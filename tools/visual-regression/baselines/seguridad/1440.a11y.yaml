@@ -1,0 +1,152 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Productos":
+    - text: Productos
+    - img
+  - link "Precios":
+    - /url: precios.html
+  - button "Desarrolladores":
+    - text: Desarrolladores
+    - img
+  - button "Empresa y Recursos":
+    - text: Empresa y Recursos
+    - img
+  - link "Contacto":
+    - /url: contacto.html
+  - button "Soporte":
+    - text: Soporte
+    - img
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+- paragraph: Seguridad
+- heading "Seguridad en cada transacción" [level=1]
+- paragraph: Tecnología de clase mundial que protege tu negocio y a tus clientes. Certificación PCI-DSS y prevención de fraude con IA.
+- link "Comenzar ahora":
+  - /url: precios.html
+  - text: Comenzar ahora
+  - img
+- paragraph: Certificaciones
+- heading "Los más altos estándares internacionales" [level=2]
+- img
+- heading "PCI-DSS Compliance" [level=3]
+- paragraph: Certificación nivel 2 de proveedores de servicio que garantiza los más altos estándares en el procesamiento de transacciones con tarjeta.
+- img
+- heading "Protocolo 3D Secure" [level=3]
+- paragraph: Autenticación 3D Secure que refuerza la seguridad de cada transacción y reduce fraudes y contracargos.
+- paragraph: QPayRadar
+- heading "Prevención de fraude con inteligencia artificial" [level=2]
+- paragraph: Un motor que monitorea y analiza cada transacción en tiempo real.
+- img
+- heading "Inteligencia Artificial" [level=3]
+- paragraph: Machine learning que aprende patrones de fraude y se adapta constantemente.
+- img
+- heading "Monitoreo en tiempo real" [level=3]
+- paragraph: Análisis instantáneo de cada transacción antes de su aprobación.
+- img
+- heading "Respuesta automática" [level=3]
+- paragraph: Bloqueo de transacciones de alto riesgo sin intervención manual.
+- text: 0.3% Bajo nivel de contracargos 90% Menos chargebacks 10K+ Bloqueo de usuarios riesgosos
+- paragraph: QPayVerify
+- heading "Validación según el nivel de riesgo" [level=2]
+- text: Riesgo bajo
+- heading "Aprobación automática" [level=3]
+- paragraph: Transacción procesada sin validación adicional.
+- text: Riesgo medio
+- heading "Validación recomendada" [level=3]
+- paragraph: Se sugiere verificación adicional del comercio.
+- text: Riesgo alto
+- heading "Validación obligatoria" [level=3]
+- paragraph: QPayVerify solicita confirmación antes de procesar.
+- paragraph: Capas de protección
+- heading "Seguridad integral en cada nivel" [level=2]
+- img
+- heading "Tokenización" [level=3]
+- paragraph: Los datos de tarjetas se convierten en tokens únicos e inutilizables.
+- img
+- heading "Autenticación biométrica" [level=3]
+- paragraph: Validación con huella digital y reconocimiento facial.
+- img
+- heading "Auditorías continuas" [level=3]
+- paragraph: Revisiones constantes por terceros certificados.
+- img
+- heading "Monitoreo 24/7" [level=3]
+- paragraph: Equipo de seguridad vigilando tu cuenta en todo momento.
+- img
+- heading "Cumplimiento global" [level=3]
+- paragraph: Alineados con regulaciones internacionales de datos.
+- img
+- heading "Infraestructura segura" [level=3]
+- paragraph: Servidores con encriptación de grado militar.
+- paragraph: Seguridad Qpaypro
+- heading "Tu seguridad es nuestra prioridad" [level=2]
+- paragraph: Protegemos miles de transacciones cada mes con tecnología avanzada.
+- link "Comenzar gratis":
+  - /url: precios.html
+  - text: Comenzar gratis
+  - img
+- link "Hablar con un experto":
+  - /url: contacto.html
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"
