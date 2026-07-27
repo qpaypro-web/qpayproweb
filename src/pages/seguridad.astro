@@ -1,0 +1,210 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Icon from '../components/Icon.astro';
+import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+
+const CERTIFICACIONES = [
+  { icon: 'shield-check', title: 'PCI-DSS Compliance', text: 'Certificación nivel 2 de proveedores de servicio que garantiza los más altos estándares en el procesamiento de transacciones con tarjeta.' },
+  { icon: 'lock', title: 'Protocolo 3D Secure', text: 'Autenticación 3D Secure que refuerza la seguridad de cada transacción y reduce fraudes y contracargos.' },
+];
+
+const QPAYRADAR_FEATURES = [
+  { icon: 'brain', title: 'Inteligencia Artificial', text: 'Machine learning que aprende patrones de fraude y se adapta constantemente.' },
+  { icon: 'activity', title: 'Monitoreo en tiempo real', text: 'Análisis instantáneo de cada transacción antes de su aprobación.' },
+  { icon: 'shield-off', title: 'Respuesta automática', text: 'Bloqueo de transacciones de alto riesgo sin intervención manual.' },
+];
+
+const QPAYRADAR_STATS = [
+  { target: 0.3, suffix: '%', decimals: 1, label: 'Bajo nivel de contracargos' },
+  { target: 90, suffix: '%', decimals: 0, label: 'Menos chargebacks' },
+  { target: 10, suffix: 'K+', decimals: 0, label: 'Bloqueo de usuarios riesgosos' },
+];
+
+const RISK_LEVELS = [
+  { color: 'rgb(34, 197, 94)', label: 'Riesgo bajo', title: 'Aprobación automática', text: 'Transacción procesada sin validación adicional.' },
+  { color: 'rgb(245, 158, 11)', label: 'Riesgo medio', title: 'Validación recomendada', text: 'Se sugiere verificación adicional del comercio.' },
+  { color: 'rgb(239, 68, 68)', label: 'Riesgo alto', title: 'Validación obligatoria', text: 'QPayVerify solicita confirmación antes de procesar.' },
+];
+
+const PROTECTION_LAYERS = [
+  { icon: 'key-round', title: 'Tokenización', text: 'Los datos de tarjetas se convierten en tokens únicos e inutilizables.' },
+  { icon: 'fingerprint', title: 'Autenticación biométrica', text: 'Validación con huella digital y reconocimiento facial.' },
+  { icon: 'file-search', title: 'Auditorías continuas', text: 'Revisiones constantes por terceros certificados.' },
+  { icon: 'eye', title: 'Monitoreo 24/7', text: 'Equipo de seguridad vigilando tu cuenta en todo momento.' },
+  { icon: 'earth', title: 'Cumplimiento global', text: 'Alineados con regulaciones internacionales de datos.' },
+  { icon: 'server', title: 'Infraestructura segura', text: 'Servidores con encriptación de grado militar.' },
+];
+---
+
+<MainLayout
+  title="Seguridad en pagos: PCI-DSS y 3D Secure | Qpaypro"
+  description="Pagos protegidos con certificación PCI-DSS, protocolo 3D Secure y prevención de fraude con Qpayradar y Qpayverify."
+  headerTheme="onLight"
+>
+  <section class="relative w-full bg-white pt-44 pb-28 lg:pt-56 lg:pb-40 overflow-hidden">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-[70%] pointer-events-none"
+      style="background: radial-gradient(50% 60% at 50% 0%, rgba(0, 151, 206, 0.1) 0%, transparent 70%);"
+    >
+    </div>
+    <div class="relative max-w-[1000px] mx-auto px-6 lg:px-8 text-center">
+      <p class="text-[#0047ba] text-sm font-semibold uppercase tracking-[0.2em] mb-8">Seguridad</p>
+      <h1 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.02] mb-8">
+        Seguridad en cada <span class="bg-gradient-to-r from-[#0047ba] to-[#0097ce] bg-clip-text text-transparent">transacción</span>
+      </h1>
+      <p class="text-[#5c606b] text-base lg:text-lg leading-relaxed max-w-2xl mx-auto mb-12 font-light">
+        Tecnología de clase mundial que protege tu negocio y a tus clientes. Certificación PCI-DSS y prevención de fraude con IA.
+      </p>
+      <a
+        href="precios.html"
+        class="group px-9 py-4 bg-gradient-to-r from-[#0047ba] to-[#0097ce] text-white rounded-full font-semibold text-base hover:shadow-[0_0_50px_rgba(0,151,206,0.35)] transition-shadow duration-500 inline-flex items-center gap-2"
+      >
+        Comenzar ahora
+        <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-16 lg:py-24">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-[1fr_auto] items-center gap-10 lg:gap-14 mb-12 lg:mb-16">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-2.5 mb-7">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Certificaciones</p>
+          </div>
+          <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] leading-[1.03]">Los más altos estándares internacionales</h2>
+        </div>
+        <div class="flex justify-center lg:justify-end">
+          <div class="dfx-cube" aria-hidden="true">
+            <div class="dfx-cube__color"></div>
+            <div class="dfx-cube__glow"><Icon name="shield-check" class="w-14 h-14 text-white" strokeWidth={1.5} /></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16" data-reveal-group>
+        {CERTIFICACIONES.map((item) => (
+          <div class="group pt-8 border-t border-white/15" data-reveal>
+            <span class="relative inline-flex mb-7">
+              <span class="dfx-ring"></span>
+              <span class="relative inline-flex w-12 h-12 rounded-xl bg-white/[0.06] border border-white/[0.10] items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-400 z-10">
+                <Icon name={item.icon} class="w-6 h-6 text-white group-hover:text-black transition-colors duration-400" strokeWidth={1.6} />
+              </span>
+            </span>
+            <h3 class="text-white text-2xl font-semibold mb-4">{item.title}</h3>
+            <p class="text-white/55 text-lg leading-relaxed max-w-md font-light">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-16 lg:py-24">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 lg:mb-16">
+        <p class="text-[#0047ba] text-sm font-semibold uppercase tracking-[0.2em] mb-6">QPayRadar</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] leading-[1.05] mb-6">Prevención de fraude<br />con inteligencia artificial</h2>
+        <p class="text-[#5c606b] text-xl leading-relaxed font-light max-w-2xl">Un motor que monitorea y analiza cada transacción en tiempo real.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-12 mb-24" data-reveal-group>
+        {QPAYRADAR_FEATURES.map((item) => (
+          <div class="pt-7 border-t border-[#d6dae2]" data-reveal>
+            <Icon name={item.icon} class="w-7 h-7 text-[#0047ba] mb-4" strokeWidth={1.5} />
+            <h3 class="text-[#1a1d29] text-lg font-semibold mb-2">{item.title}</h3>
+            <p class="text-[#5c606b] text-lg leading-relaxed font-light">{item.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="pt-16 border-t border-[#d6dae2]">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-16">
+          {QPAYRADAR_STATS.map((stat) => (
+            <div class="text-center">
+              <div
+                class="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#0047ba] to-[#0097ce] bg-clip-text text-transparent mb-3"
+                data-count-up
+                data-target={stat.target}
+                data-suffix={stat.suffix}
+                data-decimals={stat.decimals}
+              >
+                0{stat.suffix}
+              </div>
+              <div class="text-[#5c606b] text-sm font-light">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-16 lg:py-24">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 lg:mb-16">
+        <div class="flex items-center gap-2.5 mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">QPayVerify</p>
+        </div>
+        <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] leading-[1.03]">Validación según<br />el nivel de riesgo</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-12" data-reveal-group>
+        {RISK_LEVELS.map((risk) => (
+          <div class="pt-7" data-reveal>
+            <div class="h-1 w-16 rounded-full mb-7" style={`background: ${risk.color}; box-shadow: ${risk.color.replace('rgb', 'rgba').replace(')', ', 0.4)')} 0px 0px 16px;`}></div>
+            <span class="inline-flex items-center gap-2.5 mb-4 text-sm font-semibold" style={`color: ${risk.color};`}>
+              <span class="w-2.5 h-2.5 rounded-full" style={`background: ${risk.color};`}></span>
+              {risk.label}
+            </span>
+            <h3 class="text-white text-lg font-semibold mb-2">{risk.title}</h3>
+            <p class="text-white/55 text-lg leading-relaxed font-light">{risk.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-16 lg:py-24">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-12 lg:mb-16" data-reveal-group>
+        <div data-reveal>
+          <p class="text-[#0047ba] text-sm font-semibold uppercase tracking-[0.2em] mb-6">Capas de protección</p>
+          <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em] leading-[1.05]">Seguridad integral<br />en cada nivel</h2>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-16" data-reveal-group>
+        {PROTECTION_LAYERS.map((item) => (
+          <div data-reveal>
+            <Icon name={item.icon} class="w-7 h-7 text-[#0047ba] mb-4" strokeWidth={1.5} />
+            <h3 class="text-[#1a1d29] text-lg font-semibold mb-2">{item.title}</h3>
+            <p class="text-[#5c606b] text-lg leading-relaxed font-light">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full bg-[#050506] py-20 lg:py-28 overflow-hidden">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[900px] mx-auto px-6 lg:px-8 text-center" data-reveal-group>
+      <div data-reveal>
+        <div class="flex items-center justify-center gap-2.5 mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Seguridad Qpaypro</p>
+        </div>
+        <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.02] mb-8">
+          Tu seguridad es <span class="bg-gradient-to-r from-[#0047ba] to-[#0f206c] bg-clip-text text-transparent">nuestra prioridad</span>
+        </h2>
+        <p class="text-white/55 text-base lg:text-lg leading-relaxed mb-12 max-w-xl mx-auto font-light">Protegemos miles de transacciones cada mes con tecnología avanzada.</p>
+        <div class="flex items-center justify-center gap-4 flex-wrap">
+          <a href="precios.html" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+            Comenzar gratis
+            <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a href="contacto.html" class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/25 hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">
+            Hablar con un experto
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
