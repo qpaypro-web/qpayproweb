@@ -1,0 +1,96 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  headerTheme?: 'onDark' | 'onLight';
+  ogType?: string;
+  ogLocale?: string;
+}
+
+const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocale = 'es_GT' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={ogLocale} />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <Header theme={headerTheme} />
+    <slot />
+    <Footer />
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Recreates the site's original fade-up scroll reveal (short rise +
+      // fade, staggered within each group) using GSAP for exact easing/feel
+      // parity rather than re-deriving the effect by hand.
+      document.querySelectorAll<HTMLElement>('[data-reveal-group]').forEach((group) => {
+        const items = group.querySelectorAll<HTMLElement>('[data-reveal]');
+        if (!items.length) return;
+        gsap.from(items, {
+          y: 20,
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power1.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: group,
+            start: 'top 85%',
+          },
+        });
+      });
+
+      // Faithful port of the original count-up stat component: same
+      // IntersectionObserver threshold (0.4), same 1800ms duration, and the
+      // same exponential ease-out curve (1 - 2^(-10k)), triggered once.
+      document.querySelectorAll<HTMLElement>('[data-count-up]').forEach((el) => {
+        const target = parseFloat(el.dataset.target || '0');
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const scale = decimals ? 10 : 1;
+        const internalTarget = target * scale;
+        const duration = 1800;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (!entries[0].isIntersecting) return;
+            observer.disconnect();
+            const start = performance.now();
+            function tick(now: number) {
+              const k = Math.min((now - start) / duration, 1);
+              const eased = k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
+              const value = Math.round(eased * internalTarget);
+              el.textContent = (decimals ? (value / 10).toFixed(1) : value.toLocaleString('es-GT')) + suffix;
+              if (k < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          },
+          { threshold: 0.4 }
+        );
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
