@@ -69,6 +69,9 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
         const target = parseFloat(el.dataset.target || '0');
         const suffix = el.dataset.suffix || '';
         const decimals = parseInt(el.dataset.decimals || '0', 10);
+        // 'locale' -> value.toLocaleString('es-GT') (thousand separators, e.g. "5,000")
+        // 'plain'  -> String(value), no separators (e.g. a bare year like "2017")
+        const format = el.dataset.format || 'locale';
         const scale = decimals ? 10 : 1;
         const internalTarget = target * scale;
         const duration = 1800;
@@ -82,7 +85,12 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
               const k = Math.min((now - start) / duration, 1);
               const eased = k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
               const value = Math.round(eased * internalTarget);
-              el.textContent = (decimals ? (value / 10).toFixed(1) : value.toLocaleString('es-GT')) + suffix;
+              const formatted = decimals
+                ? (value / 10).toFixed(1)
+                : format === 'plain'
+                  ? String(value)
+                  : value.toLocaleString('es-GT');
+              el.textContent = formatted + suffix;
               if (k < 1) requestAnimationFrame(tick);
             }
             requestAnimationFrame(tick);
