@@ -12,10 +12,10 @@ const { theme = 'onLight' } = Astro.props;
 const onDark = theme === 'onDark';
 
 const PRODUCTOS = [
-  { href: 'pos-cute.html', icon: 'smartphone', title: 'POS Cute', subtitle: 'Terminal portátil con NFC y chip' },
-  { href: 'sistema-pos.html', icon: 'store', title: 'Punto de Venta', subtitle: 'Sistema POS completo para tu negocio' },
-  { href: 'integraciones.html', icon: 'plug', title: 'Integraciones', subtitle: 'Conecta con las plataformas que usas' },
-  { href: 'pasarela-de-pagos.html', icon: 'layers', title: 'Soluciones', subtitle: 'Herramientas para cada tipo de negocio' },
+  { href: '/pos-cute', icon: 'smartphone', title: 'POS Cute', subtitle: 'Terminal portátil con NFC y chip' },
+  { href: '/sistema-pos', icon: 'store', title: 'Punto de Venta', subtitle: 'Sistema POS completo para tu negocio' },
+  { href: '/integraciones', icon: 'plug', title: 'Integraciones', subtitle: 'Conecta con las plataformas que usas' },
+  { href: '/pasarela-de-pagos', icon: 'layers', title: 'Soluciones', subtitle: 'Herramientas para cada tipo de negocio' },
 ];
 
 const DESARROLLADORES = [
@@ -24,9 +24,9 @@ const DESARROLLADORES = [
 ];
 
 const EMPRESA_Y_RECURSOS = [
-  { href: 'sobre-qpaypro.html', icon: 'building2', title: 'Sobre Qpaypro', subtitle: 'Conoce quiénes somos' },
-  { href: 'seguridad.html', icon: 'shield-check', title: 'Seguridad', subtitle: 'Cómo protegemos cada transacción' },
-  { href: 'partners.html', icon: 'handshake', title: 'Partners', subtitle: 'Programa de socios y alianzas' },
+  { href: '/sobre-qpaypro', icon: 'building2', title: 'Sobre Qpaypro', subtitle: 'Conoce quiénes somos' },
+  { href: '/seguridad', icon: 'shield-check', title: 'Seguridad', subtitle: 'Cómo protegemos cada transacción' },
+  { href: '/partners', icon: 'handshake', title: 'Partners', subtitle: 'Programa de socios y alianzas' },
 ];
 
 const SOPORTE = [
@@ -39,11 +39,11 @@ const SOPORTE = [
 // Desarrolladores, Soporte, Empresa y Recursos, Contacto.
 const MOBILE_MENU_ENTRIES = [
   { type: 'group' as const, label: 'Productos', items: PRODUCTOS },
-  { type: 'link' as const, href: 'precios.html', label: 'Precios' },
+  { type: 'link' as const, href: '/precios', label: 'Precios' },
   { type: 'group' as const, label: 'Desarrolladores', items: DESARROLLADORES },
   { type: 'group' as const, label: 'Soporte', items: SOPORTE },
   { type: 'group' as const, label: 'Empresa y Recursos', items: EMPRESA_Y_RECURSOS },
-  { type: 'link' as const, href: 'contacto.html', label: 'Contacto' },
+  { type: 'link' as const, href: '/contacto', label: 'Contacto' },
 ];
 
 const INGRESA = [
@@ -75,7 +75,7 @@ const hamburgerClass = onDark
         </a>
 
         <div class="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
-          <div class="relative" data-dropdown>
+          <div class="relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
               <span>Productos</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
@@ -93,9 +93,9 @@ const hamburgerClass = onDark
             </div>
           </div>
 
-          <a href="precios.html" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`}>Precios</a>
+          <a href="/precios" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`}>Precios</a>
 
-          <div class="relative" data-dropdown>
+          <div class="relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
               <span>Desarrolladores</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
@@ -113,7 +113,7 @@ const hamburgerClass = onDark
             </div>
           </div>
 
-          <div class="relative" data-dropdown>
+          <div class="relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
               <span>Empresa y Recursos</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
@@ -131,11 +131,11 @@ const hamburgerClass = onDark
             </div>
           </div>
 
-          <a href="contacto.html" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`}>Contacto</a>
+          <a href="/contacto" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`}>Contacto</a>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <div class="hidden lg:block relative" data-dropdown>
+          <div class="hidden lg:block relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
               <span>Soporte</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />

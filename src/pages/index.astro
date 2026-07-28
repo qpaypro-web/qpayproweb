@@ -172,10 +172,11 @@ const TESTIMONIALS = [
       </div>
       <div class="flex flex-col md:flex-row gap-2.5 h-auto md:h-[640px]" data-sector-panels>
         {SECTOR_PANELS.map((sector, i) => (
-          <div
+          <a
+            href={sector.href}
             data-sector-panel
             data-index={i}
-            class="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-[#1a1d29]"
+            class="block relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-[#1a1d29]"
             style={i === 0 ? 'flex-grow:5; flex-basis:0px; min-height:400px;' : 'flex-grow:1; flex-basis:0px; min-height:92px;'}
           >
             <img src={`/images/index/${sector.image}`} alt={sector.title} class="absolute inset-0 w-full h-full object-cover" />
@@ -187,14 +188,14 @@ const TESTIMONIALS = [
                   <div class="h-px w-full bg-white/25 mb-5"></div>
                   <p class="text-white text-xl lg:text-2xl font-semibold leading-snug mb-2 max-w-md">{sector.headline}</p>
                   <p class="text-white/70 text-sm leading-relaxed mb-5 max-w-md">{sector.text}</p>
-                  <a href={sector.href} class="inline-flex items-center gap-1.5 text-white font-semibold text-sm border-b border-white/60 pb-0.5 hover:gap-2.5 transition-all">
+                  <span class="inline-flex items-center gap-1.5 text-white font-semibold text-sm border-b border-white/60 pb-0.5 hover:gap-2.5 transition-all">
                     Obtén más información
                     <Icon name="arrow-right" class="w-4 h-4" />
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -381,8 +382,8 @@ const TESTIMONIALS = [
 
   <script>
     const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-sector-panel]'));
-    panels.forEach((panel) => {
-      panel.addEventListener('mouseenter', () => {
+
+    function activatePanel(panel: HTMLElement) {
         panels.forEach((p) => {
           const active = p === panel;
           p.style.flexGrow = active ? '5' : '1';
@@ -404,8 +405,35 @@ const TESTIMONIALS = [
           reveal?.classList.remove('opacity-100', 'max-h-64', 'opacity-0', 'max-h-0');
           reveal?.classList.add(...(active ? ['opacity-100', 'max-h-64'] : ['opacity-0', 'max-h-0']));
         });
+    }
+
+    // Each card is a real link to its sector page. On pointer devices the
+    // hover already expands the card, so a click just follows the link.
+    // On touch (no hover) we keep the original behaviour: the first tap
+    // expands the card so its text can be read, and a second tap navigates.
+    const canHover = window.matchMedia('(hover: hover)').matches;
+
+    panels.forEach((panel) => {
+      if (canHover) {
+        // Pointer devices: hover expands, and a click just follows the link.
+        panel.addEventListener('mouseenter', () => activatePanel(panel));
+        return;
+      }
+
+      // Touch: bind expansion to the tap itself. We must not listen for
+      // mouseenter here — the browser synthesises one right before the click,
+      // which would mark the card as already expanded and let the first tap
+      // navigate away before its text was ever shown.
+      panel.addEventListener('click', (e) => {
+        if (panel.dataset.expanded === 'true') return;
+        e.preventDefault();
+        panels.forEach((p) => delete p.dataset.expanded);
+        panel.dataset.expanded = 'true';
+        activatePanel(panel);
       });
     });
+
+    if (!canHover && panels[0]) panels[0].dataset.expanded = 'true';
 
     const platformItems = Array.from(document.querySelectorAll<HTMLElement>('[data-platform-item]'));
     const platformImages = Array.from(document.querySelectorAll<HTMLImageElement>('[data-platform-images] img'));
