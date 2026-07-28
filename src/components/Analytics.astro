@@ -1,0 +1,68 @@
+---
+// Analítica del sitio. Va en el <head> de todas las páginas.
+//
+// Solo se instala el contenedor de Google Tag Manager. Se comprobó que
+// GTM-T53BQFC ya contiene las etiquetas de Meta Pixel (249008005669655),
+// GA4 (G-0TB2XWGC3C) y Google Ads (AW-787797009): cargando únicamente el
+// contenedor en una página en blanco, fbq queda inicializado con ese píxel.
+// Por eso NO se cablea aquí el código base del píxel ni gtag/GA4: hacerlo
+// los cargaría dos veces y duplicaría el PageView.
+//
+// El consentimiento se maneja con Consent Mode v2, que es el mecanismo que
+// GTM respeta para todas sus etiquetas a la vez. Los valores por defecto se
+// declaran ANTES de cargar el contenedor, y se actualizan si el visitante ya
+// había elegido. Ver ConsentBanner.astro.
+const GTM_ID = 'GTM-T53BQFC';
+---
+
+<script is:inline define:vars={{ GTM_ID }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+  window.gtag = window.gtag || gtag;
+
+  var STORAGE_KEY = 'qp-consent';
+
+  // Por defecto todo denegado salvo lo estrictamente necesario, para que
+  // ninguna etiqueta de marketing dispare antes de que el visitante elija.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500,
+  });
+
+  // Si ya eligió en una visita anterior, se aplica de inmediato.
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (saved && saved.choices) {
+      var analytics = saved.choices.analytics ? 'granted' : 'denied';
+      var marketing = saved.choices.marketing ? 'granted' : 'denied';
+      gtag('consent', 'update', {
+        ad_storage: marketing,
+        ad_user_data: marketing,
+        ad_personalization: marketing,
+        analytics_storage: analytics,
+      });
+      window.dataLayer.push({ event: 'consent_restored', consent_analytics: saved.choices.analytics, consent_marketing: saved.choices.marketing });
+    }
+  } catch (e) {
+    /* localStorage bloqueado: se queda con los valores por defecto */
+  }
+
+  // Contenedor de GTM.
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', GTM_ID);
+</script>

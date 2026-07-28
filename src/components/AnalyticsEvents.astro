@@ -1,0 +1,229 @@
+---
+// Capa de datos agnóstica y eventos de conversión del sitio.
+//
+// Todo se registra primero en dataLayer con el nombre de evento interno; las
+// etiquetas de GTM son las que lo reenvían a Meta, GA4 o Ads. Por eso aquí no
+// se llama a fbq() ni a gtag('event') directamente: la especificación pide no
+// acoplar la lógica de los botones a Meta, y además el píxel vive dentro de
+// GTM (ver Analytics.astro).
+//
+// El país va fijo en GT porque hoy el sitio es solo Guatemala; cuando exista
+// la versión de El Salvador debe pasar a ser dinámico.
+const SITE_COUNTRY = 'GT';
+---
+
+<script is:inline define:vars={{ SITE_COUNTRY }}>
+  (function () {
+    var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'];
+    var ATTR_KEY = 'qp-attribution';
+    var CONSENT_KEY = 'qp-consent';
+
+    function readCookie(name) {
+      var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+      return m ? decodeURIComponent(m[2]) : null;
+    }
+
+    // Cookies de Meta. _fbc no existe hasta que el píxel la crea, así que si
+    // la URL trae fbclid se conserva el valor con el formato oficial para no
+    // perder la atribución del primer clic.
+    function getFbp() {
+      return readCookie('_fbp');
+    }
+    function getFbc() {
+      var fbc = readCookie('_fbc');
+      if (fbc) return fbc;
+      var stored = safeStore('get');
+      if (stored && stored.fbc) return stored.fbc;
+      return null;
+    }
+
+    function safeStore(op, value) {
+      try {
+        if (op === 'get') return JSON.parse(localStorage.getItem(ATTR_KEY) || 'null');
+        localStorage.setItem(ATTR_KEY, JSON.stringify(value));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Primer toque: guarda UTMs, ids de clic y la página de aterrizaje. No se
+    // sobrescribe en visitas siguientes para no perder el origen original.
+    function captureAttribution() {
+      var params = new URLSearchParams(location.search);
+      var existing = safeStore('get') || {};
+      var data = { landing_page: existing.landing_page || location.pathname };
+      var found = false;
+      UTM_KEYS.forEach(function (k) {
+        var v = params.get(k);
+        if (v) {
+          data[k] = v;
+          found = true;
+        } else if (existing[k]) {
+          data[k] = existing[k];
+        }
+      });
+      if (params.get('fbclid') && !existing.fbc) {
+        data.fbc = 'fb.1.' + Date.now() + '.' + params.get('fbclid');
+        found = true;
+      } else if (existing.fbc) {
+        data.fbc = existing.fbc;
+      }
+      if (found || !existing.landing_page) safeStore('set', data);
+      return data;
+    }
+
+    var attribution = captureAttribution();
+
+    function consentState() {
+      try {
+        var saved = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
+        if (!saved || !saved.choices) return { analytics: null, marketing: null };
+        return { analytics: !!saved.choices.analytics, marketing: !!saved.choices.marketing };
+      } catch (e) {
+        return { analytics: null, marketing: null };
+      }
+    }
+
+    function newEventId() {
+      if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+      return 'e-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+    }
+
+    var sent = {};
+
+    /**
+     * Punto único de entrada para la analítica del sitio.
+     * Empuja el evento interno a dataLayer; GTM decide a dónde lo manda.
+     * `once: true` evita duplicados cuando hay varios disparadores posibles.
+     */
+    function trackEvent(eventName, eventData, options) {
+      var opts = options || {};
+      if (opts.once) {
+        if (sent[eventName]) return null;
+        sent[eventName] = true;
+      }
+      var eventId = opts.eventId || newEventId();
+      var payload = Object.assign(
+        {
+          event: eventName,
+          event_id: eventId,
+          event_source_url: location.href,
+          page_path: location.pathname,
+          country: SITE_COUNTRY,
+        },
+        attribution,
+        eventData || {}
+      );
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(payload);
+      if (window.__qpDebug) {
+        console.log('[analytics]', eventName, { fecha: new Date().toISOString(), event_id: eventId, parametros: payload, consentimiento: consentState() });
+      }
+      return eventId;
+    }
+
+    // Datos que el backend necesita para Conversions API. El envío a Meta
+    // desde el servidor no se hace aquí a propósito: la especificación pide
+    // que el frontend no toque la API de conversiones ni el access token.
+    function conversionPayload(eventName, eventId, extra) {
+      return Object.assign(
+        {
+          event_id: eventId,
+          event_name: eventName,
+          event_source_url: location.href,
+          fbp: getFbp(),
+          fbc: getFbc(),
+          user_agent: navigator.userAgent,
+        },
+        extra || {}
+      );
+    }
+
+    window.qpAnalytics = {
+      trackEvent: trackEvent,
+      conversionPayload: conversionPayload,
+      getFbp: getFbp,
+      getFbc: getFbc,
+      getAttribution: function () {
+        return Object.assign({}, attribution);
+      },
+      consentState: consentState,
+      newEventId: newEventId,
+      debug: function (on) {
+        window.__qpDebug = on !== false;
+        console.log('[analytics] modo depuración ' + (window.__qpDebug ? 'activado' : 'desactivado'));
+      },
+    };
+
+    // ?qpdebug=1 enciende el registro en consola que pide la especificación.
+    if (new URLSearchParams(location.search).get('qpdebug') === '1') window.__qpDebug = true;
+
+    // Una etiqueta HTML personalizada del contenedor de GTM llama a fbq() sin
+    // comprobar que la librería exista. Si se empuja un evento propio antes de
+    // que fbevents.js haya cargado, esa etiqueta se dispara y lanza
+    // "fbq is not defined". Por eso los eventos automáticos de carga de página
+    // esperan a que las etiquetas estén listas; los clics no lo necesitan
+    // porque ocurren mucho después. Lo correcto sería además blindar esa
+    // etiqueta dentro de GTM.
+    function whenTagsReady(cb) {
+      var waited = 0;
+      (function check() {
+        var gtmLoaded = (window.dataLayer || []).some(function (x) {
+          return x && x.event === 'gtm.load';
+        });
+        if (typeof window.fbq === 'function' || gtmLoaded || waited >= 4000) return cb();
+        waited += 100;
+        setTimeout(check, 100);
+      })();
+    }
+
+    // --- Vista de precios ---
+    if (location.pathname.replace(/\/$/, '') === '/precios') {
+      whenTagsReady(function () {
+        trackEvent('pricing_viewed', { content_name: 'pricing', content_category: 'qpaypro_services' }, { once: true });
+      });
+    }
+
+    // --- Clics ---
+    // Un solo listener delegado en lugar de uno por botón, para que no haya
+    // eventos duplicados si un elemento coincide con varios criterios.
+    document.addEventListener(
+      'click',
+      function (e) {
+        var link = e.target instanceof Element ? e.target.closest('a[href]') : null;
+        if (!link) return;
+        var href = link.getAttribute('href') || '';
+        var location_hint = link.getAttribute('data-track-location') || sectionOf(link);
+
+        if (/api\.whatsapp\.com|wa\.me/.test(href)) {
+          trackEvent('whatsapp_click', { contact_method: 'whatsapp', button_location: location_hint });
+          return;
+        }
+        if (/developers\.qpaypro\.com/.test(href)) {
+          trackEvent('developer_docs_click', { button_location: location_hint, destination_url: href });
+          return;
+        }
+        if (/app\.qpaypro\.com|my\.shopsettings\.com/.test(href)) {
+          trackEvent('signup_click', { button_location: location_hint, destination_url: href });
+          return;
+        }
+        if (/forms\.zoho\.com\/qpaypro/.test(href)) {
+          // Solo el clic: el envío ocurre en Zoho, así que no se puede
+          // afirmar aquí que el lead de partner se completó.
+          trackEvent('partner_form_click', { lead_type: 'partner', button_location: location_hint, destination_url: href });
+          return;
+        }
+      },
+      true
+    );
+
+    function sectionOf(el) {
+      var s = el.closest('section, header, footer, nav');
+      if (!s) return 'desconocido';
+      if (s.tagName === 'FOOTER') return 'footer';
+      if (s.tagName === 'NAV' || s.closest('nav')) return 'navbar';
+      var h = s.querySelector('h1, h2, h3');
+      return h ? h.textContent.trim().slice(0, 40).toLowerCase() : s.tagName.toLowerCase();
+    }
+  })();
+</script>
