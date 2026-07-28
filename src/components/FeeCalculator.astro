@@ -15,8 +15,8 @@ const ADMIN_COST = 2.95;
 
 <section class="w-full bg-white py-24 lg:py-32">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <div class="w-full max-w-[460px]">
+    <div class="flex flex-col gap-10 lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
+      <div class="order-2 w-full max-w-[460px] lg:order-1">
       <div class="rounded-[28px] bg-white shadow-[0_40px_90px_-50px_rgba(15,32,108,0.5)] border border-black/[0.05] overflow-hidden" data-calc>
         <div class="bg-[#f6f7f9] p-7 lg:p-8 border-b border-black/[0.05]">
           <h2 class="text-center text-[#0f206c] text-xl font-bold tracking-tight mb-6">Ingresa el monto</h2>
@@ -69,13 +69,7 @@ const ADMIN_COST = 2.95;
               <span class="text-[#0f206c] text-sm font-semibold">Comisión de pago</span>
               <Icon name="info" class="w-3.5 h-3.5 text-[#b6bac2]" />
             </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <p class="text-[#1a1d29] text-xl font-semibold" data-calc-commission>Q 7.45</p>
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-[#0047ba]/[0.08] text-[#0047ba] text-xs font-semibold px-2.5 py-1">
-                <Icon name="circle-check" class="w-3.5 h-3.5" />
-                En cada cobro exitoso
-              </span>
-            </div>
+            <p class="text-[#1a1d29] text-xl font-semibold" data-calc-commission>Q 7.45</p>
           </div>
           <div class="border-t border-black/[0.08] pt-5">
             <div class="flex items-center gap-1.5 mb-1">
@@ -89,11 +83,19 @@ const ADMIN_COST = 2.95;
       <p class="text-[#9094a0] text-xs mt-6 leading-relaxed">Cálculo referencial. Incluye comisión (<span data-calc-rate>4,50%</span>) y costo administrativo de Q2.95. La retención aplica según tu régimen y monto.</p>
       </div>
 
-      <div class="text-left">
-        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Calcula tu cobro</p>
-        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-tight leading-[1.08] mb-6">Empezar ahora</h2>
-        <p class="text-[#5c606b] text-lg leading-relaxed mb-9 max-w-md">Descubre cuánto recibes por cada venta, sin sorpresas ni letra pequeña. Afíliate hoy y empieza a cobrar con Qpaypro.</p>
-        <a href="/precios" class="inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">Afiliarme</a>
+      <div class="contents lg:block lg:order-2">
+        <div class="order-1 text-left">
+          <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Calcula tu cobro</p>
+          <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-tight leading-[1.08] mb-6">Empezar ahora</h2>
+          <p class="text-[#5c606b] text-lg leading-relaxed mb-5 max-w-md">Descubre cuánto recibes por cada venta, sin sorpresas ni letra pequeña. Afíliate hoy y empieza a cobrar con Qpaypro.</p>
+          <p class="inline-flex items-center gap-2 text-[#0047ba] text-[15px] font-semibold mb-9">
+            <Icon name="circle-check" class="w-4 h-4" />
+            La comisión se cobra en cada cobro exitoso.
+          </p>
+        </div>
+        <div class="order-3">
+          <a href="/precios" class="inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">Afiliarme</a>
+        </div>
       </div>
     </div>
   </div>

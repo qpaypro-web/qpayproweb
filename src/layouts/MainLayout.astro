@@ -55,10 +55,25 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
       // Groups stagger their children; a standalone [data-reveal] animates
       // on its own. Every standalone marker used to be inert, which is why
       // most section headings had no entrance at all.
+      // data-reveal-group="mobile" solo anima por debajo de lg; en escritorio
+      // el grupo se deja quieto y su contenido queda visible tal cual.
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
       const revealBatches: HTMLElement[][] = [];
       document.querySelectorAll<HTMLElement>('[data-reveal-group]').forEach((group) => {
+        const mobileOnly = group.dataset.revealGroup === 'mobile';
+        if (mobileOnly && isDesktop) return;
         const items = Array.from(group.querySelectorAll<HTMLElement>('[data-reveal]'));
-        if (items.length) revealBatches.push(items);
+        if (!items.length) return;
+        if (mobileOnly) {
+          // En móvil estas tarjetas quedan apiladas a lo largo de miles de
+          // píxeles. Si se revelaran como un grupo, al entrar la primera se
+          // animarían todas y las de abajo harían su entrada fuera de
+          // pantalla, así que cada una entra por su cuenta al aparecer.
+          items.forEach((el) => revealBatches.push([el]));
+        } else {
+          revealBatches.push(items);
+        }
       });
       document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
         if (!el.closest('[data-reveal-group]')) revealBatches.push([el]);

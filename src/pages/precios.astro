@@ -33,7 +33,6 @@ const PLANS = [
 const COMPARISON = [
   { title: 'Comisiones', rows: [
     { label: 'Comisión en línea', values: ['5% + Q2.95', '4.50% + Q2.95', '4.50% + Q2.95', '4.50% + Q2.95'] },
-    { label: 'Comisión POS Físico Qpaypro', values: ['5%', '4.50%', '4.50%', '4.50%'] },
     { label: 'Efectivo y transferencias', values: ['0%', '0%', '0%', '0%'] },
     { label: 'Comisión POS Físico Externo', values: ['+1.00%', '+0.85%', '+0.75%', 'Desde 0.65%'] },
   ]},
@@ -133,9 +132,9 @@ function CellIcon(v: string) {
           <button data-billing-toggle="year" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all text-[#6b7280]">Anual</button>
         </div>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 md:items-start" data-plan-cards>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 md:items-start" data-plan-cards data-reveal-group="mobile">
         {PLANS.map((plan) => (
-          <div class:list={["relative flex flex-col rounded-[24px] p-7 bg-white transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(15,32,108,0.12)]", plan.featured ? "ring-2 ring-[#0047ba] shadow-[0_20px_50px_rgba(0,71,186,0.12)]" : "ring-1 ring-[#e8eaed] hover:ring-[#d8dbe0]"]}>
+          <div data-reveal class:list={["relative flex flex-col rounded-[24px] p-7 bg-white transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(15,32,108,0.12)]", plan.featured ? "ring-2 ring-[#0047ba] shadow-[0_20px_50px_rgba(0,71,186,0.12)]" : "ring-1 ring-[#e8eaed] hover:ring-[#d8dbe0]"]}>
             {plan.featured && <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0047ba] text-white text-[11px] font-semibold uppercase tracking-wide px-4 py-1 rounded-full whitespace-nowrap">Recomendado</span>}
             <h3 class="text-[#1a1d29] text-xl font-semibold mb-1.5">{plan.name}</h3>
             <p class="text-[#5c606b] text-sm leading-relaxed mb-5">{plan.tagline}</p>
