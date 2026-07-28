@@ -1,0 +1,265 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+  - button:
+    - img
+- paragraph: Planes y precios
+- heading "Elige cómo quieres crecer." [level=1]
+- paragraph: Cobra con tarjeta, envía links de pago, crea tu tienda en línea y automatiza suscripciones. Sin costos ocultos.
+- button "Mensual"
+- button "Anual"
+- heading "Free" [level=3]
+- paragraph: Para empezar a cobrar en línea sin costo fijo.
+- text: Q0 /mes
+- paragraph: 5% + Q2.95 por transacción
+- link "Comenzar gratis":
+  - /url: https://app.qpaypro.com
+  - text: Comenzar gratis
+  - img
+- list:
+  - listitem:
+    - img
+    - text: Links de pago, QR y cuotas
+  - listitem:
+    - img
+    - text: "Punto de venta: hasta 20 productos"
+  - listitem:
+    - img
+    - text: Facturación electrónica
+  - listitem:
+    - img
+    - text: QpayRadar y QpayVerify
+- heading "Premium" [level=3]
+- paragraph: Para negocios que venden en línea y en tienda.
+- text: Q195 /mes
+- paragraph: 4.50% + Q2.95 por transacción
+- link "Elegir Premium":
+  - /url: https://app.qpaypro.com
+  - text: Elegir Premium
+  - img
+- list:
+  - listitem:
+    - img
+    - text: Todo lo de Free, con menor comisión
+  - listitem:
+    - img
+    - text: Cobros internacionales y suscripciones
+  - listitem:
+    - img
+    - text: "Plug-ins: WooCommerce, Shopify…"
+  - listitem:
+    - img
+    - text: API y tienda en línea
+  - listitem:
+    - img
+    - text: 50 DTEs y 50 WhatsApp incluidos
+- text: Recomendado
+- heading "Elite" [level=3]
+- paragraph: Para operaciones que necesitan más control.
+- text: Q395 /mes
+- paragraph: 4.50% + Q2.95 por transacción
+- link "Elegir Elite":
+  - /url: https://app.qpaypro.com
+  - text: Elegir Elite
+  - img
+- list:
+  - listitem:
+    - img
+    - text: Todo lo de Premium, ampliado
+  - listitem:
+    - img
+    - text: Hasta 2,500 productos con variaciones
+  - listitem:
+    - img
+    - text: Tokenización y Plug-in VTEX
+  - listitem:
+    - img
+    - text: Inventario entre sucursales
+  - listitem:
+    - img
+    - text: 100 DTEs y 100 WhatsApp incluidos
+- heading "Enterprise" [level=3]
+- paragraph: Para empresas con alto volumen y sucursales.
+- text: Q5,000 /mes
+- paragraph: Negociada 4.50% por transacción
+- link "Hablar con Ventas":
+  - /url: contacto.html
+  - text: Hablar con Ventas
+  - img
+- list:
+  - listitem:
+    - img
+    - text: Todo lo de Elite, sin límites
+  - listitem:
+    - img
+    - text: Productos ilimitados, 4 sucursales
+  - listitem:
+    - img
+    - text: Soporte prioritario dedicado
+  - listitem:
+    - img
+    - text: 500 DTEs y 500 WhatsApp incluidos
+  - listitem:
+    - img
+    - text: POS externo desde 0.65%
+- paragraph: "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"4.50%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal."
+- heading "Todo lo que incluye cada plan" [level=2]
+- button "Free"
+- button "Premium"
+- button "Elite"
+- button "Enterprise"
+- text: Comisiones Comisión en línea 4.50% + Q2.95 Comisión POS Físico Qpaypro 4.50% Efectivo y transferencias 0% Comisión POS Físico Externo +0.85% Pasarela de Pago Links de Pago
+- img
+- text: Código QR
+- img
+- text: Cuotas
+- img
+- text: Moneda Q/$ Cobros Internacionales
+- img
+- text: Suscripciones
+- img
+- text: Tokenización
+- img
+- text: Plug-in WooCommerce
+- img
+- text: Plug-in OpenCart
+- img
+- text: Plug-in PrestaShop
+- img
+- text: Plug-in Shopify
+- img
+- text: Plug-in VTEX
+- img
+- text: Comisión Plug-in Shopify y VTEX +0.45% API
+- img
+- text: Punto de Venta Cantidad de Productos 100 Sucursales Incluidas 1 Precio sucursal adicional
+- img
+- text: Inventario Básico Sincronización entre Sucursales
+- img
+- text: Tienda en Línea Cantidad de Productos 100 Inventario Básico Sincronización a Punto de Venta
+- img
+- text: Facturación Electrónica DTEs Incluidos 50 Costo por DTE Adicional Q0.25 Facturas por WhatsApp incluidas 50 Costo por WhatsApp Adicional Q0.17 Seguridad 3DS Opcional Costo 3DS por Transacción Q1.60 QpayRadar
+- img
+- text: QpayVerify
+- img
+- text: Soporte Asesorías 1 a 1
+- img
+- text: Soporte WhatsApp | Correo | PBX
+- img
+- text: Soporte Prioritario
+- img
+- text: Talleres y Webinars
+- img
+- text: Próximos Lanzamientos H2 2026 Reservas Próximamente Clínicas Próximamente Marketplace Próximamente
+- paragraph: (*) Cargo de plataforma por transacciones procesadas fuera de Qpaypro (datáfono u otro procesador), según el plan. En Enterprise se negocia según volumen. El precio de sucursal adicional aplica sin importar cuántas cajas físicas operen dentro de esa sucursal; cada caja requiere su propio Kit de Hardware.
+- paragraph: Preguntas frecuentes
+- heading "Todo lo que necesitas saber" [level=2]
+- button "¿Qpaypro funciona en Guatemala?":
+  - text: ¿Qpaypro funciona en Guatemala?
+  - img
+- paragraph: Sí, Qpaypro es una pasarela de pagos diseñada para negocios en Guatemala y permite aceptar pagos con tarjeta Visa y Mastercard de forma segura.
+- button "¿Puedo cobrar sin tener una tienda en línea?":
+  - text: ¿Puedo cobrar sin tener una tienda en línea?
+  - img
+- paragraph: Sí, puedes enviar links de pago por WhatsApp, Instagram, Facebook o correo electrónico sin necesidad de una tienda en línea.
+- button "¿Cuándo se cobra la comisión?":
+  - text: ¿Cuándo se cobra la comisión?
+  - img
+- paragraph: La comisión se descuenta automáticamente de cada transacción exitosa antes de transferir los fondos a tu cuenta bancaria.
+- button "¿Cuándo recibo mi dinero?":
+  - text: ¿Cuándo recibo mi dinero?
+  - img
+- paragraph: Los fondos se transfieren a tu cuenta bancaria en un plazo de 24 a 48 horas hábiles después de cada transacción exitosa.
+- button "¿Cobran retención de impuestos?":
+  - text: ¿Cobran retención de impuestos?
+  - img
+- paragraph: Sí. Legalmente en Guatemala y El Salvador, a cada transacción con tarjeta de crédito o débito se le descuenta la retención de IVA según el régimen fiscal de cada comercio, y se refleja en cada liquidación.
+- button "¿Qué tipo de tienda en línea incluye el plan Premium?":
+  - text: ¿Qué tipo de tienda en línea incluye el plan Premium?
+  - img
+- paragraph: El plan Premium incluye acceso completo a Qpayshop, nuestra plataforma de tienda en línea con capacidad para hasta 100 productos, categorías, métodos de envío y más. Es una solución de eCommerce completa y fácil de usar, similar a Shopify, WooCommerce o Wix.
+- button "¿Qué requisitos necesito?":
+  - text: ¿Qué requisitos necesito?
+  - img
+- paragraph: "Los requisitos son sencillos y los de ley: número de identificación tributaria, patente de comercio, estados de cuenta bancarios, documentos de identidad, entre otros. Nuestro equipo de afiliaciones te acompaña en todo el proceso."
+- button "¿Con cuáles bancos trabajan?":
+  - text: ¿Con cuáles bancos trabajan?
+  - img
+- paragraph: En Guatemala trabajamos con todos los bancos del sistema y depositamos fondos en cuentas monetarias o de ahorro en GTQ o USD. En El Salvador trabajamos con Banco Atlántida; si no tienes cuenta, te ayudamos a aperturarla durante el proceso de afiliación.
+- button "¿Cuánto se tarda en aperturar mi cuenta?":
+  - text: ¿Cuánto se tarda en aperturar mi cuenta?
+  - img
+- paragraph: En Guatemala puedes empezar a cobrar con el plan Free en 5 minutos; tras completar la papelería, la afiliación completa tarda 24 horas hábiles. En El Salvador, el proceso tarda entre 5 y 8 días hábiles incluyendo la cuenta bancaria.
+- paragraph: Empieza con Qpaypro
+- heading "Empieza hoy." [level=2]
+- paragraph: Únete a miles de negocios que ya cobran con tarjeta usando Qpaypro.
+- link "Crear cuenta gratis":
+  - /url: precios.html
+  - text: Crear cuenta gratis
+  - img
+- button "Contacta a Ventas"
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"

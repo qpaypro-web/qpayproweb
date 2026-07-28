@@ -1,0 +1,358 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Icon from '../components/Icon.astro';
+import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+
+const PLANS = [
+  {
+    name: 'Free', priceMonth: 'Q0', priceYear: 'Q0',
+    tagline: 'Para empezar a cobrar en línea sin costo fijo.',
+    commission: '5% + Q2.95', cta: 'Comenzar gratis', url: 'https://app.qpaypro.com',
+    highlights: ['Links de pago, QR y cuotas', 'Punto de venta: hasta 20 productos', 'Facturación electrónica', 'QpayRadar y QpayVerify'],
+  },
+  {
+    name: 'Premium', priceMonth: 'Q195', priceYear: 'Q1,950',
+    tagline: 'Para negocios que venden en línea y en tienda.',
+    commission: '4.50% + Q2.95', cta: 'Elegir Premium', url: 'https://app.qpaypro.com',
+    highlights: ['Todo lo de Free, con menor comisión', 'Cobros internacionales y suscripciones', 'Plug-ins: WooCommerce, Shopify…', 'API y tienda en línea', '50 DTEs y 50 WhatsApp incluidos'],
+  },
+  {
+    name: 'Elite', priceMonth: 'Q395', priceYear: 'Q3,950', featured: true,
+    tagline: 'Para operaciones que necesitan más control.',
+    commission: '4.50% + Q2.95', cta: 'Elegir Elite', url: 'https://app.qpaypro.com',
+    highlights: ['Todo lo de Premium, ampliado', 'Hasta 2,500 productos con variaciones', 'Tokenización y Plug-in VTEX', 'Inventario entre sucursales', '100 DTEs y 100 WhatsApp incluidos'],
+  },
+  {
+    name: 'Enterprise', priceMonth: 'Q5,000', priceYear: 'Q50,000',
+    tagline: 'Para empresas con alto volumen y sucursales.',
+    commission: 'Negociada 4.50%', cta: 'Hablar con Ventas', url: 'contacto.html',
+    highlights: ['Todo lo de Elite, sin límites', 'Productos ilimitados, 4 sucursales', 'Soporte prioritario dedicado', '500 DTEs y 500 WhatsApp incluidos', 'POS externo desde 0.65%'],
+  },
+];
+
+const COMPARISON = [
+  { title: 'Comisiones', rows: [
+    { label: 'Comisión en línea', values: ['5% + Q2.95', '4.50% + Q2.95', '4.50% + Q2.95', '4.50% + Q2.95'] },
+    { label: 'Comisión POS Físico Qpaypro', values: ['5%', '4.50%', '4.50%', '4.50%'] },
+    { label: 'Efectivo y transferencias', values: ['0%', '0%', '0%', '0%'] },
+    { label: 'Comisión POS Físico Externo', values: ['+1.00%', '+0.85%', '+0.75%', 'Desde 0.65%'] },
+  ]},
+  { title: 'Pasarela de Pago', rows: [
+    { label: 'Links de Pago', values: ['si', 'si', 'si', 'si'] },
+    { label: 'Código QR', values: ['si', 'si', 'si', 'si'] },
+    { label: 'Cuotas', values: ['si', 'si', 'si', 'si'] },
+    { label: 'Moneda', values: ['Q', 'Q/$', 'Q/$', 'Q/$'] },
+    { label: 'Cobros Internacionales', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Suscripciones', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Tokenización', values: ['no', 'no', 'si', 'si'] },
+    { label: 'Plug-in WooCommerce', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Plug-in OpenCart', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Plug-in PrestaShop', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Plug-in Shopify', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Plug-in VTEX', values: ['no', 'no', 'si', 'si'] },
+    { label: 'Comisión Plug-in Shopify y VTEX', values: ['no', '+0.45%', '+0.45%', '+0.45%'] },
+    { label: 'API', values: ['no', 'si', 'si', 'si'] },
+  ]},
+  { title: 'Punto de Venta', rows: [
+    { label: 'Cantidad de Productos', values: ['20', '100', '2,500', 'Ilimitado'] },
+    { label: 'Sucursales Incluidas', values: ['1', '1', '1', '4'] },
+    { label: 'Precio sucursal adicional', values: ['—', '—', 'Q395/mes', 'Q395/mes'] },
+    { label: 'Inventario', values: ['no', 'Básico', 'Variaciones', 'Variaciones'] },
+    { label: 'Sincronización entre Sucursales', values: ['no', 'no', 'si', 'si'] },
+  ]},
+  { title: 'Tienda en Línea', rows: [
+    { label: 'Cantidad de Productos', values: ['no', '100', '2,500', 'Ilimitado'] },
+    { label: 'Inventario', values: ['no', 'Básico', 'Variaciones', 'Variaciones'] },
+    { label: 'Sincronización a Punto de Venta', values: ['no', 'si', 'si', 'si'] },
+  ]},
+  { title: 'Facturación Electrónica', rows: [
+    { label: 'DTEs Incluidos', values: ['0', '50', '100', '500'] },
+    { label: 'Costo por DTE Adicional', values: ['Q0.30', 'Q0.25', 'Q0.25', 'Q0.20'] },
+    { label: 'Facturas por WhatsApp incluidas', values: ['0', '50', '100', '500'] },
+    { label: 'Costo por WhatsApp Adicional', values: ['Q0.20', 'Q0.17', 'Q0.17', 'Q0.15'] },
+  ]},
+  { title: 'Seguridad', rows: [
+    { label: '3DS', values: ['Opcional', 'Opcional', 'Opcional', 'Opcional'] },
+    { label: 'Costo 3DS por Transacción', values: ['Q1.60', 'Q1.60', 'Q1.60', 'Q1.60'] },
+    { label: 'QpayRadar', values: ['si', 'si', 'si', 'si'] },
+    { label: 'QpayVerify', values: ['si', 'si', 'si', 'si'] },
+  ]},
+  { title: 'Soporte', rows: [
+    { label: 'Asesorías 1 a 1', values: ['no', 'si', 'si', 'si'] },
+    { label: 'Soporte WhatsApp | Correo | PBX', values: ['si', 'si', 'si', 'si'] },
+    { label: 'Soporte Prioritario', values: ['no', 'no', 'no', 'si'] },
+    { label: 'Talleres y Webinars', values: ['no', 'si', 'si', 'si'] },
+  ]},
+  { title: 'Próximos Lanzamientos H2 2026', rows: [
+    { label: 'Reservas', values: ['Próximamente', 'Próximamente', 'Próximamente', 'Próximamente'] },
+    { label: 'Clínicas', values: ['Próximamente', 'Próximamente', 'Próximamente', 'Próximamente'] },
+    { label: 'Marketplace', values: ['Próximamente', 'Próximamente', 'Próximamente', 'Próximamente'] },
+  ]},
+];
+
+const FAQ = [
+  { q: '¿Qpaypro funciona en Guatemala?', a: 'Sí, Qpaypro es una pasarela de pagos diseñada para negocios en Guatemala y permite aceptar pagos con tarjeta Visa y Mastercard de forma segura.' },
+  { q: '¿Puedo cobrar sin tener una tienda en línea?', a: 'Sí, puedes enviar links de pago por WhatsApp, Instagram, Facebook o correo electrónico sin necesidad de una tienda en línea.' },
+  { q: '¿Cuándo se cobra la comisión?', a: 'La comisión se descuenta automáticamente de cada transacción exitosa antes de transferir los fondos a tu cuenta bancaria.' },
+  { q: '¿Cuándo recibo mi dinero?', a: 'Los fondos se transfieren a tu cuenta bancaria en un plazo de 24 a 48 horas hábiles después de cada transacción exitosa.' },
+  { q: '¿Cobran retención de impuestos?', a: 'Sí. Legalmente en Guatemala y El Salvador, a cada transacción con tarjeta de crédito o débito se le descuenta la retención de IVA según el régimen fiscal de cada comercio, y se refleja en cada liquidación.' },
+  { q: '¿Qué tipo de tienda en línea incluye el plan Premium?', a: 'El plan Premium incluye acceso completo a Qpayshop, nuestra plataforma de tienda en línea con capacidad para hasta 100 productos, categorías, métodos de envío y más. Es una solución de eCommerce completa y fácil de usar, similar a Shopify, WooCommerce o Wix.' },
+  { q: '¿Qué requisitos necesito?', a: 'Los requisitos son sencillos y los de ley: número de identificación tributaria, patente de comercio, estados de cuenta bancarios, documentos de identidad, entre otros. Nuestro equipo de afiliaciones te acompaña en todo el proceso.' },
+  { q: '¿Con cuáles bancos trabajan?', a: 'En Guatemala trabajamos con todos los bancos del sistema y depositamos fondos en cuentas monetarias o de ahorro en GTQ o USD. En El Salvador trabajamos con Banco Atlántida; si no tienes cuenta, te ayudamos a aperturarla durante el proceso de afiliación.' },
+  { q: '¿Cuánto se tarda en aperturar mi cuenta?', a: 'En Guatemala puedes empezar a cobrar con el plan Free en 5 minutos; tras completar la papelería, la afiliación completa tarda 24 horas hábiles. En El Salvador, el proceso tarda entre 5 y 8 días hábiles incluyendo la cuenta bancaria.' },
+];
+
+function CellIcon(v: string) {
+  if (v === 'si') return 'check';
+  if (v === 'no' || v === '—') return 'x';
+  return null;
+}
+---
+
+<MainLayout
+  title="Precios y planes | Pasarela de pagos Qpaypro Guatemala"
+  description="Conoce los planes y comisiones de Qpaypro. Cobra con tarjeta, links de pago y tienda en línea desde el plan ideal para tu negocio en Guatemala y El Salvador."
+  headerTheme="onLight"
+>
+  <section class="w-full bg-white pt-32 pb-10 lg:pt-40 lg:pb-14 text-center">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-center gap-2.5 mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#0047ba] animate-pulse"></span>
+        <p class="text-[#5c606b] text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Planes y precios</p>
+      </div>
+      <h1 class="text-[#1a1d29] text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-[-0.03em] leading-[1.03] mb-7">Elige cómo quieres crecer.</h1>
+      <p class="text-[#5c606b] text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto font-light">Cobra con tarjeta, envía links de pago, crea tu tienda en línea y automatiza suscripciones. Sin costos ocultos.</p>
+    </div>
+  </section>
+
+  <section class="w-full bg-white pb-20 lg:pb-28">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex items-center rounded-full bg-[#f0f1f4] p-1">
+          <button data-billing-toggle="month" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-[#1a1d29] shadow-sm">Mensual</button>
+          <button data-billing-toggle="year" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all text-[#6b7280]">Anual</button>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 md:items-start" data-plan-cards>
+        {PLANS.map((plan) => (
+          <div class:list={["relative flex flex-col rounded-[24px] p-7 bg-white transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_60px_rgba(15,32,108,0.12)]", plan.featured ? "ring-2 ring-[#0047ba] shadow-[0_20px_50px_rgba(0,71,186,0.12)]" : "ring-1 ring-[#e8eaed] hover:ring-[#d8dbe0]"]}>
+            {plan.featured && <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0047ba] text-white text-[11px] font-semibold uppercase tracking-wide px-4 py-1 rounded-full whitespace-nowrap">Recomendado</span>}
+            <h3 class="text-[#1a1d29] text-xl font-semibold mb-1.5">{plan.name}</h3>
+            <p class="text-[#5c606b] text-sm leading-relaxed mb-5">{plan.tagline}</p>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="text-[#1a1d29] text-4xl font-bold tracking-tight" data-price-month={plan.priceMonth} data-price-year={plan.priceYear}>{plan.priceMonth}</span>
+              <span class="text-[#9094a0] text-base" data-period>/mes</span>
+            </div>
+            <p class="text-[#9094a0] text-xs mb-5" style="font-family: var(--font-brand);">{plan.commission} por transacción</p>
+            <a href={plan.url} target={plan.url.startsWith('http') ? '_blank' : undefined} rel={plan.url.startsWith('http') ? 'noreferrer' : undefined} class="w-full py-3 rounded-full font-medium text-sm mb-5 flex items-center justify-center gap-2 transition-all bg-[#0047ba] text-white hover:bg-[#0f206c]">
+              {plan.cta}
+              <Icon name="arrow-right" class="w-4 h-4" />
+            </a>
+            <div class="h-px bg-[#eceef1] mb-5"></div>
+            <ul class="space-y-3 mt-auto">
+              {plan.highlights.map((h) => (
+                <li class="flex items-start gap-3">
+                  <Icon name="check" class="w-[18px] h-[18px] mt-0.5 flex-shrink-0 text-[#0047ba]" strokeWidth={2.5} />
+                  <span class="text-[#5c606b] text-sm leading-snug">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="text-center text-[#9094a0] text-xs mt-10 max-w-2xl mx-auto leading-relaxed">Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta "4.50%" depende de la banda MCC de tu giro y se confirma en tu propuesta formal.</p>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-24 lg:py-32">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-white text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05]">Todo lo que incluye cada plan</h2>
+      </div>
+
+      <div class="md:hidden">
+        <div class="grid grid-cols-2 gap-3 mb-8">
+          {PLANS.map((plan, i) => (
+            <button
+              data-plan-tab={i}
+              class:list={["px-4 py-3 rounded-full text-sm font-semibold transition-all", i === 1 ? "bg-white text-[#1a1d29]" : "bg-white/[0.06] text-white/70 border border-white/[0.1]"]}
+            >
+              {plan.name}
+            </button>
+          ))}
+        </div>
+        {COMPARISON.map((group) => (
+          <div class="mb-8">
+            <p class="text-white/40 text-xs font-semibold uppercase tracking-[0.16em] mb-3" style="font-family: var(--font-brand);">{group.title}</p>
+            {group.rows.map((row) => (
+              <div class="flex items-center justify-between py-3.5 border-t border-white/[0.08]">
+                <span class="text-white/70 text-[13px] leading-snug">{row.label}</span>
+                {row.values.map((v, i) => {
+                  const icon = CellIcon(v);
+                  return (
+                    <span data-plan-value={i} class:list={["text-right", i === 1 ? "" : "hidden"]}>
+                      {icon ? (
+                        <Icon name={icon} class={`w-[18px] h-[18px] ${icon === 'check' ? 'text-[#22d3ee]' : 'text-white/25'}`} strokeWidth={2.5} />
+                      ) : (
+                        <span class="text-white/80 text-sm font-medium">{v}</span>
+                      )}
+                    </span>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div class="hidden md:block overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="text-left pb-4"></th>
+              {PLANS.map((plan) => (
+                <th class:list={["text-center pb-4 text-sm font-semibold", plan.featured ? "text-[#4ad2ff]" : "text-white"]}>{plan.name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {COMPARISON.map((group) => (
+              <>
+                <tr>
+                  <td colspan="5" class="pt-8 pb-2">
+                    <p class="text-white/40 text-xs font-semibold uppercase tracking-[0.16em]" style="font-family: var(--font-brand);">{group.title}</p>
+                  </td>
+                </tr>
+                {group.rows.map((row) => (
+                  <tr class="border-t border-white/[0.08]">
+                    <td class="py-3.5 pr-4 text-white/70 text-[13px] leading-snug">{row.label}</td>
+                    {row.values.map((v) => {
+                      const icon = CellIcon(v);
+                      return (
+                        <td class="py-3.5 px-2 text-center">
+                          {icon ? (
+                            <Icon name={icon} class={`w-4 h-4 mx-auto ${icon === 'check' ? 'text-[#22d3ee]' : 'text-white/25'}`} strokeWidth={2.5} />
+                          ) : (
+                            <span class="text-white/75 text-[13px]">{v}</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-white/40 text-xs mt-10 leading-relaxed max-w-3xl">(*) Cargo de plataforma por transacciones procesadas fuera de Qpaypro (datáfono u otro procesador), según el plan. En Enterprise se negocia según volumen. El precio de sucursal adicional aplica sin importar cuántas cajas físicas operen dentro de esa sucursal; cada caja requiere su propio Kit de Hardware.</p>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f6f7f9] py-28 lg:py-40">
+    <div class="max-w-[820px] mx-auto px-6 lg:px-8">
+      <div class="mb-16 lg:mb-20">
+        <p class="text-[#0047ba] text-sm font-semibold uppercase tracking-[0.2em] mb-6">Preguntas frecuentes</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05]">Todo lo que necesitas saber</h2>
+      </div>
+      <div>
+        {FAQ.map((item) => (
+          <div class="border-b border-[#e4e6ea]" data-faq-item>
+            <button class="w-full flex items-center justify-between py-6 text-left gap-4" data-faq-trigger>
+              <span class="text-[#1a1d29] font-semibold text-lg lg:text-xl">{item.q}</span>
+              <Icon name="plus" class="w-5 h-5 text-[#9094a0] flex-shrink-0" data-faq-icon-closed />
+              <Icon name="minus" class="w-5 h-5 text-[#0047ba] flex-shrink-0 hidden" data-faq-icon-open />
+            </button>
+            <div class="overflow-hidden transition-all duration-400 ease-out max-h-0 opacity-0" data-faq-panel>
+              <p class="text-[#5c606b] text-base leading-relaxed max-w-3xl pb-6">{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-32 lg:py-48">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[800px] mx-auto px-6 lg:px-8 text-center">
+      <div class="flex items-center justify-center gap-2.5 mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Empieza con Qpaypro</p>
+      </div>
+      <h2 class="text-white text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-[-0.03em] leading-[1.02] mb-8">Empieza hoy.</h2>
+      <p class="text-white/55 text-xl lg:text-2xl leading-relaxed mb-12 max-w-xl mx-auto font-light">Únete a miles de negocios que ya cobran con tarjeta usando Qpaypro.</p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="precios.html" class="group px-9 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+          Crear cuenta gratis
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <button class="px-9 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Billing toggle (Mensual/Anual)
+    const toggleButtons = document.querySelectorAll<HTMLButtonElement>('[data-billing-toggle]');
+    toggleButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const yearly = btn.dataset.billingToggle === 'year';
+        toggleButtons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-white', active);
+          b.classList.toggle('text-[#1a1d29]', active);
+          b.classList.toggle('shadow-sm', active);
+          b.classList.toggle('text-[#6b7280]', !active);
+        });
+        document.querySelectorAll<HTMLElement>('[data-price-month]').forEach((el) => {
+          el.textContent = yearly ? el.dataset.priceYear! : el.dataset.priceMonth!;
+        });
+        document.querySelectorAll<HTMLElement>('[data-period]').forEach((el) => {
+          el.textContent = yearly ? '/año' : '/mes';
+        });
+      });
+    });
+
+    // Mobile plan tab switcher for the comparison table
+    const planTabs = document.querySelectorAll<HTMLButtonElement>('[data-plan-tab]');
+    planTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const index = tab.dataset.planTab;
+        planTabs.forEach((t) => {
+          const active = t === tab;
+          t.classList.toggle('bg-white', active);
+          t.classList.toggle('text-[#1a1d29]', active);
+          t.classList.toggle('bg-white/[0.06]', !active);
+          t.classList.toggle('text-white/70', !active);
+          t.classList.toggle('border', !active);
+          t.classList.toggle('border-white/[0.1]', !active);
+        });
+        document.querySelectorAll<HTMLElement>('[data-plan-value]').forEach((el) => {
+          el.classList.toggle('hidden', el.dataset.planValue !== index);
+        });
+      });
+    });
+
+    // FAQ accordion (each item toggles independently)
+    document.querySelectorAll<HTMLElement>('[data-faq-item]').forEach((item) => {
+      const trigger = item.querySelector<HTMLElement>('[data-faq-trigger]');
+      const panel = item.querySelector<HTMLElement>('[data-faq-panel]');
+      const iconClosed = item.querySelector<HTMLElement>('[data-faq-icon-closed]');
+      const iconOpen = item.querySelector<HTMLElement>('[data-faq-icon-open]');
+      let open = false;
+      trigger?.addEventListener('click', () => {
+        open = !open;
+        if (panel) {
+          panel.classList.toggle('max-h-96', open);
+          panel.classList.toggle('opacity-100', open);
+          panel.classList.toggle('max-h-0', !open);
+          panel.classList.toggle('opacity-0', !open);
+        }
+        iconClosed?.classList.toggle('hidden', open);
+        iconOpen?.classList.toggle('hidden', !open);
+      });
+    });
+  </script>
+</MainLayout>
