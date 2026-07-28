@@ -1,0 +1,119 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Icon from '../components/Icon.astro';
+import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+
+const PLATFORMS = [
+  { href: 'https://apps.shopify.com/qpaypro-cli-version?locale=es', image: '/images/integraciones/ee3b5ab285f2.jpg', name: 'Shopify', tier: 'Desde Premium' },
+  { href: 'https://wordpress.org/plugins/qpaypro-payment-gateway-for-woocommerce/', image: '/images/integraciones/c456df2b0822.jpg', name: 'WooCommerce', tier: 'Desde Premium' },
+  { href: null, image: '/images/integraciones/5157ad75532d.jpg', name: 'VTEX', tier: 'Elite y Enterprise' },
+  { href: 'https://qpaypro.zohodesk.com/portal/es/kb/articles/prestashop-1-7', image: '/images/integraciones/8e72baa941dc.jpg', name: 'PrestaShop', tier: 'Desde Premium' },
+  { href: 'https://qpaypro.zohodesk.com/portal/es/kb/articles/open-cart-3-x', image: '/images/integraciones/51929f45b04f.jpg', name: 'OpenCart', tier: 'Desde Premium' },
+];
+
+const STEPS = [
+  { num: '01', icon: 'plug', title: 'Instala el plug-in', text: 'Descarga el conector oficial de Qpaypro desde el marketplace de tu plataforma.' },
+  { num: '02', icon: 'settings', title: 'Configura tus llaves', text: 'Pega tus credenciales de Qpaypro y define tu moneda y método de cobro.' },
+  { num: '03', icon: 'credit-card', title: 'Empieza a cobrar', text: 'Tus clientes pagan con tarjeta, cuotas o QR directamente en tu checkout.' },
+];
+---
+
+<MainLayout
+  title="Integraciones de pagos: Shopify, WooCommerce, VTEX | Qpaypro"
+  description="Conecta Qpaypro con Shopify, WooCommerce, VTEX, PrestaShop y OpenCart. Cobra con tarjeta en tu tienda en línea en minutos, o intégralo con nuestra API."
+  headerTheme="onLight"
+>
+  <section class="w-full bg-white pt-32 pb-16 lg:pt-40 lg:pb-20 text-center">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-center gap-2.5 mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#0047ba] animate-pulse"></span>
+        <p class="text-[#5c606b] text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Integraciones</p>
+      </div>
+      <h1 class="text-[#1a1d29] text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-[-0.03em] leading-[1.03] mb-7">Conecta Qpaypro<br />con tu tienda favorita.</h1>
+      <p class="text-[#5c606b] text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto font-light mb-10">Cobra en tu e-commerce con la plataforma que ya usas. Instala el plug-in oficial y empieza a recibir pagos con tarjeta en minutos.</p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="precios.html" class="group px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300 flex items-center gap-2">
+          Empieza ahora
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <a href="https://developers.qpaypro.com/" target="_blank" rel="noreferrer" class="px-8 py-4 bg-[#f0f1f4] text-[#1a1d29] rounded-full font-semibold text-base hover:bg-[#e4e6ea] transition-all duration-300">Ver documentación</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white pb-24 lg:pb-32">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05]">Plataformas compatibles</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7">
+        {PLATFORMS.map((platform) => {
+          const Tag = platform.href ? 'a' : 'div';
+          return (
+            <Tag
+              href={platform.href}
+              target={platform.href ? '_blank' : undefined}
+              rel={platform.href ? 'noreferrer' : undefined}
+              class="group flex flex-col items-center text-center rounded-3xl bg-[#f6f7f9] ring-1 ring-[#e8eaed] p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:bg-white hover:shadow-[0_24px_60px_rgba(15,32,108,0.12)]"
+            >
+              <div class="w-full aspect-square flex items-center justify-center mb-5 overflow-hidden">
+                <img src={platform.image} alt={platform.name} class="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105 mix-blend-multiply" />
+              </div>
+              <h3 class="text-[#1a1d29] text-lg font-semibold">{platform.name}</h3>
+              <span class="text-[#9094a0] text-[11px] font-semibold uppercase tracking-wide mt-1.5" style="font-family: var(--font-brand);">{platform.tier}</span>
+            </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-28 lg:py-40">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20">
+        <div class="flex items-center gap-2.5 mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Cómo funciona</p>
+        </div>
+        <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03]">Conéctalo en<br />tres pasos.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.08] rounded-3xl overflow-hidden border border-white/[0.08] mb-20">
+        {STEPS.map((step) => (
+          <div class="group relative bg-[#0a0a0c] p-8 lg:p-9 transition-colors duration-500 hover:bg-[#101014]">
+            <span class="absolute top-7 right-8 text-white/20 text-xs group-hover:text-white/40 transition-colors" style="font-family: var(--font-brand);">{step.num}</span>
+            <span class="relative inline-flex mb-6">
+              <span class="dfx-ring"></span>
+              <span class="relative inline-flex w-11 h-11 rounded-xl bg-white/[0.06] border border-white/[0.10] items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-400 z-10">
+                <Icon name={step.icon} class="w-5 h-5 text-white group-hover:text-black transition-colors duration-400" strokeWidth={1.75} />
+              </span>
+            </span>
+            <h3 class="text-white text-lg font-semibold mb-2 leading-snug">{step.title}</h3>
+            <p class="text-white/50 text-sm leading-relaxed font-light">{step.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <span class="relative inline-flex mb-7">
+            <span class="relative inline-flex w-12 h-12 rounded-xl bg-white/[0.06] border border-white/[0.10] items-center justify-center z-10">
+              <Icon name="code-xml" class="w-6 h-6 text-white" strokeWidth={1.6} />
+            </span>
+          </span>
+          <h3 class="text-white text-3xl md:text-4xl font-bold tracking-[-0.02em] mb-5">¿Tu plataforma no está en la lista?</h3>
+          <p class="text-white/60 text-lg leading-relaxed font-light mb-4">Con la API de Qpaypro puedes integrar los pagos a cualquier sistema a la medida. Documentación clara, entorno de pruebas y soporte para desarrolladores.</p>
+          <p class="text-white/40 text-sm" style="font-family: var(--font-brand);">Disponible desde el plan Premium</p>
+        </div>
+        <div class="rounded-2xl border border-white/[0.08] bg-[#0a0a0c] p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+          <div class="text-white/40">// Crear un cobro con la API</div>
+          <div class="text-white/80 mt-2"><span class="text-[#4ad2ff]">POST</span> /v1/payments</div>
+          <div class="text-white/60 mt-3">{'{'}</div>
+          <div class="text-white/60 ml-4">"amount": <span class="text-[#4ad2ff]">200.00</span>,</div>
+          <div class="text-white/60 ml-4">"currency": <span class="text-emerald-400">"GTQ"</span>,</div>
+          <div class="text-white/60 ml-4">"method": <span class="text-emerald-400">"card"</span></div>
+          <div class="text-white/60">{'}'}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
