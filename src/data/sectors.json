@@ -1,0 +1,943 @@
+{
+  "retail": {
+    "title": "Pagos y punto de venta para tiendas retail | Qpaypro",
+    "description": "Cobra con tarjeta, controla inventario y sincroniza tu tienda física y en línea. Solución de pagos y POS para retail en Guatemala.",
+    "hero": {
+      "bgImage": "/images/sectors/c37cd4b1bafe.webp",
+      "title": "Tu tienda física y online en un mismo lugar.",
+      "subtitle": "Cobros, punto de venta, inventario y ventas en línea en una sola plataforma.",
+      "ctaPrimary": "Comenzar ahora",
+      "ctaSecondary": "Hablar con ventas",
+      "footnote": "Certificada PCI-DSS · Aprobación rápida · Soporte local"
+    },
+    "marquee": {
+      "eyebrow": "Hecho para tu giro",
+      "heading": "Funciona para todo tipo de tienda",
+      "cards": [
+        {
+          "image": "/images/sectors/dd34e7d09e81.webp",
+          "alt": "Ropa y calzado",
+          "label": "Ropa y calzado"
+        },
+        {
+          "image": "/images/sectors/6634fe8542ee.webp",
+          "alt": "Abarrotes",
+          "label": "Abarrotes"
+        },
+        {
+          "image": "/images/sectors/d8db47d53f7b.webp",
+          "alt": "Ferreterías",
+          "label": "Ferreterías"
+        },
+        {
+          "image": "/images/sectors/627de9c067c6.webp",
+          "alt": "Librerías",
+          "label": "Librerías"
+        },
+        {
+          "image": "/images/sectors/c382223dc71e.webp",
+          "alt": "Hogar y regalos",
+          "label": "Hogar y regalos"
+        },
+        {
+          "image": "/images/sectors/2bbfdb5699c8.webp",
+          "alt": "Tecnología",
+          "label": "Tecnología"
+        },
+        {
+          "image": "/images/sectors/a66cf50d32cc.webp",
+          "alt": "Tiendas de conveniencia",
+          "label": "Tiendas de conveniencia"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Todo en uno, todo conectado",
+      "heading": "Todo tu negocio en una sola plataforma",
+      "desc": "Vendas donde vendas — tienda, redes o en línea — tus cobros, tu inventario y tus ventas están siempre sincronizados.",
+      "blocks": [
+        {
+          "eyebrow": "Cobros",
+          "heading": "Cobra como tu cliente quiera",
+          "desc": "Acepta tarjeta, pago sin contacto, QR y links de pago por WhatsApp con la terminal POS de Qpaypro. Tarifas claras, sin sorpresas.",
+          "bullets": [
+            "Tarjeta, pago sin contacto y QR",
+            "Links de pago por WhatsApp",
+            "Tarifas transparentes"
+          ],
+          "image": "/images/sectors/1d02c33e7012.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Inventario conectado",
+          "heading": "Ten tu inventario bajo control",
+          "desc": "Registra tus productos y controla el stock en tiempo real. Recibe alertas cuando algo esté por agotarse y organiza tu catálogo por categorías. Y como todo está conectado, vendas en tu tienda, en redes o en línea, tu inventario es siempre el mismo.",
+          "bullets": [
+            "Sincronización de inventario físico y online",
+            "Control de stock en tiempo real",
+            "Alertas de bajo inventario",
+            "Catálogo por categorías"
+          ],
+          "image": "/images/sectors/3ec22b87d6e3.webp",
+          "order": "reverse"
+        },
+        {
+          "eyebrow": "Todo en uno",
+          "heading": "Vende en línea y en tu tienda, sin descuadres",
+          "desc": "Tu tienda física, tus redes y tu Qpayshop comparten el mismo catálogo e inventario. Si se vende algo en línea, tu stock del mostrador se actualiza solo — y tus ventas quedan en un mismo lugar.",
+          "bullets": [
+            "Mismo catálogo en todos tus canales",
+            "Inventario y ventas sincronizados",
+            "Reportes unificados"
+          ],
+          "image": "/images/sectors/c21c59c19613.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Seguridad",
+          "heading": "Cobra tranquilo, sin sustos de fraude",
+          "desc": "Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y monitoreo prevención de fraude Qpayradar y Qpayverify. Menos contracargos y más confianza para ti y tus clientes.",
+          "bullets": [
+            "Certificación PCI-DSS",
+            "Protocolo 3D Secure",
+            "Prevención de fraude Qpayradar + Qpayverify"
+          ],
+          "image": "/images/sectors/5782d9dadcab.webp",
+          "order": "reverse"
+        }
+      ]
+    },
+    "pos": {
+      "eyebrow": "Punto de venta",
+      "heading": "Suma el Sistema POS a tu mostrador",
+      "desc": "Cobra en el mostrador, controla tu inventario y cierra caja sin cuadernos ni cuentas a mano. Un solo equipo para tu punto de venta físico.",
+      "items": [
+        {
+          "icon": "credit-card",
+          "title": "Cobra en el mostrador",
+          "desc": "Terminal, escáner, impresora y cajón, listos para vender."
+        },
+        {
+          "icon": "boxes",
+          "title": "Controla tu inventario",
+          "desc": "Sabes qué tienes y qué se está por acabar, en tiempo real."
+        },
+        {
+          "icon": "chart-line",
+          "title": "Cierra caja sin líos",
+          "desc": "Reportes de lo que vendes, por día y por producto."
+        }
+      ],
+      "ctaText": "Ver Sistema POS",
+      "ctaHref": "sistema-pos.html",
+      "image": "/images/sectors/34d825ba261b.webp"
+    },
+    "testimonial": {
+      "image": "/images/sectors/5d04962f8c9e.webp",
+      "quote": "“Ha sido la herramienta segura que le da confianza a mis clientes y que hizo crecer mis ventas.”",
+      "name": "Ana Lucía",
+      "company": "Laluh"
+    },
+    "faq": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿El inventario se sincroniza entre mi tienda física y en línea?",
+          "a": "Sí. Vendas en tu tienda, en redes o en línea, Qpaypro mantiene el mismo catálogo e inventario sincronizado en tiempo real, para que nunca vendas de más."
+        },
+        {
+          "q": "¿Puedo cobrar con tarjeta y también por WhatsApp?",
+          "a": "Sí. Cobras con tarjeta (pago sin contacto y QR) en el mostrador con el Sistema POS, y también envías links de pago por WhatsApp y redes."
+        },
+        {
+          "q": "¿Qué necesito para empezar a cobrar en mi tienda?",
+          "a": "Solo tu cuenta Qpaypro. Puedes cobrar desde el celular, con el Sistema POS o con links de pago, según lo que mejor le sirva a tu negocio."
+        }
+      ]
+    },
+    "final": {
+      "stats": [
+        "Comercios activos",
+        "Usuarios",
+        "Soporte local"
+      ],
+      "heading": "Lleva tu tienda al siguiente nivel",
+      "desc": "Empieza a cobrar con tarjeta, enviar links de pago y vender en línea hoy mismo con Qpaypro.",
+      "ctas": [
+        {
+          "text": "Comenzar ahora",
+          "href": "precios.html"
+        },
+        {
+          "text": "Hablar con ventas",
+          "href": "contacto.html#ventas"
+        }
+      ],
+      "statsTargets": [
+        {
+          "format": "locale",
+          "target": 5000,
+          "suffix": "+",
+          "label": "Comercios activos"
+        },
+        {
+          "format": "locale",
+          "target": 800000,
+          "suffix": "+",
+          "label": "Usuarios"
+        },
+        {
+          "static": "24/7",
+          "label": "Soporte local"
+        }
+      ]
+    }
+  },
+  "servicios": {
+    "title": "Pagos para negocios de servicios | Qpaypro",
+    "description": "Cobra con tarjeta, links de pago y suscripciones para tu negocio de servicios. Sin perseguir pagos, con Qpaypro.",
+    "hero": {
+      "bgImage": "/images/sectors/4985de3889de.webp",
+      "title": "Cobra tus servicios sin perseguir pagos.",
+      "subtitle": "Cobros con tarjeta, links de pago y suscripciones para tu negocio de servicios.",
+      "ctaPrimary": "Comenzar ahora",
+      "ctaSecondary": "Hablar con ventas",
+      "footnote": "Certificada PCI-DSS · Aprobación rápida · Soporte local"
+    },
+    "marquee": {
+      "eyebrow": "Hecho para tu giro",
+      "heading": "Funciona para todo tipo de servicio",
+      "cards": [
+        {
+          "image": "/images/sectors/0f6e080a03e7.webp",
+          "alt": "Hogar y reparación",
+          "label": "Hogar y reparación"
+        },
+        {
+          "image": "/images/sectors/aed993be2e23.webp",
+          "alt": "Automotriz",
+          "label": "Automotriz"
+        },
+        {
+          "image": "/images/sectors/2b209653a813.webp",
+          "alt": "Servicios profesionales",
+          "label": "Servicios profesionales"
+        },
+        {
+          "image": "/images/sectors/f7b56fe11872.webp",
+          "alt": "Limpieza",
+          "label": "Limpieza"
+        },
+        {
+          "image": "/images/sectors/3eca3ba48fbd.webp",
+          "alt": "Transporte",
+          "label": "Transporte"
+        },
+        {
+          "image": "/images/sectors/35919e811e8d.webp",
+          "alt": "Mascotas",
+          "label": "Mascotas"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Todo en uno, todo conectado",
+      "heading": "Todo tu negocio en una sola plataforma",
+      "desc": "Cobres donde cobres — en sitio, por WhatsApp o en línea — tus pagos y tus clientes quedan siempre en un mismo lugar.",
+      "blocks": [
+        {
+          "eyebrow": "Cobros con tarjeta",
+          "heading": "No pierdas un trabajo por falta de efectivo",
+          "desc": "Acepta Visa y Mastercard, crédito y débito, en el lugar del servicio o donde estés. Si tu cliente no trae efectivo, igual cobras — incluso en cuotas.",
+          "bullets": [
+            "Visa y Mastercard, crédito y débito",
+            "Cobra en sitio o a distancia",
+            "Pagos en cuotas"
+          ],
+          "image": "/images/sectors/103eb0450bf9.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Links de pago",
+          "heading": "Cobra el anticipo por WhatsApp",
+          "desc": "Envía un link de pago para confirmar la cita con un anticipo y reduce las cancelaciones. Tu cliente paga desde su celular y a ti te llega la confirmación al instante.",
+          "bullets": [
+            "Confirma citas con anticipo",
+            "Cobra por WhatsApp y redes",
+            "Menos cancelaciones de última hora"
+          ],
+          "image": "/images/sectors/64cf54fc463c.webp",
+          "order": "reverse"
+        },
+        {
+          "eyebrow": "Suscripciones",
+          "heading": "Cobra mensualidades sin perseguir a nadie",
+          "desc": "Automatiza cobros mensuales o por plan para mantenimientos, membresías y servicios frecuentes. Menos morosidad y un ingreso más predecible.",
+          "bullets": [
+            "Cobros automáticos y frecuentes",
+            "Ideal para planes y mantenimientos",
+            "Menos morosidad"
+          ],
+          "image": "/images/sectors/f5152b9bb0d7.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Seguridad",
+          "heading": "Cobra tranquilo, sin sustos de fraude",
+          "desc": "Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y monitoreo prevención de fraude Qpayradar y Qpayverify.",
+          "bullets": [
+            "Certificación PCI-DSS",
+            "Protocolo 3D Secure",
+            "Prevención de fraude Qpayradar + Qpayverify"
+          ],
+          "image": "/images/sectors/7f95c0532143.webp",
+          "order": "reverse"
+        }
+      ]
+    },
+    "pos": {
+      "eyebrow": "Punto de venta",
+      "heading": "Cobra en recepción con tu punto de venta",
+      "desc": "Suma un punto de venta a tu recepción: cobra con tarjeta, organiza tus servicios y cierra caja sin cuadernos ni cuentas a mano.",
+      "items": [
+        {
+          "icon": "credit-card",
+          "title": "Cobra en recepción",
+          "desc": "Terminal lista para aceptar tarjeta en el mostrador."
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Organiza tus servicios",
+          "desc": "Registra lo que cobras por cada servicio y cliente."
+        },
+        {
+          "icon": "chart-line",
+          "title": "Cierra caja sin líos",
+          "desc": "Reportes de lo que cobras, por día y por servicio."
+        }
+      ],
+      "ctaText": "Ver Sistema POS",
+      "image": "/images/sectors/34d825ba261b.webp",
+      "ctaHref": "sistema-pos.html"
+    },
+    "testimonial": {
+      "image": "/images/sectors/826585492158.webp",
+      "quote": "“Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.”",
+      "name": "María Belén",
+      "company": "María Belén Coach"
+    },
+    "faq": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿Puedo cobrar con tarjeta si no tengo un local?",
+          "a": "Sí. Con Qpaypro cobras con tarjeta desde tu celular y envías links de pago por WhatsApp, sin necesidad de un POS físico ni de un local. Ideal para servicios a domicilio."
+        },
+        {
+          "q": "¿Cómo cobro mensualidades o servicios frecuentes?",
+          "a": "Configuras el cobro automático una sola vez y Qpaypro cobra cada periodo. Así reduces la morosidad y tienes ingresos más predecibles."
+        },
+        {
+          "q": "¿Qué comisión cobra Qpaypro?",
+          "a": "Las tarifas son claras y sin sorpresas; varían según tu volumen y el método de cobro. Escríbenos y te damos una cotización a tu medida."
+        }
+      ]
+    },
+    "final": {
+      "stats": [
+        "Comercios activos",
+        "Usuarios",
+        "Soporte local"
+      ],
+      "heading": "Lleva tu negocio de servicios al siguiente nivel",
+      "desc": "Empieza a cobrar con tarjeta, por WhatsApp y con suscripciones hoy mismo con Qpaypro.",
+      "ctas": [
+        {
+          "text": "Comenzar ahora",
+          "href": "precios.html"
+        },
+        {
+          "text": "Hablar con ventas",
+          "href": "contacto.html#ventas"
+        }
+      ],
+      "statsTargets": [
+        {
+          "format": "locale",
+          "target": 5000,
+          "suffix": "+",
+          "label": "Comercios activos"
+        },
+        {
+          "format": "locale",
+          "target": 800000,
+          "suffix": "+",
+          "label": "Usuarios"
+        },
+        {
+          "static": "24/7",
+          "label": "Soporte local"
+        }
+      ]
+    }
+  },
+  "ecommerce": {
+    "title": "Pasarela de pagos para ecommerce | Qpaypro",
+    "description": "Acepta tarjeta en tu tienda en línea, integra tu ecommerce y sincroniza inventario con Qpaypro en Guatemala.",
+    "hero": {
+      "bgImage": "/images/sectors/95eea350f723.webp",
+      "title": "Convierte más visitas en ventas.",
+      "subtitle": "Pasarela de pagos, tienda en línea e integraciones para tu ecommerce.",
+      "ctaPrimary": "Comenzar ahora",
+      "ctaSecondary": "Hablar con ventas",
+      "footnote": "Certificada PCI-DSS · Aprobación rápida · Soporte local"
+    },
+    "marquee": {
+      "eyebrow": "Hecho para tu giro",
+      "heading": "Para toda tienda en línea",
+      "cards": [
+        {
+          "image": "/images/sectors/8faf57c52913.webp",
+          "alt": "Moda",
+          "label": "Moda"
+        },
+        {
+          "image": "/images/sectors/977cd754e81c.webp",
+          "alt": "Electrónica",
+          "label": "Electrónica"
+        },
+        {
+          "image": "/images/sectors/20d364b82547.webp",
+          "alt": "Cosmética",
+          "label": "Cosmética"
+        },
+        {
+          "image": "/images/sectors/a07546b8121a.webp",
+          "alt": "Alimentos",
+          "label": "Alimentos"
+        },
+        {
+          "image": "/images/sectors/dd2a81749cf7.webp",
+          "alt": "Suscripciones",
+          "label": "Suscripciones"
+        },
+        {
+          "image": "/images/sectors/652f8dbb62a0.webp",
+          "alt": "Marketplace",
+          "label": "Marketplace"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Todo en uno, todo conectado",
+      "heading": "Todo tu ecommerce en una sola plataforma",
+      "desc": "Cobros, catálogo y ventas conectados: vendas en tu web, en redes o en tu tienda física, todo queda sincronizado.",
+      "blocks": [
+        {
+          "eyebrow": "Cobros en línea",
+          "heading": "Acepta tarjeta directo en tu web",
+          "desc": "Integra el checkout de Qpaypro en tu sitio y acepta Visa y Mastercard con validaciones prevención de fraude, en cualquier dispositivo.",
+          "bullets": [
+            "Visa y Mastercard, crédito y débito",
+            "Checkout optimizado",
+            "Pago sin contacto y 3D Secure"
+          ],
+          "image": "/images/sectors/5b0376c7162b.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Integraciones",
+          "heading": "Conecta tu tienda sin programar",
+          "desc": "Instala nuestros plugins listos para las plataformas de ecommerce más usadas y empieza a cobrar con tarjeta en minutos.",
+          "bullets": [
+            "WooCommerce, Shopify y Ecwid",
+            "VTEX y Prestashop",
+            "Sin escribir una línea de código"
+          ],
+          "image": "/images/sectors/3ec22b87d6e3.webp",
+          "order": "reverse"
+        },
+        {
+          "eyebrow": "Tienda en línea",
+          "heading": "¿No tienes web? Crea tu Qpayshop",
+          "desc": "Publica tu catálogo, conecta tu dominio y configura envíos. Cobra con tarjeta directo en tu tienda, con administración de pedidos incluida.",
+          "bullets": [
+            "Catálogo con productos y categorías",
+            "Conecta tu propio dominio",
+            "Administración de pedidos y envíos"
+          ],
+          "image": "/images/sectors/c21c59c19613.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Desarrolladores",
+          "heading": "Una API que tus devs van a amar",
+          "desc": "Integra Qpaypro a tu sistema, app o tienda con APIs robustas y documentadas para distintos casos de uso.",
+          "bullets": [
+            "API de cobros",
+            "Checkout Page",
+            "API de suscripciones"
+          ],
+          "image": "/images/sectors/b3964f773ddf.webp",
+          "order": "reverse"
+        }
+      ]
+    },
+    "pos": {
+      "eyebrow": "Todo conectado",
+      "heading": "Vende también en tu tienda física",
+      "desc": "Suma el Sistema POS y vende en físico con el mismo catálogo e inventario de tu tienda en línea. Todo tu negocio, sincronizado.",
+      "items": [
+        {
+          "icon": "credit-card",
+          "title": "Cobra en el mostrador",
+          "desc": "Terminal lista para aceptar tarjeta en tu local."
+        },
+        {
+          "icon": "boxes",
+          "title": "Inventario sincronizado",
+          "desc": "El stock es el mismo en línea y en tienda."
+        },
+        {
+          "icon": "chart-line",
+          "title": "Reportes unificados",
+          "desc": "Tus ventas online y físicas, en un solo lugar."
+        }
+      ],
+      "ctaText": "Ver Sistema POS",
+      "image": "/images/sectors/34d825ba261b.webp",
+      "ctaHref": "sistema-pos.html"
+    },
+    "testimonial": {
+      "image": "/images/sectors/f14b74902338.webp",
+      "quote": "“Cuando comencé mi negocio necesitaba una plataforma para gestionar mis pedidos en línea. Qpayshop me facilitó el trabajo: fácil de integrar, ver inventarios, monitorear pedidos y recibir pagos sin complicaciones.”",
+      "name": "Ana Cecilia Guerra",
+      "company": "ByAnaCeci"
+    },
+    "faq": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿Cómo conecto Qpaypro a mi tienda en línea?",
+          "a": "Instalas el plugin de Qpaypro para tu plataforma (Shopify, WooCommerce, VTEX, Prestashop o Ecwid) y empiezas a cobrar con tarjeta en minutos, sin programar."
+        },
+        {
+          "q": "¿Cuál es la mejor pasarela de pagos para ecommerce en Guatemala y El Salvador?",
+          "a": "Qpaypro es una pasarela local certificada PCI-DSS que cobra en moneda local, con soporte directo y las integraciones de ecommerce más usadas. Acepta Visa y Mastercard, crédito y débito."
+        },
+        {
+          "q": "¿Necesito una página web para vender con Qpaypro?",
+          "a": "No. Si no tienes web, creas tu tienda Qpayshop con catálogo y dominio propio; y si ya tienes una, conectas Qpaypro con un plugin."
+        }
+      ]
+    },
+    "final": {
+      "stats": [
+        "Comercios activos",
+        "Usuarios",
+        "Soporte local"
+      ],
+      "heading": "Haz crecer tu ecommerce",
+      "desc": "Empieza a cobrar con tarjeta en tu web hoy mismo con Qpaypro.",
+      "ctas": [
+        {
+          "text": "Comenzar ahora",
+          "href": "precios.html"
+        },
+        {
+          "text": "Hablar con ventas",
+          "href": "contacto.html#ventas"
+        }
+      ],
+      "statsTargets": [
+        {
+          "format": "locale",
+          "target": 5000,
+          "suffix": "+",
+          "label": "Comercios activos"
+        },
+        {
+          "format": "locale",
+          "target": 800000,
+          "suffix": "+",
+          "label": "Usuarios"
+        },
+        {
+          "static": "24/7",
+          "label": "Soporte local"
+        }
+      ]
+    }
+  },
+  "belleza": {
+    "title": "Pagos para salones, barberías y spa | Qpaypro",
+    "description": "Cobra con tarjeta, asegura citas con links de pago y vende membresías para tu salón, barbería o spa con Qpaypro.",
+    "hero": {
+      "bgImage": "/images/sectors/e5ef95d38da9.webp",
+      "title": "Asegura cada cita y cobra al instante.",
+      "subtitle": "Pagos con tarjeta, links de pago y membresías para tu salón, barbería o spa.",
+      "ctaPrimary": "Comenzar ahora",
+      "ctaSecondary": "Hablar con ventas",
+      "footnote": "Certificada PCI-DSS · Aprobación rápida · Soporte local"
+    },
+    "marquee": {
+      "eyebrow": "Hecho para tu giro",
+      "heading": "Para todo negocio de belleza",
+      "cards": [
+        {
+          "image": "/images/sectors/4c658e1e06d7.webp",
+          "alt": "Salón de belleza",
+          "label": "Salón de belleza"
+        },
+        {
+          "image": "/images/sectors/415b3c9f1d44.webp",
+          "alt": "Barbería",
+          "label": "Barbería"
+        },
+        {
+          "image": "/images/sectors/3c53e8e23bb3.webp",
+          "alt": "Spa",
+          "label": "Spa"
+        },
+        {
+          "image": "/images/sectors/9e12d75785d0.webp",
+          "alt": "Uñas",
+          "label": "Uñas"
+        },
+        {
+          "image": "/images/sectors/77f96cc58ac0.webp",
+          "alt": "Maquillaje",
+          "label": "Maquillaje"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Todo en uno, todo conectado",
+      "heading": "Todo tu negocio en una sola plataforma",
+      "desc": "Cobros, citas y clientes conectados: cobres en el salón, por WhatsApp o con membresías, todo queda en un mismo lugar.",
+      "blocks": [
+        {
+          "eyebrow": "Cobros con tarjeta",
+          "heading": "Cobra rápido, incluso la propina",
+          "desc": "Acepta Visa y Mastercard en tu salón y agiliza la salida de cada cliente. Sin depender del efectivo y con la opción de propina.",
+          "bullets": [
+            "Visa y Mastercard, crédito y débito",
+            "Cobro rápido en recepción",
+            "Pago sin contacto y 3D Secure"
+          ],
+          "image": "/images/sectors/032ca2235155.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Links de pago",
+          "heading": "Cobra el anticipo de la cita",
+          "desc": "Envía un link por WhatsApp para asegurar la cita con un anticipo y reduce las ausencias. Tu cliente paga desde su celular al instante.",
+          "bullets": [
+            "Asegura citas con anticipo",
+            "Cobra por WhatsApp y redes",
+            "Menos ausencias"
+          ],
+          "image": "/images/sectors/c624f847d5f7.webp",
+          "order": "reverse"
+        },
+        {
+          "eyebrow": "Membresías",
+          "heading": "Vende paquetes y planes mensuales",
+          "desc": "Automatiza cobros de membresías, paquetes de sesiones y planes frecuentes. Fideliza a tus clientes y estabiliza tus ingresos.",
+          "bullets": [
+            "Cobros automáticos y frecuentes",
+            "Paquetes y planes de sesiones",
+            "Menos morosidad"
+          ],
+          "image": "/images/sectors/56b353d16ecc.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Seguridad",
+          "heading": "Cobra tranquilo, sin sustos de fraude",
+          "desc": "Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y monitoreo prevención de fraude Qpayradar y Qpayverify.",
+          "bullets": [
+            "Certificación PCI-DSS",
+            "Protocolo 3D Secure",
+            "Prevención de fraude Qpayradar + Qpayverify"
+          ],
+          "image": "/images/sectors/226807dbe15b.webp",
+          "order": "reverse"
+        }
+      ]
+    },
+    "pos": {
+      "eyebrow": "Punto de venta",
+      "heading": "Cobra en recepción con tu punto de venta",
+      "desc": "Suma un punto de venta a tu recepción: cobra con tarjeta, registra tus servicios y cierra caja sin cuadernos.",
+      "items": [
+        {
+          "icon": "credit-card",
+          "title": "Cobra en recepción",
+          "desc": "Terminal lista para aceptar tarjeta y propina."
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Registra tus servicios",
+          "desc": "Lleva el control de lo que cobras por servicio."
+        },
+        {
+          "icon": "chart-line",
+          "title": "Cierra caja sin líos",
+          "desc": "Reportes de lo que cobras, por día y servicio."
+        }
+      ],
+      "ctaText": "Ver Sistema POS",
+      "image": "/images/sectors/34d825ba261b.webp",
+      "ctaHref": "sistema-pos.html"
+    },
+    "testimonial": {
+      "image": "/images/sectors/56d68b9a2125.webp",
+      "quote": "“Descubrí Qpaypro y se me hizo súper fácil afiliarme. En menos de 48 horas ya estaba cobrando.”",
+      "name": "Najelee Gálvez",
+      "company": "NayeNails"
+    },
+    "faq": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿Cómo reduzco las ausencias en las citas?",
+          "a": "Envías un link de pago por WhatsApp para cobrar un anticipo al agendar. Al pagar por adelantado, tus clientes faltan mucho menos."
+        },
+        {
+          "q": "¿Puedo vender membresías o paquetes de sesiones?",
+          "a": "Sí. Configuras cobros frecuentes para membresías, paquetes y planes mensuales de forma automática."
+        },
+        {
+          "q": "¿Acepta pago con tarjeta y propina?",
+          "a": "Sí. Cobras con Visa y Mastercard, crédito y débito, pago sin contacto, con opción de propina en recepción."
+        }
+      ]
+    },
+    "final": {
+      "stats": [
+        "Comercios activos",
+        "Usuarios",
+        "Soporte local"
+      ],
+      "heading": "Llena tu agenda y cobra sin fricción",
+      "desc": "Empieza a cobrar con tarjeta, por WhatsApp y con membresías hoy mismo con Qpaypro.",
+      "ctas": [
+        {
+          "text": "Comenzar ahora",
+          "href": "precios.html"
+        },
+        {
+          "text": "Hablar con ventas",
+          "href": "contacto.html#ventas"
+        }
+      ],
+      "statsTargets": [
+        {
+          "format": "locale",
+          "target": 5000,
+          "suffix": "+",
+          "label": "Comercios activos"
+        },
+        {
+          "format": "locale",
+          "target": 800000,
+          "suffix": "+",
+          "label": "Usuarios"
+        },
+        {
+          "static": "24/7",
+          "label": "Soporte local"
+        }
+      ]
+    }
+  },
+  "clinicas": {
+    "title": "Pagos para clínicas y consultorios | Qpaypro",
+    "description": "Cobra consultas y tratamientos con tarjeta, links de pago y planes. Solución de pagos para clínicas y consultorios con Qpaypro.",
+    "hero": {
+      "bgImage": "/images/sectors/9ec7da7f14f5.webp",
+      "title": "Cobra consultas y tratamientos sin filas.",
+      "subtitle": "Pagos con tarjeta, links de pago y planes para tu clínica o consultorio.",
+      "ctaPrimary": "Comenzar ahora",
+      "ctaSecondary": "Hablar con ventas",
+      "footnote": "Certificada PCI-DSS · Aprobación rápida · Soporte local"
+    },
+    "marquee": {
+      "eyebrow": "Hecho para tu giro",
+      "heading": "Para toda clínica y consultorio",
+      "cards": [
+        {
+          "image": "/images/sectors/6f1ddb4c1fff.webp",
+          "alt": "Dental",
+          "label": "Dental"
+        },
+        {
+          "image": "/images/sectors/6e00685a603d.webp",
+          "alt": "Médica",
+          "label": "Médica"
+        },
+        {
+          "image": "/images/sectors/b3c4c4745b34.webp",
+          "alt": "Veterinaria",
+          "label": "Veterinaria"
+        },
+        {
+          "image": "/images/sectors/4a73165a4717.webp",
+          "alt": "Estética",
+          "label": "Estética"
+        },
+        {
+          "image": "/images/sectors/ecad6aa4f51c.webp",
+          "alt": "Laboratorio",
+          "label": "Laboratorio"
+        },
+        {
+          "image": "/images/sectors/8b354b796cb5.webp",
+          "alt": "Fisioterapia",
+          "label": "Fisioterapia"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "Todo en uno, todo conectado",
+      "heading": "Todos tus cobros en una sola plataforma",
+      "desc": "Cobres en recepción, por WhatsApp o con planes de tratamiento, tus pagos y tus pacientes quedan siempre en un mismo lugar.",
+      "blocks": [
+        {
+          "eyebrow": "Cobros con tarjeta",
+          "heading": "Cobra tratamientos, incluso en cuotas",
+          "desc": "Acepta Visa y Mastercard en recepción y ofrece pagos en cuotas para tratamientos más grandes. Sin depender del efectivo.",
+          "bullets": [
+            "Visa y Mastercard, crédito y débito",
+            "Pagos en cuotas para tratamientos",
+            "Pago sin contacto y 3D Secure"
+          ],
+          "image": "/images/sectors/b3ea424ddfaf.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Links de pago",
+          "heading": "Cobra la consulta por WhatsApp",
+          "desc": "Envía un link de pago para cobrar la consulta o un anticipo antes de la cita. Tu paciente paga desde su celular al instante.",
+          "bullets": [
+            "Cobra el anticipo de la cita",
+            "Links por WhatsApp y correo",
+            "Confirmación inmediata"
+          ],
+          "image": "/images/sectors/758a40c54bdf.webp",
+          "order": "reverse"
+        },
+        {
+          "eyebrow": "Planes y frecuencias",
+          "heading": "Cobra planes de tratamiento sin perseguir a nadie",
+          "desc": "Automatiza cobros de planes de tratamiento, controles y membresías. Menos morosidad y un ingreso más predecible.",
+          "bullets": [
+            "Cobros automáticos y frecuentes",
+            "Planes de tratamiento y controles",
+            "Menos morosidad"
+          ],
+          "image": "/images/sectors/04f2a3830428.webp",
+          "order": "normal"
+        },
+        {
+          "eyebrow": "Seguridad",
+          "heading": "Cobra con seguridad de nivel bancario",
+          "desc": "Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y monitoreo prevención de fraude Qpayradar y Qpayverify.",
+          "bullets": [
+            "Certificación PCI-DSS",
+            "Protocolo 3D Secure",
+            "Prevención de fraude Qpayradar + Qpayverify"
+          ],
+          "image": "/images/sectors/e67e9e156eee.webp",
+          "order": "reverse"
+        }
+      ]
+    },
+    "pos": {
+      "eyebrow": "Punto de venta",
+      "heading": "Cobra en recepción con tu punto de venta",
+      "desc": "Suma un punto de venta a la recepción de tu clínica: cobra con tarjeta, registra cada cobro y cierra caja sin cuadernos.",
+      "items": [
+        {
+          "icon": "credit-card",
+          "title": "Cobra en recepción",
+          "desc": "Terminal lista para aceptar tarjeta en el mostrador."
+        },
+        {
+          "icon": "calendar-clock",
+          "title": "Registra cada cobro",
+          "desc": "Lleva el control de consultas y tratamientos."
+        },
+        {
+          "icon": "shield-check",
+          "title": "Cobros protegidos",
+          "desc": "Seguridad certificada en cada transacción."
+        }
+      ],
+      "ctaText": "Ver Sistema POS",
+      "image": "/images/sectors/34d825ba261b.webp",
+      "ctaHref": "sistema-pos.html"
+    },
+    "testimonial": {
+      "image": "/images/sectors/9bea2d036ab0.webp",
+      "quote": "“Desde que estoy con Qpaypro he podido gestionar los cobros de mis pacientes mes a mes sin ninguna complicación; las suscripciones me han ayudado mucho para no estar persiguiendo pagos cada fin de mes.”",
+      "name": "Doctora Elena Vargas",
+      "company": "Pediatría"
+    },
+    "faq": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿Puedo cobrar tratamientos en cuotas?",
+          "a": "Sí. Aceptas Visa y Mastercard con pagos en cuotas para tratamientos más grandes, directamente en la recepción de tu clínica."
+        },
+        {
+          "q": "¿Cómo cobro la consulta por adelantado?",
+          "a": "Envías un link de pago por WhatsApp o correo para cobrar la consulta o un anticipo antes de la cita, con confirmación inmediata."
+        },
+        {
+          "q": "¿Es seguro para los datos de mis pacientes?",
+          "a": "Sí. Qpaypro está certificado PCI-DSS y usa 3D Secure más monitoreo prevención de fraude Qpayradar y Qpayverify en cada cobro."
+        }
+      ]
+    },
+    "final": {
+      "stats": [
+        "Comercios activos",
+        "Usuarios",
+        "Soporte local"
+      ],
+      "heading": "Moderniza los cobros de tu clínica",
+      "desc": "Empieza a cobrar con tarjeta, por WhatsApp y con planes hoy mismo con Qpaypro.",
+      "ctas": [
+        {
+          "text": "Comenzar ahora",
+          "href": "precios.html"
+        },
+        {
+          "text": "Hablar con ventas",
+          "href": "contacto.html#ventas"
+        }
+      ],
+      "statsTargets": [
+        {
+          "format": "locale",
+          "target": 5000,
+          "suffix": "+",
+          "label": "Comercios activos"
+        },
+        {
+          "format": "locale",
+          "target": 800000,
+          "suffix": "+",
+          "label": "Usuarios"
+        },
+        {
+          "static": "24/7",
+          "label": "Soporte local"
+        }
+      ]
+    }
+  }
+}

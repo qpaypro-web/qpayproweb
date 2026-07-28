@@ -1,0 +1,227 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Productos":
+    - text: Productos
+    - img
+  - link "Precios":
+    - /url: precios.html
+  - button "Desarrolladores":
+    - text: Desarrolladores
+    - img
+  - button "Empresa y Recursos":
+    - text: Empresa y Recursos
+    - img
+  - link "Contacto":
+    - /url: contacto.html
+  - button "Soporte":
+    - text: Soporte
+    - img
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+- heading "Cobra tus servicios sin perseguir pagos." [level=1]
+- paragraph: Cobros con tarjeta, links de pago y suscripciones para tu negocio de servicios.
+- link "Comenzar ahora":
+  - /url: precios.html
+  - text: Comenzar ahora
+  - img
+- link "Hablar con ventas":
+  - /url: contacto.html#ventas
+- paragraph: Certificada PCI-DSS · Aprobación rápida · Soporte local
+- paragraph: Hecho para tu giro
+- heading "Funciona para todo tipo de servicio" [level=2]
+- img "Hogar y reparación"
+- text: Hogar y reparación
+- img "Automotriz"
+- text: Automotriz
+- img "Servicios profesionales"
+- text: Servicios profesionales
+- img "Limpieza"
+- text: Limpieza
+- img "Transporte"
+- text: Transporte
+- img "Mascotas"
+- text: Mascotas
+- img "Hogar y reparación"
+- text: Hogar y reparación
+- img "Automotriz"
+- text: Automotriz
+- img "Servicios profesionales"
+- text: Servicios profesionales
+- img "Limpieza"
+- text: Limpieza
+- img "Transporte"
+- text: Transporte
+- img "Mascotas"
+- text: Mascotas
+- paragraph: Todo en uno, todo conectado
+- heading "Todo tu negocio en una sola plataforma" [level=2]
+- paragraph: Cobres donde cobres — en sitio, por WhatsApp o en línea — tus pagos y tus clientes quedan siempre en un mismo lugar.
+- paragraph: Cobros con tarjeta
+- heading "No pierdas un trabajo por falta de efectivo" [level=3]
+- paragraph: Acepta Visa y Mastercard, crédito y débito, en el lugar del servicio o donde estés. Si tu cliente no trae efectivo, igual cobras — incluso en cuotas.
+- list:
+  - listitem:
+    - img
+    - text: Visa y Mastercard, crédito y débito
+  - listitem:
+    - img
+    - text: Cobra en sitio o a distancia
+  - listitem:
+    - img
+    - text: Pagos en cuotas
+- paragraph: Links de pago
+- heading "Cobra el anticipo por WhatsApp" [level=3]
+- paragraph: Envía un link de pago para confirmar la cita con un anticipo y reduce las cancelaciones. Tu cliente paga desde su celular y a ti te llega la confirmación al instante.
+- list:
+  - listitem:
+    - img
+    - text: Confirma citas con anticipo
+  - listitem:
+    - img
+    - text: Cobra por WhatsApp y redes
+  - listitem:
+    - img
+    - text: Menos cancelaciones de última hora
+- paragraph: Suscripciones
+- heading "Cobra mensualidades sin perseguir a nadie" [level=3]
+- paragraph: Automatiza cobros mensuales o por plan para mantenimientos, membresías y servicios frecuentes. Menos morosidad y un ingreso más predecible.
+- list:
+  - listitem:
+    - img
+    - text: Cobros automáticos y frecuentes
+  - listitem:
+    - img
+    - text: Ideal para planes y mantenimientos
+  - listitem:
+    - img
+    - text: Menos morosidad
+- paragraph: Seguridad
+- heading "Cobra tranquilo, sin sustos de fraude" [level=3]
+- paragraph: Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y monitoreo prevención de fraude Qpayradar y Qpayverify.
+- list:
+  - listitem:
+    - img
+    - text: Certificación PCI-DSS
+  - listitem:
+    - img
+    - text: Protocolo 3D Secure
+  - listitem:
+    - img
+    - text: Prevención de fraude Qpayradar + Qpayverify
+- paragraph: Todo conectado
+- heading "Todo, en una sola plataforma" [level=2]
+- paragraph: Un mismo inventario para tu tienda física y en línea. Cobros, links de pago, suscripciones e integraciones, todo conectado en un solo lugar.
+- img
+- img
+- text: Tienda física
+- img
+- text: Tienda en línea
+- img
+- text: Links de pago
+- img
+- text: Suscripciones
+- img
+- text: Inventario sincronizado
+- img
+- text: Integraciones
+- img "Qpaypro"
+- text: Una sola plataforma
+- paragraph: Punto de venta
+- heading "Cobra en recepción con tu punto de venta" [level=2]
+- paragraph: "Suma un punto de venta a tu recepción: cobra con tarjeta, organiza tus servicios y cierra caja sin cuadernos ni cuentas a mano."
+- img
+- text: Cobra en recepción Terminal lista para aceptar tarjeta en el mostrador.
+- img
+- text: Organiza tus servicios Registra lo que cobras por cada servicio y cliente.
+- img
+- text: Cierra caja sin líos Reportes de lo que cobras, por día y por servicio.
+- button "Ver Sistema POS":
+  - text: Ver Sistema POS
+  - img
+- img "Sistema de punto de venta Qpaypro"
+- img "Testimonio de María Belén"
+- paragraph: Testimonios
+- img
+- blockquote: "“Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.”"
+- text: María Belén María Belén Coach
+- paragraph: Preguntas frecuentes
+- heading "Preguntas frecuentes" [level=2]
+- heading "¿Puedo cobrar con tarjeta si no tengo un local?" [level=3]
+- paragraph: Sí. Con Qpaypro cobras con tarjeta desde tu celular y envías links de pago por WhatsApp, sin necesidad de un POS físico ni de un local. Ideal para servicios a domicilio.
+- heading "¿Cómo cobro mensualidades o servicios frecuentes?" [level=3]
+- paragraph: Configuras el cobro automático una sola vez y Qpaypro cobra cada periodo. Así reduces la morosidad y tienes ingresos más predecibles.
+- heading "¿Qué comisión cobra Qpaypro?" [level=3]
+- paragraph: Las tarifas son claras y sin sorpresas; varían según tu volumen y el método de cobro. Escríbenos y te damos una cotización a tu medida.
+- text: 4,988+ Comercios activos 798,088+ Usuarios 24/7 Soporte local
+- heading "Lleva tu negocio de servicios al siguiente nivel" [level=2]
+- paragraph: Empieza a cobrar con tarjeta, por WhatsApp y con suscripciones hoy mismo con Qpaypro.
+- link "Comenzar ahora":
+  - /url: precios.html
+  - text: Comenzar ahora
+  - img
+- link "Hablar con ventas":
+  - /url: contacto.html#ventas
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"
