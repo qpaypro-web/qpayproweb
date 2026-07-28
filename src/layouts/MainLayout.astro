@@ -43,24 +43,114 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
 
       gsap.registerPlugin(ScrollTrigger);
 
-      // Recreates the site's original fade-up scroll reveal (short rise +
-      // fade, staggered within each group) using GSAP for exact easing/feel
-      // parity rather than re-deriving the effect by hand.
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Entrance reveal: a longer rise with a softer settle than the original
+      // 0.3s/20px version, which barely registered while scrolling.
+      //
+      // Deliberately an IntersectionObserver rather than gsap.from() +
+      // ScrollTrigger. ScrollTrigger auto-refreshes on `load`, and on a
+      // refresh GSAP re-applies a `from` tween's start state; if that
+      // trigger had already fired it never fires again, so the element
+      // stays at opacity 0 permanently. That was already happening on
+      // sobre-qpaypro before these changes (five cards never appeared).
+      // Driving it from an observer also means the markup is visible by
+      // default and only hidden once the script is definitely running.
+      //
+      // Groups stagger their children; a standalone [data-reveal] animates
+      // on its own. Every standalone marker used to be inert, which is why
+      // most section headings had no entrance at all.
+      const revealBatches: HTMLElement[][] = [];
       document.querySelectorAll<HTMLElement>('[data-reveal-group]').forEach((group) => {
-        const items = group.querySelectorAll<HTMLElement>('[data-reveal]');
-        if (!items.length) return;
-        gsap.from(items, {
-          y: 20,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power1.out',
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: group,
-            start: 'top 85%',
-          },
-        });
+        const items = Array.from(group.querySelectorAll<HTMLElement>('[data-reveal]'));
+        if (items.length) revealBatches.push(items);
       });
+      document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+        if (!el.closest('[data-reveal-group]')) revealBatches.push([el]);
+      });
+
+      const RISE = reduceMotion ? 0 : 38;
+      const DURATION = reduceMotion ? 200 : 750;
+      const STAGGER = reduceMotion ? 0 : 120;
+
+      revealBatches.forEach((items) => {
+        items.forEach((el, i) => {
+          el.style.opacity = '0';
+          el.style.transform = `translateY(${RISE}px)`;
+          el.style.transition = `opacity ${DURATION}ms cubic-bezier(0.22, 1, 0.36, 1) ${i * STAGGER}ms, transform ${DURATION}ms cubic-bezier(0.22, 1, 0.36, 1) ${i * STAGGER}ms`;
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            observer.disconnect();
+            items.forEach((el) => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+              // Hand the element back to CSS once it has arrived, so nothing
+              // is left with inline transforms that could fight a hover state.
+              window.setTimeout(
+                () => {
+                  el.style.removeProperty('opacity');
+                  el.style.removeProperty('transform');
+                  el.style.removeProperty('transition');
+                },
+                DURATION + STAGGER * items.length + 60
+              );
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px' }
+        );
+        items.forEach((el) => observer.observe(el));
+      });
+
+      if (!reduceMotion) {
+        // Parallax. 'cover' is for images that fill a clipped container: they
+        // get scaled up first so the drift stays inside the frame and can
+        // never overlap neighbouring content. Anything else drifts by a few
+        // pixels, well within the sections' vertical padding.
+        document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
+          const cover = el.dataset.parallax === 'cover';
+          const trigger = cover ? el.parentElement || el : el;
+          if (cover) {
+            gsap.set(el, { scale: 1.18, transformOrigin: 'center center' });
+          }
+          gsap.fromTo(
+            el,
+            cover ? { yPercent: -7 } : { y: 34 },
+            {
+              ...(cover ? { yPercent: 7 } : { y: -34 }),
+              ease: 'none',
+              scrollTrigger: {
+                trigger,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.6,
+              },
+            }
+          );
+        });
+
+        // Hero media settles back and dims as the hero scrolls away, so the
+        // section below feels like it slides over it.
+        document.querySelectorAll<HTMLElement>('[data-scroll-zoom]').forEach((el) => {
+          gsap.fromTo(
+            el,
+            { scale: 1.06 },
+            {
+              scale: 1,
+              opacity: 0.55,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: el.closest('section') || el.parentElement || el,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.6,
+              },
+            }
+          );
+        });
+      }
 
       // Faithful port of the original count-up stat component: same
       // IntersectionObserver threshold (0.4), same 1800ms duration, and the
@@ -98,6 +188,18 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
           { threshold: 0.4 }
         );
         observer.observe(el);
+      });
+
+      // ScrollTrigger measures every trigger's position once, on setup. Images
+      // and webfonts land after that and push the layout down, so any trigger
+      // whose real position ends up past its stale offset simply never fires —
+      // which left a few cards stuck at opacity 0 for good. Re-measure once
+      // everything that can change the layout has settled.
+      const refresh = () => ScrollTrigger.refresh();
+      window.addEventListener('load', refresh);
+      document.fonts?.ready.then(refresh);
+      document.querySelectorAll('img').forEach((img) => {
+        if (!img.complete) img.addEventListener('load', refresh, { once: true });
       });
     </script>
   </body>
