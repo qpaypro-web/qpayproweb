@@ -1,0 +1,106 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+  - button:
+    - img
+- paragraph: POS Cute
+- text: Próximamente
+- heading "Cobra en grande." [level=1]
+- paragraph: El terminal físico de Qpaypro. Acepta tarjetas, pago sin contacto y chip donde sea que estés.
+- text: Disponible muy pronto
+- link "Ver especificaciones ›":
+  - /url: "#specs"
+- img "POS Cute de Qpaypro"
+- heading "Pequeño por fuera. Poderoso por dentro." [level=2]
+- text: NFC
+- heading "Pagos sin contacto" [level=3]
+- paragraph: Acepta tarjetas sin contacto, Apple Pay y Google Pay con solo acercarlas.
+- text: Chip & PIN
+- heading "Seguridad total" [level=3]
+- paragraph: Lector de chip con teclado PIN físico para transacciones protegidas.
+- text: "700"
+- heading "Cobros por carga" [level=3]
+- paragraph: Hasta 700 cobros con una sola carga, vía USB-C.
+- text: Bluetooth
+- heading "Conéctalo a tu celular" [level=3]
+- paragraph: Se enlaza por Bluetooth con tu teléfono para cobrar donde estés.
+- paragraph: Tecnología pago sin contacto
+- heading "Un toque y listo." [level=2]
+- paragraph: "La zona NFC en la parte trasera permite cobrar acercando la tarjeta o el teléfono. Sin insertar, sin deslizar: el pago más rápido que tu negocio haya tenido."
+- paragraph: Compatible con Visa, Mastercard, Apple Pay y Google Pay.
+- img "Vistas del POS Cute con zona NFC"
+- paragraph: Especificaciones
+- heading "Todo lo que lleva dentro" [level=2]
+- text: Pantalla LCD blanco y negro retroiluminada · 128 × 40 px Conectividad Bluetooth 3.0 y 4.2 Pagos NFC pago sin contacto · Chip EMV · Banda magnética Batería 3.7V / 250mAh · hasta 700 cobros por carga Carga USB-C · 5V 0.5A Dimensiones 99 × 59 × 16.1 mm · 80 g Resistencia Soporta caídas de hasta 1 metro Seguridad PCI PTS 6.x con SRED · EMV L1 y L2 Compatibilidad Visa PayWave · Mastercard PayPass · Apple Pay
+- paragraph: POS Cute
+- heading "El POS Cute te espera." [level=2]
+- paragraph: Llévalo a tu negocio y empieza a cobrar en grande hoy mismo.
+- button "Cómpralo ahora":
+  - text: Cómpralo ahora
+  - img
+- button "Contacta a Ventas"
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"

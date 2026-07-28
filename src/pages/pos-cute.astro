@@ -1,0 +1,123 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Icon from '../components/Icon.astro';
+import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+
+const FEATURES = [
+  { stat: 'NFC', title: 'Pagos sin contacto', text: 'Acepta tarjetas sin contacto, Apple Pay y Google Pay con solo acercarlas.' },
+  { stat: 'Chip & PIN', title: 'Seguridad total', text: 'Lector de chip con teclado PIN físico para transacciones protegidas.' },
+  { stat: '700', title: 'Cobros por carga', text: 'Hasta 700 cobros con una sola carga, vía USB-C.' },
+  { stat: 'Bluetooth', title: 'Conéctalo a tu celular', text: 'Se enlaza por Bluetooth con tu teléfono para cobrar donde estés.' },
+];
+
+const SPECS = [
+  { label: 'Pantalla', value: 'LCD blanco y negro retroiluminada · 128 × 40 px' },
+  { label: 'Conectividad', value: 'Bluetooth 3.0 y 4.2' },
+  { label: 'Pagos', value: 'NFC pago sin contacto · Chip EMV · Banda magnética' },
+  { label: 'Batería', value: '3.7V / 250mAh · hasta 700 cobros por carga' },
+  { label: 'Carga', value: 'USB-C · 5V 0.5A' },
+  { label: 'Dimensiones', value: '99 × 59 × 16.1 mm · 80 g' },
+  { label: 'Resistencia', value: 'Soporta caídas de hasta 1 metro' },
+  { label: 'Seguridad', value: 'PCI PTS 6.x con SRED · EMV L1 y L2' },
+  { label: 'Compatibilidad', value: 'Visa PayWave · Mastercard PayPass · Apple Pay' },
+];
+---
+
+<MainLayout
+  title="POS Cute: el terminal físico de Qpaypro | Qpaypro"
+  description="El terminal físico de Qpaypro. Acepta tarjetas, pago sin contacto y chip donde sea que estés. Próximamente."
+  headerTheme="onLight"
+>
+  <section class="relative w-full bg-white pt-32 lg:pt-40 pb-0 overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8 text-center" data-reveal>
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <p class="text-[#0047ba] text-base lg:text-lg font-semibold">POS Cute</p>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0047ba]/10 text-[#0047ba] text-xs font-bold uppercase tracking-[0.14em]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#0047ba] animate-pulse"></span>Próximamente
+        </span>
+      </div>
+      <h1 class="text-[#1a1d29] text-5xl md:text-6xl lg:text-[5.5rem] font-bold tracking-[-0.03em] leading-[1.02] mb-6">Cobra en grande.</h1>
+      <p class="text-[#5c606b] text-xl lg:text-2xl leading-relaxed max-w-2xl mx-auto mb-4">El terminal físico de Qpaypro. Acepta tarjetas, pago sin contacto y chip donde sea que estés.</p>
+      <div class="flex items-center justify-center gap-6 flex-wrap mb-2">
+        <span class="text-[#8a8f9a] text-lg font-medium">Disponible muy pronto</span>
+        <a href="#specs" class="text-[#0047ba] text-lg font-medium hover:underline">Ver especificaciones ›</a>
+      </div>
+    </div>
+    <div class="relative max-w-[700px] mx-auto px-6 mt-4">
+      <img src="/images/pos-cute/fa694bc40cfa.jpg" alt="POS Cute de Qpaypro" class="w-full h-auto" />
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20" data-reveal>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05]">Pequeño por fuera.<br />Poderoso por dentro.</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-16" data-reveal-group>
+        {FEATURES.map((f) => (
+          <div class="border-t border-[#e4e6ea] pt-6" data-reveal>
+            <div class="text-[#0047ba] text-4xl lg:text-5xl font-bold tracking-tight mb-4">{f.stat}</div>
+            <h3 class="text-[#1a1d29] text-xl font-semibold mb-2">{f.title}</h3>
+            <p class="text-[#5c606b] text-base leading-relaxed max-w-md">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-24 lg:py-32">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8" data-reveal>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <div class="flex items-center gap-2.5 mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Tecnología pago sin contacto</p>
+          </div>
+          <h2 class="text-white text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05] mb-6">Un toque y listo.</h2>
+          <p class="text-white/60 text-lg leading-relaxed mb-4 font-light">La zona NFC en la parte trasera permite cobrar acercando la tarjeta o el teléfono. Sin insertar, sin deslizar: el pago más rápido que tu negocio haya tenido.</p>
+          <p class="text-white/60 text-lg leading-relaxed font-light">Compatible con Visa, Mastercard, Apple Pay y Google Pay.</p>
+        </div>
+        <div class="relative flex items-center justify-center">
+          <img src="/images/pos-cute/ef4fcafeadd1.png" alt="Vistas del POS Cute con zona NFC" class="w-full h-auto object-contain drop-shadow-2xl" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs" class="w-full bg-white py-24 lg:py-32 border-t border-[#eef0f3]">
+    <div class="max-w-[900px] mx-auto px-6 lg:px-8">
+      <div class="mb-14" data-reveal>
+        <p class="text-[#5c606b] text-xs font-semibold uppercase tracking-[0.14em] mb-5">Especificaciones</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-[-0.02em] leading-[1.08]">Todo lo que lleva dentro</h2>
+      </div>
+      <div class="divide-y divide-[#e4e6ea]">
+        {SPECS.map((spec) => (
+          <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-8 py-5">
+            <span class="text-[#9094a0] text-sm font-medium">{spec.label}</span>
+            <span class="text-[#1a1d29] text-base font-medium">{spec.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-28 lg:py-40">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[800px] mx-auto px-6 lg:px-8 text-center" data-reveal>
+      <div class="flex items-center justify-center gap-2.5 mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">POS Cute</p>
+      </div>
+      <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03] mb-6">El POS Cute te espera.</h2>
+      <p class="text-white/55 text-xl leading-relaxed mb-10 max-w-xl mx-auto font-light">Llévalo a tu negocio y empieza a cobrar en grande hoy mismo.</p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <button type="button" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+          Cómpralo ahora
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
+        <button type="button" class="px-8 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</button>
+      </div>
+    </div>
+  </section>
+</MainLayout>
