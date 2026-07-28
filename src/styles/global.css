@@ -16,3 +16,11 @@ h5,
 h6 {
   font-family: var(--font-brand);
 }
+
+@media (max-width: 640px) {
+  h1 {
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}

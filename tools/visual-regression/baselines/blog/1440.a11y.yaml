@@ -1,0 +1,227 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Productos":
+    - text: Productos
+    - img
+  - link "Precios":
+    - /url: precios.html
+  - button "Desarrolladores":
+    - text: Desarrolladores
+    - img
+  - button "Empresa y Recursos":
+    - text: Empresa y Recursos
+    - img
+  - link "Contacto":
+    - /url: contacto.html
+  - button "Soporte":
+    - text: Soporte
+    - img
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+- text: Blog
+- heading "Ideas para cobrar, vender y crecer" [level=1]
+- paragraph: Estrategias, tendencias y guías de pagos digitales y ecommerce para hacer crecer tu negocio.
+- link "Alianza estratégica Ecommerce Lanzamientos Alianza estratégica Leer artículo":
+  - /url: articulo.html#alianzaelsalvador
+  - img "Alianza estratégica"
+  - text: Ecommerce Lanzamientos
+  - heading "Alianza estratégica" [level=3]
+  - text: Leer artículo
+  - img
+- link "Qpaypro busca modernizarse, estar a la vanguardia de la tecnología Lanzamientos Transformación de Negocios Qpaypro busca modernizarse, estar a la vanguardia de la tecnología Leer artículo":
+  - /url: articulo.html#qpaypro-busca-modernizarse-estar-a-la-vanguardia-de-la-tecnologia
+  - img "Qpaypro busca modernizarse, estar a la vanguardia de la tecnología"
+  - text: Lanzamientos Transformación de Negocios
+  - heading "Qpaypro busca modernizarse, estar a la vanguardia de la tecnología" [level=3]
+  - text: Leer artículo
+  - img
+- 'link "De Local Físico a Tienda Digital: Lo Que Nadie Te Dice Sobre El Cambio Pagos en línea Transformación de Negocios De Local Físico a Tienda Digital: Lo Que Nadie Te Dice Sobre El Cambio Leer artículo"':
+  - /url: articulo.html#como-generar-confianza-en-linea-sin-tener-una-gran-marca
+  - 'img "De Local Físico a Tienda Digital: Lo Que Nadie Te Dice Sobre El Cambio"'
+  - text: Pagos en línea Transformación de Negocios
+  - 'heading "De Local Físico a Tienda Digital: Lo Que Nadie Te Dice Sobre El Cambio" [level=3]'
+  - text: Leer artículo
+  - img
+- link "Checklist Para Lanzar Tu Tienda Online Sin Fallar En El Intento Ecommerce Estrategias de Venta Digital Checklist Para Lanzar Tu Tienda Online Sin Fallar En El Intento Leer artículo":
+  - /url: articulo.html#checklist-para-lanzar-tu-tienda-online-sin-fallar-en-el-intento
+  - img "Checklist Para Lanzar Tu Tienda Online Sin Fallar En El Intento"
+  - text: Ecommerce Estrategias de Venta Digital
+  - heading "Checklist Para Lanzar Tu Tienda Online Sin Fallar En El Intento" [level=3]
+  - text: Leer artículo
+  - img
+- link "¿Tu Sitio Web Está Vendiendo Menos? Estas Señales Podrían Ser La Razón Pagos en línea Velocidad y rendimiento ¿Tu Sitio Web Está Vendiendo Menos? Estas Señales Podrían Ser La Razón Leer artículo":
+  - /url: articulo.html#tu-sitio-web-esta-vendiendo-menos-estas-senales-podrian-ser-la-razon
+  - img "¿Tu Sitio Web Está Vendiendo Menos? Estas Señales Podrían Ser La Razón"
+  - text: Pagos en línea Velocidad y rendimiento
+  - heading "¿Tu Sitio Web Está Vendiendo Menos? Estas Señales Podrían Ser La Razón" [level=3]
+  - text: Leer artículo
+  - img
+- 'link "Automatiza Tu Negocio Sin Perder El Control: Guía Para Principiantes Ecommerce Estrategias de Venta Digital Automatiza Tu Negocio Sin Perder El Control: Guía Para Principiantes Leer artículo"':
+  - /url: articulo.html#automatiza-tu-negocio-sin-perder-el-control-guia-para-principiantes
+  - 'img "Automatiza Tu Negocio Sin Perder El Control: Guía Para Principiantes"'
+  - text: Ecommerce Estrategias de Venta Digital
+  - 'heading "Automatiza Tu Negocio Sin Perder El Control: Guía Para Principiantes" [level=3]'
+  - text: Leer artículo
+  - img
+- link "Mitos Que Están Frenando El Crecimiento De Tu Negocio Digital Ecommerce Qpayfel Mitos Que Están Frenando El Crecimiento De Tu Negocio Digital Leer artículo":
+  - /url: articulo.html#mitos-que-estan-frenando-el-crecimiento-de-tu-negocio-digital
+  - img "Mitos Que Están Frenando El Crecimiento De Tu Negocio Digital"
+  - text: Ecommerce Qpayfel
+  - heading "Mitos Que Están Frenando El Crecimiento De Tu Negocio Digital" [level=3]
+  - text: Leer artículo
+  - img
+- 'link "Temporadas Altas Sin Pérdidas: La Guía Para Cobrar Sin Errores Atención al cliente Pagos en línea Temporadas Altas Sin Pérdidas: La Guía Para Cobrar Sin Errores Leer artículo"':
+  - /url: articulo.html#temporadas-altas-sin-perdidas-la-guia-para-cobrar-sin-errores
+  - 'img "Temporadas Altas Sin Pérdidas: La Guía Para Cobrar Sin Errores"'
+  - text: Atención al cliente Pagos en línea
+  - 'heading "Temporadas Altas Sin Pérdidas: La Guía Para Cobrar Sin Errores" [level=3]'
+  - text: Leer artículo
+  - img
+- link "Tendencias Que Están Transformando El Ecommerce En Latinoamérica Ecommerce Tecnología y automatización Tendencias Que Están Transformando El Ecommerce En Latinoamérica Leer artículo":
+  - /url: articulo.html#tendencias-que-estan-transformando-el-ecommerce-en-latinoamerica
+  - img "Tendencias Que Están Transformando El Ecommerce En Latinoamérica"
+  - text: Ecommerce Tecnología y automatización
+  - heading "Tendencias Que Están Transformando El Ecommerce En Latinoamérica" [level=3]
+  - text: Leer artículo
+  - img
+- 'link "Pagos Digitales: El Aliado Silencioso Para Hacer Crecer Tu Negocio Ecommerce Pagos en línea Pagos Digitales: El Aliado Silencioso Para Hacer Crecer Tu Negocio Leer artículo"':
+  - /url: articulo.html#pagos-digitales-el-aliado-silencioso-para-hacer-crecer-tu-negocio
+  - 'img "Pagos Digitales: El Aliado Silencioso Para Hacer Crecer Tu Negocio"'
+  - text: Ecommerce Pagos en línea
+  - 'heading "Pagos Digitales: El Aliado Silencioso Para Hacer Crecer Tu Negocio" [level=3]'
+  - text: Leer artículo
+  - img
+- 'link "Qpayfel: La revolución en facturación electrónica en Guatemala Qpayfel Pagos en línea Qpayfel: La revolución en facturación electrónica en Guatemala Leer artículo"':
+  - /url: articulo.html#errores-comunes-en-el-ecommerce-y-como-evitarlos
+  - 'img "Qpayfel: La revolución en facturación electrónica en Guatemala"'
+  - text: Qpayfel Pagos en línea
+  - 'heading "Qpayfel: La revolución en facturación electrónica en Guatemala" [level=3]'
+  - text: Leer artículo
+  - img
+- link "Errores Comunes en el Ecommerce y Cómo Evitarlos Ecommerce Marketing Errores Comunes en el Ecommerce y Cómo Evitarlos Leer artículo":
+  - /url: articulo.html#maximizar-ventas-en-temporadas-de-festividades-copy-copy
+  - img "Errores Comunes en el Ecommerce y Cómo Evitarlos"
+  - text: Ecommerce Marketing
+  - heading "Errores Comunes en el Ecommerce y Cómo Evitarlos" [level=3]
+  - text: Leer artículo
+  - img
+- link "Cómo Maximizar tus Ventas en Línea Durante la Temporada de Festividades Ecommerce Marketing Cómo Maximizar tus Ventas en Línea Durante la Temporada de Festividades Leer artículo":
+  - /url: articulo.html#maximizar-ventas-en-temporadas-de-festividades
+  - img "Cómo Maximizar tus Ventas en Línea Durante la Temporada de Festividades"
+  - text: Ecommerce Marketing
+  - heading "Cómo Maximizar tus Ventas en Línea Durante la Temporada de Festividades" [level=3]
+  - text: Leer artículo
+  - img
+- link "Nuevas Soluciones de Pago para tu Shopify con Qpaypro Ecommerce Nuevas Soluciones de Pago para tu Shopify con Qpaypro Leer artículo":
+  - /url: articulo.html#integracion-con-shopify
+  - img "Nuevas Soluciones de Pago para tu Shopify con Qpaypro"
+  - text: Ecommerce
+  - heading "Nuevas Soluciones de Pago para tu Shopify con Qpaypro" [level=3]
+  - text: Leer artículo
+  - img
+- 'link "La Nueva Forma de Recibir Pagos en Efectivo: Qpaycash Lanzamientos Ecommerce La Nueva Forma de Recibir Pagos en Efectivo: Qpaycash Leer artículo"':
+  - /url: articulo.html#qpaychas-pagos-en-efectivo
+  - 'img "La Nueva Forma de Recibir Pagos en Efectivo: Qpaycash"'
+  - text: Lanzamientos Ecommerce
+  - 'heading "La Nueva Forma de Recibir Pagos en Efectivo: Qpaycash" [level=3]'
+  - text: Leer artículo
+  - img
+- link "Cómo Aumentar la Retención de Clientes en tu Tienda en Línea Ecommerce Cómo Aumentar la Retención de Clientes en tu Tienda en Línea Leer artículo":
+  - /url: articulo.html#aumentar-retencion-clientes-en-linea
+  - img "Cómo Aumentar la Retención de Clientes en tu Tienda en Línea"
+  - text: Ecommerce
+  - heading "Cómo Aumentar la Retención de Clientes en tu Tienda en Línea" [level=3]
+  - text: Leer artículo
+  - img
+- link "4 Estrategias para Reducir el Abandono del Carrito de Compras Ecommerce 4 Estrategias para Reducir el Abandono del Carrito de Compras Leer artículo":
+  - /url: articulo.html#estrategias-abandono-de-carrito-en-linea
+  - img "4 Estrategias para Reducir el Abandono del Carrito de Compras"
+  - text: Ecommerce
+  - heading "4 Estrategias para Reducir el Abandono del Carrito de Compras" [level=3]
+  - text: Leer artículo
+  - img
+- 'link "Criptomonedas: Datos Clave y Cómo Transforman el Comercio en Línea Ecommerce Criptomonedas: Datos Clave y Cómo Transforman el Comercio en Línea Leer artículo"':
+  - /url: articulo.html#criptomonedas
+  - 'img "Criptomonedas: Datos Clave y Cómo Transforman el Comercio en Línea"'
+  - text: Ecommerce
+  - 'heading "Criptomonedas: Datos Clave y Cómo Transforman el Comercio en Línea" [level=3]'
+  - text: Leer artículo
+  - img
+- 'link "El Futuro de los Pagos Digitales: Tendencias a Tener en Cuenta Ecommerce El Futuro de los Pagos Digitales: Tendencias a Tener en Cuenta Leer artículo"':
+  - /url: articulo.html#tendencias-pagos-digitales
+  - 'img "El Futuro de los Pagos Digitales: Tendencias a Tener en Cuenta"'
+  - text: Ecommerce
+  - 'heading "El Futuro de los Pagos Digitales: Tendencias a Tener en Cuenta" [level=3]'
+  - text: Leer artículo
+  - img
+- link "Mejorando la Experiencia del Cliente en tu Tienda en Línea Ecommerce Mejorando la Experiencia del Cliente en tu Tienda en Línea Leer artículo":
+  - /url: articulo.html#experiencia-en-tu-tienda-en-linea
+  - img "Mejorando la Experiencia del Cliente en tu Tienda en Línea"
+  - text: Ecommerce
+  - heading "Mejorando la Experiencia del Cliente en tu Tienda en Línea" [level=3]
+  - text: Leer artículo
+  - img
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"
