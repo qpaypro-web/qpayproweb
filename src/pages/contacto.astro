@@ -1,0 +1,241 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Icon from '../components/Icon.astro';
+
+const SUPPORT_LINKS = [
+  { href: 'https://api.whatsapp.com/send/?phone=50247856011', icon: 'message-circle', title: 'WhatsApp', subtitle: 'Ayuda más rápida' },
+  { href: 'mailto:soporte@qpaypro.com', icon: 'mail', title: 'Ticket', subtitle: 'soporte@qpaypro.com' },
+  { href: 'https://soporte.qpaypro.com', icon: 'life-buoy', title: 'Autoayuda', subtitle: 'soporte.qpaypro.com' },
+];
+
+const OFFICES = [
+  {
+    country: 'Guatemala',
+    city: 'Santa Catarina Pinula',
+    address: 'Km 15.8 Carretera a El Salvador, Edificio Torre Castaño, Santa Catarina Pinula, Guatemala.',
+    phone: '+(502) 2355-6000',
+    hours: 'Lunes a Viernes · 8:00 a 17:00 hrs',
+    flag: 'gt',
+  },
+  {
+    country: 'El Salvador',
+    city: 'San Salvador',
+    address: 'Calle La Mascota, No. 533, Colonia San Benito, Oficinas Stofficenter, Distrito de San Salvador.',
+    phone: '+(503) 2208-2300',
+    hours: 'Lunes a Viernes · 8:00 a 17:00 hrs (previa cita)',
+    flag: 'sv',
+  },
+];
+---
+
+<MainLayout
+  title="Contacto y soporte | Qpaypro"
+  description="Contáctanos para ventas y soporte. Oficinas en Guatemala y El Salvador. Cobra con tarjeta, links de pago y tienda en línea con Qpaypro."
+  headerTheme="onDark"
+>
+  <section class="relative w-full flex items-center pt-40 pb-28 lg:pt-48 lg:pb-36 min-h-screen overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/contacto/23175c84ee63.webp');"></div>
+    <div class="absolute inset-0 bg-black/[0.55]"></div>
+    <div class="absolute inset-0" style="background: linear-gradient(rgba(5, 5, 6, 0.35) 0%, rgba(5, 5, 6, 0.1) 45%, rgba(5, 5, 6, 0.45) 100%);"></div>
+    <div class="relative z-10 w-full max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-white/25">
+        <div class="lg:pr-14 flex flex-col items-center text-center">
+          <h1 class="text-white text-3xl lg:text-4xl font-semibold tracking-[-0.03em] mb-4" style="text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 24px;">Soporte</h1>
+          <p class="text-white/75 text-lg font-light mb-1">Obtén asistencia en cualquiera de nuestros canales</p>
+          <p class="text-white font-medium mb-8">Lunes a Domingo de 7:00 a 20:00 hrs</p>
+          <div class="flex flex-col sm:flex-row gap-4 w-full">
+            {SUPPORT_LINKS.map((link) => (
+              <a href={link.href} target="_blank" rel="noreferrer" class="group flex flex-1 min-w-0 flex-col items-center gap-2.5">
+                <Icon name={link.icon} class="w-5 h-5 text-white/90 group-hover:text-white transition-colors duration-300" strokeWidth={1.8} />
+                <span class="w-full text-center rounded-full bg-white/[0.13] border border-white/25 backdrop-blur-md px-3 py-2.5 group-hover:bg-white/[0.20] group-hover:border-white/40 transition-all duration-300">
+                  <span class="block text-white font-semibold text-[13px] leading-tight">{link.title}</span>
+                  <span class="block text-white/70 text-[11px] leading-snug whitespace-nowrap">{link.subtitle}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+        <div class="lg:pl-14 flex flex-col items-center justify-center text-center">
+          <h2 class="text-white text-3xl lg:text-4xl font-semibold tracking-[-0.03em] mb-4" style="text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 24px;">Contactar Ventas</h2>
+          <p class="text-white/75 text-lg font-light mb-8 max-w-sm">Cuéntanos de tu negocio y un asesor te contactará.</p>
+          <a href="#ventas" class="group inline-flex items-center gap-2 px-8 py-4 text-white font-semibold text-base rounded-full bg-white/[0.07] border border-white/15 backdrop-blur-md hover:bg-white/[0.13] hover:border-white/30 transition-all duration-300">
+            Contactar a ventas
+            <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ventas" class="w-full bg-[#f5f6f8] py-24 lg:py-32 scroll-mt-24">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Contactar ventas</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.03] mb-5">Hablemos de tu negocio</h2>
+        <p class="text-[#6b7280] text-lg font-light">Cuéntanos de tu negocio y un asesor te contactará para ayudarte a vender más.</p>
+      </div>
+      <div class="bg-white rounded-[28px] border border-black/[0.06] shadow-[0_40px_90px_-40px_rgba(15,32,108,0.30)] p-7 lg:p-10">
+        <div data-contact-success class="hidden text-center py-12">
+          <Icon name="circle-check" class="w-14 h-14 text-[#0a9d5a] mx-auto mb-5" strokeWidth={1.6} />
+          <h3 class="text-[#1a1d29] text-2xl font-semibold mb-2">¡Gracias por escribirnos!</h3>
+          <p class="text-[#6b7280] font-light">Un asesor de Qpaypro te contactará muy pronto.</p>
+        </div>
+        <form data-contact-form class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Nombre *</label>
+            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu nombre" />
+          </div>
+          <div>
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Apellido *</label>
+            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu apellido" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Empresa *</label>
+            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Nombre de tu empresa" />
+          </div>
+          <div>
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Email *</label>
+            <input type="email" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="tucorreo@ejemplo.com" />
+          </div>
+          <div>
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Teléfono *</label>
+            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="+502 0000-0000" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">País *</label>
+            <select required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option>Guatemala</option>
+              <option>El Salvador</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué producto o servicio vendes? *</label>
+            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Describe brevemente tu producto o servicio" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué servicio te interesa? *</label>
+            <select required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option>Pagos con tarjeta</option>
+              <option>Tienda en línea</option>
+              <option>Punto de venta</option>
+              <option>POS Cute</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[#3a3d47] text-sm font-medium mb-2">¿Cómo podemos ayudarte? (Opcional)</label>
+            <textarea rows="4" class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition resize-none" placeholder="Cuéntanos más sobre lo que necesitas"></textarea>
+          </div>
+          <div class="sm:col-span-2 flex justify-center">
+            <label class="flex items-center gap-3 w-full sm:w-fit rounded-xl border border-black/12 bg-[#f9fafb] px-4 py-3.5 cursor-pointer select-none hover:border-black/20 transition-colors">
+              <input type="checkbox" data-recaptcha-checkbox class="w-5 h-5 accent-[#0047ba]" />
+              <span class="text-[#3a3d47] text-sm font-medium flex-1">No soy un robot</span>
+              <span class="text-[10px] text-[#9aa0aa] leading-tight text-right">reCAPTCHA<br />Privacidad · Términos</span>
+            </label>
+          </div>
+          <div class="sm:col-span-2 mt-2 flex justify-center">
+            <button type="submit" disabled data-submit-btn class="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 bg-[#c8cbd2] text-white cursor-not-allowed">
+              Enviar mensaje
+              <Icon name="send" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Estamos para ayudarte</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.03]">Nuestras oficinas</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        {OFFICES.map((office) => (
+          <div class="group relative overflow-hidden rounded-[28px] border border-black/[0.06] bg-white p-8 lg:p-10 shadow-[0_20px_50px_-30px_rgba(15,32,108,0.25)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-38px_rgba(15,32,108,0.32)]">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0f206c] via-[#0047ba] to-[#0097ce]"></div>
+            <div class="flex items-center gap-4 mb-8">
+              <span class="w-14 h-10 rounded-lg overflow-hidden ring-1 ring-black/10 shadow-sm flex-shrink-0">
+                {office.flag === 'gt' ? (
+                  <svg viewBox="0 0 30 20" class="w-full h-full">
+                    <rect width="30" height="20" fill="#4997D0" />
+                    <rect x="10" width="10" height="20" fill="#fff" />
+                    <circle cx="15" cy="10" r="2.2" fill="none" stroke="#3a7d3a" stroke-width="0.5" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 30 20" class="w-full h-full">
+                    <rect width="30" height="20" fill="#0F47AF" />
+                    <rect y="6.667" width="30" height="6.667" fill="#fff" />
+                    <circle cx="15" cy="10" r="2" fill="none" stroke="#d4a017" stroke-width="0.5" />
+                  </svg>
+                )}
+              </span>
+              <div>
+                <h3 class="text-[#1a1d29] text-2xl font-semibold tracking-tight leading-none mb-1">{office.country}</h3>
+                <span class="text-[#8a8f9a] text-sm">{office.city}</span>
+              </div>
+            </div>
+            <div class="space-y-5 mb-8">
+              <div class="flex items-start gap-3.5">
+                <span class="inline-flex w-9 h-9 rounded-lg bg-[#0047ba]/[0.08] items-center justify-center flex-shrink-0">
+                  <Icon name="map-pin" class="w-4 h-4 text-[#0047ba]" strokeWidth={1.9} />
+                </span>
+                <div>
+                  <div class="text-[#8a8f9a] text-xs font-semibold uppercase tracking-wider mb-0.5">Dirección</div>
+                  <div class="text-[#3a3d47] text-[15px] leading-relaxed">{office.address}</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5">
+                <span class="inline-flex w-9 h-9 rounded-lg bg-[#0047ba]/[0.08] items-center justify-center flex-shrink-0">
+                  <Icon name="phone" class="w-4 h-4 text-[#0047ba]" strokeWidth={1.9} />
+                </span>
+                <div>
+                  <div class="text-[#8a8f9a] text-xs font-semibold uppercase tracking-wider mb-0.5">Teléfono</div>
+                  <div class="text-[#3a3d47] text-[15px] leading-relaxed">{office.phone}</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-3.5">
+                <span class="inline-flex w-9 h-9 rounded-lg bg-[#0047ba]/[0.08] items-center justify-center flex-shrink-0">
+                  <Icon name="clock" class="w-4 h-4 text-[#0047ba]" strokeWidth={1.9} />
+                </span>
+                <div>
+                  <div class="text-[#8a8f9a] text-xs font-semibold uppercase tracking-wider mb-0.5">Horario</div>
+                  <div class="text-[#3a3d47] text-[15px] leading-relaxed">{office.hours}</div>
+                </div>
+              </div>
+            </div>
+            <a href="https://api.whatsapp.com/send/?phone=50247856011" target="_blank" rel="noreferrer" class="group/btn inline-flex items-center gap-2 px-6 py-3 bg-[#050506] text-white rounded-full font-semibold text-sm hover:bg-[#0047ba] transition-colors duration-300">
+              <Icon name="message-circle" class="w-4 h-4" />
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    const checkbox = document.querySelector<HTMLInputElement>('[data-recaptcha-checkbox]');
+    const submitBtn = document.querySelector<HTMLButtonElement>('[data-submit-btn]');
+    const successPanel = document.querySelector<HTMLElement>('[data-contact-success]');
+
+    const ENABLED = ['bg-[#0047ba]', 'text-white', 'hover:bg-[#0f206c]'];
+    const DISABLED = ['bg-[#c8cbd2]', 'text-white', 'cursor-not-allowed'];
+
+    checkbox?.addEventListener('change', () => {
+      if (!submitBtn) return;
+      submitBtn.disabled = !checkbox.checked;
+      submitBtn.classList.remove(...ENABLED, ...DISABLED);
+      submitBtn.classList.add(...(checkbox.checked ? ENABLED : DISABLED));
+    });
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!checkbox?.checked) return;
+      form.classList.add('hidden');
+      successPanel?.classList.remove('hidden');
+    });
+  </script>
+</MainLayout>
