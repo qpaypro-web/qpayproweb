@@ -1,0 +1,260 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Icon from '../components/Icon.astro';
+import ConnectedPlatformDiagram from '../components/ConnectedPlatformDiagram.astro';
+
+const PIECES = [
+  { src: '/images/sistema-pos/38c08d7b58b2.webp', desktop: { left: '13.667%', top: '58.074%', width: '2.625%' }, mobile: { left: '13.667%', top: '64.974%', width: '2.625%' }, delay: '0.35s' },
+  { src: '/images/sistema-pos/e6bddd1eb37e.webp', desktop: { left: '17.958%', top: '31.63%', width: '8.25%' }, mobile: { left: '17.958%', top: '46.477%', width: '8.25%' }, delay: '0.63s' },
+  { src: '/images/sistema-pos/8624cb394df6.webp', desktop: { left: '28.208%', top: '40.074%', width: '8.542%' }, mobile: { left: '28.208%', top: '52.383%', width: '8.542%' }, delay: '0.91s' },
+  { src: '/images/sistema-pos/bd4fff269ba6.webp', desktop: { left: '34.5%', top: '74.296%', width: '31.083%' }, mobile: { left: '34.5%', top: '76.321%', width: '31.083%' }, delay: '1.19s' },
+  { src: '/images/sistema-pos/b659d2c7fb02.webp', desktop: { left: '38.625%', top: '13.333%', width: '33.625%' }, mobile: { left: '38.625%', top: '33.679%', width: '33.625%' }, delay: '1.47s' },
+  { src: '/images/sistema-pos/dc10e3ff99ab.webp', desktop: { left: '73.125%', top: '37.556%', width: '14.583%' }, mobile: { left: '73.125%', top: '50.622%', width: '14.583%' }, delay: '1.75s' },
+];
+
+const HARDWARE_PIECES = [
+  { title: 'Terminal POS', text: 'Pantalla táctil con el software Qpaypro: ventas, inventario y reportes en un solo lugar.' },
+  { title: 'Escáner inalámbrico', text: 'Lee cualquier código al instante, hasta 10 m de alcance, con receptor USB incluido.' },
+  { title: 'Impresora de recibos', text: 'Impresión térmica rápida y nítida para cada venta.' },
+  { title: 'Cajón de efectivo', text: 'Cajón metálico seguro con apertura automática integrada al sistema.' },
+];
+
+const SPECS = [
+  { label: 'Terminal', value: 'Pantalla táctil con software Qpaypro (ventas, inventario y reportes)' },
+  { label: 'Escáner', value: 'Inalámbrico, hasta 10 m de alcance, receptor USB incluido' },
+  { label: 'Impresora', value: 'Térmica de recibos, impresión rápida y nítida' },
+  { label: 'Cajón de efectivo', value: 'Metálico, con apertura automática integrada' },
+  { label: 'Pagos', value: 'Visa y Mastercard · crédito y débito · pago sin contacto (NFC) · 3D Secure' },
+  { label: 'Conexión', value: 'WiFi y 4G' },
+  { label: 'Canales', value: 'Sincroniza con Shopify, VTEX, WooCommerce, Prestashop y Ecwid' },
+];
+
+const FAQ = [
+  { q: '¿Cómo funciona el POS omnicanal de Qpaypro con las tiendas en línea?', a: 'El Sistema POS de Qpaypro sincroniza en tiempo real el inventario, los pagos físicos y la impresión de recibos con las ventas de tu tienda en línea (Shopify, VTEX, WooCommerce), unificando todo en una sola plataforma. Así vendes en el mostrador y en internet con el mismo catálogo y el mismo stock.' },
+  { q: '¿Qué incluye el Sistema POS de Qpaypro?', a: 'Incluye terminal POS con pantalla táctil, escáner inalámbrico, impresora de recibos y cajón de efectivo. Todo llega listo para vender y cobrar con tarjeta desde el primer día.' },
+  { q: '¿El POS acepta pagos con pago sin contacto?', a: 'Sí. Acepta Visa y Mastercard, crédito y débito, con pagos pago sin contacto (NFC) y validación 3D Secure para mayor seguridad.' },
+  { q: '¿Puedo controlar mi inventario desde el POS?', a: 'Sí. El POS controla el stock en tiempo real, envía alertas de bajo inventario y organiza tu catálogo por categorías, sincronizado con tus ventas en línea.' },
+  { q: '¿Cuánto cuesta el Sistema POS completo?', a: 'El sistema completo tiene un precio de referencia de Q6,845. Escríbenos para una cotización a la medida de tu negocio.' },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+};
+
+const UNIT_PRICE = 6845;
+---
+
+<MainLayout
+  title="Sistema POS: terminal, escáner, impresora y cajón | Qpaypro"
+  description="Sistema de punto de venta completo: terminal táctil, escáner inalámbrico, impresora de recibos y cajón de efectivo. Sincronizado con tu tienda en línea."
+  headerTheme="onDark"
+>
+  <section class="relative w-full bg-[#050506] overflow-hidden">
+    <style>
+      @keyframes sysPieceIn { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: none; } }
+      @keyframes sysFade { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes sysPop { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+      .sys-piece { position: absolute; height: auto; opacity: 0; animation: sysPieceIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+      @media (prefers-reduced-motion: reduce) { .sys-piece { animation: none; opacity: 1; } }
+      .sys-buy-d { position: absolute; right: 4.5%; bottom: 16%; z-index: 5; }
+      .sys-buy-m { display: flex; justify-content: center; margin: 22px auto 4px; }
+      .sys-buy-trigger { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Manrope', sans-serif; background: rgba(17, 24, 39, 0.34); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.26); border-radius: 14px; padding: 13px 24px; color: #fff; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22); transition: 0.3s; }
+      .sys-buy-trigger:hover { background: rgba(17, 24, 39, 0.5); transform: translateY(-2px); }
+      .sys-modal { position: fixed; inset: 0; z-index: 100; background: rgba(5, 5, 6, 0.74); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 24px; animation: sysFade 0.2s ease-out; }
+      .sys-cart { position: relative; width: 300px; max-width: 100%; background: rgba(17, 24, 39, 0.94); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 18px; padding: 20px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5); color: #fff; font-family: 'Manrope', sans-serif; animation: sysPop 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+      .sys-cart-close { position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: rgba(255, 255, 255, 0.08); color: #fff; cursor: pointer; transition: 0.2s; }
+      .sys-cart-close:hover { background: rgba(255, 255, 255, 0.18); }
+      .sys-cart-head { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.14); margin-bottom: 14px; }
+      .sys-ci-name { display: block; font-size: 15px; font-weight: 600; }
+      .sys-ci-meta { display: block; font-size: 11.5px; font-weight: 300; color: rgba(255, 255, 255, 0.6); margin-top: 3px; }
+      .sys-cart-qty { display: flex; align-items: center; justify-content: space-between; margin: 16px 0; }
+      .sys-q-label { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+      .sys-q-ctrl { display: flex; align-items: center; gap: 12px; }
+      .sys-q-ctrl button { width: 28px; height: 28px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.08); color: #fff; font-size: 16px; line-height: 1; cursor: pointer; transition: 0.2s; }
+      .sys-q-ctrl button:hover { background: rgba(255, 255, 255, 0.2); }
+      .sys-q-val { min-width: 20px; text-align: center; font-weight: 600; font-size: 15px; }
+      .sys-cart-total { display: flex; align-items: center; justify-content: space-between; padding-top: 13px; border-top: 1px solid rgba(255, 255, 255, 0.14); margin-bottom: 16px; }
+      .sys-t-label { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+      .sys-t-val { font-size: 19px; font-weight: 700; }
+      .sys-cart-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: linear-gradient(135deg, #0047ba, #0097ce); color: #fff; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; text-decoration: none; transition: 0.25s; }
+      .sys-cart-btn:hover { filter: brightness(1.08); }
+    </style>
+
+    <div class="relative w-full hidden lg:block">
+      <img src="/images/sistema-pos/ab32f5093859.webp" alt="Sistema de punto de venta Qpaypro" class="block w-full h-auto" />
+      {PIECES.map((piece) => (
+        <img src={piece.src} alt="" class="sys-piece" style={`left: ${piece.desktop.left}; top: ${piece.desktop.top}; width: ${piece.desktop.width}; animation-delay: ${piece.delay};`} />
+      ))}
+      <div class="sys-buy-d">
+        <button type="button" class="sys-buy-trigger" data-cart-open>
+          <Icon name="shopping-cart" class="w-4 h-4" />
+          Comprar ahora
+        </button>
+      </div>
+    </div>
+
+    <div class="relative w-full lg:hidden">
+      <img src="/images/sistema-pos/d371d4dd3018.webp" alt="Sistema de punto de venta Qpaypro" class="block w-full h-auto" />
+      {PIECES.map((piece) => (
+        <img src={piece.src} alt="" class="sys-piece" style={`left: ${piece.mobile.left}; top: ${piece.mobile.top}; width: ${piece.mobile.width}; animation-delay: ${piece.delay};`} />
+      ))}
+      <div class="sys-buy-m">
+        <button type="button" class="sys-buy-trigger" data-cart-open>
+          <Icon name="shopping-cart" class="w-4 h-4" />
+          Comprar ahora
+        </button>
+      </div>
+    </div>
+
+    <div class="sys-modal" data-cart-modal style="display: none;">
+      <div class="sys-cart">
+        <button type="button" class="sys-cart-close" aria-label="Cerrar" data-cart-close>
+          <Icon name="x" class="w-4 h-4" />
+        </button>
+        <div class="sys-cart-head">
+          <Icon name="shopping-cart" class="w-4 h-4" />
+          Tu carrito
+        </div>
+        <div>
+          <span class="sys-ci-name">Sistema POS completo</span>
+          <span class="sys-ci-meta">Terminal · Escáner · Impresora · Cajón</span>
+        </div>
+        <div class="sys-cart-qty">
+          <span class="sys-q-label">Cantidad</span>
+          <span class="sys-q-ctrl">
+            <button type="button" aria-label="Quitar" data-cart-decrement>−</button>
+            <span class="sys-q-val" data-cart-qty>1</span>
+            <button type="button" aria-label="Agregar" data-cart-increment>+</button>
+          </span>
+        </div>
+        <div class="sys-cart-total">
+          <span class="sys-t-label">Total</span>
+          <span class="sys-t-val" data-cart-total>Q{UNIT_PRICE.toLocaleString('es-GT')}</span>
+        </div>
+        <a class="sys-cart-btn" href="#">
+          <Icon name="shopping-cart" class="w-4 h-4" />
+          Agregar al carrito
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1040px] mx-auto px-6 lg:px-8">
+      <h2 class="text-center text-3xl md:text-4xl font-bold tracking-[-0.02em] leading-tight mb-14 lg:mb-16">
+        <span class="text-[#0f206c]">Qué incluye. </span><span class="text-[#0047ba]">Cuatro piezas que trabajan como una sola.</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
+        {HARDWARE_PIECES.map((piece) => (
+          <div class="text-center">
+            <div class="mx-auto mb-5 h-[3px] w-9 rounded-full bg-gradient-to-r from-[#0047ba] to-[#0097ce]"></div>
+            <h3 class="text-[#0f206c] text-lg font-semibold mb-2.5">{piece.title}</h3>
+            <p class="text-[#6b7280] text-[15px] font-light leading-relaxed">{piece.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ConnectedPlatformDiagram />
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12 lg:mb-14">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Especificaciones</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl font-semibold tracking-[-0.03em]">Ficha técnica del hardware</h2>
+      </div>
+      <div class="rounded-[24px] overflow-hidden border border-black/[0.07] bg-white">
+        {SPECS.map((spec, i) => (
+          <div class:list={["grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-1 sm:gap-4 px-6 py-4", i % 2 === 0 ? "bg-white" : "bg-[#fafbfc]"]}>
+            <div class="text-[#0f206c] text-sm font-semibold">{spec.label}</div>
+            <div class="text-[#4a4e58] text-[15px] font-light">{spec.value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="rounded-[28px] overflow-hidden bg-[#f5f6f8] aspect-[4/3] lg:aspect-[5/6]">
+          <img src="/images/sistema-pos/826585492158.webp" alt="Testimonio de María Belén" class="w-full h-full object-cover" />
+        </div>
+        <div>
+          <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Testimonios</p>
+          <Icon name="quote" class="w-10 h-10 text-[#0047ba]/25 mb-5" strokeWidth={1.5} />
+          <blockquote class="text-[#1a1d29] text-2xl lg:text-[2rem] font-light leading-[1.35] tracking-[-0.01em] mb-8">&ldquo;Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.&rdquo;</blockquote>
+          <div class="flex items-center gap-4">
+            <div class="w-1 h-11 rounded-full bg-gradient-to-b from-[#0047ba] to-[#0097ce] flex-shrink-0"></div>
+            <div>
+              <div class="text-[#1a1d29] font-semibold text-[15px]">María Belén</div>
+              <div class="text-[#8a8f9a] text-sm">María Belén Coach</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Preguntas frecuentes</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.04]">Preguntas frecuentes del Sistema POS</h2>
+      </div>
+      <div class="divide-y divide-black/[0.08] border-t border-black/[0.08]">
+        {FAQ.map((item) => (
+          <div class="py-7">
+            <h3 class="text-[#1a1d29] text-lg lg:text-xl font-semibold mb-3 tracking-tight">{item.q}</h3>
+            <p class="text-[#4a4e58] text-[15px] lg:text-base leading-relaxed font-light">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full overflow-hidden bg-[#050506] py-24 lg:py-32">
+    <div class="absolute -top-32 -left-24 w-[560px] h-[560px] rounded-full blur-3xl pointer-events-none" style="background: radial-gradient(circle, rgba(0, 71, 186, 0.4) 0%, transparent 70%);"></div>
+    <div class="absolute -bottom-32 -right-16 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none" style="background: radial-gradient(circle, rgba(15, 32, 108, 0.45) 0%, transparent 70%);"></div>
+    <div class="relative z-10 max-w-2xl mx-auto px-6 lg:px-8 text-center">
+      <h2 class="text-white text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] mb-6">¿Listo para empezar?</h2>
+      <p class="text-white/60 text-lg lg:text-xl leading-relaxed mb-11 font-light">Lleva el Sistema POS a tu negocio y empieza a cobrar, controlar tu inventario y vender desde un solo equipo.</p>
+      <a href="contacto.html" class="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300">
+        <Icon name="shopping-cart" class="w-4 h-4" />
+        Comprar ahora
+      </a>
+    </div>
+  </section>
+
+  <script define:vars={{ UNIT_PRICE }}>
+    const openBtns = document.querySelectorAll('[data-cart-open]');
+    const modal = document.querySelector('[data-cart-modal]');
+    const closeBtn = document.querySelector('[data-cart-close]');
+    const qtyEl = document.querySelector('[data-cart-qty]');
+    const totalEl = document.querySelector('[data-cart-total]');
+    let qty = 1;
+
+    function render() {
+      qtyEl.textContent = String(qty);
+      totalEl.textContent = 'Q' + (UNIT_PRICE * qty).toLocaleString('es-GT');
+    }
+
+    openBtns.forEach((btn) => btn.addEventListener('click', () => { modal.style.display = 'flex'; }));
+    closeBtn?.addEventListener('click', () => { modal.style.display = 'none'; });
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+    document.querySelector('[data-cart-increment]')?.addEventListener('click', () => {
+      qty += 1;
+      render();
+    });
+    document.querySelector('[data-cart-decrement]')?.addEventListener('click', () => {
+      qty = Math.max(1, qty - 1);
+      render();
+    });
+  </script>
+</MainLayout>

@@ -1,0 +1,141 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Productos":
+    - text: Productos
+    - img
+  - link "Precios":
+    - /url: precios.html
+  - button "Desarrolladores":
+    - text: Desarrolladores
+    - img
+  - button "Empresa y Recursos":
+    - text: Empresa y Recursos
+    - img
+  - link "Contacto":
+    - /url: contacto.html
+  - button "Soporte":
+    - text: Soporte
+    - img
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+- img "Sistema de punto de venta Qpaypro"
+- button "Comprar ahora":
+  - img
+  - text: Comprar ahora
+- heading "Qué incluye. Cuatro piezas que trabajan como una sola." [level=2]
+- heading "Terminal POS" [level=3]
+- paragraph: "Pantalla táctil con el software Qpaypro: ventas, inventario y reportes en un solo lugar."
+- heading "Escáner inalámbrico" [level=3]
+- paragraph: Lee cualquier código al instante, hasta 10 m de alcance, con receptor USB incluido.
+- heading "Impresora de recibos" [level=3]
+- paragraph: Impresión térmica rápida y nítida para cada venta.
+- heading "Cajón de efectivo" [level=3]
+- paragraph: Cajón metálico seguro con apertura automática integrada al sistema.
+- paragraph: Todo conectado
+- heading "Todo, en una sola plataforma" [level=2]
+- paragraph: Un mismo inventario para tu tienda física y en línea. Cobros, links de pago, suscripciones e integraciones, todo conectado en un solo lugar.
+- img
+- img
+- text: Tienda física
+- img
+- text: Tienda en línea
+- img
+- text: Links de pago
+- img
+- text: Suscripciones
+- img
+- text: Inventario sincronizado
+- img
+- text: Integraciones
+- img "Qpaypro"
+- text: Una sola plataforma
+- paragraph: Especificaciones
+- heading "Ficha técnica del hardware" [level=2]
+- text: Terminal Pantalla táctil con software Qpaypro (ventas, inventario y reportes) Escáner Inalámbrico, hasta 10 m de alcance, receptor USB incluido Impresora Térmica de recibos, impresión rápida y nítida Cajón de efectivo Metálico, con apertura automática integrada Pagos Visa y Mastercard · crédito y débito · pago sin contacto (NFC) · 3D Secure Conexión WiFi y 4G Canales Sincroniza con Shopify, VTEX, WooCommerce, Prestashop y Ecwid
+- img "Testimonio de María Belén"
+- paragraph: Testimonios
+- img
+- blockquote: "“Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.”"
+- text: María Belén María Belén Coach
+- paragraph: Preguntas frecuentes
+- heading "Preguntas frecuentes del Sistema POS" [level=2]
+- heading "¿Cómo funciona el POS omnicanal de Qpaypro con las tiendas en línea?" [level=3]
+- paragraph: El Sistema POS de Qpaypro sincroniza en tiempo real el inventario, los pagos físicos y la impresión de recibos con las ventas de tu tienda en línea (Shopify, VTEX, WooCommerce), unificando todo en una sola plataforma. Así vendes en el mostrador y en internet con el mismo catálogo y el mismo stock.
+- heading "¿Qué incluye el Sistema POS de Qpaypro?" [level=3]
+- paragraph: Incluye terminal POS con pantalla táctil, escáner inalámbrico, impresora de recibos y cajón de efectivo. Todo llega listo para vender y cobrar con tarjeta desde el primer día.
+- heading "¿El POS acepta pagos con pago sin contacto?" [level=3]
+- paragraph: Sí. Acepta Visa y Mastercard, crédito y débito, con pagos pago sin contacto (NFC) y validación 3D Secure para mayor seguridad.
+- heading "¿Puedo controlar mi inventario desde el POS?" [level=3]
+- paragraph: Sí. El POS controla el stock en tiempo real, envía alertas de bajo inventario y organiza tu catálogo por categorías, sincronizado con tus ventas en línea.
+- heading "¿Cuánto cuesta el Sistema POS completo?" [level=3]
+- paragraph: El sistema completo tiene un precio de referencia de Q6,845. Escríbenos para una cotización a la medida de tu negocio.
+- heading "¿Listo para empezar?" [level=2]
+- paragraph: Lleva el Sistema POS a tu negocio y empieza a cobrar, controlar tu inventario y vender desde un solo equipo.
+- link "Comprar ahora":
+  - /url: contacto.html
+  - img
+  - text: Comprar ahora
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"
