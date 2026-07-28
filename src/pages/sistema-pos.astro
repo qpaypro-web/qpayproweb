@@ -13,17 +13,17 @@ const PIECES = [
 ];
 
 const HARDWARE_PIECES = [
-  { title: 'Terminal POS', text: 'Pantalla táctil con el software Qpaypro: ventas, inventario y reportes en un solo lugar.' },
-  { title: 'Escáner inalámbrico', text: 'Lee cualquier código al instante, hasta 10 m de alcance, con receptor USB incluido.' },
+  { title: 'Terminal POS', text: 'Pantalla táctil con el software Qpaypro sobre stand G1S de aluminio, con bloqueo antirrobo y carga por contacto.' },
+  { title: 'Escáner inalámbrico', text: 'HS-250 2D WL: lee códigos 1D y 2D al instante, hasta 30-50 m de alcance, con receptor USB incluido.' },
   { title: 'Impresora de recibos', text: 'Impresión térmica rápida y nítida para cada venta.' },
-  { title: 'Cajón de efectivo', text: 'Cajón metálico seguro con apertura automática integrada al sistema.' },
+  { title: 'Cajón de efectivo', text: 'Custom CD30 de acero laminado en frío, con 5 ranuras para billetes y 8 para monedas.' },
 ];
 
 const SPECS = [
-  { label: 'Terminal', value: 'Pantalla táctil con software Qpaypro (ventas, inventario y reportes)' },
-  { label: 'Escáner', value: 'Inalámbrico, hasta 10 m de alcance, receptor USB incluido' },
+  { label: 'Terminal', value: 'Pantalla táctil con software Qpaypro sobre stand G1S universal de aluminio · bloqueo antirrobo · carga por contacto · 149.5 × 133 × 225 mm' },
+  { label: 'Escáner', value: 'HS-250 2D WL · códigos 1D y 2D (QR, Data Matrix, PDF417, Aztec, EAN, UPC, Code 39) · 2.4G y Bluetooth, 30-50 m · batería 2200 mAh, 7 h de uso · receptor USB plug and play · resiste caídas de 3 m' },
   { label: 'Impresora', value: 'Térmica de recibos, impresión rápida y nítida' },
-  { label: 'Cajón de efectivo', value: 'Metálico, con apertura automática integrada' },
+  { label: 'Cajón de efectivo', value: 'Custom CD30 · acero laminado en frío · 5 ranuras para billetes y 8 para monedas, más 2 compartimentos inferiores · bloqueo de tres posiciones · apertura impulsada por la impresora · 410 × 420 × 100 mm' },
   { label: 'Pagos', value: 'Visa y Mastercard · crédito y débito · pago sin contacto (NFC) · 3D Secure' },
   { label: 'Conexión', value: 'WiFi y 4G' },
   { label: 'Canales', value: 'Sincroniza con Shopify, VTEX, WooCommerce, Prestashop y Ecwid' },
@@ -95,12 +95,23 @@ const UNIT_PRICE = 6845;
       </div>
     </div>
 
-    <div class="relative w-full lg:hidden">
-      <img src="/images/sistema-pos/d371d4dd3018.webp" alt="Sistema de punto de venta Qpaypro" class="block w-full h-auto" />
-      {PIECES.map((piece) => (
-        <img src={piece.src} alt="" class="sys-piece" style={`left: ${piece.mobile.left}; top: ${piece.mobile.top}; width: ${piece.mobile.width}; animation-delay: ${piece.delay};`} />
-      ))}
-      <div class="sys-buy-m">
+    <!-- Móvil: una sola toma vertical que llena la pantalla. No lleva las
+         piezas flotantes porque esta imagen ya las trae compuestas; si se
+         superpusieran, el escáner, la impresora y el cajón saldrían dos veces. -->
+    <!-- El fondo continúa el beige del borde inferior de la foto (#a5968f, medido
+         del propio archivo), así la sección llena la pantalla sin recortar la
+         imagen: con object-cover en pantallas de 360 px se perdían la impresora
+         y el receptor USB de los extremos. -->
+    <div class="relative w-full lg:hidden min-h-[100svh] bg-[#a5968f]">
+      <img
+        src="/images/sistema-pos/605062be289f.webp"
+        alt="Sistema de punto de venta Qpaypro"
+        class="block w-full h-auto"
+      />
+      <!-- Anclado al 76% de la propia foto (la zona vacía del mostrador, bajo el
+           cajón) en vez de al fondo del contenedor: así queda dentro de la
+           pantalla tanto si la foto es más alta como más baja que el viewport. -->
+      <div class="absolute inset-x-0 top-[76%] flex justify-center">
         <button type="button" class="sys-buy-trigger" data-cart-open>
           <Icon name="shopping-cart" class="w-4 h-4" />
           Comprar ahora
