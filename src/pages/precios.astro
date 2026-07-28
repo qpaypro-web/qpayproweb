@@ -25,7 +25,7 @@ const PLANS = [
   {
     name: 'Enterprise', priceMonth: 'Q5,000', priceYear: 'Q50,000',
     tagline: 'Para empresas con alto volumen y sucursales.',
-    commission: 'Negociada 4.50%', cta: 'Hablar con Ventas', url: '/contacto',
+    commission: 'Negociada 4.50%', cta: 'Hablar con Ventas', url: '/contacto#ventas',
     highlights: ['Todo lo de Elite, sin límites', 'Productos ilimitados, 4 sucursales', 'Soporte prioritario dedicado', '500 DTEs y 500 WhatsApp incluidos', 'POS externo desde 0.65%'],
   },
 ];
@@ -288,7 +288,7 @@ function CellIcon(v: string) {
           Crear cuenta gratis
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
-        <button class="px-9 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</button>
+        <a href="/contacto#ventas" class="px-9 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</a>
       </div>
     </div>
   </section>
