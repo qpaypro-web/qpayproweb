@@ -1,0 +1,13 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import LegalContent from '../components/LegalContent.astro';
+import blocks from '../data/legal-terminos.json';
+---
+
+<MainLayout
+  title="Términos y Condiciones | Qpaypro"
+  description="Términos y condiciones del contrato de afiliación de Qpaypro (Tap Pay, S.A.) para comercios afiliados en Guatemala."
+  headerTheme="onLight"
+>
+  <LegalContent blocks={blocks} eyebrow="Legal" />
+</MainLayout>

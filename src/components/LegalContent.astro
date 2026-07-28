@@ -1,0 +1,51 @@
+---
+// Renders a legal document extracted verbatim from the live qpaypro.com pages.
+// Block types come from src/data/legal-*.json: title / subtitle / heading / p / li.
+interface Block {
+  type: string;
+  text: string;
+}
+interface Props {
+  blocks: Block[];
+  eyebrow: string;
+}
+
+const { blocks, eyebrow } = Astro.props;
+
+const title = blocks.find((b) => b.type === 'title')?.text ?? '';
+const subtitle = blocks.find((b) => b.type === 'subtitle')?.text ?? '';
+const body = blocks.filter((b) => b.type !== 'title' && b.type !== 'subtitle');
+
+// Turn bare URLs into real links without altering the surrounding wording.
+const linkify = (text: string) =>
+  text.replace(
+    /(https?:\/\/[^\s<]+[^\s<.,;:)])/g,
+    '<a href="$1" target="_blank" rel="noreferrer" class="text-[#0047ba] underline decoration-[#0047ba]/30 hover:decoration-[#0047ba] break-words">$1</a>'
+  );
+---
+
+<section class="w-full bg-white pt-36 pb-16 lg:pt-44 lg:pb-20 border-b border-black/[0.05]">
+  <div class="max-w-3xl mx-auto px-6 lg:px-8" data-reveal>
+    <p class="text-[#0047ba] text-[11px] font-semibold uppercase tracking-[0.28em] mb-5">{eyebrow}</p>
+    <h1 class="text-[#0f0f12] text-4xl md:text-5xl font-semibold tracking-[-0.035em] leading-[1.05]">{title}</h1>
+    {subtitle && <p class="text-[#5c606b] text-lg lg:text-xl font-light mt-5">{subtitle}</p>}
+  </div>
+</section>
+
+<article class="w-full bg-white py-14 lg:py-20">
+  <div class="max-w-3xl mx-auto px-6 lg:px-8">
+    {body.map((block) =>
+      block.type === 'heading' ? (
+        <h2 class="text-[#0f0f12] text-lg lg:text-xl font-semibold tracking-tight mt-12 mb-4 first:mt-0">{block.text}</h2>
+      ) : block.type === 'li' ? (
+        <p class="text-[#3a3d47] text-[15px] leading-[1.8] font-light mb-3 pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.7em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#0047ba]/40">
+          <Fragment set:html={linkify(block.text)} />
+        </p>
+      ) : (
+        <p class="text-[#3a3d47] text-[15px] leading-[1.8] font-light mb-5 whitespace-pre-line">
+          <Fragment set:html={linkify(block.text)} />
+        </p>
+      )
+    )}
+  </div>
+</article>

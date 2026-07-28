@@ -64,19 +64,47 @@ const ingresaBtnClass = onDark
 const hamburgerClass = onDark
   ? 'text-white/90 hover:bg-white/10'
   : 'text-gray-800/90 hover:bg-gray-900/10';
+
+// The navbar re-themes itself at runtime depending on how light the section
+// behind it is (see the script at the bottom). These are the two variants it
+// swaps between; the `theme` prop above only decides the server-rendered
+// starting state so there is no flash before the first measurement.
+// `logo` uses the coloured mark plus a filter for the light-on-dark case,
+// which is the same trick the footer already uses, so only one SVG ships.
+const THEME_VARIANTS = {
+  onLightBg: {
+    pill: 'bg-gray-900/[0.20] backdrop-blur-[24px] shadow-md shadow-black/[0.08]',
+    pillScrolled: 'bg-gray-900/[0.25] backdrop-blur-[28px] shadow-lg shadow-black/[0.12]',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+    link: 'text-gray-800/90 hover:text-gray-900 hover:bg-gray-900/10',
+    cta: 'bg-gray-900 text-white hover:shadow-xl hover:shadow-gray-900/30',
+    burger: 'text-gray-800/90 hover:bg-gray-900/10',
+    logo: '',
+  },
+  onDarkBg: {
+    pill: 'bg-white/[0.08] backdrop-blur-[25px] shadow-md shadow-black/[0.04]',
+    pillScrolled: 'bg-white/[0.12] backdrop-blur-[30px] shadow-lg shadow-black/[0.08]',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    link: 'text-white/90 hover:text-white hover:bg-white/10',
+    cta: 'bg-white text-gray-900 hover:shadow-xl hover:shadow-white/30',
+    burger: 'text-white/90 hover:bg-white/10',
+    logo: 'brightness-0 invert',
+  },
+};
+const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLightBg.logo;
 ---
 
 <nav class="fixed top-4 left-0 right-0 z-50 transition-all duration-500" data-header>
   <div class="max-w-[1400px] mx-auto px-6">
-    <div class={`relative rounded-2xl transition-all duration-500 ${pillClass}`} style={`border: 1px solid ${pillBorder};`}>
+    <div class={`relative rounded-2xl transition-all duration-500 ${pillClass}`} style={`border: 1px solid ${pillBorder};`} data-header-pill>
       <div class="flex items-center justify-between px-5 py-3">
         <a href="/" class="flex items-center flex-shrink-0">
-          <Logo variant={onDark ? 'white' : 'colored'} class="h-6 transition-all duration-500" />
+          <Logo variant="colored" class={`h-6 transition-[filter] duration-500 ${logoFilter}`} data-header-logo />
         </a>
 
         <div class="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
           <div class="relative" data-dropdown data-hover-dropdown>
-            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
               <span>Productos</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
             </button>
@@ -93,10 +121,10 @@ const hamburgerClass = onDark
             </div>
           </div>
 
-          <a href="/precios" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`}>Precios</a>
+          <a href="/precios" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Precios</a>
 
           <div class="relative" data-dropdown data-hover-dropdown>
-            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
               <span>Desarrolladores</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
             </button>
@@ -114,7 +142,7 @@ const hamburgerClass = onDark
           </div>
 
           <div class="relative" data-dropdown data-hover-dropdown>
-            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
               <span>Empresa y Recursos</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
             </button>
@@ -131,12 +159,12 @@ const hamburgerClass = onDark
             </div>
           </div>
 
-          <a href="/contacto" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`}>Contacto</a>
+          <a href="/contacto" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Contacto</a>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           <div class="hidden lg:block relative" data-dropdown data-hover-dropdown>
-            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
               <span>Soporte</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
             </button>
@@ -154,7 +182,7 @@ const hamburgerClass = onDark
           </div>
 
           <div class="relative" data-dropdown data-hover-dropdown>
-            <button class={`flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-sm transition-all hover:scale-105 ${ingresaBtnClass}`} data-dropdown-trigger>
+            <button class={`flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-sm transition-all hover:scale-105 ${ingresaBtnClass}`} data-dropdown-trigger data-header-cta>
               Ingresa
               <Icon name="chevron-down" class="w-3.5 h-3.5 transition-transform" />
             </button>
@@ -168,7 +196,7 @@ const hamburgerClass = onDark
             </div>
           </div>
 
-          <button class={`lg:hidden p-2 transition-all duration-300 rounded-lg ${hamburgerClass}`} data-mobile-menu-trigger aria-label="Abrir menú">
+          <button class={`lg:hidden p-2 transition-all duration-300 rounded-lg ${hamburgerClass}`} data-header-burger data-mobile-menu-trigger aria-label="Abrir menú">
             <Icon name="menu" class="w-6 h-6" data-mobile-menu-icon-open />
             <Icon name="x" class="w-6 h-6 hidden" data-mobile-menu-icon-close />
           </button>
@@ -207,6 +235,124 @@ const hamburgerClass = onDark
     </div>
   </div>
 </nav>
+
+<script define:vars={{ THEME_VARIANTS, startsOnDarkBg: onDark }}>
+  // Restores the original site's adaptive navbar: on every scroll it samples
+  // the section sitting behind the bar and switches to dark-on-light or
+  // light-on-dark so the logo and the links stay readable.
+  (function setupAdaptiveHeader() {
+    const nav = document.querySelector('[data-header]');
+    const pill = document.querySelector('[data-header-pill]');
+    const logo = document.querySelector('[data-header-logo]');
+    const links = Array.from(document.querySelectorAll('[data-header-link]'));
+    const cta = document.querySelector('[data-header-cta]');
+    const burger = document.querySelector('[data-header-burger]');
+    if (!nav || !pill) return;
+
+    const LIGHT = THEME_VARIANTS.onLightBg;
+    const DARK = THEME_VARIANTS.onDarkBg;
+    const cls = (s) => s.split(' ').filter(Boolean);
+
+    function swap(el, from, to) {
+      if (!el) return;
+      el.classList.remove(...cls(from));
+      el.classList.add(...cls(to));
+    }
+
+    let appliedLight = !startsOnDarkBg;
+    let appliedScrolled = false;
+
+    function apply(isLight, scrolled) {
+      if (isLight === appliedLight && scrolled === appliedScrolled) return;
+      const to = isLight ? LIGHT : DARK;
+      const from = isLight ? DARK : LIGHT;
+
+      nav.classList.toggle('top-2', scrolled);
+      nav.classList.toggle('top-4', !scrolled);
+
+      // The pill has two axes (theme x scrolled), so clear all four sets first.
+      pill.classList.remove(...cls(LIGHT.pill), ...cls(LIGHT.pillScrolled), ...cls(DARK.pill), ...cls(DARK.pillScrolled));
+      pill.classList.add(...cls(scrolled ? to.pillScrolled : to.pill));
+      pill.style.border = to.border;
+
+      links.forEach((el) => swap(el, from.link, to.link));
+      swap(cta, from.cta, to.cta);
+      swap(burger, from.burger, to.burger);
+      if (logo) {
+        // '' for the light case, so only remove/add when there is something to.
+        if (from.logo) logo.classList.remove(...cls(from.logo));
+        if (to.logo) logo.classList.add(...cls(to.logo));
+      }
+
+      appliedLight = isLight;
+      appliedScrolled = scrolled;
+    }
+
+    const MEDIA = ['IMG', 'VIDEO', 'PICTURE', 'CANVAS', 'SVG'];
+
+    // Effective background behind the bar, or null when it can't be known.
+    // Transparent wrappers are see-through, so walk up to the first painted
+    // ancestor. But if what's actually on top is artwork (a photo, a video, a
+    // gradient) its luminance isn't readable from CSS, and guessing there is
+    // how you end up with dark text over a dark image — so report null and let
+    // the caller keep the theme the page was authored with.
+    function backgroundBehind(topmost) {
+      if (!topmost) return null;
+      if (MEDIA.includes(topmost.tagName)) return null;
+      if (getComputedStyle(topmost).backgroundImage !== 'none') return null;
+
+      let el = topmost;
+      while (el && el !== document.documentElement) {
+        const parts = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+        if (parts && parts.length >= 3) {
+          const alpha = parts.length > 3 ? Number(parts[3]) : 1;
+          if (alpha > 0.5) return parts.slice(0, 3).map(Number);
+        }
+        el = el.parentElement;
+      }
+      return null;
+    }
+
+    // Several probes across the width instead of just the centre: a single
+    // sample lands in whatever happens to be at the middle, which over a row
+    // of image cards can be one narrow gap and misreads the whole band.
+    const PROBES = [0.15, 0.3, 0.5, 0.7, 0.85];
+
+    function measure() {
+      const scrolled = window.scrollY > 50;
+      let light = 0;
+      let dark = 0;
+
+      for (const ratio of PROBES) {
+        const stack = document.elementsFromPoint(window.innerWidth * ratio, 90);
+        const rgb = backgroundBehind(stack.find((el) => !nav.contains(el)));
+        if (!rgb) continue; // artwork: unknown, doesn't vote
+        if ((0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255 > 0.7) light++;
+        else dark++;
+      }
+
+      // No probe could read a flat colour (the bar is over artwork), so keep
+      // the theme the page declared instead of guessing.
+      const isLight = light === 0 && dark === 0 ? !startsOnDarkBg : light > dark;
+
+      apply(isLight, scrolled);
+    }
+
+    let queued = false;
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        measure();
+      });
+    }
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  })();
+</script>
 
 <script>
   function setupDropdowns(root: ParentNode) {

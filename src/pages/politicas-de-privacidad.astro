@@ -1,0 +1,13 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import LegalContent from '../components/LegalContent.astro';
+import blocks from '../data/legal-privacidad.json';
+---
+
+<MainLayout
+  title="Políticas de Privacidad | Qpaypro"
+  description="Condiciones de uso, propiedad intelectual y protección de datos personales del sitio web de Qpaypro."
+  headerTheme="onLight"
+>
+  <LegalContent blocks={blocks} eyebrow="Legal" />
+</MainLayout>
