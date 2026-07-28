@@ -1,0 +1,172 @@
+---
+import Icon from './Icon.astro';
+
+const INSTALLMENTS = [
+  { label: 'Contado', rate: 0.045 },
+  { label: '3 meses', rate: 0.0785 },
+  { label: '6 meses', rate: 0.091 },
+  { label: '10 meses', rate: 0.0935 },
+  { label: '12 meses', rate: 0.101 },
+  { label: '15 meses', rate: 0.121 },
+  { label: '18 meses', rate: 0.141 },
+];
+const ADMIN_COST = 2.95;
+---
+
+<section class="w-full bg-white py-24 lg:py-32">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="w-full max-w-[460px]">
+      <div class="rounded-[28px] bg-white shadow-[0_40px_90px_-50px_rgba(15,32,108,0.5)] border border-black/[0.05] overflow-hidden" data-calc>
+        <div class="bg-[#f6f7f9] p-7 lg:p-8 border-b border-black/[0.05]">
+          <h2 class="text-center text-[#0f206c] text-xl font-bold tracking-tight mb-6">Ingresa el monto</h2>
+          <div class="flex items-center gap-2 rounded-full bg-white border border-black/10 px-5 py-3.5 mb-6 focus-within:border-[#0047ba] transition-colors">
+            <span class="text-[#0047ba] font-bold">Q</span>
+            <input
+              type="text"
+              inputmode="decimal"
+              value="100.00"
+              data-calc-amount
+              class="flex-1 bg-transparent outline-none text-center text-[#0f206c] text-2xl font-semibold tracking-tight"
+            />
+          </div>
+          <div class="flex gap-3 mb-5">
+            <button type="button" data-calc-regime="pequeno" data-active="true" class="flex-1 rounded-2xl border-2 p-5 flex flex-col items-center gap-3 transition-all duration-300 border-[#0047ba] bg-[#0047ba]/[0.04] shadow-[0_10px_30px_-16px_rgba(0,71,186,0.5)]">
+              <span data-calc-regime-icon class="inline-flex w-14 h-14 rounded-2xl items-center justify-center transition-colors bg-gradient-to-br from-[#0f206c] to-[#0097ce]">
+                <Icon name="rocket" class="w-6 h-6 text-white" strokeWidth={1.8} />
+              </span>
+              <span class="flex items-center gap-2">
+                <span data-calc-regime-dot class="w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center border-[#0047ba]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#0047ba]"></span>
+                </span>
+                <span data-calc-regime-label class="text-sm font-semibold text-[#0f206c]">Pequeño Contribuyente</span>
+              </span>
+            </button>
+            <button type="button" data-calc-regime="general" data-active="false" class="flex-1 rounded-2xl border-2 p-5 flex flex-col items-center gap-3 transition-all duration-300 border-black/10 bg-white hover:border-black/20">
+              <span data-calc-regime-icon class="inline-flex w-14 h-14 rounded-2xl items-center justify-center transition-colors bg-[#f0f2f6]">
+                <Icon name="building2" class="w-6 h-6 text-[#8a8f9a]" strokeWidth={1.8} />
+              </span>
+              <span class="flex items-center gap-2">
+                <span data-calc-regime-dot class="w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center border-black/25"></span>
+                <span data-calc-regime-label class="text-sm font-semibold text-[#5c606b]">Régimen General</span>
+              </span>
+            </button>
+          </div>
+          <div class="relative">
+            <select data-calc-installments class="w-full appearance-none rounded-full bg-white border border-black/10 px-5 py-3.5 text-[#3a3d47] text-sm font-medium outline-none focus:border-[#0047ba] transition-colors cursor-pointer">
+              {INSTALLMENTS.map((item, i) => (
+                <option value={i}>{item.label}</option>
+              ))}
+            </select>
+            <Icon name="chevron-down" class="w-4 h-4 text-[#8a8f9a] absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
+        </div>
+        <div class="p-7 lg:p-8">
+          <p class="text-center text-[#5c606b] text-sm font-semibold mb-1.5">Para esta venta recibes:</p>
+          <p class="text-center text-[#0047ba] text-5xl font-bold tracking-[-0.03em] mb-8" data-calc-net>Q 92.55</p>
+          <div class="border-t border-black/[0.08] pt-5 mb-5">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="text-[#0f206c] text-sm font-semibold">Comisión de pago</span>
+              <Icon name="info" class="w-3.5 h-3.5 text-[#b6bac2]" />
+            </div>
+            <p class="text-[#1a1d29] text-xl font-semibold" data-calc-commission>Q 7.45</p>
+          </div>
+          <div class="border-t border-black/[0.08] pt-5">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="text-[#0f206c] text-sm font-semibold" data-calc-retention-label>Retención ISR (5%)</span>
+              <Icon name="info" class="w-3.5 h-3.5 text-[#b6bac2]" />
+            </div>
+            <p class="text-[#1a1d29] text-xl font-semibold" data-calc-retention>Q 0.00</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-[#9094a0] text-xs mt-6 leading-relaxed">Cálculo referencial. Incluye comisión (<span data-calc-rate>4,50%</span>) y costo administrativo de Q2.95. La retención aplica según tu régimen y monto.</p>
+      </div>
+
+      <div class="text-left">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Calcula tu cobro</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-tight leading-[1.08] mb-6">Empezar ahora</h2>
+        <p class="text-[#5c606b] text-lg leading-relaxed mb-9 max-w-md">Descubre cuánto recibes por cada venta, sin sorpresas ni letra pequeña. Afíliate hoy y empieza a cobrar con Qpaypro.</p>
+        <a href="/precios" class="inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">Afiliarme</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ INSTALLMENTS, ADMIN_COST }}>
+  const root = document.querySelector('[data-calc]');
+  const amountInput = root.querySelector('[data-calc-amount]');
+  const installmentsSelect = root.querySelector('[data-calc-installments]');
+  const regimeButtons = Array.from(root.querySelectorAll('[data-calc-regime]'));
+  const netEl = root.querySelector('[data-calc-net]');
+  const commissionEl = root.querySelector('[data-calc-commission]');
+  const retentionEl = root.querySelector('[data-calc-retention]');
+  const retentionLabelEl = root.querySelector('[data-calc-retention-label]');
+  const rateEl = document.querySelector('[data-calc-rate]');
+
+  let regime = 'pequeno';
+
+  const formatQ = (n) => 'Q ' + n.toLocaleString('es-GT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function render() {
+    const amount = parseFloat(amountInput.value) || 0;
+    const rate = INSTALLMENTS[Number(installmentsSelect.value)].rate;
+    const commissionBeforeAdmin = amount * rate;
+
+    let retention = 0;
+    let retentionLabel = 'Retención de IVA';
+    if (regime === 'pequeno') {
+      retention = amount > 2500 ? 0.05 * amount : 0;
+      retentionLabel = 'Retención ISR (5%)';
+    } else {
+      retention = (amount / 1.12) * 0.12 * 0.15;
+      retentionLabel = 'Retención de IVA';
+    }
+
+    const commission = commissionBeforeAdmin + ADMIN_COST;
+    const net = Math.max(0, amount - commission - retention);
+
+    netEl.textContent = formatQ(net);
+    commissionEl.textContent = formatQ(commission);
+    retentionEl.textContent = formatQ(retention);
+    retentionLabelEl.textContent = retentionLabel;
+    rateEl.textContent = (rate * 100).toFixed(2).replace('.', ',') + '%';
+  }
+
+  amountInput.addEventListener('input', () => {
+    amountInput.value = amountInput.value.replace(',', '.').replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    render();
+  });
+  installmentsSelect.addEventListener('change', render);
+
+  regimeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      regime = btn.dataset.calcRegime;
+      regimeButtons.forEach((b) => {
+        const active = b === btn;
+        b.dataset.active = String(active);
+        b.classList.remove('border-[#0047ba]', 'bg-[#0047ba]/[0.04]', 'shadow-[0_10px_30px_-16px_rgba(0,71,186,0.5)]', 'border-black/10', 'bg-white', 'hover:border-black/20');
+        b.classList.add(...(active ? ['border-[#0047ba]', 'bg-[#0047ba]/[0.04]', 'shadow-[0_10px_30px_-16px_rgba(0,71,186,0.5)]'] : ['border-black/10', 'bg-white', 'hover:border-black/20']));
+
+        const iconWrap = b.querySelector('[data-calc-regime-icon]');
+        iconWrap.classList.remove('bg-gradient-to-br', 'from-[#0f206c]', 'to-[#0097ce]', 'bg-[#f0f2f6]');
+        iconWrap.classList.add(...(active ? ['bg-gradient-to-br', 'from-[#0f206c]', 'to-[#0097ce]'] : ['bg-[#f0f2f6]']));
+        const icon = iconWrap.querySelector('svg');
+        icon.classList.remove('text-white', 'text-[#8a8f9a]');
+        icon.classList.add(active ? 'text-white' : 'text-[#8a8f9a]');
+
+        const dot = b.querySelector('[data-calc-regime-dot]');
+        dot.classList.remove('border-[#0047ba]', 'border-black/25');
+        dot.classList.add(active ? 'border-[#0047ba]' : 'border-black/25');
+        dot.innerHTML = active ? '<span class="w-1.5 h-1.5 rounded-full bg-[#0047ba]"></span>' : '';
+
+        const label = b.querySelector('[data-calc-regime-label]');
+        label.classList.remove('text-[#0f206c]', 'text-[#5c606b]');
+        label.classList.add(active ? 'text-[#0f206c]' : 'text-[#5c606b]');
+      });
+      render();
+    });
+  });
+
+  render();
+</script>

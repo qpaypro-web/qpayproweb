@@ -3,7 +3,7 @@
     "title": "Pagos y punto de venta para tiendas retail | Qpaypro",
     "description": "Cobra con tarjeta, controla inventario y sincroniza tu tienda física y en línea. Solución de pagos y POS para retail en Guatemala.",
     "hero": {
-      "bgImage": "/images/sectors/c37cd4b1bafe.webp",
+      "bgImage": "/images/sectors/e61931a02095.png",
       "title": "Tu tienda física y online en un mismo lugar.",
       "subtitle": "Cobros, punto de venta, inventario y ventas en línea en una sola plataforma.",
       "ctaPrimary": "Comenzar ahora",
@@ -78,7 +78,7 @@
             "Alertas de bajo inventario",
             "Catálogo por categorías"
           ],
-          "image": "/images/sectors/3ec22b87d6e3.webp",
+          "image": "/images/sectors/65317519e83a.png",
           "order": "reverse"
         },
         {
@@ -90,7 +90,7 @@
             "Inventario y ventas sincronizados",
             "Reportes unificados"
           ],
-          "image": "/images/sectors/c21c59c19613.webp",
+          "image": "/images/sectors/099f5c898cc6.png",
           "order": "normal"
         },
         {
@@ -129,7 +129,7 @@
         }
       ],
       "ctaText": "Ver Sistema POS",
-      "ctaHref": "sistema-pos.html",
+      "ctaHref": "/sistema-pos",
       "image": "/images/sectors/34d825ba261b.webp"
     },
     "testimonial": {
@@ -166,11 +166,11 @@
       "ctas": [
         {
           "text": "Comenzar ahora",
-          "href": "precios.html"
+          "href": "/precios"
         },
         {
           "text": "Hablar con ventas",
-          "href": "contacto.html#ventas"
+          "href": "/contacto#ventas"
         }
       ],
       "statsTargets": [
@@ -254,7 +254,7 @@
             "Cobra en sitio o a distancia",
             "Pagos en cuotas"
           ],
-          "image": "/images/sectors/103eb0450bf9.webp",
+          "image": "/images/sectors/e2067ffb52fa.png",
           "order": "normal"
         },
         {
@@ -318,7 +318,7 @@
       ],
       "ctaText": "Ver Sistema POS",
       "image": "/images/sectors/34d825ba261b.webp",
-      "ctaHref": "sistema-pos.html"
+      "ctaHref": "/sistema-pos"
     },
     "testimonial": {
       "image": "/images/sectors/826585492158.webp",
@@ -354,11 +354,11 @@
       "ctas": [
         {
           "text": "Comenzar ahora",
-          "href": "precios.html"
+          "href": "/precios"
         },
         {
           "text": "Hablar con ventas",
-          "href": "contacto.html#ventas"
+          "href": "/contacto#ventas"
         }
       ],
       "statsTargets": [
@@ -454,7 +454,7 @@
             "VTEX y Prestashop",
             "Sin escribir una línea de código"
           ],
-          "image": "/images/sectors/3ec22b87d6e3.webp",
+          "image": "/images/sectors/8f12055aabe0.webp",
           "order": "reverse"
         },
         {
@@ -466,7 +466,7 @@
             "Conecta tu propio dominio",
             "Administración de pedidos y envíos"
           ],
-          "image": "/images/sectors/c21c59c19613.webp",
+          "image": "/images/sectors/9fbdca16358b.png",
           "order": "normal"
         },
         {
@@ -478,7 +478,7 @@
             "Checkout Page",
             "API de suscripciones"
           ],
-          "image": "/images/sectors/b3964f773ddf.webp",
+          "image": "/images/sectors/e0eeb9b67982.png",
           "order": "reverse"
         }
       ]
@@ -506,7 +506,7 @@
       ],
       "ctaText": "Ver Sistema POS",
       "image": "/images/sectors/34d825ba261b.webp",
-      "ctaHref": "sistema-pos.html"
+      "ctaHref": "/sistema-pos"
     },
     "testimonial": {
       "image": "/images/sectors/f14b74902338.webp",
@@ -542,11 +542,11 @@
       "ctas": [
         {
           "text": "Comenzar ahora",
-          "href": "precios.html"
+          "href": "/precios"
         },
         {
           "text": "Hablar con ventas",
-          "href": "contacto.html#ventas"
+          "href": "/contacto#ventas"
         }
       ],
       "statsTargets": [
@@ -625,7 +625,7 @@
             "Cobro rápido en recepción",
             "Pago sin contacto y 3D Secure"
           ],
-          "image": "/images/sectors/032ca2235155.webp",
+          "image": "/images/sectors/8a21ee0952d6.png",
           "order": "normal"
         },
         {
@@ -649,7 +649,7 @@
             "Paquetes y planes de sesiones",
             "Menos morosidad"
           ],
-          "image": "/images/sectors/56b353d16ecc.webp",
+          "image": "/images/sectors/a9c625ec0d09.png",
           "order": "normal"
         },
         {
@@ -689,7 +689,7 @@
       ],
       "ctaText": "Ver Sistema POS",
       "image": "/images/sectors/34d825ba261b.webp",
-      "ctaHref": "sistema-pos.html"
+      "ctaHref": "/sistema-pos"
     },
     "testimonial": {
       "image": "/images/sectors/56d68b9a2125.webp",
@@ -725,11 +725,11 @@
       "ctas": [
         {
           "text": "Comenzar ahora",
-          "href": "precios.html"
+          "href": "/precios"
         },
         {
           "text": "Hablar con ventas",
-          "href": "contacto.html#ventas"
+          "href": "/contacto#ventas"
         }
       ],
       "statsTargets": [
@@ -877,7 +877,7 @@
       ],
       "ctaText": "Ver Sistema POS",
       "image": "/images/sectors/34d825ba261b.webp",
-      "ctaHref": "sistema-pos.html"
+      "ctaHref": "/sistema-pos"
     },
     "testimonial": {
       "image": "/images/sectors/9bea2d036ab0.webp",
@@ -913,11 +913,11 @@
       "ctas": [
         {
           "text": "Comenzar ahora",
-          "href": "precios.html"
+          "href": "/precios"
         },
         {
           "text": "Hablar con ventas",
-          "href": "contacto.html#ventas"
+          "href": "/contacto#ventas"
         }
       ],
       "statsTargets": [
