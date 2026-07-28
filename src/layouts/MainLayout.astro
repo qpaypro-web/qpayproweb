@@ -38,11 +38,6 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
     <slot />
     <Footer />
     <script>
-      import { gsap } from 'gsap';
-      import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-      gsap.registerPlugin(ScrollTrigger);
-
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Entrance reveal: a longer rise with a softer settle than the original
@@ -104,54 +99,6 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
         items.forEach((el) => observer.observe(el));
       });
 
-      if (!reduceMotion) {
-        // Parallax. 'cover' is for images that fill a clipped container: they
-        // get scaled up first so the drift stays inside the frame and can
-        // never overlap neighbouring content. Anything else drifts by a few
-        // pixels, well within the sections' vertical padding.
-        document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
-          const cover = el.dataset.parallax === 'cover';
-          const trigger = cover ? el.parentElement || el : el;
-          if (cover) {
-            gsap.set(el, { scale: 1.18, transformOrigin: 'center center' });
-          }
-          gsap.fromTo(
-            el,
-            cover ? { yPercent: -7 } : { y: 34 },
-            {
-              ...(cover ? { yPercent: 7 } : { y: -34 }),
-              ease: 'none',
-              scrollTrigger: {
-                trigger,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 0.6,
-              },
-            }
-          );
-        });
-
-        // Hero media settles back and dims as the hero scrolls away, so the
-        // section below feels like it slides over it.
-        document.querySelectorAll<HTMLElement>('[data-scroll-zoom]').forEach((el) => {
-          gsap.fromTo(
-            el,
-            { scale: 1.06 },
-            {
-              scale: 1,
-              opacity: 0.55,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: el.closest('section') || el.parentElement || el,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 0.6,
-              },
-            }
-          );
-        });
-      }
-
       // Faithful port of the original count-up stat component: same
       // IntersectionObserver threshold (0.4), same 1800ms duration, and the
       // same exponential ease-out curve (1 - 2^(-10k)), triggered once.
@@ -190,17 +137,6 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
         observer.observe(el);
       });
 
-      // ScrollTrigger measures every trigger's position once, on setup. Images
-      // and webfonts land after that and push the layout down, so any trigger
-      // whose real position ends up past its stale offset simply never fires —
-      // which left a few cards stuck at opacity 0 for good. Re-measure once
-      // everything that can change the layout has settled.
-      const refresh = () => ScrollTrigger.refresh();
-      window.addEventListener('load', refresh);
-      document.fonts?.ready.then(refresh);
-      document.querySelectorAll('img').forEach((img) => {
-        if (!img.complete) img.addEventListener('load', refresh, { once: true });
-      });
     </script>
   </body>
 </html>

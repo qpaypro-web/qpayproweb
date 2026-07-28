@@ -82,7 +82,7 @@ const TESTIMONIALS = [
 >
   <section class="relative w-full h-screen overflow-hidden">
     <div class="absolute inset-0 w-full h-full">
-      <video autoplay loop playsinline muted data-scroll-zoom class="absolute inset-0 w-full h-full object-cover">
+      <video autoplay loop playsinline muted class="absolute inset-0 w-full h-full object-cover">
         <source src="/images/index/47e13c35c6d9.mp4" type="video/mp4" />
       </video>
     </div>
@@ -131,7 +131,7 @@ const TESTIMONIALS = [
         {SOLUTIONS_CARDS.map((card) => (
           <div class="h-full">
             <a href={card.href} class="group relative block h-[520px] rounded-[1.75rem] overflow-hidden shadow-[0_4px_20px_rgba(10,31,143,0.08)] hover:shadow-[0_30px_70px_rgba(10,31,143,0.18)] transition-shadow duration-500">
-              <img src={`/images/index/${card.image}`} alt={card.title} data-parallax="cover" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
+              <img src={`/images/index/${card.image}`} alt={card.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
               <div class="absolute inset-x-0 top-0 p-8 text-center" style={card.shadow ? 'text-shadow: rgba(5, 8, 20, 0.45) 0px 1px 12px;' : 'text-shadow: none;'}>
                 <h3 class={`text-[1.7rem] font-bold tracking-[-0.01em] mb-3 ${card.textClass}`}>{card.title}</h3>
                 <span class={`inline-flex items-center gap-1.5 font-semibold text-sm group-hover:gap-2.5 transition-all ${card.textClass}`}>
@@ -147,7 +147,7 @@ const TESTIMONIALS = [
   </section>
 
   <section class="relative w-full min-h-screen flex items-center py-28 overflow-hidden bg-[#050506]">
-    <video src="/images/index/b94aba71be7a.mp4" autoplay loop playsinline muted aria-hidden="true" data-scroll-zoom class="absolute inset-0 w-full h-full object-cover"></video>
+    <video src="/images/index/b94aba71be7a.mp4" autoplay loop playsinline muted aria-hidden="true" class="absolute inset-0 w-full h-full object-cover"></video>
     <div class="absolute inset-0 bg-black/55"></div>
     <div class="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center" data-reveal>
@@ -225,7 +225,7 @@ const TESTIMONIALS = [
         </div>
       </div>
     </div>
-    <img src="/images/index/e640dd216114.webp" alt="App Qpaypro en un teléfono" data-parallax="cover" class="absolute inset-0 z-0 w-full h-full object-cover object-right" />
+    <img src="/images/index/e640dd216114.webp" alt="App Qpaypro en un teléfono" class="absolute inset-0 z-0 w-full h-full object-cover object-right" />
     <div class="md:hidden absolute inset-0 z-[5] pointer-events-none" style="background: linear-gradient(rgba(14, 42, 107, 0.92) 0%, rgba(14, 42, 107, 0.8) 45%, rgba(14, 42, 107, 0.62) 100%);"></div>
     <div class="hidden md:block absolute inset-0 z-[5] pointer-events-none" style="background: linear-gradient(90deg, rgba(14, 42, 107, 0.85) 0%, rgba(14, 42, 107, 0.45) 38%, transparent 60%);"></div>
   </section>

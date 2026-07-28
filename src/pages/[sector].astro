@@ -26,7 +26,7 @@ const faqJsonLd = {
 
 <MainLayout title={data.title} description={data.description} headerTheme="onDark">
   <section class="relative w-full min-h-screen flex flex-col items-center justify-center pt-36 pb-24 lg:pt-40 lg:pb-32 text-center overflow-hidden">
-    <div data-scroll-zoom class="absolute inset-0 bg-cover bg-center" style={`background-image: url("${data.hero.bgImage}");`}></div>
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url("${data.hero.bgImage}");`}></div>
     <div class="absolute inset-0 bg-black/[0.65]"></div>
     <div class="absolute inset-0" style="background: linear-gradient(rgba(5, 5, 6, 0.3) 0%, rgba(5, 5, 6, 0.05) 42%, rgba(5, 5, 6, 0.4) 100%);"></div>
     <div class="relative z-10 max-w-[1000px] mx-auto px-6 lg:px-8">
@@ -96,7 +96,7 @@ const faqJsonLd = {
             </ul>
           </div>
           <div class:list={["flex justify-center", block.order === "reverse" ? "lg:order-1 lg:justify-start" : "lg:justify-end"]}>
-            <img src={block.image} alt="" data-parallax class="w-full max-w-[460px] aspect-[4/5] object-cover rounded-[28px] shadow-[0_40px_90px_-30px_rgba(15,32,108,0.32)]" />
+            <img src={block.image} alt="" class="w-full max-w-[460px] aspect-[4/5] object-cover rounded-[28px] shadow-[0_40px_90px_-30px_rgba(15,32,108,0.32)]" />
           </div>
         </div>
       ))}
@@ -141,7 +141,7 @@ const faqJsonLd = {
     <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div class="rounded-[28px] overflow-hidden bg-[#f5f6f8] aspect-[4/3] lg:aspect-[5/6]">
-          <img src={data.testimonial.image} alt={`Testimonio de ${data.testimonial.name}`} data-parallax="cover" class="w-full h-full object-cover" />
+          <img src={data.testimonial.image} alt={`Testimonio de ${data.testimonial.name}`} class="w-full h-full object-cover" />
         </div>
         <div>
           <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Testimonios</p>
