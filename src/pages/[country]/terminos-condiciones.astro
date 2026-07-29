@@ -1,0 +1,18 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import LegalContent from '../../components/LegalContent.astro';
+import blocks from '../../data/legal-terminos.json';
+import { countryPaths, getCountry } from '../../lib/country';
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+---
+
+<MainLayout
+  title="Términos y Condiciones | Qpaypro"
+  description="Términos y condiciones del contrato de afiliación de Qpaypro (Tap Pay, S.A.) para comercios afiliados en Guatemala."
+  headerTheme="onLight"
+>
+  <LegalContent blocks={blocks} eyebrow="Legal" />
+</MainLayout>

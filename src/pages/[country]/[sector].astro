@@ -1,17 +1,22 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
-import ConnectedPlatformDiagram from '../components/ConnectedPlatformDiagram.astro';
-import sectors from '../data/sectors.json';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.astro';
+import sectors from '../../data/sectors.json';
+import { COUNTRY_CODES, getCountry, withCountry } from '../../lib/country';
 
 export function getStaticPaths() {
-  return Object.keys(sectors).map((sector) => ({
-    params: { sector },
-    props: { data: sectors[sector] },
-  }));
+  return COUNTRY_CODES.flatMap((country) =>
+    Object.keys(sectors).map((sector) => ({
+      params: { country, sector },
+      props: { data: sectors[sector] },
+    }))
+  );
 }
 
 const { data } = Astro.props;
+const country = Astro.params.country!;
+const c = getCountry(country);
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -33,11 +38,11 @@ const faqJsonLd = {
       <h1 class="text-white text-3xl md:text-4xl lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.05] mb-8" style="text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 30px;">{data.hero.title}</h1>
       <p class="text-white/75 text-xl lg:text-2xl leading-relaxed max-w-xl mx-auto font-light mb-11" style="text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 20px;">{data.hero.subtitle}</p>
       <div class="flex items-center justify-center gap-4 flex-wrap mb-8">
-        <a href="/precios" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+        <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
           {data.hero.ctaPrimary}
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
-        <a href="/contacto#ventas" class="px-8 py-4 bg-white/[0.10] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300">{data.hero.ctaSecondary}</a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.10] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300">{data.hero.ctaSecondary}</a>
       </div>
       <p class="text-white/50 text-sm font-light">{data.hero.footnote}</p>
     </div>
@@ -125,7 +130,7 @@ const faqJsonLd = {
               </div>
             ))}
           </div>
-          <a href={data.pos.ctaHref} class="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">
+          <a href={withCountry(country, data.pos.ctaHref)} class="group inline-flex items-center gap-2 px-7 py-3.5 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">
             {data.pos.ctaText}
             <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
@@ -212,12 +217,12 @@ const faqJsonLd = {
         <div class="flex items-center justify-center gap-4 flex-wrap">
           {data.final.ctas.map((cta, i) =>
             i === 0 ? (
-              <a href={cta.href} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+              <a href={withCountry(country, cta.href)} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
                 {cta.text}
                 <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             ) : (
-              <a href={cta.href} class="px-8 py-4 bg-white/[0.08] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/25 hover:bg-white/[0.14] hover:border-white/40 transition-all duration-300">
+              <a href={withCountry(country, cta.href)} class="px-8 py-4 bg-white/[0.08] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/25 hover:bg-white/[0.14] hover:border-white/40 transition-all duration-300">
                 {cta.text}
               </a>
             )

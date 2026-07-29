@@ -1,70 +1,73 @@
 {
-  "code": "sv",
-  "name": "El Salvador",
+  "code": "gt",
+  "name": "Guatemala",
   "currency": {
-    "code": "USD",
-    "symbol": "$",
-    "locale": "es-SV"
+    "code": "GTQ",
+    "symbol": "Q",
+    "locale": "es-GT"
   },
   "plans": [
     {
       "name": "Free",
-      "priceMonth": "$0",
-      "priceYear": "$0",
+      "priceMonth": "Q0",
+      "priceYear": "Q0",
       "tagline": "Para empezar a cobrar en línea sin costo fijo.",
-      "commission": "5% + $0.40",
+      "commission": "5% + Q2.95",
       "cta": "Comenzar gratis",
       "url": "https://app.qpaypro.com",
       "highlights": [
-        "Terminal de cobro POS disponible desde este plan",
-        "Links de pago y QR",
+        "Links de pago, QR y cuotas",
         "Punto de venta: hasta 20 productos",
+        "Facturación electrónica",
         "QpayRadar y QpayVerify"
       ]
     },
     {
       "name": "Premium",
-      "priceMonth": "$25",
-      "priceYear": "$250",
+      "priceMonth": "Q195",
+      "priceYear": "Q1,950",
       "tagline": "Para negocios que venden en línea y en tienda.",
-      "commission": "4.50% + $0.40",
+      "commission": "4.50% + Q2.95",
       "cta": "Elegir Premium",
       "url": "https://app.qpaypro.com",
       "highlights": [
         "Todo lo de Free, con menor comisión",
-        "Cobros internacionales",
+        "Cobros internacionales y suscripciones",
         "Plug-ins: WooCommerce, Shopify…",
-        "API y tienda en línea"
+        "API y tienda en línea",
+        "50 DTEs y 50 WhatsApp incluidos"
       ]
     },
     {
       "name": "Elite",
-      "priceMonth": "$50",
-      "priceYear": "$500",
+      "priceMonth": "Q395",
+      "priceYear": "Q3,950",
       "tagline": "Para operaciones que necesitan más control.",
-      "commission": "4.50% + $0.40",
-      "featured": true,
+      "commission": "4.50% + Q2.95",
       "cta": "Elegir Elite",
       "url": "https://app.qpaypro.com",
       "highlights": [
         "Todo lo de Premium, ampliado",
         "Hasta 2,500 productos con variaciones",
-        "Plug-in VTEX",
-        "Inventario entre sucursales"
-      ]
+        "Tokenización y Plug-in VTEX",
+        "Inventario entre sucursales",
+        "100 DTEs y 100 WhatsApp incluidos"
+      ],
+      "featured": true
     },
     {
       "name": "Enterprise",
-      "priceMonth": "$650",
-      "priceYear": "$6,500",
+      "priceMonth": "Q5,000",
+      "priceYear": "Q50,000",
       "tagline": "Para empresas con alto volumen y sucursales.",
       "commission": "Negociada 4.50%",
       "cta": "Hablar con Ventas",
-      "url": "/sv/contacto#ventas",
+      "url": "/contacto#ventas",
       "highlights": [
         "Todo lo de Elite, sin límites",
         "Productos ilimitados, 4 sucursales",
         "Soporte prioritario dedicado",
+        "500 DTEs y 500 WhatsApp incluidos",
         "POS externo desde 0.65%"
       ]
     }
@@ -76,19 +79,10 @@
         {
           "label": "Comisión en línea",
           "values": [
-            "5% + $0.40",
-            "4.50% + $0.40",
-            "4.50% + $0.40",
-            "4.50% + $0.40"
-          ]
-        },
-        {
-          "label": "Comisión POS Físico Qpaypro",
-          "values": [
-            "5%",
-            "4.50%",
-            "4.50%",
-            "4.50%"
+            "5% + Q2.95",
+            "4.50% + Q2.95",
+            "4.50% + Q2.95",
+            "4.50% + Q2.95"
           ]
         },
         {
@@ -107,8 +101,7 @@
             "+0.85%",
             "+0.75%",
             "Desde 0.65%"
-          ],
-          "note": "Se cobra con POS distinto a Qpaypro"
+          ]
         }
       ]
     },
@@ -134,12 +127,21 @@
           ]
         },
         {
+          "label": "Cuotas",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
           "label": "Moneda",
           "values": [
-            "$",
-            "$",
-            "$",
-            "$"
+            "Q",
+            "Q/$",
+            "Q/$",
+            "Q/$"
           ]
         },
         {
@@ -147,6 +149,24 @@
           "values": [
             "no",
             "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Suscripciones",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Tokenización",
+          "values": [
+            "no",
+            "no",
             "si",
             "si"
           ]
@@ -242,8 +262,8 @@
           "values": [
             "—",
             "—",
-            "$50/mes",
-            "$50/mes"
+            "Q395/mes",
+            "Q395/mes"
           ]
         },
         {
@@ -299,24 +319,65 @@
       ]
     },
     {
+      "title": "Facturación Electrónica",
+      "rows": [
+        {
+          "label": "DTEs Incluidos",
+          "values": [
+            "0",
+            "50",
+            "100",
+            "500"
+          ]
+        },
+        {
+          "label": "Costo por DTE Adicional",
+          "values": [
+            "Q0.30",
+            "Q0.25",
+            "Q0.25",
+            "Q0.20"
+          ]
+        },
+        {
+          "label": "Facturas por WhatsApp incluidas",
+          "values": [
+            "0",
+            "50",
+            "100",
+            "500"
+          ]
+        },
+        {
+          "label": "Costo por WhatsApp Adicional",
+          "values": [
+            "Q0.20",
+            "Q0.17",
+            "Q0.17",
+            "Q0.15"
+          ]
+        }
+      ]
+    },
+    {
       "title": "Seguridad",
       "rows": [
         {
           "label": "3DS",
           "values": [
-            "si",
-            "si",
-            "si",
-            "si"
+            "Opcional",
+            "Opcional",
+            "Opcional",
+            "Opcional"
           ]
         },
         {
           "label": "Costo 3DS por Transacción",
           "values": [
-            "$0.20",
-            "$0.20",
-            "$0.20",
-            "$0.20"
+            "Q1.60",
+            "Q1.60",
+            "Q1.60",
+            "Q1.60"
           ]
         },
         {
@@ -413,22 +474,10 @@
       ]
     }
   ],
-  "calculator": {
-    "commission": 0.035,
-    "iva": 0.13,
-    "retention": 0.02,
-    "fixedCost": 0,
-    "installments": false,
-    "notes": [
-      "Recibes tu dinero cada 24 horas — liquidación diaria.",
-      "El monto final puede variar al momento del desembolso, debido a que el cálculo se realiza de manera aproximada."
-    ],
-    "exemptNote": "Si eres exento, recuerda que no aplica IVA y Retenciones."
-  },
   "faq": [
     {
-      "q": "¿Qpaypro funciona en El Salvador?",
-      "a": "Sí, Qpaypro es una pasarela de pagos diseñada para negocios en El Salvador y permite aceptar pagos con tarjeta Visa y Mastercard de forma segura."
+      "q": "¿Qpaypro funciona en Guatemala?",
+      "a": "Sí, Qpaypro es una pasarela de pagos diseñada para negocios en Guatemala y permite aceptar pagos con tarjeta Visa y Mastercard de forma segura."
     },
     {
       "q": "¿Puedo cobrar sin tener una tienda en línea?",
@@ -440,11 +489,11 @@
     },
     {
       "q": "¿Cuándo recibo mi dinero?",
-      "a": "Recibes tu dinero cada 24 horas: en El Salvador la liquidación es diaria."
+      "a": "Los fondos se transfieren a tu cuenta bancaria en un plazo de 24 a 48 horas hábiles después de cada transacción exitosa."
     },
     {
       "q": "¿Cobran retención de impuestos?",
-      "a": "Sí. En El Salvador, a cada pago con tarjeta de crédito o débito se le aplica una retención del 2% en concepto de anticipo a cuenta del IVA, según el Art. 162-A del Código Tributario, calculada sobre el monto sin IVA. Además se cobra el IVA del 13% sobre la comisión. Todo se refleja en cada liquidación, y el anticipo retenido es crédito fiscal acreditable para tu negocio."
+      "a": "Sí. Legalmente en Guatemala y El Salvador, a cada transacción con tarjeta de crédito o débito se le descuenta la retención de IVA según el régimen fiscal de cada comercio, y se refleja en cada liquidación."
     },
     {
       "q": "¿Qué tipo de tienda en línea incluye el plan Premium?",
@@ -452,97 +501,57 @@
     },
     {
       "q": "¿Qué requisitos necesito?",
-      "a": "Depende de si te afilias como persona natural o como sociedad. Como persona natural: DUI vigente de ambos lados, tarjeta de registro de IVA si aplica, copia de un recibo de servicios básicos y cuenta en Banco Atlántida. Como sociedad se piden además NIT y tarjeta de IVA de la sociedad, DUI del representante legal y de los accionistas, escritura de constitución inscrita en el Registro de Comercio, credencial vigente del representante, solvencia de matrícula, certificación de la estructura accionaria, estados financieros, declaración de renta y declaraciones de IVA de los últimos 6 meses. Si no tienes cuenta en Banco Atlántida, con gusto te apoyamos con la apertura. Nuestro equipo de afiliaciones te acompaña en todo el proceso."
+      "a": "Los requisitos son sencillos y los de ley: número de identificación tributaria, patente de comercio, estados de cuenta bancarios, documentos de identidad, entre otros. Nuestro equipo de afiliaciones te acompaña en todo el proceso."
     },
     {
       "q": "¿Con cuáles bancos trabajan?",
-      "a": "En El Salvador trabajamos con Banco Atlántida; si no tienes cuenta, te ayudamos a aperturarla durante el proceso de afiliación."
+      "a": "En Guatemala trabajamos con todos los bancos del sistema y depositamos fondos en cuentas monetarias o de ahorro en GTQ o USD. En El Salvador trabajamos con Banco Atlántida; si no tienes cuenta, te ayudamos a aperturarla durante el proceso de afiliación."
     },
     {
       "q": "¿Cuánto se tarda en aperturar mi cuenta?",
-      "a": "En El Salvador el proceso tarda entre 5 y 8 días hábiles, incluyendo la apertura de la cuenta bancaria."
+      "a": "En Guatemala puedes empezar a cobrar con el plan Free en 5 minutos; tras completar la papelería, la afiliación completa tarda 24 horas hábiles. En El Salvador, el proceso tarda entre 5 y 8 días hábiles incluyendo la cuenta bancaria."
     }
   ],
+  "calculator": {
+    "installments": true,
+    "installmentRates": [
+      {
+        "label": "Contado",
+        "rate": 0.045
+      },
+      {
+        "label": "3 meses",
+        "rate": 0.0785
+      },
+      {
+        "label": "6 meses",
+        "rate": 0.091
+      },
+      {
+        "label": "10 meses",
+        "rate": 0.0935
+      },
+      {
+        "label": "12 meses",
+        "rate": 0.101
+      },
+      {
+        "label": "15 meses",
+        "rate": 0.121
+      },
+      {
+        "label": "18 meses",
+        "rate": 0.141
+      }
+    ],
+    "fixedCost": 2.95,
+    "iva": 0.12,
+    "smallTaxpayerThreshold": 2500,
+    "smallTaxpayerRate": 0.05,
+    "generalRetentionRate": 0.15
+  },
+  "sistemaPosPrice": 6845,
   "posTerminal": {
-    "model": "POS A920",
-    "headline": "El POS que lo hace todo.",
-    "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip, sin contacto y QR.",
-    "features": [
-      {
-        "stat": "5\"",
-        "title": "Pantalla táctil HD",
-        "desc": "Alta definición."
-      },
-      {
-        "stat": "4G + WiFi",
-        "title": "Siempre conectado",
-        "desc": "4G, WiFi y GPS."
-      },
-      {
-        "stat": "Android",
-        "title": "POS con apps",
-        "desc": "Ventas, fidelización y más."
-      },
-      {
-        "stat": "Impresora",
-        "title": "Recibos al instante",
-        "desc": "Impresión térmica integrada."
-      }
-    ],
-    "specs": [
-      {
-        "label": "Pantalla",
-        "value": "Táctil HD de 5\""
-      },
-      {
-        "label": "Conectividad",
-        "value": "4G · WiFi · GPS"
-      },
-      {
-        "label": "Pagos",
-        "value": "Sin contacto · QR · Chip · Banda"
-      },
-      {
-        "label": "Batería",
-        "value": "5250 mAh"
-      },
-      {
-        "label": "Impresora",
-        "value": "Térmica integrada"
-      },
-      {
-        "label": "Seguridad",
-        "value": "PCI PTS 5.x con SRED"
-      }
-    ]
-  },
-  "pendiente": {
-    "sistemaPosPrice": "Falta el precio en USD del kit Sistema POS (en GT es Q6,845). No inventar.",
-    "terminos": "Falta el contrato de Qpaypro El Salvador, S.A. de CV. Mostrar Próximamente."
-  },
-  "requirements": {
-    "sociedad": [
-      "NIT de sociedad",
-      "DUI de ambos lados del Representante Legal",
-      "Tarjeta de registro de IVA de sociedad",
-      "Escritura de constitución de la sociedad inscrita en el Registro de Comercio y sus modificaciones, si las hubiere.",
-      "Certificación de la estructura accionaria de la empresa, actualizada y firmada por el Representante Legal.",
-      "Credencial vigente de Representante Legal, Junta Directiva o administrador único; inscrita en Registro de comercio o documento equivalente.",
-      "Solvencia de matrícula de la empresa en registro de comercio vigente.",
-      "DUI de accionistas",
-      "Factura o recibo de servicios básicos (energía o agua)",
-      "Estados financieros del último ejercicio (balance inicial para empresas nuevas)",
-      "Declaración de renta del último ejercicio.",
-      "Declaración de IVA últimos 6 meses",
-      "Formulario de registro de persona natural (uno por cada accionista)",
-      "Formulario de registro de la sociedad (firma y sello del Representante Legal)",
-      "Tener cuenta de Banco Atlántida (de no contar, con gusto apoyamos con la apertura de cuenta)"
-    ],
-    "personaNatural": [
-      "DUI de ambos lados y vigente",
-      "Tarjeta de registro de IVA (si aplica)",
-      "Fotocopia de servicios básicos (luz o agua)",
-      "Tener cuenta de Banco Atlántida (de no contar, con gusto apoyamos con la apertura de cuenta)"
-    ]
+    "model": "POS Cute"
   }
 }

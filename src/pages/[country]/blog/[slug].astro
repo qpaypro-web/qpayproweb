@@ -1,26 +1,35 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
-import Icon from '../../components/Icon.astro';
-import articles from '../../data/blog-articles.json';
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import articles from '../../../data/blog-articles.json';
+import { COUNTRY_CODES, getCountry } from '../../../lib/country';
 
 export function getStaticPaths() {
   const slugs = articles.map((a) => a.slug);
-  return articles.map((article, index) => {
+  const perArticle = articles.map((article, index) => {
     const others = slugs.filter((s) => s !== article.slug);
     let related = others.slice(index, index + 3);
     if (related.length < 3) related = others.slice(0, 3);
     const relatedArticles = related.map((slug) => articles.find((a) => a.slug === slug));
-    return { params: { slug: article.slug }, props: { article, relatedArticles } };
+    return { slug: article.slug, article, relatedArticles };
   });
+  return COUNTRY_CODES.flatMap((country) =>
+    perArticle.map((a) => ({
+      params: { country, slug: a.slug },
+      props: { article: a.article, relatedArticles: a.relatedArticles },
+    }))
+  );
 }
 
 const { article, relatedArticles } = Astro.props;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout title={`${article.title} — Qpaypro`} description={article.body[0]?.t?.slice(0, 155) ?? article.title} headerTheme="onLight">
   <header class="w-full bg-white pt-32 lg:pt-40">
     <div class="max-w-3xl mx-auto px-6 lg:px-8">
-      <a href="/blog" class="inline-flex items-center gap-1.5 text-[#6b7280] hover:text-[#0047ba] text-sm font-medium mb-7 transition-colors">
+      <a href={`/${country}/blog`} class="inline-flex items-center gap-1.5 text-[#6b7280] hover:text-[#0047ba] text-sm font-medium mb-7 transition-colors">
         <Icon name="arrow-left" class="w-4 h-4" />
         Volver al blog
       </a>
@@ -54,7 +63,7 @@ const { article, relatedArticles } = Astro.props;
       <h2 class="text-[#1a1d29] text-2xl font-semibold tracking-tight mb-8">Sigue leyendo</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {relatedArticles.map((related) => (
-          <a href={`/blog/${related.slug}`} class="group rounded-2xl overflow-hidden bg-white border border-black/[0.06] hover:-translate-y-1 transition-all duration-300">
+          <a href={`/${country}/blog/${related.slug}`} class="group rounded-2xl overflow-hidden bg-white border border-black/[0.06] hover:-translate-y-1 transition-all duration-300">
             <div class="aspect-[16/10] overflow-hidden bg-[#eef1f6]">
               <img src={related.image} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>

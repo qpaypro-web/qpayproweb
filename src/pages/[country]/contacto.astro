@@ -1,6 +1,7 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { countryPaths, getCountry } from '../../lib/country';
 
 const SUPPORT_LINKS = [
   { href: 'https://api.whatsapp.com/send/?phone=50247856011', icon: 'message-circle', title: 'WhatsApp', subtitle: 'Ayuda más rápida' },
@@ -26,6 +27,10 @@ const OFFICES = [
     flag: 'sv',
   },
 ];
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout
@@ -120,7 +125,7 @@ const OFFICES = [
               <option>Pagos con tarjeta</option>
               <option>Tienda en línea</option>
               <option>Punto de venta</option>
-              <option>POS Cute</option>
+              <option>{c.posTerminal.model}</option>
             </select>
           </div>
           <div class="sm:col-span-2">

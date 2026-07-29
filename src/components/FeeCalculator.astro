@@ -1,5 +1,12 @@
 ---
 import Icon from './Icon.astro';
+import { withCountry } from './../lib/country';
+
+interface Props {
+  country: string;
+}
+
+const { country } = Astro.props;
 
 const INSTALLMENTS = [
   { label: 'Contado', rate: 0.045 },
@@ -94,7 +101,7 @@ const ADMIN_COST = 2.95;
           </p>
         </div>
         <div class="order-3">
-          <a href="/precios" class="inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">Afiliarme</a>
+          <a href={withCountry(country, "/precios")} class="inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300">Afiliarme</a>
         </div>
       </div>
     </div>

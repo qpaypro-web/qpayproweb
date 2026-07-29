@@ -1,7 +1,8 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
-import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry } from '../../lib/country';
 
 const STATS = [
   { format: 'plain', target: 2017, suffix: '', label: 'Año de fundación' },
@@ -23,6 +24,10 @@ const WHY_US = [
   { icon: 'globe', title: 'Visión global', text: 'Conectamos negocios con el mercado global, con estándares de calidad y seguridad.' },
   { icon: 'trending-up', title: 'Compromiso con el crecimiento', text: 'Acompañamos a nuestros clientes en cada etapa de su transformación digital.' },
 ];
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout
@@ -160,11 +165,11 @@ const WHY_US = [
           <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] leading-[1.03] mb-6">Crece con nosotros.</h2>
           <p class="text-white/55 text-xl leading-relaxed mb-12 max-w-xl mx-auto font-light">Miles de negocios ya confían en Qpaypro para crecer. Es tu turno.</p>
           <div class="flex items-center justify-center gap-4 flex-wrap">
-            <a href="/precios" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+            <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
               Comenzar gratis
               <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="/contacto#ventas" class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/25 hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">
+            <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/25 hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">
               Contacta a Ventas
             </a>
           </div>

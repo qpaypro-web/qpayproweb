@@ -1,7 +1,8 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
-import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry, withCountry } from '../../lib/country';
 
 const PLANS = [
   {
@@ -106,6 +107,10 @@ function CellIcon(v: string) {
   if (v === 'no' || v === '—') return 'x';
   return null;
 }
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout
@@ -143,7 +148,7 @@ function CellIcon(v: string) {
               <span class="text-[#9094a0] text-base" data-period>/mes</span>
             </div>
             <p class="text-[#9094a0] text-xs mb-5" style="font-family: var(--font-brand);">{plan.commission} por transacción</p>
-            <a href={plan.url} target={plan.url.startsWith('http') ? '_blank' : undefined} rel={plan.url.startsWith('http') ? 'noreferrer' : undefined} class="w-full py-3 rounded-full font-medium text-sm mb-5 flex items-center justify-center gap-2 transition-all bg-[#0047ba] text-white hover:bg-[#0f206c]">
+            <a href={withCountry(country, plan.url)} target={plan.url.startsWith('http') ? '_blank' : undefined} rel={plan.url.startsWith('http') ? 'noreferrer' : undefined} class="w-full py-3 rounded-full font-medium text-sm mb-5 flex items-center justify-center gap-2 transition-all bg-[#0047ba] text-white hover:bg-[#0f206c]">
               {plan.cta}
               <Icon name="arrow-right" class="w-4 h-4" />
             </a>
@@ -283,11 +288,11 @@ function CellIcon(v: string) {
       <h2 class="text-white text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-[-0.03em] leading-[1.02] mb-8">Empieza hoy.</h2>
       <p class="text-white/55 text-xl lg:text-2xl leading-relaxed mb-12 max-w-xl mx-auto font-light">Únete a miles de negocios que ya cobran con tarjeta usando Qpaypro.</p>
       <div class="flex items-center justify-center gap-4 flex-wrap">
-        <a href="/precios" class="group px-9 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+        <a href={`/${country}/precios`} class="group px-9 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
           Crear cuenta gratis
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
-        <a href="/contacto#ventas" class="px-9 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</a>
+        <a href={`/${country}/contacto#ventas`} class="px-9 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</a>
       </div>
     </div>
   </section>

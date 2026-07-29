@@ -5,6 +5,7 @@ import Analytics from '../components/Analytics.astro';
 import AnalyticsEvents from '../components/AnalyticsEvents.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import '../styles/global.css';
+import { COUNTRY_CODES, COUNTRY_HREFLANG, DEFAULT_COUNTRY, countryFromPath, swapCountry } from '../lib/country';
 
 interface Props {
   title: string;
@@ -14,7 +15,13 @@ interface Props {
   ogLocale?: string;
 }
 
-const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocale = 'es_GT' } = Astro.props;
+const { title, description, headerTheme = 'onLight', ogType = 'website' } = Astro.props;
+
+// El país se deriva de la propia ruta (/gt/... o /sv/...) en lugar de pasarlo
+// como prop desde cada página, para no tener que tocar los 16 llamados.
+const country = countryFromPath(Astro.url.pathname);
+const ogLocale = COUNTRY_HREFLANG[country as keyof typeof COUNTRY_HREFLANG].replace('-', '_');
+const pathname = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -32,6 +39,10 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={ogLocale} />
+    {COUNTRY_CODES.map((code) => (
+      <link rel="alternate" hreflang={COUNTRY_HREFLANG[code]} href={swapCountry(pathname, code)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={swapCountry(pathname, DEFAULT_COUNTRY)} />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
@@ -46,10 +57,10 @@ const { title, description, headerTheme = 'onLight', ogType = 'website', ogLocal
         style="display:none;visibility:hidden"
         title="Google Tag Manager"></iframe
     ></noscript>
-    <Header theme={headerTheme} />
+    <Header theme={headerTheme} country={country} />
     <slot />
-    <Footer />
-    <ConsentBanner />
+    <Footer country={country} />
+    <ConsentBanner country={country} />
     <AnalyticsEvents />
     <script>
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

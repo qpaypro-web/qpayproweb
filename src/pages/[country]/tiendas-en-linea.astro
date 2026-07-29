@@ -1,8 +1,9 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
-import GlowSectionDecor from '../components/GlowSectionDecor.astro';
-import ConnectedPlatformDiagram from '../components/ConnectedPlatformDiagram.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.astro';
+import { countryPaths, getCountry } from '../../lib/country';
 
 const CARDS = [
   {
@@ -46,6 +47,10 @@ const faqJsonLd = {
   '@type': 'FAQPage',
   mainEntity: FAQ.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
 };
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout
@@ -65,11 +70,11 @@ const faqJsonLd = {
       <h1 class="text-white text-4xl md:text-5xl lg:text-[4rem] font-semibold tracking-[-0.04em] leading-[1.0] mb-7">Tu tienda en línea, lista para vender.</h1>
       <p class="text-white/55 text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto mb-11">Crea tu tienda con Qpayshop o conecta la que ya tienes, y cobra con tarjeta.</p>
       <div class="flex items-center justify-center gap-3 flex-wrap">
-        <a href="/precios" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
+        <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
           Comenzar ahora
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
-        <a href="/contacto#ventas" class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-[15px] border border-white/20 hover:bg-white/[0.12] hover:border-white/35 transition-all duration-300">Hablar con ventas</a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-[15px] border border-white/20 hover:bg-white/[0.12] hover:border-white/35 transition-all duration-300">Hablar con ventas</a>
       </div>
     </div>
   </section>
@@ -141,11 +146,11 @@ const faqJsonLd = {
       <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.035em] leading-[1.05] mb-5">Lanza tu tienda en línea</h2>
       <p class="text-white/55 text-lg leading-relaxed mb-10 font-light max-w-lg mx-auto">Crea tu Qpayshop o conecta la que ya tienes y empieza a vender.</p>
       <div class="flex items-center justify-center gap-3 flex-wrap">
-        <a href="/precios" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
+        <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
           Comenzar ahora
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
-        <a href="/contacto#ventas" class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-[15px] border border-white/20 hover:bg-white/[0.12] transition-all duration-300">Hablar con ventas</a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-[15px] border border-white/20 hover:bg-white/[0.12] transition-all duration-300">Hablar con ventas</a>
       </div>
     </div>
   </section>

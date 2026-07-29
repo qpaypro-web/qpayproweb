@@ -1,7 +1,8 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
-import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry } from '../../lib/country';
 
 const FEATURES = [
   { stat: 'NFC', title: 'Pagos sin contacto', text: 'Acepta tarjetas sin contacto, Apple Pay y Google Pay con solo acercarlas.' },
@@ -21,6 +22,10 @@ const SPECS = [
   { label: 'Seguridad', value: 'PCI PTS 6.x con SRED · EMV L1 y L2' },
   { label: 'Compatibilidad', value: 'Visa PayWave · Mastercard PayPass · Apple Pay' },
 ];
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout
@@ -112,11 +117,11 @@ const SPECS = [
       <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03] mb-6">El POS Cute te espera.</h2>
       <p class="text-white/55 text-xl leading-relaxed mb-10 max-w-xl mx-auto font-light">Llévalo a tu negocio y empieza a cobrar en grande hoy mismo.</p>
       <div class="flex items-center justify-center gap-4 flex-wrap">
-        <a href="/contacto#ventas" class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+        <a href={`/${country}/contacto#ventas`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
           Cómpralo ahora
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
-        <a href="/contacto#ventas" class="px-8 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</a>
       </div>
     </div>
   </section>

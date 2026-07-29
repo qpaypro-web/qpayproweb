@@ -1,7 +1,8 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Icon from '../components/Icon.astro';
-import GlowSectionDecor from '../components/GlowSectionDecor.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry } from '../../lib/country';
 
 const FLOATING_STATS = [
   { icon: 'users', value: '100+', label: 'Partners activos', top: '16%', right: '6%', width: '250px', anim: 'ph-float2 10s ease-in-out infinite' },
@@ -27,6 +28,10 @@ const PROCESS = [
   { num: '03', title: 'Onboarding', text: 'Tu gerente de cuenta te guía en la configuración inicial.' },
   { num: '04', title: 'Comienza a ganar', text: 'Refiere clientes y recibe comisiones mensuales.' },
 ];
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
 ---
 
 <MainLayout
@@ -78,7 +83,7 @@ const PROCESS = [
             Aplicar al programa
             <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
-          <a href="/contacto#ventas" class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-full font-semibold text-base hover:bg-white/20 transition-all duration-300">Hablar con Ventas</a>
+          <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-full font-semibold text-base hover:bg-white/20 transition-all duration-300">Hablar con Ventas</a>
         </div>
       </div>
     </div>

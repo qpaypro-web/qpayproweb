@@ -1,18 +1,24 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
+import { COUNTRY_CODES, COUNTRY_HREFLANG, COUNTRY_LABELS, withCountry, swapCountry } from '../lib/country';
 
 interface Props {
   /** 'onDark' = white text (nav floats over a colorful/dark hero image).
    *  'onLight' = dark text (nav floats over a plain light section). */
   theme?: 'onDark' | 'onLight';
+  country: string;
 }
 
-const { theme = 'onLight' } = Astro.props;
+const { theme = 'onLight', country } = Astro.props;
 const onDark = theme === 'onDark';
 
+// El selector de país intercambia sólo el prefijo de la ruta actual, así que
+// /gt/precios lleva a /sv/precios y no de vuelta al home.
+const currentPath = Astro.url.pathname;
+
 const PRODUCTOS = [
-  { href: '/pos-cute', icon: 'smartphone', title: 'POS Cute', subtitle: 'Terminal portátil con NFC y chip' },
+  { href: '/terminal-pos', icon: 'smartphone', title: 'Terminal de Cobro POS', subtitle: 'Terminal portátil con NFC y chip' },
   { href: '/sistema-pos', icon: 'store', title: 'Punto de Venta', subtitle: 'Sistema POS completo para tu negocio' },
   { href: '/integraciones', icon: 'plug', title: 'Integraciones', subtitle: 'Conecta con las plataformas que usas' },
   { href: '/pasarela-de-pagos', icon: 'layers', title: 'Soluciones', subtitle: 'Herramientas para cada tipo de negocio' },
@@ -98,7 +104,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
   <div class="max-w-[1400px] mx-auto px-6">
     <div class={`relative rounded-2xl transition-all duration-500 ${pillClass}`} style={`border: 1px solid ${pillBorder};`} data-header-pill>
       <div class="flex items-center justify-between px-5 py-3">
-        <a href="/" class="flex items-center flex-shrink-0">
+        <a href={`/${country}`} class="flex items-center flex-shrink-0">
           <Logo variant="colored" class={`h-6 transition-[filter] duration-500 ${logoFilter}`} data-header-logo />
         </a>
 
@@ -110,7 +116,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </button>
             <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
               {PRODUCTOS.map((item) => (
-                <a href={item.href} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                <a href={withCountry(country, item.href)} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
                   <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                   <div>
                     <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
@@ -121,7 +127,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </div>
           </div>
 
-          <a href="/precios" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Precios</a>
+          <a href={`/${country}/precios`} class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Precios</a>
 
           <div class="relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
@@ -130,7 +136,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </button>
             <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
               {DESARROLLADORES.map((item) => (
-                <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
                   <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                   <div>
                     <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
@@ -148,7 +154,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </button>
             <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
               {EMPRESA_Y_RECURSOS.map((item) => (
-                <a href={item.href} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                <a href={withCountry(country, item.href)} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
                   <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                   <div>
                     <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
@@ -159,7 +165,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </div>
           </div>
 
-          <a href="/contacto" class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Contacto</a>
+          <a href={`/${country}/contacto`} class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Contacto</a>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
@@ -170,12 +176,36 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </button>
             <div class="absolute top-full right-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
               {SOPORTE.map((item) => (
-                <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
                   <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                   <div>
                     <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
                     <div class="text-xs leading-relaxed text-[#5c606b]">{item.subtitle}</div>
                   </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="hidden lg:block relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1.5 px-3 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link aria-label="Cambiar de país">
+              <Icon name="globe" class="w-4 h-4" />
+              <span>{COUNTRY_LABELS[country as keyof typeof COUNTRY_LABELS]}</span>
+              <Icon name="chevron-down" class="w-3.5 h-3.5" />
+            </button>
+            <div class="absolute top-full right-0 mt-2 w-52 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {COUNTRY_CODES.map((code) => (
+                <a
+                  href={swapCountry(currentPath, code)}
+                  hreflang={COUNTRY_HREFLANG[code]}
+                  aria-current={code === country ? 'true' : undefined}
+                  class:list={[
+                    'flex items-center justify-between gap-3 p-3 rounded-xl transition-all text-sm hover:bg-[#f6f7f9]',
+                    code === country ? 'font-semibold text-[#1a1d29]' : 'text-[#5c606b]',
+                  ]}
+                >
+                  <span>{COUNTRY_LABELS[code]}</span>
+                  {code === country && <Icon name="check" class="w-4 h-4 text-[#0047ba]" />}
                 </a>
               ))}
             </div>
@@ -188,7 +218,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </button>
             <div class="absolute top-full right-0 mt-2 w-64 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
               {INGRESA.map((item) => (
-                <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-center gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-center gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
                   <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0" />
                   <div class="font-semibold text-sm text-[#1a1d29]">{item.title}</div>
                 </a>
@@ -211,7 +241,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
       <div class="p-4 space-y-1">
         {MOBILE_MENU_ENTRIES.map((entry) =>
           entry.type === 'link' ? (
-            <a href={entry.href} class="block px-3 py-3 rounded-lg font-semibold text-sm text-[#1a1d29] hover:bg-[#f6f7f9]">{entry.label}</a>
+            <a href={withCountry(country, entry.href)} class="block px-3 py-3 rounded-lg font-semibold text-sm text-[#1a1d29] hover:bg-[#f6f7f9]">{entry.label}</a>
           ) : (
             <div class="border-b border-[#eef0f3] last:border-0 pb-1" data-mobile-submenu>
               <button class="w-full flex items-center justify-between px-3 py-3 rounded-lg font-semibold text-sm text-[#1a1d29] hover:bg-[#f6f7f9]" data-mobile-submenu-trigger>
@@ -220,7 +250,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
               </button>
               <div class="hidden pl-2 pb-2 space-y-0.5" data-mobile-submenu-panel>
                 {entry.items.map((item) => (
-                  <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="block px-3 py-2 rounded-lg text-sm text-[#5c606b] hover:bg-[#f6f7f9]">
+                  <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="block px-3 py-2 rounded-lg text-sm text-[#5c606b] hover:bg-[#f6f7f9]">
                     {item.title}
                   </a>
                 ))}
@@ -228,6 +258,26 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </div>
           )
         )}
+        <div class="border-t border-[#eef0f3] pt-3">
+          <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#9aa0ac]">País</p>
+          <div class="flex gap-2 px-1">
+            {COUNTRY_CODES.map((code) => (
+              <a
+                href={swapCountry(currentPath, code)}
+                hreflang={COUNTRY_HREFLANG[code]}
+                aria-current={code === country ? 'true' : undefined}
+                class:list={[
+                  'flex-1 min-w-0 text-center px-3 py-2.5 rounded-xl text-sm transition-colors',
+                  code === country
+                    ? 'bg-[#eef2fb] text-[#0047ba] font-semibold'
+                    : 'text-[#5c606b] hover:bg-[#f6f7f9]',
+                ]}
+              >
+                {COUNTRY_LABELS[code]}
+              </a>
+            ))}
+          </div>
+        </div>
         <div class="pt-3 space-y-2">
           <a href="https://app.qpaypro.com" target="_blank" rel="noreferrer" class="block w-full text-center px-5 py-3 rounded-xl font-semibold text-sm bg-[#0047ba] text-white hover:bg-[#0f206c] transition-colors">Ingresa</a>
         </div>

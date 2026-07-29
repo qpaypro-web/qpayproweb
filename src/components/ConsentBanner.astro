@@ -5,6 +5,13 @@
 // Actualiza Consent Mode v2, que es lo que GTM consulta para decidir si sus
 // etiquetas —incluido el Meta Pixel— pueden dispararse. Guarda la elección y
 // se puede volver a abrir desde el enlace del footer.
+import { withCountry } from '../lib/country';
+
+interface Props {
+  country: string;
+}
+
+const { country } = Astro.props;
 ---
 
 <div
@@ -22,7 +29,7 @@
           Usamos cookies necesarias para que el sitio funcione. Con tu permiso también usamos cookies de
           analítica, para entender cómo se usa el sitio, y de marketing, para medir nuestras campañas.
           Puedes cambiar tu elección cuando quieras.
-          <a href="/politicas-de-privacidad" class="text-[#0047ba] underline decoration-[#0047ba]/30 hover:decoration-[#0047ba]">Ver políticas de privacidad</a>.
+          <a href={withCountry(country, "/politicas-de-privacidad")} class="text-[#0047ba] underline decoration-[#0047ba]/30 hover:decoration-[#0047ba]">Ver políticas de privacidad</a>.
         </p>
 
         <div data-consent-detail class="hidden mt-5 space-y-3">
