@@ -188,9 +188,11 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
           </div>
 
           <div class="hidden lg:block relative" data-dropdown data-hover-dropdown>
-            <button class={`flex items-center gap-1.5 px-3 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link aria-label="Cambiar de país">
+            <button class={`flex items-center gap-1.5 px-3 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link aria-label={`País: ${COUNTRY_LABELS[country as keyof typeof COUNTRY_LABELS]}. Cambiar de país`}>
               <Icon name="globe" class="w-4 h-4" />
-              <span>{COUNTRY_LABELS[country as keyof typeof COUNTRY_LABELS]}</span>
+              {/* El botón cerrado muestra solo el código; el nombre completo del
+                  país aparece al desplegarlo. */}
+              <span>{country.toUpperCase()}</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
             </button>
             <div class="absolute top-full right-0 mt-2 w-52 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
