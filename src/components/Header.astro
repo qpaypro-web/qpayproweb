@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
+import Flag from './Flag.astro';
 import { COUNTRY_CODES, COUNTRY_HREFLANG, COUNTRY_LABELS, withCountry, swapCountry } from '../lib/country';
 
 interface Props {
@@ -103,12 +104,12 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
 <nav class="fixed top-4 left-0 right-0 z-50 transition-all duration-500" data-header>
   <div class="max-w-[1400px] mx-auto px-6">
     <div class={`relative rounded-2xl transition-all duration-500 ${pillClass}`} style={`border: 1px solid ${pillBorder};`} data-header-pill>
-      <div class="flex items-center justify-between px-5 py-3">
-        <a href={`/${country}`} class="flex items-center flex-shrink-0">
+      <div class="flex items-center justify-between gap-4 px-5 py-3">
+        <a href={`/${country}`} class="flex flex-1 items-center flex-shrink-0">
           <Logo variant="colored" class={`h-6 transition-[filter] duration-500 ${logoFilter}`} data-header-logo />
         </a>
 
-        <div class="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
+        <div class="hidden xl:flex items-center gap-0.5 flex-shrink-0">
           <div class="relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
               <span>Productos</span>
@@ -165,16 +166,12 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </div>
           </div>
 
-          <a href={`/${country}/contacto`} class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Contacto</a>
-        </div>
-
-        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <div class="hidden lg:block relative" data-dropdown data-hover-dropdown>
+          <div class="relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
               <span>Soporte</span>
               <Icon name="chevron-down" class="w-3.5 h-3.5" />
             </button>
-            <div class="absolute top-full right-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+            <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
               {SOPORTE.map((item) => (
                 <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
                   <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
@@ -187,9 +184,13 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </div>
           </div>
 
-          <div class="hidden lg:block relative" data-dropdown data-hover-dropdown>
+          <a href={`/${country}/contacto`} class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Contacto</a>
+        </div>
+
+        <div class="flex flex-1 items-center justify-end gap-2 sm:gap-3 flex-shrink-0">
+          <div class="hidden xl:block relative" data-dropdown data-hover-dropdown>
             <button class={`flex items-center gap-1.5 px-3 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link aria-label={`País: ${COUNTRY_LABELS[country as keyof typeof COUNTRY_LABELS]}. Cambiar de país`}>
-              <Icon name="globe" class="w-4 h-4" />
+              <Flag country={country} class="w-4 h-4" />
               {/* El botón cerrado muestra solo el código; el nombre completo del
                   país aparece al desplegarlo. */}
               <span>{country.toUpperCase()}</span>
@@ -206,7 +207,10 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
                     code === country ? 'font-semibold text-[#1a1d29]' : 'text-[#5c606b]',
                   ]}
                 >
-                  <span>{COUNTRY_LABELS[code]}</span>
+                  <span class="flex items-center gap-2.5">
+                    <Flag country={code} class="w-[18px] h-[18px]" />
+                    {COUNTRY_LABELS[code]}
+                  </span>
                   {code === country && <Icon name="check" class="w-4 h-4 text-[#0047ba]" />}
                 </a>
               ))}
@@ -228,7 +232,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
             </div>
           </div>
 
-          <button class={`lg:hidden p-2 transition-all duration-300 rounded-lg ${hamburgerClass}`} data-header-burger data-mobile-menu-trigger aria-label="Abrir menú">
+          <button class={`xl:hidden p-2 transition-all duration-300 rounded-lg ${hamburgerClass}`} data-header-burger data-mobile-menu-trigger aria-label="Abrir menú">
             <Icon name="menu" class="w-6 h-6" data-mobile-menu-icon-open />
             <Icon name="x" class="w-6 h-6 hidden" data-mobile-menu-icon-close />
           </button>
@@ -237,7 +241,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
     </div>
   </div>
 
-  <div class="lg:hidden fixed inset-0 z-40 mt-20 hidden" data-mobile-menu>
+  <div class="xl:hidden fixed inset-0 z-40 mt-20 hidden" data-mobile-menu>
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-mobile-menu-backdrop></div>
     <div class="relative max-w-sm mx-auto mt-2 rounded-2xl backdrop-blur-[30px] shadow-2xl shadow-black/15 bg-white/98 max-h-[80vh] overflow-y-auto" style="border: 1px solid rgba(0, 0, 0, 0.08); margin-left: 1.5rem; margin-right: 1.5rem;">
       <div class="p-4 space-y-1">
@@ -275,7 +279,10 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
                     : 'text-[#5c606b] hover:bg-[#f6f7f9]',
                 ]}
               >
-                {COUNTRY_LABELS[code]}
+                <span class="inline-flex items-center justify-center gap-2">
+                  <Flag country={code} class="w-4 h-4" />
+                  {COUNTRY_LABELS[code]}
+                </span>
               </a>
             ))}
           </div>

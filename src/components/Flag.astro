@@ -1,0 +1,47 @@
+---
+// Bandera de país en círculo, para el selector del navbar.
+//
+// A este tamaño (16-20 px) el escudo de armas de las dos banderas es una
+// mancha ilegible, así que se dibujan sólo las franjas: es lo que hacen los
+// juegos de banderas circulares y deja los dos países distinguibles de un
+// vistazo, porque Guatemala lleva las franjas verticales y El Salvador
+// horizontales, con azules distintos.
+//
+// El círculo se recorta con CSS y no con un clipPath de SVG, porque el
+// selector dibuja la misma bandera tres veces por página y los id de los
+// clipPath se repetirían.
+interface Props {
+  country: string;
+  class?: string;
+}
+
+const { country, class: className = 'w-4 h-4' } = Astro.props;
+
+const FLAGS: Record<string, { bands: 'vertical' | 'horizontal'; blue: string; label: string }> = {
+  gt: { bands: 'vertical', blue: '#4997d0', label: 'Bandera de Guatemala' },
+  sv: { bands: 'horizontal', blue: '#0f47af', label: 'Bandera de El Salvador' },
+};
+
+const flag = FLAGS[country] ?? FLAGS.gt;
+---
+
+<span
+  class={`inline-block flex-shrink-0 rounded-full overflow-hidden ring-1 ring-black/[0.18] ${className}`}
+  role="img"
+  aria-label={flag.label}
+>
+  <svg viewBox="0 0 24 24" class="block w-full h-full" aria-hidden="true">
+    <rect x="0" y="0" width="24" height="24" fill="#ffffff" />
+    {flag.bands === 'vertical' ? (
+      <>
+        <rect x="0" y="0" width="8" height="24" fill={flag.blue} />
+        <rect x="16" y="0" width="8" height="24" fill={flag.blue} />
+      </>
+    ) : (
+      <>
+        <rect x="0" y="0" width="24" height="8" fill={flag.blue} />
+        <rect x="0" y="16" width="24" height="8" fill={flag.blue} />
+      </>
+    )}
+  </svg>
+</span>
