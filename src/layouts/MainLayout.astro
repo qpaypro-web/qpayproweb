@@ -61,7 +61,7 @@ const pathname = Astro.url.pathname;
     <slot />
     <Footer country={country} />
     <ConsentBanner country={country} />
-    <AnalyticsEvents />
+    <AnalyticsEvents country={country} />
     <script>
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

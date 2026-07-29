@@ -7,9 +7,14 @@
 // acoplar la lógica de los botones a Meta, y además el píxel vive dentro de
 // GTM (ver Analytics.astro).
 //
-// El país va fijo en GT porque hoy el sitio es solo Guatemala; cuando exista
-// la versión de El Salvador debe pasar a ser dinámico.
-const SITE_COUNTRY = 'GT';
+// El país acompaña cada evento para poder separar las conversiones de
+// Guatemala y El Salvador en GA4 y en Meta sin depender de la URL.
+interface Props {
+  country: string;
+}
+
+const { country } = Astro.props;
+const SITE_COUNTRY = country.toUpperCase();
 ---
 
 <script is:inline define:vars={{ SITE_COUNTRY }}>

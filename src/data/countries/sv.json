@@ -60,7 +60,7 @@
       "tagline": "Para empresas con alto volumen y sucursales.",
       "commission": "Negociada 4.50%",
       "cta": "Hablar con Ventas",
-      "url": "/sv/contacto#ventas",
+      "url": "/contacto#ventas",
       "highlights": [
         "Todo lo de Elite, sin límites",
         "Productos ilimitados, 4 sucursales",
@@ -465,30 +465,42 @@
   ],
   "posTerminal": {
     "model": "POS A920",
+    "comingSoon": true,
     "headline": "El POS que lo hace todo.",
     "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip, sin contacto y QR.",
+    "heroImage": "/images/terminal-pos-sv/a920-hero.webp",
+    "heroAlt": "POS A920 de Qpaypro",
+    "seoTitle": "POS A920 El Salvador | Terminal de pago con tarjeta | Qpaypro",
+    "seoDescription": "El terminal de pago de Qpaypro para El Salvador: acepta tarjetas, pago sin contacto y chip. Cobra donde estés.",
     "features": [
       {
         "stat": "5\"",
         "title": "Pantalla táctil HD",
-        "desc": "Alta definición."
+        "text": "Alta definición."
       },
       {
         "stat": "4G + WiFi",
         "title": "Siempre conectado",
-        "desc": "4G, WiFi y GPS."
+        "text": "4G, WiFi y GPS."
       },
       {
         "stat": "Android",
         "title": "POS con apps",
-        "desc": "Ventas, fidelización y más."
+        "text": "Ventas, fidelización y más."
       },
       {
         "stat": "Impresora",
         "title": "Recibos al instante",
-        "desc": "Impresión térmica integrada."
+        "text": "Impresión térmica integrada."
       }
     ],
+    "nfc": {
+      "image": "/images/terminal-pos-sv/a920-contactless.webp",
+      "alt": "Pago sin contacto con el POS A920 de Qpaypro",
+      "paragraphs": [
+        "Acerca la tarjeta o el teléfono y listo. Compatible con Visa, Mastercard, Apple Pay y Google Pay."
+      ]
+    },
     "specs": [
       {
         "label": "Pantalla",
@@ -514,7 +526,8 @@
         "label": "Seguridad",
         "value": "PCI PTS 5.x con SRED"
       }
-    ]
+    ],
+    "closing": "Llévalo a tu negocio y empieza a cobrar en grande hoy mismo."
   },
   "pendiente": {
     "sistemaPosPrice": "Falta el precio en USD del kit Sistema POS (en GT es Q6,845). No inventar.",

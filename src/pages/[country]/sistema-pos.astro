@@ -35,7 +35,12 @@ const FAQ = [
   { q: '¿Qué incluye el Sistema POS de Qpaypro?', a: 'Incluye terminal POS con pantalla táctil, escáner inalámbrico, impresora de recibos y cajón de efectivo. Todo llega listo para vender y cobrar con tarjeta desde el primer día.' },
   { q: '¿El POS acepta pagos con pago sin contacto?', a: 'Sí. Acepta Visa y Mastercard, crédito y débito, con pagos pago sin contacto (NFC) y validación 3D Secure para mayor seguridad.' },
   { q: '¿Puedo controlar mi inventario desde el POS?', a: 'Sí. El POS controla el stock en tiempo real, envía alertas de bajo inventario y organiza tu catálogo por categorías, sincronizado con tus ventas en línea.' },
-  { q: '¿Cuánto cuesta el Sistema POS completo?', a: 'El sistema completo tiene un precio de referencia de Q6,845. Escríbenos para una cotización a la medida de tu negocio.' },
+  {
+    q: '¿Cuánto cuesta el Sistema POS completo?',
+    a: getCountry(Astro.params.country!).sistemaPosPrice
+      ? `El sistema completo tiene un precio de referencia de Q${getCountry(Astro.params.country!).sistemaPosPrice!.toLocaleString('es-GT')}. Escríbenos para una cotización a la medida de tu negocio.`
+      : 'Escríbenos para una cotización a la medida de tu negocio.',
+  },
 ];
 
 const faqJsonLd = {
@@ -44,11 +49,17 @@ const faqJsonLd = {
   mainEntity: FAQ.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
 };
 
-const UNIT_PRICE = 6845;
-
 export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
 const c = getCountry(country);
+
+// El kit tiene precio de referencia en Guatemala; en El Salvador aún no lo
+// entregan, así que en vez de un número se ofrece cotización.
+const UNIT_PRICE: number | null = c.sistemaPosPrice ?? null;
+const CURRENCY = c.currency === 'USD' ? '$' : 'Q';
+const PRICE_LOCALE = c.currency === 'USD' ? 'en-US' : 'es-GT';
+const QUOTE_LABEL = 'A cotizar';
+const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toLocaleString(PRICE_LOCALE);
 ---
 
 <MainLayout
@@ -147,7 +158,7 @@ const c = getCountry(country);
         </div>
         <div class="sys-cart-total">
           <span class="sys-t-label">Total</span>
-          <span class="sys-t-val" data-cart-total>Q{UNIT_PRICE.toLocaleString('es-GT')}</span>
+          <span class="sys-t-val" data-cart-total>{priceLabel}</span>
         </div>
         <a class="sys-cart-btn" href="#">
           <Icon name="shopping-cart" class="w-4 h-4" />
@@ -224,7 +235,7 @@ const c = getCountry(country);
     </div>
   </section>
 
-  <script define:vars={{ UNIT_PRICE }}>
+  <script define:vars={{ UNIT_PRICE, CURRENCY, PRICE_LOCALE, QUOTE_LABEL }}>
     const openBtns = document.querySelectorAll('[data-cart-open]');
     const modal = document.querySelector('[data-cart-modal]');
     const closeBtn = document.querySelector('[data-cart-close]');
@@ -234,7 +245,8 @@ const c = getCountry(country);
 
     function render() {
       qtyEl.textContent = String(qty);
-      totalEl.textContent = 'Q' + (UNIT_PRICE * qty).toLocaleString('es-GT');
+      totalEl.textContent =
+        UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + (UNIT_PRICE * qty).toLocaleString(PRICE_LOCALE);
     }
 
     openBtns.forEach((btn) => btn.addEventListener('click', () => { modal.style.display = 'flex'; }));
