@@ -21,7 +21,11 @@ const COLUMNS = [
     title: 'Producto',
     links: [
       { label: 'Pagos', href: '/pasarela-de-pagos' },
-      { label: 'Terminal POS', href: '/sistema-pos' },
+      // "Terminal POS" apuntaba aquí, pero /sistema-pos es el punto de venta y
+      // el terminal de cobro es otro producto: dos nombres parecidos para dos
+      // cosas distintas confundían el menú del pie con el del navbar.
+      { label: 'Punto de Venta', href: '/sistema-pos' },
+      { label: 'Terminal de Cobro POS', href: '/terminal-pos' },
     ],
   },
   {
