@@ -34,7 +34,20 @@ const SPECS = t.specs;
       <h1 class="text-[#1a1d29] text-5xl md:text-6xl lg:text-[5.5rem] font-bold tracking-[-0.03em] leading-[1.02] mb-6">{t.headline}</h1>
       <p class="text-[#5c606b] text-xl lg:text-2xl leading-relaxed max-w-2xl mx-auto mb-4">{t.subtitle}</p>
       <div class="flex items-center justify-center gap-6 flex-wrap mb-2">
-        {t.comingSoon && <span class="text-[#8a8f9a] text-lg font-medium">Disponible muy pronto</span>}
+        {/* Donde el terminal ya se vende, el lugar del aviso de "próximamente"
+            lo toma la acción de compra: dejar el hero sin ninguna acción en un
+            producto disponible obliga a bajar hasta el final de la página. */}
+        {t.comingSoon ? (
+          <span class="text-[#8a8f9a] text-lg font-medium">Disponible muy pronto</span>
+        ) : (
+          <a
+            href={`/${country}/contacto#ventas`}
+            class="group inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300"
+          >
+            Cómpralo ahora
+            <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        )}
         <a href="#specs" class="text-[#0047ba] text-lg font-medium hover:underline">Ver especificaciones ›</a>
       </div>
     </div>
@@ -46,7 +59,7 @@ const SPECS = t.specs;
   <section class="w-full bg-white py-24 lg:py-32">
     <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
       <div class="max-w-3xl mb-16 lg:mb-20" data-reveal>
-        <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05]">Pequeño por fuera.<br />Poderoso por dentro.</h2>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05]">{t.sectionHeadline[0]}<br />{t.sectionHeadline[1]}</h2>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-16" data-reveal-group>
         {FEATURES.map((f) => (

@@ -628,6 +628,10 @@
         "value": "Visa PayWave · Mastercard PayPass · Apple Pay"
       }
     ],
-    "closing": "Llévalo a tu negocio y empieza a cobrar en grande hoy mismo."
+    "closing": "Llévalo a tu negocio y empieza a cobrar en grande hoy mismo.",
+    "sectionHeadline": [
+      "Pequeño por fuera.",
+      "Poderoso por dentro."
+    ]
   }
 }

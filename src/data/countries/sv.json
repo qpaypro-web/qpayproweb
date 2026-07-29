@@ -465,7 +465,7 @@
   ],
   "posTerminal": {
     "model": "POS A920",
-    "comingSoon": true,
+    "comingSoon": false,
     "headline": "El POS que lo hace todo.",
     "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip, sin contacto y QR.",
     "heroImage": "/images/terminal-pos-sv/a920-hero.webp",
@@ -527,7 +527,11 @@
         "value": "PCI PTS 5.x con SRED"
       }
     ],
-    "closing": "Llévalo a tu negocio y empieza a cobrar en grande hoy mismo."
+    "closing": "Llévalo a tu negocio y empieza a cobrar en grande hoy mismo.",
+    "sectionHeadline": [
+      "Cobra, imprime y controla.",
+      "Sin cambiar de aparato."
+    ]
   },
   "pendiente": {
     "sistemaPosPrice": "Falta el precio en USD del kit Sistema POS (en GT es Q6,845). No inventar.",
