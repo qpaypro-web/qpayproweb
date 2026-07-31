@@ -64,8 +64,7 @@
       "highlights": [
         "Todo lo de Elite, sin límites",
         "Productos ilimitados, 4 sucursales",
-        "Soporte prioritario dedicado",
-        "POS externo desde 0.65%"
+        "Soporte prioritario dedicado"
       ]
     }
   ],
@@ -90,25 +89,6 @@
             "Desde 3.5%",
             "Desde 3.5%"
           ]
-        },
-        {
-          "label": "Efectivo y transferencias",
-          "values": [
-            "0%",
-            "0%",
-            "0%",
-            "0%"
-          ]
-        },
-        {
-          "label": "Comisión POS Físico Externo",
-          "values": [
-            "+1.00%",
-            "+0.85%",
-            "+0.75%",
-            "Desde 0.65%"
-          ],
-          "note": "Se cobra con POS distinto a Qpaypro"
         }
       ]
     },
@@ -200,9 +180,9 @@
           "label": "Comisión Plug-in Shopify y VTEX",
           "values": [
             "no",
-            "+0.45%",
-            "+0.45%",
-            "+0.45%"
+            "+0.50%",
+            "+0.50%",
+            "+0.50%"
           ]
         },
         {
@@ -263,6 +243,25 @@
             "si",
             "si"
           ]
+        },
+        {
+          "label": "Efectivo y transferencias",
+          "values": [
+            "0%",
+            "0%",
+            "0%",
+            "0%"
+          ]
+        },
+        {
+          "label": "Comisión POS Físico Externo",
+          "values": [
+            "+1.00%",
+            "+0.85%",
+            "+0.75%",
+            "Desde 0.65%"
+          ],
+          "note": "Se cobra con POS distinto a Qpaypro"
         }
       ]
     },
