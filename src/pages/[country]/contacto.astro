@@ -125,7 +125,11 @@ const c = getCountry(country);
               <option>Pagos con tarjeta</option>
               <option>Tienda en línea</option>
               <option>Punto de venta</option>
-              <option>{c.posTerminal.model}</option>
+              {/* El nombre del modelo cambia por país (POS Cute en Guatemala,
+                  POS A920 en El Salvador), pero en el formulario la opción es
+                  la misma en los dos: al cliente se le pregunta por el
+                  producto, no por el aparato. */}
+              <option>Terminal POS</option>
             </select>
           </div>
           <div class="sm:col-span-2">
