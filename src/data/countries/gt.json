@@ -33,9 +33,9 @@
       "highlights": [
         "Todo lo de Free, con menor comisión",
         "Cobros internacionales y suscripciones",
-        "Plug-ins: WooCommerce, Shopify…",
+        "Plug-ins: WooCommerce, OpenCart, PrestaShop y Shopify",
         "API y tienda en línea",
-        "50 DTEs y 50 WhatsApp incluidos"
+        "Facturación Electrónica (50) y 50 WhatsApp incluidos"
       ]
     },
     {
@@ -51,7 +51,7 @@
         "Hasta 2,500 productos con variaciones",
         "Tokenización y Plug-in VTEX",
         "Inventario entre sucursales",
-        "100 DTEs y 100 WhatsApp incluidos"
+        "Facturación Electrónica (100) y 100 WhatsApp incluidos"
       ],
       "featured": true
     },
@@ -67,8 +67,7 @@
         "Todo lo de Elite, sin límites",
         "Productos ilimitados, 4 sucursales",
         "Soporte prioritario dedicado",
-        "500 DTEs y 500 WhatsApp incluidos",
-        "POS externo desde 0.65%"
+        "Facturación Electrónica (500) y 500 WhatsApp incluidos"
       ]
     }
   ],
@@ -271,8 +270,8 @@
           "values": [
             "no",
             "Básico",
-            "Variaciones",
-            "Variaciones"
+            "Inventario Avanzado",
+            "Inventario Avanzado"
           ]
         },
         {
@@ -303,8 +302,8 @@
           "values": [
             "no",
             "Básico",
-            "Variaciones",
-            "Variaciones"
+            "Inventario Avanzado",
+            "Inventario Avanzado"
           ]
         },
         {
@@ -633,5 +632,6 @@
       "Pequeño por fuera.",
       "Poderoso por dentro."
     ]
-  }
+  },
+  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"4.50%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal."
 }

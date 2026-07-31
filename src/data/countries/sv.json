@@ -12,7 +12,7 @@
       "priceMonth": "$0",
       "priceYear": "$0",
       "tagline": "Para empezar a cobrar en línea sin costo fijo.",
-      "commission": "5% + $0.40",
+      "commission": "Desde 3.5% + $0.15",
       "cta": "Comenzar gratis",
       "url": "https://app.qpaypro.com",
       "highlights": [
@@ -27,7 +27,7 @@
       "priceMonth": "$25",
       "priceYear": "$250",
       "tagline": "Para negocios que venden en línea y en tienda.",
-      "commission": "4.50% + $0.40",
+      "commission": "Desde 3.5% + $0.15",
       "cta": "Elegir Premium",
       "url": "https://app.qpaypro.com",
       "highlights": [
@@ -42,7 +42,7 @@
       "priceMonth": "$50",
       "priceYear": "$500",
       "tagline": "Para operaciones que necesitan más control.",
-      "commission": "4.50% + $0.40",
+      "commission": "Desde 3.5% + $0.15",
       "featured": true,
       "cta": "Elegir Elite",
       "url": "https://app.qpaypro.com",
@@ -58,7 +58,7 @@
       "priceMonth": "$650",
       "priceYear": "$6,500",
       "tagline": "Para empresas con alto volumen y sucursales.",
-      "commission": "Negociada 4.50%",
+      "commission": "Negociada desde 3.5%",
       "cta": "Hablar con Ventas",
       "url": "/contacto#ventas",
       "highlights": [
@@ -76,19 +76,19 @@
         {
           "label": "Comisión en línea",
           "values": [
-            "5% + $0.40",
-            "4.50% + $0.40",
-            "4.50% + $0.40",
-            "4.50% + $0.40"
+            "Desde 3.5% + $0.15",
+            "Desde 3.5% + $0.15",
+            "Desde 3.5% + $0.15",
+            "Desde 3.5% + $0.15"
           ]
         },
         {
           "label": "Comisión POS Físico Qpaypro",
           "values": [
-            "5%",
-            "4.50%",
-            "4.50%",
-            "4.50%"
+            "Desde 3.5%",
+            "Desde 3.5%",
+            "Desde 3.5%",
+            "Desde 3.5%"
           ]
         },
         {
@@ -251,8 +251,8 @@
           "values": [
             "no",
             "Básico",
-            "Variaciones",
-            "Variaciones"
+            "Inventario Avanzado",
+            "Inventario Avanzado"
           ]
         },
         {
@@ -283,8 +283,8 @@
           "values": [
             "no",
             "Básico",
-            "Variaciones",
-            "Variaciones"
+            "Inventario Avanzado",
+            "Inventario Avanzado"
           ]
         },
         {
@@ -561,5 +561,6 @@
       "Fotocopia de servicios básicos (luz o agua)",
       "Tener cuenta de Banco Atlántida (de no contar, con gusto apoyamos con la apertura de cuenta)"
     ]
-  }
+  },
+  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"3.5%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal."
 }
