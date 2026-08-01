@@ -23,6 +23,7 @@ interface Env {
   TURNSTILE_SECRET_KEY: string;
   ZOHO_ACCOUNTS_HOST?: string;
   ZOHO_API_HOST?: string;
+  META_CAPI_TOKEN?: string;
   LEAD_RATE_LIMIT?: KVLike;
 }
 
@@ -35,6 +36,17 @@ interface KVLike {
 interface EventContext {
   request: Request;
   env: Env;
+  /** Deja correr una promesa después de responder. Pages siempre lo provee. */
+  waitUntil?: (promise: Promise<unknown>) => void;
+}
+
+/** Lo que el navegador manda para poder atribuir el evento en Meta. */
+interface MetaPayload {
+  event_id?: string;
+  event_source_url?: string;
+  fbp?: string | null;
+  fbc?: string | null;
+  user_agent?: string;
 }
 
 // Las assignment rules de Zoho NO corren en un insert normal de la API: hay que
@@ -59,6 +71,12 @@ const SERVICE_TO_PRODUCT: Record<string, string> = {
   'Punto de venta': 'QPayPOS',
   'Terminal POS': 'mPOS',
 };
+
+// Píxel de Meta. Es público —viaja en el HTML de todas las páginas— así que no
+// tiene sentido pasarlo por variable de entorno; el que sí es secreto es el
+// token de Conversions API.
+const META_PIXEL_ID = '249008005669655';
+const META_API = 'https://graph.facebook.com/v21.0';
 
 // Lead_Source es un picklist y este es el valor exacto que existe en el CRM.
 // Cualquier variante —tilde, mayúscula, sinónimo— hace que Zoho rechace el
@@ -207,8 +225,95 @@ async function attachNote(host: string, accessToken: string, leadId: string, con
   }
 }
 
+/** Meta identifica a la persona por hashes, nunca por el dato en claro. */
+async function sha256Hex(valor: string): Promise<string> {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(valor));
+  return Array.from(new Uint8Array(hash), (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/**
+ * Meta exige normalizar antes de hashear —minúsculas, sin espacios ni acentos—
+ * porque compara hashes: "Ana" y "ana " producen hashes distintos y el registro
+ * no cruzaría con nadie.
+ */
+function normalizar(valor: string): string {
+  return valor.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+const PAIS_ISO: Record<string, string> = { Guatemala: 'gt', 'El Salvador': 'sv' };
+
+/**
+ * Conversions API: el mismo evento que el navegador manda por el píxel, pero
+ * desde el servidor, donde no lo bloquean las extensiones ni las restricciones
+ * de cookies de Safari. Meta reconoce los dos como uno solo gracias al
+ * `event_id` compartido, así que la conversión no se cuenta dos veces.
+ *
+ * Nunca lanza: que Meta falle no puede afectar a quien acaba de escribirnos.
+ */
+async function enviarEventoMeta(
+  env: Env,
+  meta: MetaPayload,
+  persona: { email: string; phone: string; firstName: string; lastName: string; country: string },
+  contexto: { ip: string | null; interest: string },
+): Promise<void> {
+  if (!env.META_CAPI_TOKEN) return;
+
+  try {
+    const hash = async (valor: string) => (valor ? await sha256Hex(normalizar(valor)) : null);
+    const [em, ph, fn, ln, country] = await Promise.all([
+      hash(persona.email),
+      hash(persona.phone.replace(/\D/g, '')),
+      hash(persona.firstName),
+      hash(persona.lastName),
+      hash(PAIS_ISO[persona.country] ?? ''),
+    ]);
+
+    const userData: Record<string, unknown> = {};
+    if (em) userData.em = [em];
+    if (ph) userData.ph = [ph];
+    if (fn) userData.fn = [fn];
+    if (ln) userData.ln = [ln];
+    if (country) userData.country = [country];
+    if (meta.fbp) userData.fbp = meta.fbp;
+    if (meta.fbc) userData.fbc = meta.fbc;
+    if (contexto.ip) userData.client_ip_address = contexto.ip;
+    if (meta.user_agent) userData.client_user_agent = meta.user_agent;
+
+    const evento = {
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now() / 1000),
+      // Si el navegador no mandó id es porque tampoco disparó el píxel, así que
+      // no hay nada con lo que deduplicar y uno propio sirve igual.
+      event_id: meta.event_id || crypto.randomUUID(),
+      event_source_url: meta.event_source_url,
+      action_source: 'website',
+      user_data: userData,
+      custom_data: {
+        content_name: 'contact_form',
+        content_category: contexto.interest,
+        lead_type: 'ventas',
+      },
+    };
+
+    const response = await fetch(`${META_API}/${META_PIXEL_ID}/events`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: [evento], access_token: env.META_CAPI_TOKEN }),
+    });
+
+    const resultado = (await response.json()) as { events_received?: number; error?: { message?: string } };
+    if (!response.ok || resultado.error) {
+      console.error(`[lead] Meta ${response.status}: ${resultado.error?.message ?? JSON.stringify(resultado)}`);
+    } else {
+      console.log(`[lead] Meta recibió ${resultado.events_received ?? 0} evento(s)`);
+    }
+  } catch (error) {
+    console.error(`[lead] Meta falló: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
 export async function onRequestPost(context: EventContext): Promise<Response> {
-  const { request, env } = context;
+  const { request, env, waitUntil } = context;
   const ip = request.headers.get('CF-Connecting-IP');
 
   if (!request.headers.get('Content-Type')?.includes('application/json')) {
@@ -273,6 +378,18 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   }
 
   const interest = SERVICE_TO_PRODUCT[service];
+
+  // El evento sale sin bloquear la respuesta: quien envió el formulario no
+  // tiene por qué esperar a que Meta conteste.
+  const notificarMeta = () => {
+    const envio = enviarEventoMeta(
+      env,
+      (payload.meta ?? {}) as MetaPayload,
+      { email, phone, firstName, lastName, country },
+      { ip, interest },
+    );
+    if (waitUntil) waitUntil(envio);
+  };
 
   const lead: Record<string, unknown> = {
     First_Name: firstName,
@@ -347,6 +464,9 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       } else {
         console.error(`[lead] Duplicado sin id en la respuesta: ${JSON.stringify(entry?.details)}`);
       }
+      // Un duplicado sigue siendo una conversión: la persona llenó el formulario
+      // y ventas recibe su mensaje en la nota. Para la campaña cuenta igual.
+      notificarMeta();
       console.log(`[lead] Duplicado para ${email}`);
       return json({ ok: true });
     }
@@ -359,6 +479,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       return fail(GENERIC_ERROR, 502);
     }
 
+    notificarMeta();
     return json({ ok: true });
   } catch (error) {
     console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);

@@ -26,6 +26,7 @@ recogen.
 | `PUBLIC_TURNSTILE_SITE_KEY` | Plaintext (build) | no — ver "Captcha" |
 | `ZOHO_ACCOUNTS_HOST` | Plaintext | no — default `accounts.zoho.com` |
 | `ZOHO_API_HOST` | Plaintext | no — respaldo; Zoho devuelve el correcto |
+| `META_CAPI_TOKEN` | Secret | no — ver "Conversions API" |
 | `LEAD_RATE_LIMIT` | KV binding | no — sin él no hay límite por IP |
 
 `PUBLIC_TURNSTILE_SITE_KEY` es la única que se compila dentro del sitio y es
@@ -156,6 +157,39 @@ Zoho tiene `Email` como único en Leads. Cuando alguien que ya está en el CRM
 vuelve a escribir, la respuesta trae `DUPLICATE_DATA` y la Function **cuelga el
 mensaje como Nota** del lead existente en vez de descartarlo. Si la nota falla se
 registra en el log pero el envío se da por bueno igual.
+
+### Conversions API de Meta
+
+Cuando el lead entra en el CRM, la Function manda además el evento `Lead` a Meta
+por Conversions API. Es el mismo evento que el navegador dispara por el píxel,
+pero desde el servidor, donde no lo bloquean las extensiones ni las
+restricciones de cookies de Safari y iOS.
+
+Los dos envíos comparten el **`event_id`**, que el navegador genera antes de
+llamar a `/api/lead` y manda en el objeto `meta` junto con `fbp`, `fbc` y el
+user agent. Meta los reconoce como un solo evento: sin ese id, cada conversión
+se contaría dos veces y las campañas optimizarían sobre datos inflados.
+
+Los datos de la persona —correo, teléfono, nombre— viajan **hasheados con
+SHA-256**, normalizados antes (minúsculas, sin acentos, el teléfono solo
+dígitos). Sin esa normalización el hash no cruza con nadie y la coincidencia
+baja a cero. En claro no sale nada.
+
+El id del píxel está fijo en el código porque es público: viaja en el HTML de
+todas las páginas. El único secreto es `META_CAPI_TOKEN`.
+
+**Para generarlo:** Meta Business Manager → Configuración del negocio →
+Usuarios → Usuarios del sistema → crear uno → Generar token, con acceso al
+activo del píxel `249008005669655` y el permiso `ads_management`. Se guarda en
+Cloudflare Pages como *Secret*, en Production y en Preview.
+
+Sin la variable, esta parte simplemente no corre y todo lo demás sigue igual: la
+conversión se mide solo desde el navegador. Un fallo de Meta nunca afecta la
+respuesta al visitante ni la creación del lead — se registra en el log y ya.
+
+Esto reemplaza al contenedor de tagging del lado del servidor que había en
+Google Cloud Run, que costaba unos USD 17 al mes y dejó de funcionar cuando se
+cerró la cuenta de facturación. Las Pages Functions ya estaban ahí.
 
 ### Automatizaciones
 
