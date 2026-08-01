@@ -159,9 +159,15 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
             <label for="cf-website">No llenar este campo</label>
             <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
-          <div class="sm:col-span-2 flex justify-center">
-            <div data-turnstile data-sitekey={turnstileSiteKey} class="min-h-[65px]"></div>
-          </div>
+          {/* Turnstile solo aparece si hay sitekey configurada. Sin ella el
+              formulario sigue funcionando —con honeypot, validación de servidor
+              y límite por IP— para no dejarlo inutilizable mientras se
+              configuran las llaves. */}
+          {turnstileSiteKey && (
+            <div class="sm:col-span-2 flex justify-center">
+              <div data-turnstile data-sitekey={turnstileSiteKey} class="min-h-[65px]"></div>
+            </div>
+          )}
 
           {/* El error no reemplaza al formulario: se anuncia arriba del botón y
               deja intacto lo que la persona ya escribió, para que reintentar no
@@ -171,7 +177,15 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
           </div>
 
           <div class="sm:col-span-2 mt-2 flex flex-col items-center gap-4">
-            <button type="submit" disabled data-submit-btn class="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 bg-[#c8cbd2] text-white cursor-not-allowed">
+            <button
+              type="submit"
+              disabled={Boolean(turnstileSiteKey)}
+              data-submit-btn
+              class:list={[
+                'group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 text-white',
+                turnstileSiteKey ? 'bg-[#c8cbd2] cursor-not-allowed' : 'bg-[#0047ba] hover:bg-[#0f206c]',
+              ]}
+            >
               <span data-submit-label>Enviar mensaje</span>
               <Icon name="send" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" data-submit-icon />
               <span data-submit-spinner class="hidden w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
@@ -318,7 +332,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       submitSpinner?.classList.toggle('hidden', !value);
       // Durante el envío el botón se bloquea aunque haya token, para que un
       // doble clic no cree dos leads.
-      setEnabled(!value && Boolean(captchaToken));
+      setEnabled(!value && (!captchaEnabled || Boolean(captchaToken)));
       if (value && statusLine) statusLine.textContent = 'Enviando tu mensaje…';
     }
 
@@ -339,12 +353,14 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     }
 
     const sitekey = turnstileHost?.dataset.sitekey ?? '';
+    // Sin sitekey no hay captcha y el formulario se usa igual. Lo que queda
+    // protegiéndolo es el honeypot, la validación del servidor y el límite por
+    // IP; el captcha se enciende solo en cuanto la variable exista en el build.
+    const captchaEnabled = Boolean(turnstileHost && sitekey);
 
     if (!turnstileHost || !sitekey) {
-      // Sin sitekey el formulario quedaría sin protección: se prefiere que no
-      // envíe y se note, antes que aceptar spam en silencio.
-      showError('El formulario no está disponible en este momento. Escríbenos por WhatsApp mientras tanto.');
-      console.error('[contacto] Falta PUBLIC_TURNSTILE_SITE_KEY: el formulario queda deshabilitado.');
+      console.warn('[contacto] Sin PUBLIC_TURNSTILE_SITE_KEY: el formulario funciona sin captcha.');
+      setEnabled(true);
     } else {
       whenTurnstileReady((api) => {
         widgetId = api.render(turnstileHost, {
@@ -374,7 +390,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (sending || !form.reportValidity()) return;
-      if (!captchaToken) {
+      if (captchaEnabled && !captchaToken) {
         showError('Completa la verificación de seguridad antes de enviar.');
         return;
       }
@@ -404,11 +420,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         if (statusLine) statusLine.textContent = 'Mensaje enviado.';
       } catch (error) {
         // El token de Turnstile es de un solo uso: si el envío falló hay que
-        // pedir uno nuevo o el reintento se rechaza siempre.
+        // pedir uno nuevo o el reintento se rechaza siempre. Sin captcha no hay
+        // nada que renovar y el botón vuelve a quedar disponible enseguida.
         captchaToken = '';
         if (widgetId !== undefined) window.turnstile?.reset(widgetId);
         setSending(false);
-        setEnabled(false);
+        setEnabled(!captchaEnabled);
         showError(error instanceof Error ? error.message : GENERIC_ERROR);
       }
     });

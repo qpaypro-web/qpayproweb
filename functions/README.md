@@ -22,8 +22,8 @@ recogen.
 | `ZOHO_CLIENT_ID` | Secret | sí |
 | `ZOHO_CLIENT_SECRET` | Secret | sí |
 | `ZOHO_REFRESH_TOKEN` | Secret | sí |
-| `TURNSTILE_SECRET_KEY` | Secret | sí |
-| `PUBLIC_TURNSTILE_SITE_KEY` | Plaintext (build) | sí |
+| `TURNSTILE_SECRET_KEY` | Secret | no — ver "Captcha" |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Plaintext (build) | no — ver "Captcha" |
 | `ZOHO_ACCOUNTS_HOST` | Plaintext | no — default `accounts.zoho.com` |
 | `ZOHO_API_HOST` | Plaintext | no — respaldo; Zoho devuelve el correcto |
 | `ZOHO_FIELD_PRODUCT` | Plaintext | no — ver más abajo |
@@ -34,6 +34,23 @@ recogen.
 visible para cualquiera; así está diseñado Turnstile. **A ninguna otra se le
 puede poner el prefijo `PUBLIC_`**: quedaría dentro del JS que descarga el
 navegador.
+
+### Captcha
+
+Las dos variables de Turnstile son opcionales, pero **el formulario queda
+expuesto a bots mientras no estén**. Se comporta así:
+
+| Estado | Qué pasa |
+|---|---|
+| Las dos configuradas | El widget aparece y el servidor verifica el token. Es el estado deseado. |
+| Ninguna configurada | El widget no se dibuja y el formulario funciona. Lo protegen el honeypot, la validación del servidor y el límite por IP. Queda un aviso en la consola del navegador y en el log de la Function. |
+| Solo la sitekey | El widget aparece pero el servidor no verifica: protección aparente, no real. |
+| Solo el secret | El servidor exige un token que el formulario no puede generar. **Nadie puede enviar nada.** |
+
+Los dos estados a medias son configuraciones rotas: o las dos, o ninguna.
+
+En cuanto se agregan las dos y se redespliega, la verificación se activa sola,
+sin tocar código.
 
 ### Datacenter de Zoho
 
@@ -76,5 +93,9 @@ ZOHO_REFRESH_TOKEN=…
 
 Cloudflare publica llaves de prueba para Turnstile: `1x00000000000000000000AA`
 (sitekey, siempre aprueba) y `1x0000000000000000000000000000000AA` (secret).
-Son las que conviene usar también al capturar la regresión visual, para que el
-widget no dependa de la red.
+Sirven para probar el camino con captcha sin dar de alta un widget real; para
+probar la ruta de error están `2x00000000000000000000AB` y
+`2x0000000000000000000000000000000AA`, que siempre fallan.
+
+Los baselines de regresión visual se capturan con `npm run build` a secas, sin
+ninguna variable de Turnstile.
