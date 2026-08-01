@@ -1,16 +1,23 @@
 ---
 import MainLayout from '../../../layouts/MainLayout.astro';
 import Icon from '../../../components/Icon.astro';
-import articles from '../../../data/blog-articles.json';
-import { countryPaths, getCountry } from '../../../lib/country';
+import { countryPaths } from '../../../lib/country';
+import { articulosDe, categoriasDe, fechaLarga, nombreCategoria } from '../../../lib/blog';
 
 export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
-const c = getCountry(country);
+
+const articulos = articulosDe(country);
+const [destacado, ...resto] = articulos;
+const categorias = categoriasDe(country);
+
+// Con 50 artículos la lista completa es demasiada de golpe: se muestran 12 y el resto entra con
+// el botón. El HTML de todos se emite igual, así que el filtro por categoría no necesita red.
+const POR_PAGINA = 12;
 ---
 
 <MainLayout
-  title="Blog Qpaypro: Ideas para cobrar, vender y crecer"
+  title="Blog Qpaypro: ideas para cobrar, vender y crecer"
   description="Estrategias, tendencias y guías de pagos digitales y ecommerce para hacer crecer tu negocio."
   headerTheme="onLight"
 >
@@ -21,62 +28,213 @@ const c = getCountry(country);
         <span class="text-[#0047ba] text-[11px] font-semibold uppercase tracking-[0.28em]">Blog</span>
         <span class="h-px w-8 bg-gradient-to-l from-[#0047ba] to-[#0097ce]"></span>
       </div>
-      <h1 class="text-[#0f0f12] text-4xl md:text-5xl font-semibold tracking-[-0.035em] leading-[1.03] mb-5">Ideas para cobrar, vender y crecer</h1>
-      <p class="text-[#5c606b] text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto">Estrategias, tendencias y guías de pagos digitales y ecommerce para hacer crecer tu negocio.</p>
+      <h1 class="text-[#0f0f12] text-4xl md:text-5xl font-semibold tracking-[-0.035em] leading-[1.03] mb-5">
+        Ideas para cobrar, vender y crecer
+      </h1>
+      <p class="text-[#5c606b] text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto">
+        Estrategias, tendencias y guías de pagos digitales y ecommerce para hacer crecer tu negocio.
+      </p>
     </div>
   </section>
 
-  <section class="w-full bg-[#f5f6f8] py-20 lg:py-28">
+  {destacado && (
+    <section class="w-full bg-white py-14 lg:py-20">
+      <div class="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <a
+          href={`/${country}/blog/${destacado.slug}`}
+          class="group grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center rounded-[28px] overflow-hidden bg-white border border-black/[0.07] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_40px_90px_-50px_rgba(15,32,108,0.4)]"
+          data-reveal
+        >
+          <div class="aspect-[16/10] lg:h-full overflow-hidden bg-[#eef1f6]">
+            <img
+              src={destacado.cover.src}
+              alt={destacado.cover.alt}
+              width={destacado.cover.w ?? undefined}
+              height={destacado.cover.h ?? undefined}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+          </div>
+          <div class="p-7 lg:pr-10 lg:py-10">
+            <div class="flex flex-wrap items-center gap-2.5 mb-5">
+              <span class="text-[10.5px] font-semibold uppercase tracking-wider text-[#0047ba] bg-[#0047ba]/[0.08] rounded-full px-2.5 py-1">
+                Lo más reciente
+              </span>
+              <span class="text-[#9094a0] text-xs">{fechaLarga(destacado.date)}</span>
+            </div>
+            <h2 class="text-[#0f0f12] text-2xl md:text-3xl lg:text-[2.1rem] font-semibold tracking-[-0.025em] leading-[1.14] mb-4 group-hover:text-[#0047ba] transition-colors duration-300">
+              {destacado.title}
+            </h2>
+            <p class="text-[#5c606b] text-base lg:text-[17px] leading-relaxed font-light mb-6">
+              {destacado.excerpt}
+            </p>
+            <span class="inline-flex items-center gap-1.5 text-[#0047ba] text-sm font-semibold">
+              Leer artículo
+              <Icon name="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <section class="w-full bg-[#f5f6f8] py-16 lg:py-24 border-t border-black/[0.05]">
     <div class="max-w-[1240px] mx-auto px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {articles.map((article, i) => (
+      <div class="flex flex-wrap items-center gap-2 mb-10 lg:mb-12" role="group" aria-label="Filtrar por categoría">
+        <button
+          type="button"
+          data-filtro="todos"
+          aria-pressed="true"
+          class="px-4 py-2 rounded-full text-[13px] font-semibold transition-colors duration-300 bg-[#0047ba] text-white"
+        >
+          Todos
+        </button>
+        {categorias.map((cat) => (
+          <button
+            type="button"
+            data-filtro={cat.slug}
+            aria-pressed="false"
+            class="px-4 py-2 rounded-full text-[13px] font-semibold transition-colors duration-300 bg-white text-[#5c606b] ring-1 ring-black/[0.07] hover:text-[#1a1d29]"
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" data-lista>
+        {resto.map((article, i) => (
           <a
             href={`/${country}/blog/${article.slug}`}
             data-blog-card
-            data-col={i % 3}
-            class="group flex flex-col rounded-[24px] overflow-hidden bg-white border border-black/[0.07] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-44px_rgba(15,32,108,0.4)]"
+            data-cats={article.cats.join(' ')}
+            data-orden={i}
+            class:list={[
+              'group flex flex-col rounded-[24px] overflow-hidden bg-white border border-black/[0.07] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-44px_rgba(15,32,108,0.4)]',
+              i >= POR_PAGINA && 'hidden',
+            ]}
           >
             <div class="aspect-[16/10] overflow-hidden bg-[#eef1f6]">
-              <img src={article.image} alt={article.title} loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+              <img
+                src={article.cover.src}
+                alt={article.cover.alt}
+                loading="lazy"
+                width={article.cover.w ?? undefined}
+                height={article.cover.h ?? undefined}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+              />
             </div>
             <div class="flex flex-col flex-1 p-6">
-              <div class="flex flex-wrap gap-2 mb-3.5">
-                {article.cats.slice(0, 2).map((cat) => (
-                  <span class="text-[10.5px] font-semibold uppercase tracking-wider text-[#0047ba] bg-[#0047ba]/[0.08] rounded-full px-2.5 py-1">{cat}</span>
-                ))}
+              <div class="flex flex-wrap items-center gap-2 mb-3.5">
+                <span class="text-[10.5px] font-semibold uppercase tracking-wider text-[#0047ba] bg-[#0047ba]/[0.08] rounded-full px-2.5 py-1">
+                  {nombreCategoria(article.cats[0])}
+                </span>
               </div>
-              <h3 class="text-[#1a1d29] text-lg font-semibold leading-snug tracking-[-0.01em] mb-5 flex-1 group-hover:text-[#0047ba] transition-colors duration-300">{article.title}</h3>
-              <span class="inline-flex items-center gap-1.5 text-[#0047ba] text-sm font-semibold">
-                Leer artículo
-                <Icon name="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </span>
+              <h3 class="text-[#1a1d29] text-lg font-semibold leading-snug tracking-[-0.01em] mb-3 group-hover:text-[#0047ba] transition-colors duration-300">
+                {article.title}
+              </h3>
+              <p class="text-[#5c606b] text-sm leading-relaxed font-light mb-5 line-clamp-2 flex-1">
+                {article.excerpt}
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-[#9094a0] text-xs">
+                  {fechaLarga(article.date)} · {article.readingMinutes} min
+                </span>
+                <Icon
+                  name="arrow-up-right"
+                  class="w-4 h-4 text-[#0047ba] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </div>
             </div>
           </a>
         ))}
       </div>
+
+      <p class="text-[#8a8f9a] text-sm text-center mt-10 hidden" data-vacio>
+        No hay artículos en esta categoría todavía.
+      </p>
+
+      <div class="flex justify-center mt-12">
+        <button
+          type="button"
+          data-ver-mas
+          class:list={[
+            'px-8 py-3.5 rounded-full font-semibold text-sm bg-white text-[#1a1d29] ring-1 ring-black/[0.09] hover:ring-black/25 transition-all duration-300',
+            resto.length <= POR_PAGINA && 'hidden',
+          ]}
+        >
+          Ver más artículos
+        </button>
+      </div>
     </div>
   </section>
 
-  <script>
-    // Faithful port of the original's per-card framer-motion reveal
-    // (useInView, once: true, margin: "-40px") — each card animates
-    // independently as it scrolls into view, staggered only by column
-    // (r%3*0.08s), not by an accumulating group-wide stagger.
-    document.querySelectorAll<HTMLElement>('[data-blog-card]').forEach((card) => {
-      const delay = parseInt(card.dataset.col || '0', 10) * 0.08;
+  <script define:vars={{ POR_PAGINA }}>
+    const lista = document.querySelector('[data-lista]');
+    const tarjetas = Array.from(lista.querySelectorAll('[data-blog-card]'));
+    const botones = Array.from(document.querySelectorAll('[data-filtro]'));
+    const verMas = document.querySelector('[data-ver-mas]');
+    const vacio = document.querySelector('[data-vacio]');
+
+    let categoria = 'todos';
+    let visibles = POR_PAGINA;
+
+    function pintar() {
+      const coinciden = tarjetas.filter(
+        (t) => categoria === 'todos' || t.dataset.cats.split(' ').includes(categoria)
+      );
+      tarjetas.forEach((t) => t.classList.add('hidden'));
+      coinciden.slice(0, visibles).forEach((t) => t.classList.remove('hidden'));
+      verMas.classList.toggle('hidden', coinciden.length <= visibles);
+      vacio.classList.toggle('hidden', coinciden.length > 0);
+    }
+
+    botones.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        categoria = btn.dataset.filtro;
+        visibles = POR_PAGINA;
+        botones.forEach((b) => {
+          const on = b === btn;
+          b.setAttribute('aria-pressed', String(on));
+          b.classList.toggle('bg-[#0047ba]', on);
+          b.classList.toggle('text-white', on);
+          b.classList.toggle('bg-white', !on);
+          b.classList.toggle('text-[#5c606b]', !on);
+          b.classList.toggle('ring-1', !on);
+          b.classList.toggle('ring-black/[0.07]', !on);
+          b.classList.toggle('hover:text-[#1a1d29]', !on);
+        });
+        pintar();
+      });
+    });
+
+    verMas.addEventListener('click', () => {
+      visibles += POR_PAGINA;
+      pintar();
+    });
+
+    // Reproduce el reveal por tarjeta del original: cada una entra sola al aparecer, con un
+    // desfase por columna y no acumulativo.
+    const revelar = (card) => {
+      if (card.dataset.revelada) return;
+      card.dataset.revelada = '1';
+      const delay = (Number(card.dataset.orden) % 3) * 0.08;
       card.style.opacity = '0';
       card.style.transform = 'translateY(22px)';
       card.style.transition = `opacity 0.5s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${delay}s`;
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (!entries[0].isIntersecting) return;
-          observer.disconnect();
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        },
-        { rootMargin: '-40px' }
-      );
-      observer.observe(card);
-    });
+      requestAnimationFrame(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    };
+    const obs = new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          if (!e.isIntersecting) continue;
+          obs.unobserve(e.target);
+          revelar(e.target);
+        }
+      },
+      { rootMargin: '-40px' }
+    );
+    tarjetas.forEach((t) => obs.observe(t));
   </script>
 </MainLayout>

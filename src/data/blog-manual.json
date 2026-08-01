@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "alianzaelsalvador",
+    "slugWp": "alianzaelsalvador",
+    "title": "Alianza estratégica: Qpaypro, Banco Atlántida y SERFINSA en El Salvador",
+    "excerpt": "Qpaypro, Banco Atlántida y SERFINSA unen fuerzas para transformar la forma de cobrar en El Salvador.",
+    "date": "2026-03-30",
+    "cats": ["producto"],
+    "countries": ["gt", "sv"],
+    "cover": {
+      "wp": "https://www.qpaypro.com/wp-content/uploads/2026/03/POS-SV2.webp"
+    },
+    "readingMinutes": 1,
+    "body": [
+      {
+        "type": "p",
+        "text": "<strong>Qpaypro, Banco Atlántida y SERFINSA unen fuerzas para transformar la forma de cobrar en El Salvador.</strong>"
+      },
+      {
+        "type": "p",
+        "text": "La alianza junta tres piezas que hasta ahora un comercio salvadoreño tenía que resolver por separado: la plataforma con la que cobra, el banco donde recibe su dinero y el procesamiento de las transacciones con tarjeta."
+      },
+      {
+        "type": "h2",
+        "text": "Qué significa para tu negocio"
+      },
+      {
+        "type": "p",
+        "text": "Si vendes en El Salvador, puedes aceptar tarjetas de crédito y débito, cobros sin contacto y QR, en línea y en tu local, con la liquidación llegando a tu cuenta cada 24 horas."
+      },
+      {
+        "type": "p",
+        "text": "En El Salvador Qpaypro trabaja con Banco Atlántida. Si todavía no tienes cuenta ahí, el equipo de afiliaciones te acompaña a aperturarla durante el mismo proceso, que toma entre 5 y 8 días hábiles."
+      },
+      {
+        "type": "cta",
+        "text": "Conoce los planes disponibles en El Salvador y el terminal de cobro que puedes llevar a tu negocio."
+      }
+    ]
+  }
+]

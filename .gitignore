@@ -26,3 +26,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Descargas de trabajo de la migración del blog (se regeneran con --descargar)
+scripts/.wp-posts.json
+scripts/.img-estado.txt
+scripts/.articulos.json
+scripts/.no-migrados.json
