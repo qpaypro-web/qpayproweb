@@ -343,7 +343,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
     // que no puede pasar es que su mensaje nuevo se pierda sin que nadie en
     // ventas se entere, así que se cuelga como Nota del lead existente.
     if (zohoCode === 'DUPLICATE_DATA') {
-      const leadId = duplicateLeadId(entry.details);
+      const leadId = duplicateLeadId(entry?.details);
       if (leadId) {
         const note = [
           `Servicio de interés: ${interest}`,
@@ -354,7 +354,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
           .join('\n\n');
         await attachNote(host, accessToken, leadId, note);
       } else {
-        console.error(`[lead] Duplicado sin id en la respuesta: ${JSON.stringify(entry.details)}`);
+        console.error(`[lead] Duplicado sin id en la respuesta: ${JSON.stringify(entry?.details)}`);
       }
       console.log(`[lead] Duplicado para ${email}`);
       return json({ ok: true });
