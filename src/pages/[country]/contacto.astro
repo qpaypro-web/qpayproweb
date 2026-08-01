@@ -177,7 +177,9 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
               <span data-submit-spinner class="hidden w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
             </button>
             <p class="text-[#8a8f9a] text-xs text-center max-w-md leading-relaxed">
-              Al enviar aceptas que Qpaypro trate tus datos para contactarte. Consulta nuestra
+              {/* El espacio va explícito: compressHTML viene activo por defecto
+                  en Astro y se come el salto de línea, dejando "nuestrapolítica". */}
+              Al enviar aceptas que Qpaypro trate tus datos para contactarte. Consulta nuestra{' '}
               <a href={privacyHref} class="text-[#0047ba] hover:underline">política de privacidad</a>.
             </p>
           </div>
