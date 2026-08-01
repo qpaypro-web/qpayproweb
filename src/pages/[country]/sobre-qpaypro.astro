@@ -1,0 +1,180 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry } from '../../lib/country';
+
+const STATS = [
+  { format: 'plain', target: 2017, suffix: '', label: 'Año de fundación' },
+  { format: 'locale', target: 5000, suffix: '+', label: 'Negocios activos' },
+  { static: '24/7', label: 'Soporte técnico' },
+];
+
+const VALUES = [
+  { icon: 'hand-heart', title: 'Servicio', text: 'Ponemos a cada negocio en el centro de lo que hacemos.' },
+  { icon: 'heart', title: 'Empatía', text: 'Entendemos los retos reales de nuestros clientes.' },
+  { icon: 'zap', title: 'Rapidez', text: 'Resolvemos rápido para que tu negocio no se detenga.' },
+  { icon: 'badge-check', title: 'Verdad', text: 'Transparencia total, sin costos ni letras ocultas.' },
+  { icon: 'lightbulb', title: 'Innovación', text: 'Mejoramos constantemente con tecnología confiable.' },
+  { icon: 'shield-check', title: 'Responsabilidad', text: 'Cuidamos cada transacción y cada dato con seriedad.' },
+];
+
+const WHY_US = [
+  { icon: 'award', title: 'Equipo certificado', text: 'Profesionales con certificaciones internacionales en pagos y seguridad.' },
+  { icon: 'globe', title: 'Visión global', text: 'Conectamos negocios con el mercado global, con estándares de calidad y seguridad.' },
+  { icon: 'trending-up', title: 'Compromiso con el crecimiento', text: 'Acompañamos a nuestros clientes en cada etapa de su transformación digital.' },
+];
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+---
+
+<MainLayout
+  title="Sobre Qpaypro | Pasarela de pagos para Guatemala y El Salvador"
+  description="Conoce Qpaypro, la plataforma de pagos que ayuda a los negocios a cobrar, operar y crecer en Guatemala y El Salvador."
+  headerTheme="onDark"
+>
+  <section class="relative w-full bg-[#050506] pt-28 pb-14 lg:pt-36 lg:pb-16 text-center overflow-hidden">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1000px] mx-auto px-6 lg:px-8" data-reveal-group>
+      <div data-reveal>
+        <p class="text-[#4ad2ff] text-xs font-semibold uppercase tracking-[0.22em] mb-7">Sobre nosotros</p>
+        <h1 class="text-white text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.04em] leading-[0.98] mb-8">
+          Hacemos que cobrar<br />sea <span class="text-[#4ad2ff]">simple</span>.
+        </h1>
+        <p class="text-white/60 text-xl lg:text-2xl leading-relaxed max-w-2xl mx-auto font-light">
+          Una plataforma de pagos digitales que ayuda a los negocios a cobrar de forma simple, segura y eficiente.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-24 lg:py-36">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-16 sm:gap-x-8 sm:divide-x sm:divide-white/[0.08]" data-reveal-group>
+        {STATS.map((stat) => (
+          <div class="text-center px-6" data-reveal>
+            <div>
+              {stat.static ? (
+                <div class="text-6xl lg:text-7xl xl:text-8xl font-semibold text-white tracking-[-0.04em] mb-5 tabular-nums">{stat.static}</div>
+              ) : (
+                <div
+                  class="text-6xl lg:text-7xl xl:text-8xl font-semibold text-white tracking-[-0.04em] mb-5 tabular-nums"
+                  data-count-up
+                  data-target={stat.target}
+                  data-suffix={stat.suffix}
+                  data-format={stat.format}
+                >
+                  0{stat.suffix}
+                </div>
+              )}
+              <div class="mx-auto mb-5 h-px w-8 bg-gradient-to-r from-[#0097ce] to-[#0047ba]"></div>
+              <div class="text-white/45 text-xs lg:text-sm font-medium uppercase" style="letter-spacing: 0.16em;">{stat.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8" data-reveal-group>
+        <div class="group relative overflow-hidden rounded-[32px] bg-white border border-black/[0.05] p-10 lg:p-14 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_70px_-20px_rgba(15,32,108,0.18)]" data-reveal>
+          <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl opacity-70 transition-opacity duration-500 group-hover:opacity-100" style="background: radial-gradient(circle, rgba(0, 71, 186, 0.12) 0%, transparent 70%);"></div>
+          <div class="relative">
+            <span class="inline-flex w-12 h-12 rounded-2xl bg-[#050506] items-center justify-center mb-8">
+              <Icon name="target" class="w-6 h-6 text-white" strokeWidth={1.75} />
+            </span>
+            <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Nuestra misión</p>
+            <p class="text-[#3a3d47] text-2xl lg:text-[2rem] leading-[1.28] font-light tracking-[-0.01em]">
+              Crear experiencias innovadoras y confiables que ayuden a los negocios a <span class="text-[#1a1d29] font-semibold">cobrar, operar y crecer</span> en un entorno digital seguro.
+            </p>
+          </div>
+        </div>
+        <div class="group relative overflow-hidden rounded-[32px] bg-white border border-black/[0.05] p-10 lg:p-14 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_70px_-20px_rgba(15,32,108,0.18)]" data-reveal>
+          <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-3xl opacity-70 transition-opacity duration-500 group-hover:opacity-100" style="background: radial-gradient(circle, rgba(0, 151, 206, 0.14) 0%, transparent 70%);"></div>
+          <div class="relative">
+            <span class="inline-flex w-12 h-12 rounded-2xl bg-[#050506] items-center justify-center mb-8">
+              <Icon name="eye" class="w-6 h-6 text-white" strokeWidth={1.75} />
+            </span>
+            <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Nuestra visión</p>
+            <p class="text-[#3a3d47] text-2xl lg:text-[2rem] leading-[1.28] font-light tracking-[-0.01em]">
+              Ser la plataforma <span class="text-[#1a1d29] font-semibold">líder</span> que transforma cómo los negocios cobran, operan y crecen en Centroamérica y el Caribe.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Nuestros valores</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-[1.02]">Los principios que<br />guían cada decisión</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {VALUES.map((item) => (
+          <div class="group rounded-[28px] bg-[#f5f6f8] p-9 lg:p-10 border border-transparent transition-all duration-500 hover:bg-white hover:-translate-y-1.5 hover:shadow-[0_30px_70px_-24px_rgba(15,32,108,0.18)] hover:border-black/[0.05]">
+            <span class="inline-flex w-12 h-12 rounded-2xl bg-[#050506] items-center justify-center mb-7 transition-all duration-500 group-hover:scale-105 group-hover:bg-gradient-to-br group-hover:from-[#0047ba] group-hover:to-[#0097ce]">
+              <Icon name={item.icon} class="w-6 h-6 text-white" strokeWidth={1.75} />
+            </span>
+            <h3 class="text-[#1a1d29] text-xl font-semibold mb-2.5 tracking-tight">{item.title}</h3>
+            <p class="text-[#6b7280] text-[15px] leading-relaxed font-light">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20" data-reveal-group>
+        <div data-reveal>
+          <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Por qué elegirnos</p>
+          <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] leading-[1.02] mb-7">Más que una pasarela,<br />un socio estratégico</h2>
+          <p class="text-[#6b7280] text-xl leading-relaxed font-light max-w-2xl">Creemos que los negocios merecen operar, cobrar y crecer como grandes empresas.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6" data-reveal-group>
+        {WHY_US.map((item) => (
+          <div class="group relative overflow-hidden rounded-[28px] bg-white border border-black/[0.05] p-9 lg:p-10 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_70px_-24px_rgba(15,32,108,0.18)]" data-reveal>
+            <span class="inline-flex w-12 h-12 rounded-2xl bg-[#050506] items-center justify-center mb-7 transition-transform duration-500 group-hover:scale-105">
+              <Icon name={item.icon} class="w-6 h-6 text-white" strokeWidth={1.75} />
+            </span>
+            <h3 class="text-[#1a1d29] text-xl font-semibold mb-3 tracking-tight leading-snug">{item.title}</h3>
+            <p class="text-[#6b7280] text-[15px] leading-relaxed font-light">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-20 lg:py-28">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center" data-reveal-group>
+        <div data-reveal>
+          <div class="flex items-center justify-center gap-2.5 mb-7">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Únete a Qpaypro</p>
+          </div>
+          <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] leading-[1.03] mb-6">Crece con nosotros.</h2>
+          <p class="text-white/55 text-xl leading-relaxed mb-12 max-w-xl mx-auto font-light">Miles de negocios ya confían en Qpaypro para crecer. Es tu turno.</p>
+          <div class="flex items-center justify-center gap-4 flex-wrap">
+            <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+              Comenzar gratis
+              <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-base border border-white/25 hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">
+              Contacta a Ventas
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

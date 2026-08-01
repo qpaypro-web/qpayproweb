@@ -1,0 +1,24 @@
+---
+import { DEFAULT_COUNTRY } from '../lib/country';
+
+// La raíz manda al país por defecto. Se hace con meta refresh + canonical en
+// lugar de un redirect por geo-IP: Googlebot rastrea casi siempre desde
+// direcciones de EE.UU., así que redirigir por IP haría que se indexara una
+// sola versión. La detección por geo-IP en el edge queda para la Cloudflare
+// Function, y siempre debe excluir a los bots.
+const target = `/${DEFAULT_COUNTRY}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex, follow" />
+    <title>Qpaypro</title>
+  </head>
+  <body>
+    <p>Redirigiendo a <a href={target}>Qpaypro Guatemala</a>…</p>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry } from '../../lib/country';
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+
+// El terminal es un dispositivo distinto en cada país (POS Cute en Guatemala,
+// POS A920 en El Salvador), así que todo el contenido de la página —incluidas
+// las especificaciones y las imágenes— sale de la data del país.
+const t = c.posTerminal;
+const FEATURES = t.features;
+const SPECS = t.specs;
+---
+
+<MainLayout
+  title={t.seoTitle}
+  description={t.seoDescription}
+  headerTheme="onLight"
+>
+  <section class="relative w-full bg-white pt-32 lg:pt-40 pb-0 overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8 text-center" data-reveal>
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <p class="text-[#0047ba] text-base lg:text-lg font-semibold">{t.model}</p>
+        {t.comingSoon && (
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0047ba]/10 text-[#0047ba] text-xs font-bold uppercase tracking-[0.14em]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#0047ba] animate-pulse"></span>Próximamente
+          </span>
+        )}
+      </div>
+      <h1 class="text-[#1a1d29] text-5xl md:text-6xl lg:text-[5.5rem] font-bold tracking-[-0.03em] leading-[1.02] mb-6">{t.headline}</h1>
+      <p class="text-[#5c606b] text-xl lg:text-2xl leading-relaxed max-w-2xl mx-auto mb-4">{t.subtitle}</p>
+      <div class="flex items-center justify-center gap-6 flex-wrap mb-2">
+        {/* Donde el terminal ya se vende, el lugar del aviso de "próximamente"
+            lo toma la acción de compra: dejar el hero sin ninguna acción en un
+            producto disponible obliga a bajar hasta el final de la página. */}
+        {t.comingSoon ? (
+          <span class="text-[#8a8f9a] text-lg font-medium">Disponible muy pronto</span>
+        ) : (
+          <a
+            href={`/${country}/contacto#ventas`}
+            class="group inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300"
+          >
+            Cómpralo ahora
+            <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        )}
+        <a href="#specs" class="text-[#0047ba] text-lg font-medium hover:underline">Ver especificaciones ›</a>
+      </div>
+    </div>
+    <div class="relative max-w-[700px] mx-auto px-6 mt-4">
+      <img src={t.heroImage} alt={t.heroAlt} class="w-full h-auto" />
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20" data-reveal>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05]">{t.sectionHeadline[0]}<br />{t.sectionHeadline[1]}</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-16" data-reveal-group>
+        {FEATURES.map((f) => (
+          <div class="border-t border-[#e4e6ea] pt-6" data-reveal>
+            <div class="text-[#0047ba] text-4xl lg:text-5xl font-bold tracking-tight mb-4">{f.stat}</div>
+            <h3 class="text-[#1a1d29] text-xl font-semibold mb-2">{f.title}</h3>
+            <p class="text-[#5c606b] text-base leading-relaxed max-w-md">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-24 lg:py-32">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8" data-reveal>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <div class="flex items-center gap-2.5 mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Tecnología pago sin contacto</p>
+          </div>
+          <h2 class="text-white text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05] mb-6">Un toque y listo.</h2>
+          {t.nfc.paragraphs.map((text, i) => (
+            <p class:list={['text-white/60 text-lg leading-relaxed font-light', i < t.nfc.paragraphs.length - 1 && 'mb-4']}>{text}</p>
+          ))}
+        </div>
+        <div class="relative flex items-center justify-center">
+          <img src={t.nfc.image} alt={t.nfc.alt} class="w-full h-auto object-contain drop-shadow-2xl" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs" class="w-full bg-white py-24 lg:py-32 border-t border-[#eef0f3]">
+    <div class="max-w-[900px] mx-auto px-6 lg:px-8">
+      <div class="mb-14" data-reveal>
+        <p class="text-[#5c606b] text-xs font-semibold uppercase tracking-[0.14em] mb-5">Especificaciones</p>
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-[-0.02em] leading-[1.08]">Todo lo que lleva dentro</h2>
+      </div>
+      <div class="divide-y divide-[#e4e6ea]">
+        {SPECS.map((spec) => (
+          <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-8 py-5">
+            <span class="text-[#9094a0] text-sm font-medium">{spec.label}</span>
+            <span class="text-[#1a1d29] text-base font-medium">{spec.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-28 lg:py-40">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[800px] mx-auto px-6 lg:px-8 text-center" data-reveal>
+      <div class="flex items-center justify-center gap-2.5 mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">{t.model}</p>
+      </div>
+      <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03] mb-6">{`El ${t.model} te espera.`}</h2>
+      <p class="text-white/55 text-xl leading-relaxed mb-10 max-w-xl mx-auto font-light">{t.closing}</p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href={`/${country}/contacto#ventas`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+          Cómpralo ahora
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300">Contacta a Ventas</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

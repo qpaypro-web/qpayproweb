@@ -1,0 +1,157 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.astro';
+import { countryPaths, getCountry } from '../../lib/country';
+
+const CARDS = [
+  {
+    num: '01',
+    icon: 'store',
+    title: 'Crea tu Qpayshop',
+    text: 'Publica tu catálogo, conecta tu dominio y configura envíos, sin programar.',
+    points: ['Catálogo y categorías', 'Tu propio dominio', 'Pedidos y envíos'],
+  },
+  {
+    num: '02',
+    icon: 'credit-card',
+    title: 'Cobra en tu web',
+    text: 'Integra el checkout de Qpaypro y acepta tarjeta en cualquier dispositivo.',
+    points: ['Visa y Mastercard', 'Checkout optimizado', 'Pago sin contacto y 3D Secure'],
+  },
+  {
+    num: '03',
+    icon: 'puzzle',
+    title: 'Conecta la que ya tienes',
+    text: 'Instala el plugin de Qpaypro en tu plataforma y cobra en minutos.',
+    points: ['Shopify, WooCommerce y Ecwid', 'VTEX y PrestaShop', 'Sin programar'],
+  },
+  {
+    num: '04',
+    icon: 'boxes',
+    title: 'Inventario sincronizado',
+    text: 'Tu inventario es el mismo en línea y en tu tienda física, en tiempo real.',
+    points: ['Un solo inventario', 'Pedidos en tiempo real', 'Reportes unificados'],
+  },
+];
+
+const FAQ = [
+  { q: '¿Cómo creo mi tienda en línea con Qpaypro?', a: 'Con Qpayshop publicas tu catálogo, conectas tu dominio y configuras envíos en minutos, sin programar. Tu tienda queda lista para cobrar con tarjeta.' },
+  { q: '¿Puedo conectar la tienda que ya tengo?', a: 'Sí. Si ya vendes en Shopify, WooCommerce, VTEX, PrestaShop o Ecwid, instalas el plugin de Qpaypro y empiezas a cobrar con tarjeta sin programar.' },
+  { q: '¿El inventario se sincroniza con mi tienda física?', a: 'Sí. Tu inventario es el mismo en línea y en tu tienda física, sincronizado en tiempo real desde una sola plataforma.' },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+};
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+---
+
+<MainLayout
+  title="Tiendas en línea y ecommerce | Qpaypro"
+  description="Crea tu tienda en línea con Qpayshop o conecta la que ya tienes (Shopify, WooCommerce, VTEX, PrestaShop) y cobra con tarjeta en minutos."
+  headerTheme="onDark"
+>
+  <section class="relative w-full bg-[#050506] overflow-hidden pt-40 pb-24 lg:pt-52 lg:pb-32">
+    <GlowSectionDecor />
+    <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[520px] blur-[130px] opacity-45 pointer-events-none" style="background: radial-gradient(circle, rgba(0, 71, 186, 0.55) 0%, transparent 70%);"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-3 mb-8">
+        <span class="h-px w-8 bg-gradient-to-r from-transparent to-[#4ad2ff]/70"></span>
+        <span class="text-[#4ad2ff] text-[11px] font-semibold uppercase tracking-[0.3em]">Tiendas en línea</span>
+        <span class="h-px w-8 bg-gradient-to-l from-transparent to-[#4ad2ff]/70"></span>
+      </div>
+      <h1 class="text-white text-4xl md:text-5xl lg:text-[4rem] font-semibold tracking-[-0.04em] leading-[1.0] mb-7">Tu tienda en línea, lista para vender.</h1>
+      <p class="text-white/55 text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto mb-11">Crea tu tienda con Qpayshop o conecta la que ya tienes, y cobra con tarjeta.</p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
+          Comenzar ahora
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-[15px] border border-white/20 hover:bg-white/[0.12] hover:border-white/35 transition-all duration-300">Hablar con ventas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-36">
+    <div class="max-w-[1080px] mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-16 items-end mb-14 lg:mb-20">
+        <div>
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="h-px w-8 bg-gradient-to-r from-[#0047ba] to-[#0097ce]"></span>
+            <span class="text-[#0047ba] text-[11px] font-semibold uppercase tracking-[0.28em]">Vende en línea</span>
+          </div>
+          <h2 class="text-[#0f0f12] text-4xl md:text-5xl font-semibold tracking-[-0.035em] leading-[1.02]">Tu tienda y tus cobros, conectados</h2>
+        </div>
+        <p class="text-[#6b7280] text-lg font-light leading-relaxed lg:pb-2">Monta tu tienda con Qpayshop o conecta la que ya usas, con inventario y pagos en una sola plataforma.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5 lg:gap-6">
+        {CARDS.map((card) => (
+          <div class="group relative rounded-[28px] border border-black/[0.07] bg-white p-8 lg:p-10 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_44px_90px_-46px_rgba(15,32,108,0.42)]">
+            <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0047ba]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+            <div class="flex items-start justify-between mb-7">
+              <span class="inline-flex w-14 h-14 rounded-2xl items-center justify-center" style="background: linear-gradient(135deg, rgb(15, 32, 108), rgb(0, 151, 206)); box-shadow: rgba(0, 71, 186, 0.55) 0px 14px 30px -12px;">
+                <Icon name={card.icon} class="w-6 h-6 text-white" strokeWidth={1.7} />
+              </span>
+              <span class="text-[5.5rem] leading-none font-bold tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-b from-[#eef1f6] to-[#fbfcfd] select-none -mt-3 -mr-1">{card.num}</span>
+            </div>
+            <h3 class="text-[#0f0f12] text-2xl font-semibold tracking-[-0.02em] mb-3">{card.title}</h3>
+            <p class="text-[#6b7280] text-[15px] leading-relaxed font-light mb-7">{card.text}</p>
+            <ul class="space-y-2.5">
+              {card.points.map((point) => (
+                <li class="flex items-center gap-3">
+                  <span class="inline-flex w-[18px] h-[18px] rounded-full bg-[#0047ba]/10 items-center justify-center flex-shrink-0">
+                    <Icon name="check" class="w-2.5 h-2.5 text-[#0047ba]" strokeWidth={3.5} />
+                  </span>
+                  <span class="text-[#3a3d47] text-sm">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ConnectedPlatformDiagram />
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Preguntas frecuentes</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.04]">Preguntas frecuentes</h2>
+      </div>
+      <div class="divide-y divide-black/[0.08] border-t border-black/[0.08]">
+        {FAQ.map((item) => (
+          <div class="py-7">
+            <h3 class="text-[#1a1d29] text-lg lg:text-xl font-semibold mb-3 tracking-tight">{item.q}</h3>
+            <p class="text-[#4a4e58] text-[15px] lg:text-base leading-relaxed font-light">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full overflow-hidden bg-[#050506] py-24 lg:py-32">
+    <GlowSectionDecor />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] blur-[120px] opacity-45 pointer-events-none" style="background: radial-gradient(circle, rgba(0, 71, 186, 0.5), transparent 70%);"></div>
+    <div class="relative z-10 max-w-2xl mx-auto px-6 lg:px-8 text-center">
+      <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.035em] leading-[1.05] mb-5">Lanza tu tienda en línea</h2>
+      <p class="text-white/55 text-lg leading-relaxed mb-10 font-light max-w-lg mx-auto">Crea tu Qpayshop o conecta la que ya tienes y empieza a vender.</p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
+          Comenzar ahora
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/[0.06] backdrop-blur-md text-white rounded-full font-semibold text-[15px] border border-white/20 hover:bg-white/[0.12] transition-all duration-300">Hablar con ventas</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

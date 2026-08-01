@@ -1,0 +1,491 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Flag from './Flag.astro';
+import { COUNTRY_CODES, COUNTRY_HREFLANG, COUNTRY_LABELS, withCountry, swapCountry } from '../lib/country';
+
+interface Props {
+  /** 'onDark' = white text (nav floats over a colorful/dark hero image).
+   *  'onLight' = dark text (nav floats over a plain light section). */
+  theme?: 'onDark' | 'onLight';
+  country: string;
+}
+
+const { theme = 'onLight', country } = Astro.props;
+const onDark = theme === 'onDark';
+
+// El selector de país intercambia sólo el prefijo de la ruta actual, así que
+// /gt/precios lleva a /sv/precios y no de vuelta al home.
+const currentPath = Astro.url.pathname;
+
+const PRODUCTOS = [
+  { href: '/terminal-pos', icon: 'smartphone', title: 'Terminal de Cobro POS', subtitle: 'Terminal portátil con NFC y chip' },
+  { href: '/sistema-pos', icon: 'store', title: 'Punto de Venta', subtitle: 'Sistema POS completo para tu negocio' },
+  { href: '/integraciones', icon: 'plug', title: 'Integraciones', subtitle: 'Conecta con las plataformas que usas' },
+  { href: '/pasarela-de-pagos', icon: 'layers', title: 'Soluciones', subtitle: 'Herramientas para cada tipo de negocio' },
+];
+
+const DESARROLLADORES = [
+  { href: 'https://developers.qpaypro.com/', icon: 'file-code', title: 'Documentación API', subtitle: 'Guías y referencia para integrar', external: true },
+  { href: 'https://qpaypro.zohodesk.com/portal/es/kb/payments/integraciones', icon: 'puzzle', title: 'Plugins', subtitle: 'Conectores listos para tu plataforma', external: true },
+];
+
+const EMPRESA_Y_RECURSOS = [
+  { href: '/sobre-qpaypro', icon: 'building2', title: 'Sobre Qpaypro', subtitle: 'Conoce quiénes somos' },
+  { href: '/seguridad', icon: 'shield-check', title: 'Seguridad', subtitle: 'Cómo protegemos cada transacción' },
+  { href: '/partners', icon: 'handshake', title: 'Partners', subtitle: 'Programa de socios y alianzas' },
+];
+
+const SOPORTE = [
+  { href: 'https://api.whatsapp.com/send/?phone=50247856011&text&type=phone_number&app_absent=0', icon: 'message-circle', title: 'Soporte WhatsApp', subtitle: 'Atención directa por WhatsApp', external: true },
+  { href: 'https://qpaypro.zohodesk.com/portal/es/home', icon: 'life-buoy', title: 'Centro de ayuda Qpaypro', subtitle: 'Resuelve dudas sobre Qpaypro', external: true },
+  { href: 'https://help.shopsettings.com/hc/es', icon: 'shopping-bag', title: 'Centro de ayuda Qpayshop', subtitle: 'Ayuda para tu tienda en línea', external: true },
+];
+
+// Mirrors the original mobile menu's exact order: Productos, Precios,
+// Desarrolladores, Soporte, Empresa y Recursos, Contacto.
+const MOBILE_MENU_ENTRIES = [
+  { type: 'group' as const, label: 'Productos', items: PRODUCTOS },
+  { type: 'link' as const, href: '/precios', label: 'Precios' },
+  { type: 'group' as const, label: 'Desarrolladores', items: DESARROLLADORES },
+  { type: 'group' as const, label: 'Soporte', items: SOPORTE },
+  { type: 'group' as const, label: 'Empresa y Recursos', items: EMPRESA_Y_RECURSOS },
+  { type: 'link' as const, href: '/contacto', label: 'Contacto' },
+];
+
+const INGRESA = [
+  { href: 'https://app.qpaypro.com', icon: 'building2', title: 'Ingreso Qpaypro', external: true },
+  { href: 'https://my.shopsettings.com/p/qpayshop', icon: 'shopping-bag', title: 'Ingreso Qpayshop', external: true },
+];
+
+const pillClass = onDark
+  ? 'bg-white/[0.08] backdrop-blur-[25px] shadow-md shadow-black/[0.04]'
+  : 'bg-gray-900/[0.20] backdrop-blur-[24px] shadow-md shadow-black/[0.08]';
+const pillBorder = onDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.15)';
+const linkClass = onDark
+  ? 'text-white/90 hover:text-white hover:bg-white/10'
+  : 'text-gray-800/90 hover:text-gray-900 hover:bg-gray-900/10';
+const ingresaBtnClass = onDark
+  ? 'bg-white text-gray-900 hover:shadow-xl hover:shadow-white/30'
+  : 'bg-gray-900 text-white hover:shadow-xl hover:shadow-gray-900/30';
+const hamburgerClass = onDark
+  ? 'text-white/90 hover:bg-white/10'
+  : 'text-gray-800/90 hover:bg-gray-900/10';
+
+// The navbar re-themes itself at runtime depending on how light the section
+// behind it is (see the script at the bottom). These are the two variants it
+// swaps between; the `theme` prop above only decides the server-rendered
+// starting state so there is no flash before the first measurement.
+// `logo` uses the coloured mark plus a filter for the light-on-dark case,
+// which is the same trick the footer already uses, so only one SVG ships.
+const THEME_VARIANTS = {
+  onLightBg: {
+    pill: 'bg-gray-900/[0.20] backdrop-blur-[24px] shadow-md shadow-black/[0.08]',
+    pillScrolled: 'bg-gray-900/[0.25] backdrop-blur-[28px] shadow-lg shadow-black/[0.12]',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+    link: 'text-gray-800/90 hover:text-gray-900 hover:bg-gray-900/10',
+    cta: 'bg-gray-900 text-white hover:shadow-xl hover:shadow-gray-900/30',
+    burger: 'text-gray-800/90 hover:bg-gray-900/10',
+    logo: '',
+  },
+  onDarkBg: {
+    pill: 'bg-white/[0.08] backdrop-blur-[25px] shadow-md shadow-black/[0.04]',
+    pillScrolled: 'bg-white/[0.12] backdrop-blur-[30px] shadow-lg shadow-black/[0.08]',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    link: 'text-white/90 hover:text-white hover:bg-white/10',
+    cta: 'bg-white text-gray-900 hover:shadow-xl hover:shadow-white/30',
+    burger: 'text-white/90 hover:bg-white/10',
+    logo: 'brightness-0 invert',
+  },
+};
+const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLightBg.logo;
+---
+
+<nav class="fixed top-4 left-0 right-0 z-50 transition-all duration-500" data-header>
+  <div class="max-w-[1400px] mx-auto px-6">
+    <div class={`relative rounded-2xl transition-all duration-500 ${pillClass}`} style={`border: 1px solid ${pillBorder};`} data-header-pill>
+      <div class="flex items-center justify-between gap-4 px-5 py-3">
+        <a href={`/${country}`} class="flex flex-1 items-center flex-shrink-0">
+          <Logo variant="colored" class={`h-6 transition-[filter] duration-500 ${logoFilter}`} data-header-logo />
+        </a>
+
+        <div class="hidden xl:flex items-center gap-0.5 flex-shrink-0">
+          <div class="relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
+              <span>Productos</span>
+              <Icon name="chevron-down" class="w-3.5 h-3.5" />
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {PRODUCTOS.map((item) => (
+                <a href={withCountry(country, item.href)} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                  <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
+                    <div class="text-xs leading-relaxed text-[#5c606b]">{item.subtitle}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <a href={`/${country}/precios`} class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Precios</a>
+
+          <div class="relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
+              <span>Desarrolladores</span>
+              <Icon name="chevron-down" class="w-3.5 h-3.5" />
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {DESARROLLADORES.map((item) => (
+                <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                  <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
+                    <div class="text-xs leading-relaxed text-[#5c606b]">{item.subtitle}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
+              <span>Empresa y Recursos</span>
+              <Icon name="chevron-down" class="w-3.5 h-3.5" />
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {EMPRESA_Y_RECURSOS.map((item) => (
+                <a href={withCountry(country, item.href)} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                  <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
+                    <div class="text-xs leading-relaxed text-[#5c606b]">{item.subtitle}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1 px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link>
+              <span>Soporte</span>
+              <Icon name="chevron-down" class="w-3.5 h-3.5" />
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {SOPORTE.map((item) => (
+                <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-start gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                  <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <div class="font-semibold text-sm mb-0.5 text-[#1a1d29]">{item.title}</div>
+                    <div class="text-xs leading-relaxed text-[#5c606b]">{item.subtitle}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <a href={`/${country}/contacto`} class={`px-3.5 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-header-link>Contacto</a>
+        </div>
+
+        <div class="flex flex-1 items-center justify-end gap-2 sm:gap-3 flex-shrink-0">
+          <div class="hidden xl:block relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1.5 px-3 py-2 transition-all duration-300 rounded-lg font-medium text-sm whitespace-nowrap ${linkClass}`} data-dropdown-trigger data-header-link aria-label={`País: ${COUNTRY_LABELS[country as keyof typeof COUNTRY_LABELS]}. Cambiar de país`}>
+              <Flag country={country} class="w-4 h-4" />
+              {/* El botón cerrado muestra solo el código; el nombre completo del
+                  país aparece al desplegarlo. */}
+              <span>{country.toUpperCase()}</span>
+              <Icon name="chevron-down" class="w-3.5 h-3.5" />
+            </button>
+            <div class="absolute top-full right-0 mt-2 w-52 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {COUNTRY_CODES.map((code) => (
+                <a
+                  href={swapCountry(currentPath, code)}
+                  hreflang={COUNTRY_HREFLANG[code]}
+                  aria-current={code === country ? 'true' : undefined}
+                  class:list={[
+                    'flex items-center justify-between gap-3 p-3 rounded-xl transition-all text-sm hover:bg-[#f6f7f9]',
+                    code === country ? 'font-semibold text-[#1a1d29]' : 'text-[#5c606b]',
+                  ]}
+                >
+                  <span class="flex items-center gap-2.5">
+                    <Flag country={code} class="w-[18px] h-[18px]" />
+                    {COUNTRY_LABELS[code]}
+                  </span>
+                  {code === country && <Icon name="check" class="w-4 h-4 text-[#0047ba]" />}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="relative" data-dropdown data-hover-dropdown>
+            <button class={`flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-sm transition-all hover:scale-105 ${ingresaBtnClass}`} data-dropdown-trigger data-header-cta>
+              Ingresa
+              <Icon name="chevron-down" class="w-3.5 h-3.5 transition-transform" />
+            </button>
+            <div class="absolute top-full right-0 mt-2 w-64 rounded-2xl bg-white shadow-2xl shadow-black/15 p-2 hidden" style="border: 1px solid rgba(0, 0, 0, 0.08);" data-dropdown-panel>
+              {INGRESA.map((item) => (
+                <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="flex items-center gap-3 p-3.5 rounded-xl transition-all group hover:bg-[#f6f7f9]">
+                  <Icon name={item.icon} class="w-5 h-5 text-[#0047ba] flex-shrink-0" />
+                  <div class="font-semibold text-sm text-[#1a1d29]">{item.title}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <button class={`xl:hidden p-2 transition-all duration-300 rounded-lg ${hamburgerClass}`} data-header-burger data-mobile-menu-trigger aria-label="Abrir menú">
+            <Icon name="menu" class="w-6 h-6" data-mobile-menu-icon-open />
+            <Icon name="x" class="w-6 h-6 hidden" data-mobile-menu-icon-close />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="xl:hidden fixed inset-0 z-40 mt-20 hidden" data-mobile-menu>
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-mobile-menu-backdrop></div>
+    <div class="relative max-w-sm mx-auto mt-2 rounded-2xl backdrop-blur-[30px] shadow-2xl shadow-black/15 bg-white/98 max-h-[80vh] overflow-y-auto" style="border: 1px solid rgba(0, 0, 0, 0.08); margin-left: 1.5rem; margin-right: 1.5rem;">
+      <div class="p-4 space-y-1">
+        {MOBILE_MENU_ENTRIES.map((entry) =>
+          entry.type === 'link' ? (
+            <a href={withCountry(country, entry.href)} class="block px-3 py-3 rounded-lg font-semibold text-sm text-[#1a1d29] hover:bg-[#f6f7f9]">{entry.label}</a>
+          ) : (
+            <div class="border-b border-[#eef0f3] last:border-0 pb-1" data-mobile-submenu>
+              <button class="w-full flex items-center justify-between px-3 py-3 rounded-lg font-semibold text-sm text-[#1a1d29] hover:bg-[#f6f7f9]" data-mobile-submenu-trigger>
+                {entry.label}
+                <Icon name="chevron-down" class="w-4 h-4 transition-transform" />
+              </button>
+              <div class="hidden pl-2 pb-2 space-y-0.5" data-mobile-submenu-panel>
+                {entry.items.map((item) => (
+                  <a href={withCountry(country, item.href)} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined} class="block px-3 py-2 rounded-lg text-sm text-[#5c606b] hover:bg-[#f6f7f9]">
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        )}
+        <div class="border-t border-[#eef0f3] pt-3">
+          <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#9aa0ac]">País</p>
+          <div class="flex gap-2 px-1">
+            {COUNTRY_CODES.map((code) => (
+              <a
+                href={swapCountry(currentPath, code)}
+                hreflang={COUNTRY_HREFLANG[code]}
+                aria-current={code === country ? 'true' : undefined}
+                class:list={[
+                  'flex-1 min-w-0 text-center px-3 py-2.5 rounded-xl text-sm transition-colors',
+                  code === country
+                    ? 'bg-[#eef2fb] text-[#0047ba] font-semibold'
+                    : 'text-[#5c606b] hover:bg-[#f6f7f9]',
+                ]}
+              >
+                <span class="inline-flex items-center justify-center gap-2">
+                  <Flag country={code} class="w-4 h-4" />
+                  {COUNTRY_LABELS[code]}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+        <div class="pt-3 space-y-2">
+          <a href="https://app.qpaypro.com" target="_blank" rel="noreferrer" class="block w-full text-center px-5 py-3 rounded-xl font-semibold text-sm bg-[#0047ba] text-white hover:bg-[#0f206c] transition-colors">Ingresa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script define:vars={{ THEME_VARIANTS, startsOnDarkBg: onDark }}>
+  // Restores the original site's adaptive navbar: on every scroll it samples
+  // the section sitting behind the bar and switches to dark-on-light or
+  // light-on-dark so the logo and the links stay readable.
+  (function setupAdaptiveHeader() {
+    const nav = document.querySelector('[data-header]');
+    const pill = document.querySelector('[data-header-pill]');
+    const logo = document.querySelector('[data-header-logo]');
+    const links = Array.from(document.querySelectorAll('[data-header-link]'));
+    const cta = document.querySelector('[data-header-cta]');
+    const burger = document.querySelector('[data-header-burger]');
+    if (!nav || !pill) return;
+
+    const LIGHT = THEME_VARIANTS.onLightBg;
+    const DARK = THEME_VARIANTS.onDarkBg;
+    const cls = (s) => s.split(' ').filter(Boolean);
+
+    function swap(el, from, to) {
+      if (!el) return;
+      el.classList.remove(...cls(from));
+      el.classList.add(...cls(to));
+    }
+
+    let appliedLight = !startsOnDarkBg;
+    let appliedScrolled = false;
+
+    function apply(isLight, scrolled) {
+      if (isLight === appliedLight && scrolled === appliedScrolled) return;
+      const to = isLight ? LIGHT : DARK;
+      const from = isLight ? DARK : LIGHT;
+
+      nav.classList.toggle('top-2', scrolled);
+      nav.classList.toggle('top-4', !scrolled);
+
+      // The pill has two axes (theme x scrolled), so clear all four sets first.
+      pill.classList.remove(...cls(LIGHT.pill), ...cls(LIGHT.pillScrolled), ...cls(DARK.pill), ...cls(DARK.pillScrolled));
+      pill.classList.add(...cls(scrolled ? to.pillScrolled : to.pill));
+      pill.style.border = to.border;
+
+      links.forEach((el) => swap(el, from.link, to.link));
+      swap(cta, from.cta, to.cta);
+      swap(burger, from.burger, to.burger);
+      if (logo) {
+        // '' for the light case, so only remove/add when there is something to.
+        if (from.logo) logo.classList.remove(...cls(from.logo));
+        if (to.logo) logo.classList.add(...cls(to.logo));
+      }
+
+      appliedLight = isLight;
+      appliedScrolled = scrolled;
+    }
+
+    const MEDIA = ['IMG', 'VIDEO', 'PICTURE', 'CANVAS', 'SVG'];
+
+    // Effective background behind the bar, or null when it can't be known.
+    // Transparent wrappers are see-through, so walk up to the first painted
+    // ancestor. But if what's actually on top is artwork (a photo, a video, a
+    // gradient) its luminance isn't readable from CSS, and guessing there is
+    // how you end up with dark text over a dark image — so report null and let
+    // the caller keep the theme the page was authored with.
+    function backgroundBehind(topmost) {
+      if (!topmost) return null;
+      if (MEDIA.includes(topmost.tagName)) return null;
+      if (getComputedStyle(topmost).backgroundImage !== 'none') return null;
+
+      let el = topmost;
+      while (el && el !== document.documentElement) {
+        const parts = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+        if (parts && parts.length >= 3) {
+          const alpha = parts.length > 3 ? Number(parts[3]) : 1;
+          if (alpha > 0.5) return parts.slice(0, 3).map(Number);
+        }
+        el = el.parentElement;
+      }
+      return null;
+    }
+
+    // Several probes across the width instead of just the centre: a single
+    // sample lands in whatever happens to be at the middle, which over a row
+    // of image cards can be one narrow gap and misreads the whole band.
+    const PROBES = [0.15, 0.3, 0.5, 0.7, 0.85];
+
+    function measure() {
+      const scrolled = window.scrollY > 50;
+      let light = 0;
+      let dark = 0;
+
+      for (const ratio of PROBES) {
+        const stack = document.elementsFromPoint(window.innerWidth * ratio, 90);
+        const rgb = backgroundBehind(stack.find((el) => !nav.contains(el)));
+        if (!rgb) continue; // artwork: unknown, doesn't vote
+        if ((0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255 > 0.7) light++;
+        else dark++;
+      }
+
+      // No probe could read a flat colour (the bar is over artwork), so keep
+      // the theme the page declared instead of guessing.
+      const isLight = light === 0 && dark === 0 ? !startsOnDarkBg : light > dark;
+
+      apply(isLight, scrolled);
+    }
+
+    let queued = false;
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        measure();
+      });
+    }
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  })();
+</script>
+
+<script>
+  function setupDropdowns(root: ParentNode) {
+    const dropdowns = root.querySelectorAll<HTMLElement>('[data-dropdown]');
+
+    function closeAll(except?: HTMLElement) {
+      dropdowns.forEach((dd) => {
+        if (dd === except) return;
+        dd.querySelector<HTMLElement>('[data-dropdown-panel]')?.classList.add('hidden');
+      });
+    }
+
+    dropdowns.forEach((dd) => {
+      const trigger = dd.querySelector<HTMLElement>('[data-dropdown-trigger]');
+      const panel = dd.querySelector<HTMLElement>('[data-dropdown-panel]');
+      if (!trigger || !panel) return;
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !panel.classList.contains('hidden');
+        closeAll(dd);
+        panel.classList.toggle('hidden', isOpen);
+      });
+
+      if (dd.hasAttribute('data-hover-dropdown')) {
+        let closeTimer: ReturnType<typeof setTimeout>;
+        dd.addEventListener('mouseenter', () => {
+          clearTimeout(closeTimer);
+          closeAll(dd);
+          panel.classList.remove('hidden');
+        });
+        dd.addEventListener('mouseleave', () => {
+          closeTimer = setTimeout(() => panel.classList.add('hidden'), 200);
+        });
+      }
+    });
+
+    document.addEventListener('click', () => closeAll());
+  }
+
+  function setupMobileMenu(root: ParentNode) {
+    const trigger = root.querySelector<HTMLElement>('[data-mobile-menu-trigger]');
+    const menu = root.querySelector<HTMLElement>('[data-mobile-menu]');
+    const backdrop = root.querySelector<HTMLElement>('[data-mobile-menu-backdrop]');
+    const iconOpen = root.querySelector<HTMLElement>('[data-mobile-menu-icon-open]');
+    const iconClose = root.querySelector<HTMLElement>('[data-mobile-menu-icon-close]');
+    if (!trigger || !menu) return;
+
+    function setOpen(open: boolean) {
+      menu.classList.toggle('hidden', !open);
+      iconOpen?.classList.toggle('hidden', open);
+      iconClose?.classList.toggle('hidden', !open);
+    }
+
+    trigger.addEventListener('click', () => {
+      setOpen(menu.classList.contains('hidden'));
+    });
+    backdrop?.addEventListener('click', () => setOpen(false));
+
+    root.querySelectorAll<HTMLElement>('[data-mobile-submenu]').forEach((group) => {
+      const subTrigger = group.querySelector<HTMLElement>('[data-mobile-submenu-trigger]');
+      const subPanel = group.querySelector<HTMLElement>('[data-mobile-submenu-panel]');
+      const chevron = subTrigger?.querySelector('svg');
+      subTrigger?.addEventListener('click', () => {
+        const isOpen = !subPanel?.classList.contains('hidden');
+        subPanel?.classList.toggle('hidden', isOpen);
+        chevron?.classList.toggle('rotate-180', !isOpen);
+      });
+    });
+  }
+
+  const header = document.querySelector('[data-header]');
+  if (header) {
+    setupDropdowns(header);
+    setupMobileMenu(header);
+  }
+</script>

@@ -1,0 +1,119 @@
+---
+import MainLayout from '../../../../layouts/MainLayout.astro';
+import Icon from '../../../../components/Icon.astro';
+import { COUNTRY_CODES } from '../../../../lib/country';
+import {
+  articulosDeCategoria,
+  categoriasDe,
+  fechaLarga,
+  nombreCategoria,
+  type Articulo,
+  type Categoria,
+} from '../../../../lib/blog';
+
+export function getStaticPaths() {
+  // Solo se generan las categorías que tienen artículos en ese país.
+  return COUNTRY_CODES.flatMap((country) =>
+    categoriasDe(country).map((cat) => ({
+      params: { country, cat: cat.slug },
+      props: { cat, articulos: articulosDeCategoria(country, cat.slug) },
+    }))
+  );
+}
+
+interface Props {
+  cat: Categoria;
+  articulos: Articulo[];
+}
+
+const { cat, articulos } = Astro.props;
+const country = Astro.params.country!;
+const otras = categoriasDe(country).filter((c) => c.slug !== cat.slug);
+---
+
+<MainLayout
+  title={`${cat.name} | Blog de Qpaypro`}
+  description={cat.description}
+  headerTheme="onLight"
+>
+  <section class="relative w-full bg-white pt-36 pb-14 lg:pt-44 lg:pb-16 overflow-hidden border-b border-black/[0.05]">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8 text-center" data-reveal>
+      <a
+        href={`/${country}/blog`}
+        class="inline-flex items-center gap-1.5 text-[#6b7280] hover:text-[#0047ba] text-sm font-medium mb-7 transition-colors"
+      >
+        <Icon name="arrow-left" class="w-4 h-4" />
+        Todo el blog
+      </a>
+      <h1 class="text-[#0f0f12] text-4xl md:text-5xl font-semibold tracking-[-0.035em] leading-[1.03] mb-5">
+        {cat.name}
+      </h1>
+      <p class="text-[#5c606b] text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto">
+        {cat.description}
+      </p>
+      <p class="text-[#9094a0] text-sm mt-6">
+        {articulos.length} {articulos.length === 1 ? 'artículo' : 'artículos'}
+      </p>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-16 lg:py-24">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" data-reveal-group>
+        {articulos.map((article) => (
+          <a
+            href={`/${country}/blog/${article.slug}`}
+            data-reveal
+            class="group flex flex-col rounded-[24px] overflow-hidden bg-white border border-black/[0.07] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-44px_rgba(15,32,108,0.4)]"
+          >
+            <div class="aspect-[16/10] overflow-hidden bg-[#eef1f6]">
+              <img
+                src={article.cover.src}
+                alt={article.cover.alt}
+                loading="lazy"
+                width={article.cover.w ?? undefined}
+                height={article.cover.h ?? undefined}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+              />
+            </div>
+            <div class="flex flex-col flex-1 p-6">
+              <h3 class="text-[#1a1d29] text-lg font-semibold leading-snug tracking-[-0.01em] mb-3 group-hover:text-[#0047ba] transition-colors duration-300">
+                {article.title}
+              </h3>
+              <p class="text-[#5c606b] text-sm leading-relaxed font-light mb-5 line-clamp-2 flex-1">
+                {article.excerpt}
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-[#9094a0] text-xs">
+                  {fechaLarga(article.date)} · {article.readingMinutes} min
+                </span>
+                <Icon
+                  name="arrow-up-right"
+                  class="w-4 h-4 text-[#0047ba] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-16 lg:py-20 border-t border-black/[0.05]">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-8">
+      <p class="text-[#9aa0ac] text-[11px] font-semibold uppercase tracking-[0.16em] mb-6">
+        Otras categorías
+      </p>
+      <div class="flex flex-wrap gap-2.5">
+        {otras.map((c) => (
+          <a
+            href={`/${country}/blog/categoria/${c.slug}`}
+            class="px-4 py-2 rounded-full text-[13px] font-semibold bg-[#f5f6f8] text-[#5c606b] ring-1 ring-black/[0.06] hover:text-[#0047ba] hover:ring-[#0047ba]/25 transition-all duration-300"
+          >
+            {nombreCategoria(c.slug)}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,233 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import GlowSectionDecor from '../../../components/GlowSectionDecor.astro';
+import BlogBlocks from '../../../components/BlogBlocks.astro';
+import { COUNTRY_CODES } from '../../../lib/country';
+import {
+  FIRMA,
+  articulosDe,
+  fechaLarga,
+  indiceDe,
+  nombreCategoria,
+  relacionados,
+  type Articulo,
+} from '../../../lib/blog';
+
+export function getStaticPaths() {
+  // Un artículo solo genera página en los países que declara en `countries`.
+  return COUNTRY_CODES.flatMap((country) =>
+    articulosDe(country).map((article) => ({
+      params: { country, slug: article.slug },
+      props: { article, related: relacionados(country, article.slug) },
+    }))
+  );
+}
+
+interface Props {
+  article: Articulo;
+  related: Articulo[];
+}
+
+const { article, related } = Astro.props;
+const country = Astro.params.country!;
+
+// El índice lateral solo aparece cuando hay suficientes secciones para que sirva de algo.
+const indice = indiceDe(article.body);
+const conIndice = indice.length >= 3;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: article.title,
+  description: article.excerpt,
+  datePublished: article.date,
+  image: article.cover.src,
+  author: { '@type': 'Organization', name: FIRMA },
+  publisher: { '@type': 'Organization', name: 'Qpaypro' },
+};
+---
+
+<MainLayout
+  title={`${article.title} | Blog de Qpaypro`}
+  description={article.excerpt}
+  headerTheme="onLight"
+  ogType="article"
+>
+  <header class="w-full bg-white pt-32 lg:pt-40">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <a
+        href={`/${country}/blog`}
+        class="inline-flex items-center gap-1.5 text-[#6b7280] hover:text-[#0047ba] text-sm font-medium mb-7 transition-colors"
+      >
+        <Icon name="arrow-left" class="w-4 h-4" />
+        Volver al blog
+      </a>
+      <div class="flex flex-wrap gap-2 mb-5">
+        {article.cats.map((cat) => (
+          <a
+            href={`/${country}/blog/categoria/${cat}`}
+            class="text-[10.5px] font-semibold uppercase tracking-wider text-[#0047ba] bg-[#0047ba]/[0.08] hover:bg-[#0047ba]/[0.14] rounded-full px-3 py-1 transition-colors"
+          >
+            {nombreCategoria(cat)}
+          </a>
+        ))}
+      </div>
+      <h1 class="text-[#0f0f12] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.035em] leading-[1.08] mb-6">
+        {article.title}
+      </h1>
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-[#8a8f9a] text-sm mb-9">
+        <span>{FIRMA}</span>
+        <span class="w-1 h-1 rounded-full bg-[#c8cbd2]"></span>
+        <time datetime={article.date}>{fechaLarga(article.date)}</time>
+        <span class="w-1 h-1 rounded-full bg-[#c8cbd2]"></span>
+        <span>{article.readingMinutes} min de lectura</span>
+      </div>
+    </div>
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      <div class="rounded-[24px] overflow-hidden bg-[#eef1f6] aspect-[16/9]">
+        <img
+          src={article.cover.src}
+          alt={article.cover.alt}
+          width={article.cover.w ?? undefined}
+          height={article.cover.h ?? undefined}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-[1240px] mx-auto px-6 lg:px-8 py-16 lg:py-20">
+    <div class="xl:flex xl:gap-20">
+      {conIndice && (
+        <aside class="hidden xl:block w-56 flex-shrink-0">
+          {/* Va fuera de la columna de lectura, así que fijarlo no puede tapar el texto. */}
+          <nav class="sticky top-28" aria-label="Contenido del artículo">
+            <p class="text-[#9aa0ac] text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">
+              En este artículo
+            </p>
+            <ul class="space-y-2.5 border-l border-[#e8eaed]">
+              {indice.map((h) => (
+                <li>
+                  <a
+                    href={`#${h.id}`}
+                    data-toc-link={h.id}
+                    class="block -ml-px border-l-2 border-transparent pl-4 text-[#5c606b] text-[13px] leading-snug hover:text-[#0047ba] transition-colors"
+                  >
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+
+      <article class="min-w-0 max-w-2xl mx-auto xl:mx-0">
+        <BlogBlocks body={article.body} country={country} />
+      </article>
+    </div>
+  </div>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-24 lg:py-32">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[800px] mx-auto px-6 lg:px-8 text-center">
+      <div class="flex items-center justify-center gap-2.5 mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">
+          Empieza con Qpaypro
+        </p>
+      </div>
+      <h2 class="text-white text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05] mb-6">
+        Pon a cobrar tu negocio.
+      </h2>
+      <p class="text-white/55 text-lg lg:text-xl leading-relaxed mb-10 max-w-xl mx-auto font-light">
+        Cobra con tarjeta, envía links de pago y lleva tu punto de venta desde una sola plataforma.
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a
+          href={`/${country}/precios`}
+          class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2"
+        >
+          Ver planes y precios
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <a
+          href={`/${country}/contacto#ventas`}
+          class="px-8 py-4 bg-white/[0.06] backdrop-blur-md border border-white/25 text-white rounded-full font-semibold text-base hover:bg-white/[0.12] hover:border-white/40 transition-all duration-300"
+        >
+          Hablar con ventas
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="w-full bg-[#f5f6f8] py-16 lg:py-24 border-t border-black/[0.05]">
+      <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+        <h2 class="text-[#1a1d29] text-2xl font-semibold tracking-tight mb-8">Sigue leyendo</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {related.map((r) => (
+            <a
+              href={`/${country}/blog/${r.slug}`}
+              class="group flex flex-col rounded-2xl overflow-hidden bg-white border border-black/[0.06] hover:-translate-y-1 hover:shadow-[0_30px_60px_-40px_rgba(15,32,108,0.35)] transition-all duration-300"
+            >
+              <div class="aspect-[16/10] overflow-hidden bg-[#eef1f6]">
+                <img
+                  src={r.cover.src}
+                  alt=""
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="flex flex-col flex-1 p-5">
+                <p class="text-[10.5px] font-semibold uppercase tracking-wider text-[#0047ba] mb-2">
+                  {nombreCategoria(r.cats[0])}
+                </p>
+                <h3 class="text-[#1a1d29] text-[15px] font-semibold leading-snug group-hover:text-[#0047ba] transition-colors">
+                  {r.title}
+                </h3>
+                <p class="text-[#9094a0] text-xs mt-3">{r.readingMinutes} min de lectura</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <script>
+    // Marca en el índice la sección que se está leyendo: sin ese resalte el índice no dice
+    // dónde estás, que es la mitad de su utilidad en un artículo largo.
+    const enlaces = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+    if (enlaces.length) {
+      const marcar = (id: string) => {
+        for (const a of enlaces) {
+          const on = a.dataset.tocLink === id;
+          a.classList.toggle('text-[#0047ba]', on);
+          a.classList.toggle('border-[#0047ba]', on);
+          a.classList.toggle('font-medium', on);
+          a.classList.toggle('text-[#5c606b]', !on);
+          a.classList.toggle('border-transparent', !on);
+        }
+      };
+      const visibles = new Set<string>();
+      const obs = new IntersectionObserver(
+        (entradas) => {
+          for (const e of entradas) {
+            if (e.isIntersecting) visibles.add(e.target.id);
+            else visibles.delete(e.target.id);
+          }
+          const primero = enlaces.map((a) => a.dataset.tocLink!).find((id) => visibles.has(id));
+          if (primero) marcar(primero);
+        },
+        { rootMargin: '-96px 0px -70% 0px' }
+      );
+      for (const a of enlaces) {
+        const seccion = document.getElementById(a.dataset.tocLink!);
+        if (seccion) obs.observe(seccion);
+      }
+    }
+  </script>
+</MainLayout>

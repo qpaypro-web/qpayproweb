@@ -1,0 +1,167 @@
+---
+// Capa de consentimiento con las tres categorías que pide la especificación:
+// necessary (siempre activa), analytics y marketing.
+//
+// Actualiza Consent Mode v2, que es lo que GTM consulta para decidir si sus
+// etiquetas —incluido el Meta Pixel— pueden dispararse. Guarda la elección y
+// se puede volver a abrir desde el enlace del footer.
+import { withCountry } from '../lib/country';
+
+interface Props {
+  country: string;
+}
+
+const { country } = Astro.props;
+---
+
+<div
+  data-consent-banner
+  class="hidden fixed inset-x-0 bottom-0 z-[90] p-4 sm:p-6"
+  role="dialog"
+  aria-modal="false"
+  aria-label="Preferencias de cookies"
+>
+  <div class="max-w-[1100px] mx-auto rounded-2xl bg-white shadow-[0_30px_80px_-30px_rgba(15,32,108,0.45)] border border-black/[0.08] p-6 lg:p-7">
+    <div class="lg:flex lg:items-start lg:gap-8">
+      <div class="flex-1">
+        <h2 class="text-[#0f206c] text-lg font-bold mb-2">Cookies y privacidad</h2>
+        <p class="text-[#5c606b] text-sm leading-relaxed">
+          Usamos cookies necesarias para que el sitio funcione. Con tu permiso también usamos cookies de
+          analítica, para entender cómo se usa el sitio, y de marketing, para medir nuestras campañas.
+          Puedes cambiar tu elección cuando quieras.
+          <a href={withCountry(country, "/politicas-de-privacidad")} class="text-[#0047ba] underline decoration-[#0047ba]/30 hover:decoration-[#0047ba]">Ver políticas de privacidad</a>.
+        </p>
+
+        <div data-consent-detail class="hidden mt-5 space-y-3">
+          <label class="flex items-start gap-3 opacity-70">
+            <input type="checkbox" checked disabled class="mt-1 h-4 w-4 rounded accent-[#0047ba]" />
+            <span>
+              <span class="block text-[#1a1d29] text-sm font-semibold">Necesarias</span>
+              <span class="block text-[#5c606b] text-xs leading-relaxed">Imprescindibles para la seguridad y el funcionamiento del sitio. Siempre activas.</span>
+            </span>
+          </label>
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input type="checkbox" data-consent-analytics class="mt-1 h-4 w-4 rounded accent-[#0047ba]" />
+            <span>
+              <span class="block text-[#1a1d29] text-sm font-semibold">Analítica</span>
+              <span class="block text-[#5c606b] text-xs leading-relaxed">Nos ayudan a saber qué páginas se visitan para mejorar el sitio.</span>
+            </span>
+          </label>
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input type="checkbox" data-consent-marketing class="mt-1 h-4 w-4 rounded accent-[#0047ba]" />
+            <span>
+              <span class="block text-[#1a1d29] text-sm font-semibold">Marketing</span>
+              <span class="block text-[#5c606b] text-xs leading-relaxed">Permiten medir la efectividad de nuestra publicidad.</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2.5 mt-5 lg:mt-0 lg:w-[210px] flex-shrink-0">
+        <button type="button" data-consent-accept class="px-6 py-3 rounded-full bg-[#0047ba] text-white font-semibold text-sm hover:bg-[#0f206c] transition-colors">
+          Aceptar todas
+        </button>
+        <button type="button" data-consent-reject class="px-6 py-3 rounded-full bg-[#f0f2f6] text-[#1a1d29] font-semibold text-sm hover:bg-[#e4e7ee] transition-colors">
+          Solo necesarias
+        </button>
+        <button type="button" data-consent-customize class="px-6 py-2 text-[#0047ba] font-semibold text-sm hover:underline">
+          Personalizar
+        </button>
+        <button type="button" data-consent-save class="hidden px-6 py-3 rounded-full bg-[#0047ba] text-white font-semibold text-sm hover:bg-[#0f206c] transition-colors">
+          Guardar preferencias
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'qp-consent';
+    var banner = document.querySelector('[data-consent-banner]');
+    if (!banner) return;
+    var detail = banner.querySelector('[data-consent-detail]');
+    var cbAnalytics = banner.querySelector('[data-consent-analytics]');
+    var cbMarketing = banner.querySelector('[data-consent-marketing]');
+    var btnSave = banner.querySelector('[data-consent-save]');
+    var btnCustomize = banner.querySelector('[data-consent-customize]');
+
+    function read() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) || 'null');
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function apply(choices) {
+      var analytics = choices.analytics ? 'granted' : 'denied';
+      var marketing = choices.marketing ? 'granted' : 'denied';
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          ad_storage: marketing,
+          ad_user_data: marketing,
+          ad_personalization: marketing,
+          analytics_storage: analytics,
+        });
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'consent_updated', consent_analytics: !!choices.analytics, consent_marketing: !!choices.marketing });
+    }
+
+    function save(choices) {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ version: 1, date: new Date().toISOString(), choices: choices }));
+      } catch (e) {
+        /* sin localStorage la elección solo vale para esta carga */
+      }
+      apply(choices);
+      hide();
+    }
+
+    function show() {
+      banner.classList.remove('hidden');
+    }
+    function hide() {
+      banner.classList.add('hidden');
+    }
+
+    banner.querySelector('[data-consent-accept]').addEventListener('click', function () {
+      save({ analytics: true, marketing: true });
+    });
+    banner.querySelector('[data-consent-reject]').addEventListener('click', function () {
+      save({ analytics: false, marketing: false });
+    });
+    btnCustomize.addEventListener('click', function () {
+      detail.classList.remove('hidden');
+      btnCustomize.classList.add('hidden');
+      btnSave.classList.remove('hidden');
+    });
+    btnSave.addEventListener('click', function () {
+      save({ analytics: cbAnalytics.checked, marketing: cbMarketing.checked });
+    });
+
+    // Permite reabrirlo para cambiar la elección (enlace del footer).
+    window.qpOpenConsent = function () {
+      var saved = read();
+      if (saved && saved.choices) {
+        cbAnalytics.checked = !!saved.choices.analytics;
+        cbMarketing.checked = !!saved.choices.marketing;
+        detail.classList.remove('hidden');
+        btnCustomize.classList.add('hidden');
+        btnSave.classList.remove('hidden');
+      }
+      show();
+    };
+    document.querySelectorAll('[data-open-consent]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.qpOpenConsent();
+      });
+    });
+
+    // Solo se muestra si todavía no ha elegido. Analytics.astro ya restauró
+    // la elección previa antes de que cargara GTM.
+    if (!read()) show();
+  })();
+</script>

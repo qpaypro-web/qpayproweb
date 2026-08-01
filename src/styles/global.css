@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --font-brand: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-manrope: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-brand);
+}
+
+@media (max-width: 640px) {
+  h1 {
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}

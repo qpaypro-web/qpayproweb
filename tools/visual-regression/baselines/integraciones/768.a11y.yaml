@@ -1,0 +1,122 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+  - button:
+    - img
+- paragraph: Integraciones
+- heading "Conecta Qpaypro con tu tienda favorita." [level=1]
+- paragraph: Cobra en tu e-commerce con la plataforma que ya usas. Instala el plug-in oficial y empieza a recibir pagos con tarjeta en minutos.
+- link "Empieza ahora":
+  - /url: precios.html
+  - text: Empieza ahora
+  - img
+- link "Ver documentación":
+  - /url: https://developers.qpaypro.com/
+- heading "Plataformas compatibles" [level=2]
+- link "Shopify Shopify Desde Premium":
+  - /url: https://apps.shopify.com/qpaypro-cli-version?locale=es
+  - img "Shopify"
+  - heading "Shopify" [level=3]
+  - text: Desde Premium
+- link "WooCommerce WooCommerce Desde Premium":
+  - /url: https://wordpress.org/plugins/qpaypro-payment-gateway-for-woocommerce/
+  - img "WooCommerce"
+  - heading "WooCommerce" [level=3]
+  - text: Desde Premium
+- img "VTEX"
+- heading "VTEX" [level=3]
+- text: Elite y Enterprise
+- link "PrestaShop PrestaShop Desde Premium":
+  - /url: https://qpaypro.zohodesk.com/portal/es/kb/articles/prestashop-1-7
+  - img "PrestaShop"
+  - heading "PrestaShop" [level=3]
+  - text: Desde Premium
+- link "OpenCart OpenCart Desde Premium":
+  - /url: https://qpaypro.zohodesk.com/portal/es/kb/articles/open-cart-3-x
+  - img "OpenCart"
+  - heading "OpenCart" [level=3]
+  - text: Desde Premium
+- paragraph: Cómo funciona
+- heading "Conéctalo en tres pasos." [level=2]
+- text: "01"
+- img
+- heading "Instala el plug-in" [level=3]
+- paragraph: Descarga el conector oficial de Qpaypro desde el marketplace de tu plataforma.
+- text: "02"
+- img
+- heading "Configura tus llaves" [level=3]
+- paragraph: Pega tus credenciales de Qpaypro y define tu moneda y método de cobro.
+- text: "03"
+- img
+- heading "Empieza a cobrar" [level=3]
+- paragraph: Tus clientes pagan con tarjeta, cuotas o QR directamente en tu checkout.
+- img
+- heading "¿Tu plataforma no está en la lista?" [level=3]
+- paragraph: Con la API de Qpaypro puedes integrar los pagos a cualquier sistema a la medida. Documentación clara, entorno de pruebas y soporte para desarrolladores.
+- paragraph: Disponible desde el plan Premium
+- text: "// Crear un cobro con la API POST /v1/payments { \"amount\": 200.00, \"currency\": \"GTQ\", \"method\": \"card\" }"
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"

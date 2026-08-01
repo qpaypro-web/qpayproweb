@@ -1,0 +1,80 @@
+---
+import Logo from '../components/Logo.astro';
+import Icon from '../components/Icon.astro';
+import { COUNTRY_CODES, COUNTRY_LABELS } from '../lib/country';
+import '../styles/global.css';
+
+// Sin este archivo, Cloudflare Pages responde a cualquier ruta inexistente con
+// el index de la raíz y un 200: Google indexa infinitas URLs falsas y un
+// enlace roto de El Salvador termina depositando al cliente en el home de
+// Guatemala. Con un 404.html en el build, Pages responde 404 de verdad.
+//
+// La página no usa MainLayout a propósito: este mismo HTML se sirve en
+// cualquier ruta, así que un navbar con los enlaces de un país concreto
+// mandaría al país equivocado. En su lugar ofrece los dos y el script de abajo
+// destaca el que corresponde al prefijo de la URL que falló.
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página no encontrada | Qpaypro</title>
+    <meta name="robots" content="noindex, follow" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+    </style>
+  </head>
+  <body class="min-h-screen bg-white">
+    <main class="min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center">
+      <a href="/" class="mb-14 inline-flex">
+        <Logo variant="colored" class="h-7" />
+      </a>
+
+      <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Error 404</p>
+      <h1 class="text-[#1a1d29] text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.05] mb-6">
+        Esta página no existe.
+      </h1>
+      <p class="text-[#5c606b] text-lg leading-relaxed max-w-lg mb-12">
+        Puede que el enlace esté roto o que la página haya cambiado de dirección. Elige tu país y sigue desde ahí.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full max-w-md">
+        {COUNTRY_CODES.map((code) => (
+          <a
+            href={`/${code}`}
+            data-pais={code}
+            class="flex-1 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-semibold text-base transition-colors duration-300 ring-1 ring-[#e8eaed] text-[#1a1d29] hover:ring-[#d8dbe0]"
+          >
+            {COUNTRY_LABELS[code]}
+            <Icon name="arrow-right" class="w-4 h-4" />
+          </a>
+        ))}
+      </div>
+
+      <a href="/gt/contacto" data-contacto class="mt-10 text-[#0047ba] text-[15px] font-medium hover:underline">
+        ¿Buscabas algo en particular? Escríbenos ›
+      </a>
+    </main>
+
+    <script>
+      // La ruta que falló dice a qué país iba. Se destaca ese botón y el
+      // enlace de contacto apunta al mismo país, para no mandar a alguien de
+      // El Salvador a la página de Guatemala.
+      const prefijo = location.pathname.split('/')[1];
+      const codigos = ['gt', 'sv'];
+      if (codigos.includes(prefijo)) {
+        const boton = document.querySelector(`[data-pais="${prefijo}"]`);
+        if (boton) {
+          boton.classList.remove('ring-1', 'ring-[#e8eaed]', 'text-[#1a1d29]', 'hover:ring-[#d8dbe0]');
+          boton.classList.add('bg-[#0047ba]', 'text-white', 'hover:bg-[#0f206c]');
+          boton.parentElement?.prepend(boton);
+        }
+        const contacto = document.querySelector('[data-contacto]');
+        if (contacto) contacto.setAttribute('href', `/${prefijo}/contacto`);
+      }
+    </script>
+  </body>
+</html>

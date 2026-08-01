@@ -1,0 +1,180 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: /gt
+    - img "Qpaypro"
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+  - button "Abrir menú":
+    - img
+- heading "Soporte" [level=1]
+- paragraph: Obtén asistencia en cualquiera de nuestros canales
+- paragraph: Lunes a Domingo de 7:00 a 20:00 hrs
+- link "WhatsApp Ayuda más rápida":
+  - /url: https://api.whatsapp.com/send/?phone=50247856011
+  - img
+  - text: WhatsApp Ayuda más rápida
+- link "Ticket soporte@qpaypro.com":
+  - /url: mailto:soporte@qpaypro.com
+  - img
+  - text: Ticket soporte@qpaypro.com
+- link "Autoayuda soporte.qpaypro.com":
+  - /url: https://soporte.qpaypro.com
+  - img
+  - text: Autoayuda soporte.qpaypro.com
+- heading "Contactar Ventas" [level=2]
+- paragraph: Cuéntanos de tu negocio y un asesor te contactará.
+- link "Contactar a ventas":
+  - /url: "#ventas"
+  - text: Contactar a ventas
+  - img
+- paragraph: Contactar ventas
+- heading "Hablemos de tu negocio" [level=2]
+- paragraph: Cuéntanos de tu negocio y un asesor te contactará para ayudarte a vender más.
+- text: Nombre *
+- textbox "Nombre *":
+  - /placeholder: Tu nombre
+- text: Apellido *
+- textbox "Apellido *":
+  - /placeholder: Tu apellido
+- text: Empresa *
+- textbox "Empresa *":
+  - /placeholder: Nombre de tu empresa
+- text: Email *
+- textbox "Email *":
+  - /placeholder: tucorreo@ejemplo.com
+- text: Teléfono *
+- textbox "Teléfono *":
+  - /placeholder: +502 0000-0000
+- text: País *
+- combobox "País *":
+  - option "Selecciona una opción" [disabled]
+  - option "Guatemala" [selected]
+  - option "El Salvador"
+- text: ¿Qué producto o servicio vendes? *
+- textbox "¿Qué producto o servicio vendes? *":
+  - /placeholder: Describe brevemente tu producto o servicio
+- text: ¿Qué servicio te interesa? *
+- combobox "¿Qué servicio te interesa? *":
+  - option "Selecciona una opción" [disabled] [selected]
+  - option "Pagos con tarjeta"
+  - option "Tienda en línea"
+  - option "Punto de venta"
+  - option "Terminal POS"
+- text: ¿Cómo podemos ayudarte? (Opcional)
+- textbox "¿Cómo podemos ayudarte? (Opcional)":
+  - /placeholder: Cuéntanos más sobre lo que necesitas
+- button "Enviar mensaje":
+  - text: Enviar mensaje
+  - img
+- paragraph:
+  - text: Al enviar aceptas que Qpaypro trate tus datos para contactarte. Consulta nuestra
+  - link "política de privacidad":
+    - /url: /gt/politicas-de-privacidad
+  - text: .
+- status
+- paragraph: Estamos para ayudarte
+- heading "Nuestras oficinas" [level=2]
+- img
+- heading "Guatemala" [level=3]
+- text: Santa Catarina Pinula
+- img
+- text: Dirección Km 15.8 Carretera a El Salvador, Edificio Torre Castaño, Santa Catarina Pinula, Guatemala.
+- img
+- text: Teléfono +(502) 2355-6000
+- img
+- text: Horario Lunes a Viernes · 8:00 a 17:00 hrs
+- link "Escríbenos por WhatsApp":
+  - /url: https://api.whatsapp.com/send/?phone=50247856011
+  - img
+  - text: Escríbenos por WhatsApp
+- img
+- heading "El Salvador" [level=3]
+- text: San Salvador
+- img
+- text: Dirección Calle La Mascota, No. 533, Colonia San Benito, Oficinas Stofficenter, Distrito de San Salvador.
+- img
+- text: Teléfono +(503) 2208-2300
+- img
+- text: Horario Lunes a Viernes · 8:00 a 17:00 hrs (previa cita)
+- link "Escríbenos por WhatsApp":
+  - /url: https://api.whatsapp.com/send/?phone=50247856011
+  - img
+  - text: Escríbenos por WhatsApp
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "LinkedIn":
+    - /url: https://www.linkedin.com/company/qpaypro
+    - img
+  - link "YouTube":
+    - /url: https://www.youtube.com/@qpaypro
+    - img
+  - link "Instagram":
+    - /url: https://www.instagram.com/qpaypro
+    - img
+  - link "Facebook":
+    - /url: https://www.facebook.com/qpaypro/?locale=es_LA
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: /gt/pasarela-de-pagos
+    - listitem:
+      - link "Punto de Venta":
+        - /url: /gt/sistema-pos
+    - listitem:
+      - link "Terminal de Cobro POS":
+        - /url: /gt/terminal-pos
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: /gt/ecommerce
+    - listitem:
+      - link "Retail":
+        - /url: /gt/retail
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: /gt/blog
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: /gt/sobre-qpaypro
+    - listitem:
+      - link "Seguridad":
+        - /url: /gt/seguridad
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem:
+      - link "Guatemala +(502) 2355-6000":
+        - /url: tel:+50223556000
+    - listitem:
+      - link "El Salvador +(503) 2208-2300":
+        - /url: tel:+50322082300
+    - listitem:
+      - link "WhatsApp +(502) 4785-6011":
+        - /url: https://api.whatsapp.com/send/?phone=50247856011
+    - listitem:
+      - link "soporte@qpaypro.com":
+        - /url: mailto:soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: /gt/politicas-de-privacidad
+  - link "Términos del servicio":
+    - /url: /gt/terminos-condiciones
+  - link "Seguridad":
+    - /url: /gt/seguridad
+  - button "Preferencias de cookies"
+- dialog "Preferencias de cookies":
+  - heading "Cookies y privacidad" [level=2]
+  - paragraph:
+    - text: Usamos cookies necesarias para que el sitio funcione. Con tu permiso también usamos cookies de analítica, para entender cómo se usa el sitio, y de marketing, para medir nuestras campañas. Puedes cambiar tu elección cuando quieras.
+    - link "Ver políticas de privacidad":
+      - /url: /gt/politicas-de-privacidad
+    - text: .
+  - button "Aceptar todas"
+  - button "Solo necesarias"
+  - button "Personalizar"

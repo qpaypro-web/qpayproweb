@@ -1,0 +1,212 @@
+- navigation:
+  - link "Qpaypro":
+    - /url: index.html
+    - img "Qpaypro"
+  - button "Ingresa":
+    - text: Ingresa
+    - img
+  - button:
+    - img
+- heading "Convierte más visitas en ventas." [level=1]
+- paragraph: Pasarela de pagos, tienda en línea e integraciones para tu ecommerce.
+- link "Comenzar ahora":
+  - /url: precios.html
+  - text: Comenzar ahora
+  - img
+- link "Hablar con ventas":
+  - /url: contacto.html#ventas
+- paragraph: Certificada PCI-DSS · Aprobación rápida · Soporte local
+- paragraph: Hecho para tu giro
+- heading "Para toda tienda en línea" [level=2]
+- img "Moda"
+- text: Moda
+- img "Electrónica"
+- text: Electrónica
+- img "Cosmética"
+- text: Cosmética
+- img "Alimentos"
+- text: Alimentos
+- img "Suscripciones"
+- text: Suscripciones
+- img "Marketplace"
+- text: Marketplace
+- img "Moda"
+- text: Moda
+- img "Electrónica"
+- text: Electrónica
+- img "Cosmética"
+- text: Cosmética
+- img "Alimentos"
+- text: Alimentos
+- img "Suscripciones"
+- text: Suscripciones
+- img "Marketplace"
+- text: Marketplace
+- paragraph: Todo en uno, todo conectado
+- heading "Todo tu ecommerce en una sola plataforma" [level=2]
+- paragraph: "Cobros, catálogo y ventas conectados: vendas en tu web, en redes o en tu tienda física, todo queda sincronizado."
+- paragraph: Cobros en línea
+- heading "Acepta tarjeta directo en tu web" [level=3]
+- paragraph: Integra el checkout de Qpaypro en tu sitio y acepta Visa y Mastercard con validaciones prevención de fraude, en cualquier dispositivo.
+- list:
+  - listitem:
+    - img
+    - text: Visa y Mastercard, crédito y débito
+  - listitem:
+    - img
+    - text: Checkout optimizado
+  - listitem:
+    - img
+    - text: Pago sin contacto y 3D Secure
+- paragraph: Integraciones
+- heading "Conecta tu tienda sin programar" [level=3]
+- paragraph: Instala nuestros plugins listos para las plataformas de ecommerce más usadas y empieza a cobrar con tarjeta en minutos.
+- list:
+  - listitem:
+    - img
+    - text: WooCommerce, Shopify y Ecwid
+  - listitem:
+    - img
+    - text: VTEX y Prestashop
+  - listitem:
+    - img
+    - text: Sin escribir una línea de código
+- paragraph: Tienda en línea
+- heading "¿No tienes web? Crea tu Qpayshop" [level=3]
+- paragraph: Publica tu catálogo, conecta tu dominio y configura envíos. Cobra con tarjeta directo en tu tienda, con administración de pedidos incluida.
+- list:
+  - listitem:
+    - img
+    - text: Catálogo con productos y categorías
+  - listitem:
+    - img
+    - text: Conecta tu propio dominio
+  - listitem:
+    - img
+    - text: Administración de pedidos y envíos
+- paragraph: Desarrolladores
+- heading "Una API que tus devs van a amar" [level=3]
+- paragraph: Integra Qpaypro a tu sistema, app o tienda con APIs robustas y documentadas para distintos casos de uso.
+- list:
+  - listitem:
+    - img
+    - text: API de cobros
+  - listitem:
+    - img
+    - text: Checkout Page
+  - listitem:
+    - img
+    - text: API de suscripciones
+- paragraph: Todo conectado
+- heading "Todo, en una sola plataforma" [level=2]
+- paragraph: Un mismo inventario para tu tienda física y en línea. Cobros, links de pago, suscripciones e integraciones, todo conectado en un solo lugar.
+- img "Qpaypro"
+- text: Una sola plataforma
+- img
+- text: Tienda física
+- img
+- text: Tienda en línea
+- img
+- text: Links de pago
+- img
+- text: Suscripciones
+- img
+- text: Inventario sincronizado
+- img
+- text: Integraciones
+- paragraph: Todo conectado
+- heading "Vende también en tu tienda física" [level=2]
+- paragraph: Suma el Sistema POS y vende en físico con el mismo catálogo e inventario de tu tienda en línea. Todo tu negocio, sincronizado.
+- img
+- text: Cobra en el mostrador Terminal lista para aceptar tarjeta en tu local.
+- img
+- text: Inventario sincronizado El stock es el mismo en línea y en tienda.
+- img
+- text: Reportes unificados Tus ventas online y físicas, en un solo lugar.
+- button "Ver Sistema POS":
+  - text: Ver Sistema POS
+  - img
+- img "Sistema de punto de venta Qpaypro"
+- img "Testimonio de Ana Cecilia Guerra"
+- paragraph: Testimonios
+- img
+- blockquote: "“Cuando comencé mi negocio necesitaba una plataforma para gestionar mis pedidos en línea. Qpayshop me facilitó el trabajo: fácil de integrar, ver inventarios, monitorear pedidos y recibir pagos sin complicaciones.”"
+- text: Ana Cecilia Guerra ByAnaCeci
+- paragraph: Preguntas frecuentes
+- heading "Preguntas frecuentes" [level=2]
+- heading "¿Cómo conecto Qpaypro a mi tienda en línea?" [level=3]
+- paragraph: Instalas el plugin de Qpaypro para tu plataforma (Shopify, WooCommerce, VTEX, Prestashop o Ecwid) y empiezas a cobrar con tarjeta en minutos, sin programar.
+- heading "¿Cuál es la mejor pasarela de pagos para ecommerce en Guatemala y El Salvador?" [level=3]
+- paragraph: Qpaypro es una pasarela local certificada PCI-DSS que cobra en moneda local, con soporte directo y las integraciones de ecommerce más usadas. Acepta Visa y Mastercard, crédito y débito.
+- heading "¿Necesito una página web para vender con Qpaypro?" [level=3]
+- paragraph: No. Si no tienes web, creas tu tienda Qpayshop con catálogo y dominio propio; y si ya tienes una, conectas Qpaypro con un plugin.
+- text: 5,000+ Comercios activos 800,000+ Usuarios 24/7 Soporte local
+- heading "Haz crecer tu ecommerce" [level=2]
+- paragraph: Empieza a cobrar con tarjeta en tu web hoy mismo con Qpaypro.
+- link "Comenzar ahora":
+  - /url: precios.html
+  - text: Comenzar ahora
+  - img
+- link "Hablar con ventas":
+  - /url: contacto.html#ventas
+- contentinfo:
+  - img "Qpaypro"
+  - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
+  - link "X":
+    - /url: "#"
+    - img
+  - link "LinkedIn":
+    - /url: "#"
+    - img
+  - link "YouTube":
+    - /url: "#"
+    - img
+  - link "Instagram":
+    - /url: "#"
+    - img
+  - link "Facebook":
+    - /url: "#"
+    - img
+  - heading "Producto" [level=4]
+  - list:
+    - listitem:
+      - link "Pagos":
+        - /url: "#"
+    - listitem:
+      - link "Terminal POS":
+        - /url: "#"
+  - heading "Soluciones" [level=4]
+  - list:
+    - listitem:
+      - link "E-commerce":
+        - /url: "#"
+    - listitem:
+      - link "Retail":
+        - /url: "#"
+    - listitem:
+      - link "Marketplace":
+        - /url: "#"
+  - heading "Qpaypro" [level=4]
+  - list:
+    - listitem:
+      - link "Blog":
+        - /url: "#"
+    - listitem:
+      - link "Sobre Qpaypro":
+        - /url: "#"
+    - listitem:
+      - link "Seguridad":
+        - /url: "#"
+  - heading "Contacto" [level=4]
+  - list:
+    - listitem: Guatemala +(502) 2355-6000
+    - listitem: El Salvador +(503) 2208-2300
+    - listitem: WhatsApp +(502) 4785-6011
+    - listitem: soporte@qpaypro.com
+  - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
+  - link "Política de privacidad":
+    - /url: "#"
+  - link "Términos del servicio":
+    - /url: "#"
+  - link "Seguridad":
+    - /url: "#"

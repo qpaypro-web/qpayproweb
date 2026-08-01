@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "pagos",
+    "name": "Pagos y cobros",
+    "description": "Cómo cobrar con tarjeta, links de pago, QR y efectivo, y qué pasa con tu dinero después de cada venta."
+  },
+  {
+    "slug": "ecommerce",
+    "name": "Ecommerce y tienda en línea",
+    "description": "Todo lo que rodea a una tienda en línea: catálogo, inventario, envíos y la experiencia de compra."
+  },
+  {
+    "slug": "marketing",
+    "name": "Marketing y ventas",
+    "description": "Estrategias para vender más: conversión, retención, temporadas altas y comportamiento del consumidor."
+  },
+  {
+    "slug": "seguridad",
+    "name": "Seguridad y fraude",
+    "description": "Prevención de fraude, protección de datos y qué respalda cada transacción."
+  },
+  {
+    "slug": "producto",
+    "name": "Producto Qpaypro",
+    "description": "Lanzamientos, integraciones y novedades de la plataforma."
+  },
+  {
+    "slug": "guias",
+    "name": "Guías y cómo empezar",
+    "description": "Guías paso a paso para poner tu negocio a cobrar en línea sin perderte en el camino."
+  }
+]

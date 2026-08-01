@@ -1,0 +1,197 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
+import { countryPaths, getCountry } from '../../lib/country';
+
+const FLOATING_STATS = [
+  { icon: 'users', value: '100+', label: 'Partners activos', top: '16%', right: '6%', width: '250px', anim: 'ph-float2 10s ease-in-out infinite' },
+  { icon: 'plug', value: '500+', label: 'Integraciones', top: '44%', right: '26%', width: '250px', anim: 'ph-float1 11s ease-in-out infinite' },
+  { icon: 'activity', value: '1,200M', label: 'Transacciones procesadas', top: '70%', right: '10%', width: '270px', anim: 'ph-float3 9s ease-in-out infinite' },
+];
+
+const BENEFITS = [
+  { icon: 'trending-up', num: '01', title: 'Comisiones frecuentes', text: 'Comisiones en mensualidades o anualidades sobre el plan de afiliaciones del cliente.' },
+  { icon: 'piggy-bank', num: '02', title: 'Condiciones preferenciales', text: 'Reduce los costos de afiliación de tus clientes con tarifas exclusivas del programa.' },
+  { icon: 'plug', num: '03', title: 'Integración simplificada', text: 'APIs documentadas, plug-ins listos y soporte técnico especializado para integrar.' },
+];
+
+const WHO_JOINS = [
+  { icon: 'code-xml', title: 'Agencias de desarrollo', text: 'Integra pagos en e-commerce, sitios corporativos y apps a la medida.', points: ['APIs RESTful y webhooks', 'SDKs y sandbox ilimitado'] },
+  { icon: 'megaphone', title: 'Agencias de publicidad', text: 'Ofrece soluciones de pago completas y potencia campañas de e-commerce.', points: ['Material co-branded', 'Directorio de partners'] },
+  { icon: 'briefcase', title: 'Consultores & freelancers', text: 'Suma valor a tus proyectos y genera ingresos frecuentes.', points: ['Afiliación ágil', 'Capacitación y acompañamiento'] },
+];
+
+const PROCESS = [
+  { num: '01', title: 'Regístrate', text: 'Completa el formulario de partner en menos de 5 minutos.' },
+  { num: '02', title: 'Validación', text: 'Revisamos tu solicitud en 24–48 horas hábiles.' },
+  { num: '03', title: 'Onboarding', text: 'Tu gerente de cuenta te guía en la configuración inicial.' },
+  { num: '04', title: 'Comienza a ganar', text: 'Refiere clientes y recibe comisiones mensuales.' },
+];
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+---
+
+<MainLayout
+  title="Programa de Partners | Qpaypro"
+  description="Gana comisiones frecuentes refiriendo clientes a Qpaypro. Programa de partners para agencias, consultores y freelancers en Guatemala y El Salvador."
+  headerTheme="onDark"
+>
+  <section class="relative w-full min-h-[92vh] flex items-center overflow-hidden" style="background: linear-gradient(160deg, rgb(15, 32, 108) 0%, rgb(12, 26, 88) 55%, rgb(10, 21, 71) 100%);">
+    <style>
+      @keyframes ph-float1 { 0%,100% { transform: translate(0,0) rotate(-8deg); } 50% { transform: translate(0,-28px) rotate(-2deg); } }
+      @keyframes ph-float2 { 0%,100% { transform: translate(0,0) rotate(12deg); } 50% { transform: translate(0,26px) rotate(6deg); } }
+      @keyframes ph-float3 { 0%,100% { transform: translate(0,0) rotate(6deg); } 50% { transform: translate(-18px,18px) rotate(-4deg); } }
+      @keyframes ph-spin { to { transform: rotate(360deg); } }
+      .ph-glass {
+        position: absolute;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(98,226,242,0.22), rgba(255,255,255,0.04));
+        border: 1px solid rgba(98,226,242,0.35);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.35);
+      }
+      .ph-orb { position: absolute; border-radius: 9999px; filter: blur(70px); opacity: 0.6; animation: ph-spin 26s linear infinite; }
+      @media (prefers-reduced-motion: reduce) { .ph-glass, .ph-orb { animation: none !important; } }
+    </style>
+    <div class="ph-orb" style="width: 460px; height: 460px; top: -120px; right: 120px; background: radial-gradient(circle, rgb(98, 226, 242), transparent 70%);"></div>
+    <div class="ph-orb" style="width: 520px; height: 520px; bottom: -180px; left: -80px; background: radial-gradient(circle, rgb(98, 226, 242), transparent 70%); animation-direction: reverse;"></div>
+    <div class="hidden lg:block absolute right-0 top-0 h-full w-[46%] pointer-events-none">
+      {FLOATING_STATS.map((stat) => (
+        <div class="ph-glass" style={`width: ${stat.width}; top: ${stat.top}; right: ${stat.right}; padding: 24px; animation: ${stat.anim};`}>
+          <span class="inline-flex w-11 h-11 rounded-xl items-center justify-center mb-4" style="background: rgba(98, 226, 242, 0.2);">
+            <Icon name={stat.icon} class="w-5 h-5 text-[rgb(98,226,242)]" strokeWidth={2} />
+          </span>
+          <div class="text-white text-4xl font-bold tracking-tight leading-none">{stat.value}</div>
+          <div class="text-white/60 text-sm mt-2">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+    <div class="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-8 w-full py-24">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2.5 mb-7 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+          <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: rgb(98, 226, 242);"></span>
+          <p class="text-white/80 text-xs font-semibold uppercase tracking-[0.20em]" style="font-family: var(--font-brand);">Programa de Partners</p>
+        </div>
+        <h1 class="text-white text-5xl md:text-6xl lg:text-[4.6rem] font-bold tracking-[-0.03em] leading-[1.02] mb-6">Gana con cada cliente que refieres.</h1>
+        <p class="text-white/70 text-lg lg:text-xl leading-relaxed max-w-lg font-light mb-10">Genera ingresos frecuentes ofreciendo soluciones de cobro a tus clientes.</p>
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="https://forms.zoho.com/qpaypro/form/PartnersQpaypro" target="_blank" rel="noreferrer" class="group px-8 py-4 bg-white text-[#0f206c] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 flex items-center gap-2">
+            Aplicar al programa
+            <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a href={`/${country}/contacto#ventas`} class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-full font-semibold text-base hover:bg-white/20 transition-all duration-300">Hablar con Ventas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-28 lg:py-40">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20">
+        <div class="flex items-center gap-2.5 mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Beneficios</p>
+        </div>
+        <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03]">Por qué ser<br />partner de Qpaypro</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.08] rounded-3xl overflow-hidden border border-white/[0.08]">
+        {BENEFITS.map((b) => (
+          <div class="group relative bg-[#0a0a0c] p-8 lg:p-9 transition-colors duration-500 hover:bg-[#101014]">
+            <span class="absolute top-7 right-8 text-white/20 text-xs group-hover:text-white/40 transition-colors" style="font-family: var(--font-brand);">{b.num}</span>
+            <span class="relative inline-flex mb-6">
+              <span class="dfx-ring"></span>
+              <span class="relative inline-flex w-11 h-11 rounded-xl bg-white/[0.06] border border-white/[0.10] items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-400 z-10">
+                <Icon name={b.icon} class="w-5 h-5 text-white group-hover:text-black transition-colors duration-400" strokeWidth={1.75} />
+              </span>
+            </span>
+            <h3 class="text-white text-lg font-semibold mb-2 leading-snug">{b.title}</h3>
+            <p class="text-white/50 text-sm leading-relaxed font-light">{b.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <style>
+      @keyframes pw-rotate { to { transform: rotate(360deg); } }
+      .pw-card { position: relative; border-radius: 24px; background: #f6f7f9; isolation: isolate; }
+      .pw-card::before {
+        content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1.5px;
+        background: conic-gradient(from var(--pw-a, 0deg), transparent 0turn, #22d3ee 0.15turn, #0047ba 0.3turn, transparent 0.5turn);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor; mask-composite: exclude;
+        opacity: 0; transition: opacity .5s ease; z-index: 2; pointer-events: none;
+      }
+      .pw-card:hover::before { opacity: 1; animation: pw-rotate 4s linear infinite; }
+      .pw-card::after {
+        content: ''; position: absolute; inset: 0; border-radius: 24px; z-index: 0;
+        box-shadow: 0 30px 70px rgba(0,71,186,0.16); opacity: 0; transition: opacity .5s ease;
+      }
+      .pw-card:hover::after { opacity: 1; }
+      .pw-card > * { position: relative; z-index: 1; }
+      @property --pw-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+      @media (prefers-reduced-motion: reduce) { .pw-card:hover::before { animation: none; } }
+    </style>
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05]">¿Quién puede unirse?</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {WHO_JOINS.map((item) => (
+          <div class="pw-card group flex flex-col p-8 transition-transform duration-500 ease-out hover:-translate-y-2">
+            <span class="inline-flex w-12 h-12 rounded-xl bg-[#eaf0fb] items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-[#0047ba]">
+              <Icon name={item.icon} class="w-6 h-6 text-[#0047ba] transition-colors duration-500 group-hover:text-white" strokeWidth={1.75} />
+            </span>
+            <h3 class="text-[#1a1d29] text-xl font-semibold mb-2">{item.title}</h3>
+            <p class="text-[#5c606b] text-sm leading-relaxed mb-6">{item.text}</p>
+            <ul class="space-y-3 mt-auto">
+              {item.points.map((point) => (
+                <li class="flex items-start gap-2.5">
+                  <Icon name="check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-[#0047ba]" strokeWidth={2.5} />
+                  <span class="text-[#5c606b] text-sm leading-snug">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden w-full bg-[#050506] py-28 lg:py-40">
+    <GlowSectionDecor />
+    <div class="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 lg:mb-20">
+        <div class="flex items-center gap-2.5 mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <p class="text-white/50 text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Proceso</p>
+        </div>
+        <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03]">De registro a tus<br />primeras comisiones.</h2>
+        <p class="text-white/50 text-lg font-light mt-6">En menos de una semana.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] rounded-3xl overflow-hidden border border-white/[0.08] mb-24">
+        {PROCESS.map((step) => (
+          <div class="group relative bg-[#0a0a0c] p-8 lg:p-9 transition-colors duration-500 hover:bg-[#101014]">
+            <span class="text-[#4ad2ff] text-sm font-bold mb-5 block" style="font-family: var(--font-brand);">{step.num}</span>
+            <h3 class="text-white text-lg font-semibold mb-2 leading-snug">{step.title}</h3>
+            <p class="text-white/50 text-sm leading-relaxed font-light">{step.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-white text-4xl md:text-5xl font-bold tracking-[-0.03em] leading-[1.05] mb-6">Comienza a ganar hoy.</h2>
+        <p class="text-white/55 text-lg leading-relaxed mb-10 font-light">Únete a cientos de agencias y profesionales que ya generan ingresos frecuentes con Qpaypro.</p>
+        <a href="https://forms.zoho.com/qpaypro/form/PartnersQpaypro" target="_blank" rel="noreferrer" class="group px-9 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
+          Aplicar ahora
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,182 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
+import AnalyticsEvents from '../components/AnalyticsEvents.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import '../styles/global.css';
+import { COUNTRY_CODES, COUNTRY_HREFLANG, DEFAULT_COUNTRY, countryFromPath, swapCountry } from '../lib/country';
+
+interface Props {
+  title: string;
+  description: string;
+  headerTheme?: 'onDark' | 'onLight';
+  ogType?: string;
+  ogLocale?: string;
+}
+
+const { title, description, headerTheme = 'onLight', ogType = 'website' } = Astro.props;
+
+// El país se deriva de la propia ruta (/gt/... o /sv/...) en lugar de pasarlo
+// como prop desde cada página, para no tener que tocar los 16 llamados.
+const country = countryFromPath(Astro.url.pathname);
+const ogLocale = COUNTRY_HREFLANG[country as keyof typeof COUNTRY_HREFLANG].replace('-', '_');
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <Analytics />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={ogLocale} />
+    {COUNTRY_CODES.map((code) => (
+      <link rel="alternate" hreflang={COUNTRY_HREFLANG[code]} href={swapCountry(pathname, code)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={swapCountry(pathname, DEFAULT_COUNTRY)} />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T53BQFC"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"></iframe
+    ></noscript>
+    <Header theme={headerTheme} country={country} />
+    <slot />
+    <Footer country={country} />
+    <ConsentBanner country={country} />
+    <AnalyticsEvents country={country} />
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Entrance reveal: a longer rise with a softer settle than the original
+      // 0.3s/20px version, which barely registered while scrolling.
+      //
+      // Deliberately an IntersectionObserver rather than gsap.from() +
+      // ScrollTrigger. ScrollTrigger auto-refreshes on `load`, and on a
+      // refresh GSAP re-applies a `from` tween's start state; if that
+      // trigger had already fired it never fires again, so the element
+      // stays at opacity 0 permanently. That was already happening on
+      // sobre-qpaypro before these changes (five cards never appeared).
+      // Driving it from an observer also means the markup is visible by
+      // default and only hidden once the script is definitely running.
+      //
+      // Groups stagger their children; a standalone [data-reveal] animates
+      // on its own. Every standalone marker used to be inert, which is why
+      // most section headings had no entrance at all.
+      // data-reveal-group="mobile" solo anima por debajo de lg; en escritorio
+      // el grupo se deja quieto y su contenido queda visible tal cual.
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+      const revealBatches: HTMLElement[][] = [];
+      document.querySelectorAll<HTMLElement>('[data-reveal-group]').forEach((group) => {
+        const mobileOnly = group.dataset.revealGroup === 'mobile';
+        if (mobileOnly && isDesktop) return;
+        const items = Array.from(group.querySelectorAll<HTMLElement>('[data-reveal]'));
+        if (!items.length) return;
+        if (mobileOnly) {
+          // En móvil estas tarjetas quedan apiladas a lo largo de miles de
+          // píxeles. Si se revelaran como un grupo, al entrar la primera se
+          // animarían todas y las de abajo harían su entrada fuera de
+          // pantalla, así que cada una entra por su cuenta al aparecer.
+          items.forEach((el) => revealBatches.push([el]));
+        } else {
+          revealBatches.push(items);
+        }
+      });
+      document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+        if (!el.closest('[data-reveal-group]')) revealBatches.push([el]);
+      });
+
+      const RISE = reduceMotion ? 0 : 38;
+      const DURATION = reduceMotion ? 200 : 750;
+      const STAGGER = reduceMotion ? 0 : 120;
+
+      revealBatches.forEach((items) => {
+        items.forEach((el, i) => {
+          el.style.opacity = '0';
+          el.style.transform = `translateY(${RISE}px)`;
+          el.style.transition = `opacity ${DURATION}ms cubic-bezier(0.22, 1, 0.36, 1) ${i * STAGGER}ms, transform ${DURATION}ms cubic-bezier(0.22, 1, 0.36, 1) ${i * STAGGER}ms`;
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            observer.disconnect();
+            items.forEach((el) => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+              // Hand the element back to CSS once it has arrived, so nothing
+              // is left with inline transforms that could fight a hover state.
+              window.setTimeout(
+                () => {
+                  el.style.removeProperty('opacity');
+                  el.style.removeProperty('transform');
+                  el.style.removeProperty('transition');
+                },
+                DURATION + STAGGER * items.length + 60
+              );
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px' }
+        );
+        items.forEach((el) => observer.observe(el));
+      });
+
+      // Faithful port of the original count-up stat component: same
+      // IntersectionObserver threshold (0.4), same 1800ms duration, and the
+      // same exponential ease-out curve (1 - 2^(-10k)), triggered once.
+      document.querySelectorAll<HTMLElement>('[data-count-up]').forEach((el) => {
+        const target = parseFloat(el.dataset.target || '0');
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        // 'locale' -> value.toLocaleString('es-GT') (thousand separators, e.g. "5,000")
+        // 'plain'  -> String(value), no separators (e.g. a bare year like "2017")
+        const format = el.dataset.format || 'locale';
+        const scale = decimals ? 10 : 1;
+        const internalTarget = target * scale;
+        const duration = 1800;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (!entries[0].isIntersecting) return;
+            observer.disconnect();
+            const start = performance.now();
+            function tick(now: number) {
+              const k = Math.min((now - start) / duration, 1);
+              const eased = k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
+              const value = Math.round(eased * internalTarget);
+              const formatted = decimals
+                ? (value / 10).toFixed(1)
+                : format === 'plain'
+                  ? String(value)
+                  : value.toLocaleString('es-GT');
+              el.textContent = formatted + suffix;
+              if (k < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          },
+          { threshold: 0.4 }
+        );
+        observer.observe(el);
+      });
+
+    </script>
+  </body>
+</html>

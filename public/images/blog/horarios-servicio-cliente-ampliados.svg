@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f206c"/>
+      <stop offset="100%" stop-color="#0097ce"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="800" fill="url(#g)"/>
+  <circle cx="1120" cy="140" r="220" fill="#ffffff" opacity="0.06"/>
+  <circle cx="1010" cy="700" r="160" fill="#ffffff" opacity="0.05"/>
+  <text x="80" y="140" fill="#ffffff" opacity="0.6" font-size="22" font-weight="600"
+        letter-spacing="6" font-family="Manrope, system-ui, sans-serif">QPAYPRO</text>
+  <text x="80" y="196" fill="#4ad2ff" font-size="24" font-weight="600"
+        font-family="Manrope, system-ui, sans-serif">Producto Qpaypro</text>
+    <text x="80" y="307" fill="#ffffff" font-size="46" font-weight="700" font-family="Manrope, system-ui, sans-serif">Qpaypro anuncia horarios de</text>
+    <text x="80" y="369" fill="#ffffff" font-size="46" font-weight="700" font-family="Manrope, system-ui, sans-serif">atención al cliente ampliados:</text>
+    <text x="80" y="431" fill="#ffffff" font-size="46" font-weight="700" font-family="Manrope, system-ui, sans-serif">Un impulso para mejorar la</text>
+    <text x="80" y="493" fill="#ffffff" font-size="46" font-weight="700" font-family="Manrope, system-ui, sans-serif">experiencia del cliente</text>
+</svg>

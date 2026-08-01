@@ -1,0 +1,619 @@
+{
+  "code": "gt",
+  "name": "Guatemala",
+  "currency": {
+    "code": "GTQ",
+    "symbol": "Q",
+    "locale": "es-GT"
+  },
+  "plans": [
+    {
+      "name": "Free",
+      "priceMonth": "Q0",
+      "priceYear": "Q0",
+      "tagline": "Para empezar a cobrar en línea sin costo fijo.",
+      "commission": "5% + Q2.95",
+      "cta": "Comenzar gratis",
+      "url": "https://app.qpaypro.com",
+      "highlights": [
+        "Links de pago, QR y cuotas",
+        "Punto de venta: hasta 20 productos",
+        "Facturación electrónica",
+        "QpayRadar y QpayVerify"
+      ]
+    },
+    {
+      "name": "Premium",
+      "priceMonth": "Q195",
+      "priceYear": "Q1,950",
+      "tagline": "Para negocios que venden en línea y en tienda.",
+      "commission": "4.50% + Q2.95",
+      "cta": "Elegir Premium",
+      "url": "https://app.qpaypro.com",
+      "highlights": [
+        "Todo lo de Free, con menor comisión",
+        "Cobros internacionales y suscripciones",
+        "Plug-ins: WooCommerce, OpenCart, PrestaShop y Shopify",
+        "API y tienda en línea",
+        "Facturación Electrónica (50 DTEs)"
+      ]
+    },
+    {
+      "name": "Elite",
+      "priceMonth": "Q395",
+      "priceYear": "Q3,950",
+      "tagline": "Para operaciones que necesitan más control.",
+      "commission": "4.50% + Q2.95",
+      "cta": "Elegir Elite",
+      "url": "https://app.qpaypro.com",
+      "highlights": [
+        "Todo lo de Premium, ampliado",
+        "Hasta 2,500 productos con variaciones",
+        "Tokenización y Plug-in VTEX",
+        "Inventario entre sucursales",
+        "Facturación Electrónica (100 DTEs)"
+      ],
+      "featured": true
+    },
+    {
+      "name": "Enterprise",
+      "priceMonth": "Q5,000",
+      "priceYear": "Q50,000",
+      "tagline": "Para empresas con alto volumen y sucursales.",
+      "commission": "Negociada 4.50%",
+      "cta": "Hablar con Ventas",
+      "url": "/contacto#ventas",
+      "highlights": [
+        "Todo lo de Elite, sin límites",
+        "Productos ilimitados, 4 sucursales",
+        "Soporte prioritario dedicado",
+        "Facturación Electrónica (500 DTEs)"
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "title": "Comisiones",
+      "rows": [
+        {
+          "label": "Comisión en línea",
+          "values": [
+            "5% + Q2.95",
+            "4.50% + Q2.95",
+            "4.50% + Q2.95",
+            "4.50% + Q2.95"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Pasarela de Pago",
+      "rows": [
+        {
+          "label": "Links de Pago",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Código QR",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Cuotas",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Moneda",
+          "values": [
+            "Q",
+            "Q/$",
+            "Q/$",
+            "Q/$"
+          ]
+        },
+        {
+          "label": "Cobros Internacionales",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Suscripciones",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Tokenización",
+          "values": [
+            "no",
+            "no",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Plug-in WooCommerce",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Plug-in OpenCart",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Plug-in PrestaShop",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Plug-in Shopify",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Plug-in VTEX",
+          "values": [
+            "no",
+            "no",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Comisión Plug-in Shopify y VTEX",
+          "values": [
+            "no",
+            "+0.50%",
+            "+0.50%",
+            "+0.50%"
+          ]
+        },
+        {
+          "label": "API",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Punto de Venta",
+      "rows": [
+        {
+          "label": "Cantidad de Productos",
+          "values": [
+            "20",
+            "100",
+            "2,500",
+            "Ilimitado"
+          ]
+        },
+        {
+          "label": "Sucursales Incluidas",
+          "values": [
+            "1",
+            "1",
+            "1",
+            "4"
+          ]
+        },
+        {
+          "label": "Precio sucursal adicional",
+          "values": [
+            "—",
+            "—",
+            "Q395/mes",
+            "Q395/mes"
+          ]
+        },
+        {
+          "label": "Inventario",
+          "values": [
+            "no",
+            "Básico",
+            "Inventario Avanzado",
+            "Inventario Avanzado"
+          ]
+        },
+        {
+          "label": "Sincronización entre Sucursales",
+          "values": [
+            "no",
+            "no",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Efectivo y transferencias",
+          "values": [
+            "0%",
+            "0%",
+            "0%",
+            "0%"
+          ]
+        },
+        {
+          "label": "Comisión POS Físico Externo",
+          "values": [
+            "+1.00%",
+            "+0.85%",
+            "+0.75%",
+            "Desde 0.65%"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tienda en Línea",
+      "rows": [
+        {
+          "label": "Cantidad de Productos",
+          "values": [
+            "no",
+            "100",
+            "2,500",
+            "Ilimitado"
+          ]
+        },
+        {
+          "label": "Inventario",
+          "values": [
+            "no",
+            "Básico",
+            "Inventario Avanzado",
+            "Inventario Avanzado"
+          ]
+        },
+        {
+          "label": "Sincronización a Punto de Venta",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Facturación Electrónica",
+      "rows": [
+        {
+          "label": "DTEs Incluidos",
+          "values": [
+            "0",
+            "50",
+            "100",
+            "500"
+          ]
+        },
+        {
+          "label": "Costo por DTE Adicional",
+          "values": [
+            "Q0.30",
+            "Q0.25",
+            "Q0.25",
+            "Q0.20"
+          ]
+        },
+        {
+          "label": "Facturas por WhatsApp incluidas",
+          "values": [
+            "0",
+            "50",
+            "100",
+            "500"
+          ]
+        },
+        {
+          "label": "Costo por WhatsApp Adicional",
+          "values": [
+            "Q0.20",
+            "Q0.17",
+            "Q0.17",
+            "Q0.15"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Seguridad",
+      "rows": [
+        {
+          "label": "QpayRadar",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "QpayVerify",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Soporte",
+      "rows": [
+        {
+          "label": "Asesorías 1 a 1",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Soporte WhatsApp | Correo | PBX",
+          "values": [
+            "si",
+            "si",
+            "si",
+            "si"
+          ]
+        },
+        {
+          "label": "Soporte Prioritario",
+          "values": [
+            "no",
+            "no",
+            "no",
+            "si"
+          ]
+        },
+        {
+          "label": "Talleres y Webinars",
+          "values": [
+            "no",
+            "si",
+            "si",
+            "si"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Próximos Lanzamientos H2 2026",
+      "rows": [
+        {
+          "label": "Reservas",
+          "values": [
+            "Próximamente",
+            "Próximamente",
+            "Próximamente",
+            "Próximamente"
+          ]
+        },
+        {
+          "label": "Clínicas",
+          "values": [
+            "Próximamente",
+            "Próximamente",
+            "Próximamente",
+            "Próximamente"
+          ]
+        },
+        {
+          "label": "Marketplace",
+          "values": [
+            "Próximamente",
+            "Próximamente",
+            "Próximamente",
+            "Próximamente"
+          ]
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "¿Qpaypro funciona en Guatemala?",
+      "a": "Sí, Qpaypro es una pasarela de pagos diseñada para negocios en Guatemala y permite aceptar pagos con tarjeta Visa y Mastercard de forma segura."
+    },
+    {
+      "q": "¿Puedo cobrar sin tener una tienda en línea?",
+      "a": "Sí, puedes enviar links de pago por WhatsApp, Instagram, Facebook o correo electrónico sin necesidad de una tienda en línea."
+    },
+    {
+      "q": "¿Cuándo se cobra la comisión?",
+      "a": "La comisión se descuenta automáticamente de cada transacción exitosa antes de transferir los fondos a tu cuenta bancaria."
+    },
+    {
+      "q": "¿Cuándo recibo mi dinero?",
+      "a": "Los fondos se transfieren a tu cuenta bancaria en un plazo de 24 a 48 horas hábiles después de cada transacción exitosa."
+    },
+    {
+      "q": "¿Cobran retención de impuestos?",
+      "a": "Sí. Legalmente en Guatemala y El Salvador, a cada transacción con tarjeta de crédito o débito se le descuenta la retención de IVA según el régimen fiscal de cada comercio, y se refleja en cada liquidación."
+    },
+    {
+      "q": "¿Qué tipo de tienda en línea incluye el plan Premium?",
+      "a": "El plan Premium incluye acceso completo a Qpayshop, nuestra plataforma de tienda en línea con capacidad para hasta 100 productos, categorías, métodos de envío y más. Es una solución de eCommerce completa y fácil de usar, similar a Shopify, WooCommerce o Wix."
+    },
+    {
+      "q": "¿Qué requisitos necesito?",
+      "a": "Los requisitos son sencillos y los de ley: número de identificación tributaria, patente de comercio, estados de cuenta bancarios, documentos de identidad, entre otros. Nuestro equipo de afiliaciones te acompaña en todo el proceso."
+    },
+    {
+      "q": "¿Con cuáles bancos trabajan?",
+      "a": "En Guatemala trabajamos con todos los bancos del sistema y depositamos fondos en cuentas monetarias o de ahorro en GTQ o USD. En El Salvador trabajamos con Banco Atlántida; si no tienes cuenta, te ayudamos a aperturarla durante el proceso de afiliación."
+    },
+    {
+      "q": "¿Cuánto se tarda en aperturar mi cuenta?",
+      "a": "En Guatemala puedes empezar a cobrar con el plan Free en 5 minutos; tras completar la papelería, la afiliación completa tarda 24 horas hábiles. En El Salvador, el proceso tarda entre 5 y 8 días hábiles incluyendo la cuenta bancaria."
+    }
+  ],
+  "calculator": {
+    "installments": true,
+    "installmentRates": [
+      {
+        "label": "Contado",
+        "rate": 0.045
+      },
+      {
+        "label": "3 meses",
+        "rate": 0.0785
+      },
+      {
+        "label": "6 meses",
+        "rate": 0.091
+      },
+      {
+        "label": "10 meses",
+        "rate": 0.0935
+      },
+      {
+        "label": "12 meses",
+        "rate": 0.101
+      },
+      {
+        "label": "15 meses",
+        "rate": 0.121
+      },
+      {
+        "label": "18 meses",
+        "rate": 0.141
+      }
+    ],
+    "fixedCost": 2.95,
+    "iva": 0.12,
+    "smallTaxpayerThreshold": 2500,
+    "smallTaxpayerRate": 0.05,
+    "generalRetentionRate": 0.15
+  },
+  "sistemaPosPrice": 6845,
+  "posTerminal": {
+    "model": "POS Cute",
+    "comingSoon": true,
+    "headline": "Cobra en grande.",
+    "subtitle": "El terminal físico de Qpaypro. Acepta tarjetas, pago sin contacto y chip donde sea que estés.",
+    "heroImage": "/images/pos-cute/fa694bc40cfa.jpg",
+    "heroAlt": "POS Cute de Qpaypro",
+    "seoTitle": "POS Cute: el terminal físico de Qpaypro | Qpaypro",
+    "seoDescription": "El terminal físico de Qpaypro. Acepta tarjetas, pago sin contacto y chip donde sea que estés. Próximamente.",
+    "features": [
+      {
+        "stat": "NFC",
+        "title": "Pagos sin contacto",
+        "text": "Acepta tarjetas sin contacto, Apple Pay y Google Pay con solo acercarlas."
+      },
+      {
+        "stat": "Chip & PIN",
+        "title": "Seguridad total",
+        "text": "Lector de chip con teclado PIN físico para transacciones protegidas."
+      },
+      {
+        "stat": "700",
+        "title": "Cobros por carga",
+        "text": "Hasta 700 cobros con una sola carga, vía USB-C."
+      },
+      {
+        "stat": "Bluetooth",
+        "title": "Conéctalo a tu celular",
+        "text": "Se enlaza por Bluetooth con tu teléfono para cobrar donde estés."
+      }
+    ],
+    "nfc": {
+      "image": "/images/pos-cute/ef4fcafeadd1.png",
+      "alt": "Vistas del POS Cute con zona NFC",
+      "paragraphs": [
+        "La zona NFC en la parte trasera permite cobrar acercando la tarjeta o el teléfono. Sin insertar, sin deslizar: el pago más rápido que tu negocio haya tenido.",
+        "Compatible con Visa, Mastercard, Apple Pay y Google Pay."
+      ]
+    },
+    "specs": [
+      {
+        "label": "Pantalla",
+        "value": "LCD blanco y negro retroiluminada · 128 × 40 px"
+      },
+      {
+        "label": "Conectividad",
+        "value": "Bluetooth 3.0 y 4.2"
+      },
+      {
+        "label": "Pagos",
+        "value": "NFC pago sin contacto · Chip EMV · Banda magnética"
+      },
+      {
+        "label": "Batería",
+        "value": "3.7V / 250mAh · hasta 700 cobros por carga"
+      },
+      {
+        "label": "Carga",
+        "value": "USB-C · 5V 0.5A"
+      },
+      {
+        "label": "Dimensiones",
+        "value": "99 × 59 × 16.1 mm · 80 g"
+      },
+      {
+        "label": "Resistencia",
+        "value": "Soporta caídas de hasta 1 metro"
+      },
+      {
+        "label": "Seguridad",
+        "value": "PCI PTS 6.x con SRED · EMV L1 y L2"
+      },
+      {
+        "label": "Compatibilidad",
+        "value": "Visa PayWave · Mastercard PayPass · Apple Pay"
+      }
+    ],
+    "closing": "Llévalo a tu negocio y empieza a cobrar en grande hoy mismo.",
+    "sectionHeadline": [
+      "Pequeño por fuera.",
+      "Poderoso por dentro."
+    ]
+  },
+  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"4.50%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal."
+}

@@ -1,0 +1,55 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import LegalContent from '../../components/LegalContent.astro';
+import Icon from '../../components/Icon.astro';
+import blocks from '../../data/legal-terminos.json';
+import { countryPaths, getCountry } from '../../lib/country';
+
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+
+// El contrato de afiliación no es el mismo en los dos países: el de Guatemala
+// es de Tap Pay, S.A. y el de El Salvador todavía no lo entregan. Mientras
+// falte, la página avisa que está por publicarse en lugar de mostrar el
+// contrato del otro país, que no obligaría a nadie en El Salvador.
+const contract = country === 'gt' ? blocks : null;
+---
+
+<MainLayout
+  title="Términos y Condiciones | Qpaypro"
+  description={
+    contract
+      ? 'Términos y condiciones del contrato de afiliación de Qpaypro (Tap Pay, S.A.) para comercios afiliados en Guatemala.'
+      : `Términos y condiciones de Qpaypro ${c.name}. Próximamente.`
+  }
+  headerTheme="onLight"
+>
+  {contract ? (
+    <LegalContent blocks={contract} eyebrow="Legal" />
+  ) : (
+    <section class="w-full bg-white pt-32 pb-24 lg:pt-44 lg:pb-32">
+      <div class="max-w-[720px] mx-auto px-6 lg:px-8">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Legal</p>
+        <h1 class="text-[#1a1d29] text-4xl md:text-5xl font-bold tracking-[-0.02em] leading-[1.08] mb-6">Términos y Condiciones</h1>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0047ba]/10 text-[#0047ba] text-xs font-bold uppercase tracking-[0.14em] mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#0047ba] animate-pulse"></span>Próximamente
+        </span>
+        <p class="text-[#5c606b] text-lg leading-relaxed mb-4">
+          Estamos preparando los términos y condiciones del contrato de afiliación de Qpaypro para {c.name}. Los publicaremos en esta
+          página en cuanto estén disponibles.
+        </p>
+        <p class="text-[#5c606b] text-lg leading-relaxed mb-10">
+          Si necesitas el documento antes de que lo publiquemos, escríbenos y te lo enviamos.
+        </p>
+        <a
+          href={`/${country}/contacto`}
+          class="group inline-flex items-center gap-2 px-8 py-4 bg-[#0047ba] text-white rounded-full font-semibold text-base hover:bg-[#0f206c] transition-colors duration-300"
+        >
+          Solicitar el contrato
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </section>
+  )}
+</MainLayout>

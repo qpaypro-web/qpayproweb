@@ -1,0 +1,117 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { withCountry } from '../lib/country';
+
+interface Props {
+  country: string;
+}
+
+const { country } = Astro.props;
+
+const SOCIALS = [
+  { icon: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/qpaypro' },
+  { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@qpaypro' },
+  { icon: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/qpaypro' },
+  { icon: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/qpaypro/?locale=es_LA' },
+];
+
+const COLUMNS = [
+  {
+    title: 'Producto',
+    links: [
+      { label: 'Pagos', href: '/pasarela-de-pagos' },
+      // "Terminal POS" apuntaba aquí, pero /sistema-pos es el punto de venta y
+      // el terminal de cobro es otro producto: dos nombres parecidos para dos
+      // cosas distintas confundían el menú del pie con el del navbar.
+      { label: 'Punto de Venta', href: '/sistema-pos' },
+      { label: 'Terminal de Cobro POS', href: '/terminal-pos' },
+    ],
+  },
+  {
+    title: 'Soluciones',
+    links: [
+      { label: 'E-commerce', href: '/ecommerce' },
+      { label: 'Retail', href: '/retail' },
+    ],
+  },
+  {
+    title: 'Qpaypro',
+    links: [
+      { label: 'Blog', href: '/blog' },
+      { label: 'Sobre Qpaypro', href: '/sobre-qpaypro' },
+      { label: 'Seguridad', href: '/seguridad' },
+    ],
+  },
+];
+
+const CONTACT_LINES = [
+  { label: 'Guatemala +(502) 2355-6000', href: 'tel:+50223556000' },
+  { label: 'El Salvador +(503) 2208-2300', href: 'tel:+50322082300' },
+  { label: 'WhatsApp +(502) 4785-6011', href: 'https://api.whatsapp.com/send/?phone=50247856011' },
+  { label: 'soporte@qpaypro.com', href: 'mailto:soporte@qpaypro.com' },
+];
+
+const POLICY_LINKS = [
+  { label: 'Política de privacidad', href: '/politicas-de-privacidad' },
+  { label: 'Términos del servicio', href: '/terminos-condiciones' },
+  { label: 'Seguridad', href: '/seguridad' },
+];
+---
+
+<footer class="w-full bg-[#050506] py-16 lg:py-20">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 mb-14">
+      <div class="col-span-2">
+        <Logo variant="colored" class="h-7 w-auto mb-6 brightness-0 invert" />
+        <p class="text-white/55 text-sm mb-8 max-w-xs leading-relaxed">La plataforma de pagos moderna para negocios que quieren crecer.</p>
+        <div class="flex items-center gap-3 flex-wrap">
+          {SOCIALS.map((s) => (
+            <a href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} class="w-9 h-9 bg-white/[0.06] border border-white/15 hover:border-white/40 hover:bg-white/10 rounded-lg flex items-center justify-center transition-colors">
+              <Icon name={s.icon} class="w-4 h-4 text-white" strokeWidth={1.75} />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {COLUMNS.map((col) => (
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4">{col.title}</h4>
+          <ul class="space-y-3">
+            {col.links.map((link) => (
+              <li><a href={withCountry(country, link.href)} class="text-white/55 hover:text-white transition-colors text-sm">{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <div>
+        <h4 class="text-white font-semibold text-sm mb-4">Contacto</h4>
+        <ul class="space-y-3">
+          {CONTACT_LINES.map((line) => (
+            <li>
+              <a
+                href={withCountry(country, line.href)}
+                target={line.href.startsWith('http') ? '_blank' : undefined}
+                rel={line.href.startsWith('http') ? 'noreferrer' : undefined}
+                class="text-white/55 hover:text-white transition-colors text-sm leading-relaxed"
+              >{line.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="h-px bg-white/10 mb-8"></div>
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+      <p class="text-white/40 text-sm">© 2026 Qpaypro. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-7 text-sm">
+        {POLICY_LINKS.map((link) => (
+          <a href={withCountry(country, link.href)} class="text-white/55 hover:text-white transition-colors">{link.label}</a>
+        ))}
+        <button type="button" data-open-consent class="text-white/55 hover:text-white transition-colors">Preferencias de cookies</button>
+      </div>
+    </div>
+  </div>
+</footer>
