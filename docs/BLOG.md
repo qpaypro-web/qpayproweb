@@ -61,12 +61,86 @@ la migración si el artículo nuevo se escribió en el WordPress).
 | `quote` | `text` | Cita destacada, con barra azul a la izquierda. |
 | `callout` | `text` | Caja azul clara con icono, para un dato o una advertencia. |
 | `cta` | `text` | Caja con el texto y dos botones, a precios y a ventas del país de la página. |
+| `img` | `src`, `alt`, `w`, `h`, `caption`, `wide` | Imagen dentro del texto: foto, gráfico o infografía. |
 
 En `text` y en `items` se permite **solo** `<strong>`, `<em>` y `<a href="…">`. Cualquier otra
 etiqueta se ve como texto: el renderizador usa `set:html` sobre esa lista blanca a propósito,
 para que nadie pueda meter estilos del editor viejo.
 
 El índice lateral del artículo aparece desde 1280 px y solo si el artículo tiene 3 o más `h2`.
+
+### Imágenes en el cuerpo
+
+La migración desde WordPress no trajo ninguna imagen del cuerpo: solo la portada. Los artículos
+que la necesiten se completan a mano con bloques `img`.
+
+```json
+{
+  "type": "img",
+  "src": "/images/blog/alianzaelsalvador-presentacion.webp",
+  "alt": "Tres representantes de Qpaypro muestran la aplicación de cobro",
+  "w": 1080,
+  "h": 1080,
+  "caption": "La aplicación de cobro de Qpaypro, durante la presentación."
+}
+```
+
+- `alt` describe lo que se ve, para quien no puede verla. Va vacío **solo** si la imagen es
+  decorativa y no aporta información que no esté en el texto.
+- `w` y `h` son los píxeles reales del archivo. Sin ellos el navegador no reserva el espacio y la
+  página salta mientras carga.
+- `caption` es opcional. Se ve centrado y en gris bajo la imagen.
+- `wide: true` saca la imagen del ancho de la columna de texto en pantallas grandes. Es para
+  infografías y gráficos, donde el detalle se pierde a 720 px; en una foto normal estorba.
+
+Las imágenes van en `public/images/blog/` con el slug del artículo como prefijo
+(`<slug>-<que-es>.<ext>`), para que se sepa a cuál pertenecen. Conviene bajar las fotos grandes a
+1600 px de ancho antes de commitear:
+
+```bash
+sips -Z 1600 original.jpg --out public/images/blog/<slug>-<que-es>.jpg
+```
+
+Un artículo con imágenes del WordPress viejo tiene una trampa: las fotos que el tema ponía como
+**fondo de columna** no aparecen como `<img>` en el HTML ni en el contenido que devuelve la API de
+WordPress, que son shortcodes de WPBakery. La vía que sí funciona es la biblioteca de medios
+filtrada por el post:
+
+```
+/wp-json/wp/v2/posts?slug=<slugWp>        -> el id
+/wp-json/wp/v2/media?parent=<id>          -> todo lo que se subió a ese artículo
+```
+
+## Reparar artículos migrados
+
+Dos scripts, en este orden. Los dos son idempotentes y aceptan `--dry-run`.
+
+```bash
+python3 scripts/estructurar-blog.py       # jerarquía
+python3 scripts/imagenes-blog.py --descargar   # imágenes del cuerpo
+```
+
+**`estructurar-blog.py`** no escribe contenido: reinterpreta bloques que ya existen a partir de las
+marcas que dejó el texto. Repara cuatro defectos de la migración:
+
+- **Citas partidas en tres bloques.** El WordPress dejaba el párrafo entrecomillado, un encabezado
+  con la atribución («Indicó hugo garcía») y una línea con el cargo. Los une en un `quote`.
+- **Títulos de sección que quedaron como párrafos en negrita**, incluidos los numerados
+  («**1. Mejora tu presencia:** …»), que se parten en encabezado más párrafo.
+- **Encabezados que quedaron solo con el número** («1.», «2.»), que toman el nombre del párrafo
+  siguiente.
+- **Viñetas sueltas** con `•` en párrafos consecutivos, que pasan a ser una lista.
+
+El nivel del encabezado se decide una sola vez por artículo: si el artículo ya tiene secciones, lo
+que se promueve son subsecciones. Sin esa regla, un artículo con diez apartados terminaba con
+veintiún `h2` y un índice lateral inservible.
+
+**`imagenes-blog.py`** ejecuta lo que dice `scripts/blog-imagenes.json`: qué imagen va en qué
+artículo, con qué `alt` y en qué punto. Descarga, encoge a 1600 px, pasa a JPEG las fotografías que
+el WordPress guardó como PNG —ahí había 7 MB de más— e inserta el bloque.
+
+Los `alt` del JSON están escritos mirando cada imagen; no se generan solos. Al agregar imágenes
+nuevas hay que escribirlos igual.
 
 ## Agregar un artículo a mano
 
