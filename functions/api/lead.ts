@@ -484,10 +484,8 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       return fail(GENERIC_ERROR, 502);
     }
 
-    // TEMPORAL — se espera la respuesta de Meta y se devuelve para poder
-    // verificar la integración desde fuera. Quitar en cuanto esté confirmada:
-    // en régimen normal el envío no debe retrasar la respuesta al visitante.
-    return json({ ok: true, meta: await notificarMeta() });
+    notificarMeta();
+    return json({ ok: true });
   } catch (error) {
     console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);
     return fail(GENERIC_ERROR, 502);
