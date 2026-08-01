@@ -140,16 +140,23 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   // Honeypot: se responde ok para no darle al bot ninguna señal de que falló.
   if (text(payload.website)) return json({ ok: true });
 
-  const missingConfig = (['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN', 'TURNSTILE_SECRET_KEY'] as const)
+  const missingConfig = (['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET', 'ZOHO_REFRESH_TOKEN'] as const)
     .filter((key) => !env[key]);
   if (missingConfig.length) {
     console.error(`[lead] Faltan variables de entorno: ${missingConfig.join(', ')}`);
     return fail(GENERIC_ERROR, 500);
   }
 
-  const turnstileToken = text(payload.turnstileToken, 2048);
-  if (!turnstileToken || !(await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, ip))) {
-    return fail('No se pudo verificar que no eres un robot. Recarga la página e inténtalo de nuevo.', 400);
+  // El captcha se exige solo si hay secreto configurado. Sin él el endpoint
+  // sigue usable —lo cubren el honeypot, la validación de abajo y el límite por
+  // IP— y la verificación se activa sola en cuanto la variable exista.
+  if (env.TURNSTILE_SECRET_KEY) {
+    const turnstileToken = text(payload.turnstileToken, 2048);
+    if (!turnstileToken || !(await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, ip))) {
+      return fail('No se pudo verificar que no eres un robot. Recarga la página e inténtalo de nuevo.', 400);
+    }
+  } else {
+    console.warn('[lead] Sin TURNSTILE_SECRET_KEY: se acepta el envío sin verificar el captcha.');
   }
 
   if (await rateLimited(env, ip)) {
