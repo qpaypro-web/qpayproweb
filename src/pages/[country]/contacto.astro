@@ -286,9 +286,14 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       reset(id?: string): void;
     }
 
+    interface QpAnalytics {
+      trackEvent(nombre: string, datos?: Record<string, unknown>, opciones?: { once?: boolean }): string | null;
+    }
+
     declare global {
       interface Window {
         turnstile?: Turnstile;
+        qpAnalytics?: QpAnalytics;
       }
     }
 
@@ -422,6 +427,16 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         if (!response.ok || !result.ok) {
           throw new Error(typeof result.error === 'string' ? result.error : GENERIC_ERROR);
         }
+
+        // La conversión se registra solo cuando el lead entró de verdad, no al
+        // pulsar el botón. Van únicamente datos de segmentación: nada que
+        // identifique a la persona sale del formulario hacia la analítica.
+        window.qpAnalytics?.trackEvent('generate_lead', {
+          lead_type: 'ventas',
+          content_name: 'contact_form',
+          form_country: String(data.country ?? ''),
+          service: String(data.service ?? ''),
+        });
 
         form.classList.add('hidden');
         successPanel?.classList.remove('hidden');

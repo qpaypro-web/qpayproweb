@@ -182,8 +182,20 @@ const SITE_COUNTRY = country.toUpperCase();
       })();
     }
 
+    // Las rutas llevan el país adelante (/gt/precios, /sv/precios) y el build
+    // genera archivos sueltos, así que puede aparecer el .html. Comparar contra
+    // location.pathname a secas nunca coincide: es lo que tenía sin disparar la
+    // vista de precios desde que el sitio pasó a ser multipaís.
+    var PREFIJO_PAIS = '/' + SITE_COUNTRY.toLowerCase();
+
+    function rutaSinPais() {
+      var p = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/+$/, '');
+      if (p === PREFIJO_PAIS) return '/';
+      return p.indexOf(PREFIJO_PAIS + '/') === 0 ? p.slice(PREFIJO_PAIS.length) : p || '/';
+    }
+
     // --- Vista de precios ---
-    if (location.pathname.replace(/\/$/, '') === '/precios') {
+    if (rutaSinPais() === '/precios') {
       whenTagsReady(function () {
         trackEvent('pricing_viewed', { content_name: 'pricing', content_category: 'qpaypro_services' }, { once: true });
       });
