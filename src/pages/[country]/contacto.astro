@@ -371,6 +371,9 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         widgetId = api.render(turnstileHost, {
           sitekey,
           language: 'es',
+          // Etiqueta que Cloudflare usa para segmentar la analítica del widget.
+          // No cambia el comportamiento: viaja en la respuesta de siteverify.
+          action: 'turnstile-spin-v2',
           // Sin clearError() aquí: tras un envío fallido se resetea el widget y
           // este callback vuelve a dispararse, así que limpiar el error borraría
           // el mensaje justo después de mostrarlo. El error se limpia al
