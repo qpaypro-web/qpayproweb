@@ -50,6 +50,44 @@ Los dos estados a medias son configuraciones rotas: o las dos, o ninguna.
 En cuanto se agregan las dos y se redespliega, la verificación se activa sola,
 sin tocar código.
 
+### El usuario detrás del refresh token
+
+El refresh token queda atado al **usuario de Zoho que generó el Self Client**. Si
+a ese usuario lo desactivan, la API responde `403 INACTIVE_USER` y el formulario
+deja de crear leads — sin ninguna señal visible, porque el visitante solo ve el
+mensaje genérico y el detalle se queda en el log de la Function.
+
+Ya pasó una vez. Conviene generarlo con una cuenta de servicio activa y no con la
+de una persona, que es la que tarde o temprano se desactiva cuando alguien sale.
+
+Quién firma la API **no** afecta a quién se le asigna el lead: de eso se encargan
+las assignment rules por país.
+
+Scopes que necesita la integración, separados por coma:
+
+```
+ZohoCRM.modules.leads.CREATE,ZohoCRM.modules.notes.CREATE
+```
+
+`notes.CREATE` es el de la Nota que se adjunta a un lead duplicado. Es fácil de
+olvidar y no falla de inmediato: sin él los leads nuevos entran bien y solo esa
+ruta falla, en silencio, porque responde `ok` igual.
+
+Para regenerarlo: `api-console.zoho.com` → Self Client → Generate Code → canjear
+el grant code, que **vive 10 minutos**, por el refresh token:
+
+```sh
+curl -s -X POST "https://accounts.zoho.com/oauth/v2/token" \
+  -d "grant_type=authorization_code" \
+  -d "client_id=…" -d "client_secret=…" -d "code=EL_GRANT_CODE"
+```
+
+El `refresh_token` se entrega **solo en ese primer canje**. Si se pierde, hay que
+volver a generar un grant code.
+
+Después hay que **redesplegar**: los deployments ya construidos conservan las
+variables que tenían y no recogen las nuevas por guardarlas.
+
 ### Datacenter de Zoho
 
 `accounts.zoho.com` es el de EE.UU. Si el Self Client se creó en
