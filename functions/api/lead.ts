@@ -114,7 +114,22 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
     method: 'POST',
     body,
   });
-  const result = (await response.json()) as { success?: boolean };
+  const result = (await response.json()) as {
+    success?: boolean;
+    hostname?: string;
+    'error-codes'?: string[];
+  };
+
+  // Sin esto, un captcha rechazado no deja rastro: el widget dice "¡Operación
+  // exitosa!" en pantalla y el servidor responde que no, sin decir por qué.
+  //   invalid-input-secret   → el secreto no es el del widget que emitió el token
+  //   invalid-input-response → token inválido, malformado o vencido
+  //   timeout-or-duplicate   → token ya usado, o de hace más de 5 minutos
+  if (result.success !== true) {
+    const codes = result['error-codes'] ?? [];
+    console.error(`[lead] Turnstile rechazó el token: ${JSON.stringify(codes)} (hostname: ${result.hostname ?? 'n/d'})`);
+  }
+
   return result.success === true;
 }
 
