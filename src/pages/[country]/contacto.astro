@@ -287,7 +287,13 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     }
 
     interface QpAnalytics {
-      trackEvent(nombre: string, datos?: Record<string, unknown>, opciones?: { once?: boolean }): string | null;
+      trackEvent(
+        nombre: string,
+        datos?: Record<string, unknown>,
+        opciones?: { once?: boolean; eventId?: string },
+      ): string | null;
+      conversionPayload(nombre: string, eventId: string, extra?: Record<string, unknown>): Record<string, unknown>;
+      newEventId(): string;
     }
 
     declare global {
@@ -416,11 +422,17 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       // aparte y explícito, así que este sobra en el payload.
       delete data['cf-turnstile-response'];
 
+      // El mismo id viaja al navegador y al servidor: es lo que permite que
+      // Meta reconozca los dos envíos como un solo evento y no lo cuente doble.
+      // Se genera antes del fetch porque el servidor lo necesita en la petición.
+      const eventId = window.qpAnalytics?.newEventId();
+      const meta = eventId ? window.qpAnalytics?.conversionPayload('Lead', eventId) : undefined;
+
       try {
         const response = await fetch('/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...data, turnstileToken: captchaToken }),
+          body: JSON.stringify({ ...data, turnstileToken: captchaToken, meta }),
         });
         const result = await response.json().catch(() => ({}));
 
@@ -431,12 +443,16 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         // La conversión se registra solo cuando el lead entró de verdad, no al
         // pulsar el botón. Van únicamente datos de segmentación: nada que
         // identifique a la persona sale del formulario hacia la analítica.
-        window.qpAnalytics?.trackEvent('generate_lead', {
-          lead_type: 'ventas',
-          content_name: 'contact_form',
-          form_country: String(data.country ?? ''),
-          service: String(data.service ?? ''),
-        });
+        window.qpAnalytics?.trackEvent(
+          'generate_lead',
+          {
+            lead_type: 'ventas',
+            content_name: 'contact_form',
+            form_country: String(data.country ?? ''),
+            service: String(data.service ?? ''),
+          },
+          eventId ? { eventId } : undefined,
+        );
 
         form.classList.add('hidden');
         successPanel?.classList.remove('hidden');
