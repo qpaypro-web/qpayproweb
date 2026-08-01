@@ -229,7 +229,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
     .filter((key) => !env[key]);
   if (missingConfig.length) {
     console.error(`[lead] Faltan variables de entorno: ${missingConfig.join(', ')}`);
-    return fail(`${GENERIC_ERROR} [diag: faltan ${missingConfig.join(', ')}]`, 500);
+    return fail(GENERIC_ERROR, 500);
   }
 
   // El captcha se exige solo si hay secreto configurado. Sin él el endpoint
@@ -237,17 +237,8 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   // IP— y la verificación se activa sola en cuanto la variable exista.
   if (env.TURNSTILE_SECRET_KEY) {
     const turnstileToken = text(payload.turnstileToken, 2048);
-    if (!turnstileToken) {
-      return fail('No se pudo verificar que no eres un robot. [diag: el navegador no mandó token]', 400);
-    }
-    const verdict = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, ip);
-    if (!verdict.ok) {
-      // TEMPORAL — diagnóstico en pantalla mientras se depura por qué Turnstile
-      // rechaza tokens que el widget da por buenos. Quitar en cuanto se resuelva
-      // y volver al mensaje genérico: los códigos no son secretos, pero tampoco
-      // le dicen nada útil a quien está llenando el formulario.
-      const diag = `${verdict.codes.join(', ') || 'sin código'} · host: ${verdict.hostname ?? 'n/d'} · ip: ${ip ? 'sí' : 'no'}`;
-      return fail(`No se pudo verificar que no eres un robot. [diag: ${diag}]`, 400);
+    if (!turnstileToken || !(await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, ip)).ok) {
+      return fail('No se pudo verificar que no eres un robot. Recarga la página e inténtalo de nuevo.', 400);
     }
   } else {
     console.warn('[lead] Sin TURNSTILE_SECRET_KEY: se acepta el envío sin verificar el captcha.');
@@ -362,18 +353,16 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
 
     if (!response.ok || entry?.status !== 'success') {
       // El detalle se queda en el log: puede nombrar campos internos del CRM.
-      console.error(`[lead] Zoho ${response.status}: ${JSON.stringify(result)}`);
-      // TEMPORAL — ver el comentario del diagnóstico de Turnstile más arriba.
-      const diag = `zoho ${response.status} · ${zohoCode ?? 'sin code'} · ${zohoMessage ?? 'sin message'}`;
-      return fail(`${GENERIC_ERROR} [diag: ${diag}]`, 502);
+      console.error(
+        `[lead] Zoho ${response.status} · ${zohoCode ?? 'sin code'} · ${zohoMessage ?? 'sin message'}: ${JSON.stringify(result)}`,
+      );
+      return fail(GENERIC_ERROR, 502);
     }
 
     return json({ ok: true });
   } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    console.error(`[lead] ${detail}`);
-    // TEMPORAL — igual que arriba.
-    return fail(`${GENERIC_ERROR} [diag: ${detail}]`, 502);
+    console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);
+    return fail(GENERIC_ERROR, 502);
   }
 }
 
