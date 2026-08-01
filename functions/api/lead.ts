@@ -327,15 +327,22 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       }),
     });
 
+    // Zoho responde con dos formas distintas: los errores por registro vienen
+    // dentro de `data[]`, pero los de autorización —token sin scope, usuario sin
+    // permiso— llegan en la raíz. Leer solo `data[0]` deja esos últimos mudos.
     const result = (await response.json()) as {
       data?: Array<{ code?: string; status?: string; message?: string; details?: unknown }>;
+      code?: string;
+      message?: string;
     };
     const entry = result.data?.[0];
+    const zohoCode = entry?.code ?? result.code;
+    const zohoMessage = entry?.message ?? result.message;
 
     // Un lead repetido no es un error para quien escribe: ya está en el CRM. Lo
     // que no puede pasar es que su mensaje nuevo se pierda sin que nadie en
     // ventas se entere, así que se cuelga como Nota del lead existente.
-    if (entry?.code === 'DUPLICATE_DATA') {
+    if (zohoCode === 'DUPLICATE_DATA') {
       const leadId = duplicateLeadId(entry.details);
       if (leadId) {
         const note = [
@@ -357,7 +364,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       // El detalle se queda en el log: puede nombrar campos internos del CRM.
       console.error(`[lead] Zoho ${response.status}: ${JSON.stringify(result)}`);
       // TEMPORAL — ver el comentario del diagnóstico de Turnstile más arriba.
-      const diag = `zoho ${response.status} · ${entry?.code ?? 'sin code'} · ${entry?.message ?? 'sin message'}`;
+      const diag = `zoho ${response.status} · ${zohoCode ?? 'sin code'} · ${zohoMessage ?? 'sin message'}`;
       return fail(`${GENERIC_ERROR} [diag: ${diag}]`, 502);
     }
 
