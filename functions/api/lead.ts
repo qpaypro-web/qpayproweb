@@ -255,8 +255,8 @@ async function enviarEventoMeta(
   meta: MetaPayload,
   persona: { email: string; phone: string; firstName: string; lastName: string; country: string },
   contexto: { ip: string | null; interest: string },
-): Promise<void> {
-  if (!env.META_CAPI_TOKEN) return;
+): Promise<string> {
+  if (!env.META_CAPI_TOKEN) return 'sin META_CAPI_TOKEN';
 
   try {
     const hash = async (valor: string) => (valor ? await sha256Hex(normalizar(valor)) : null);
@@ -303,12 +303,16 @@ async function enviarEventoMeta(
 
     const resultado = (await response.json()) as { events_received?: number; error?: { message?: string } };
     if (!response.ok || resultado.error) {
-      console.error(`[lead] Meta ${response.status}: ${resultado.error?.message ?? JSON.stringify(resultado)}`);
-    } else {
-      console.log(`[lead] Meta recibió ${resultado.events_received ?? 0} evento(s)`);
+      const detalle = resultado.error?.message ?? JSON.stringify(resultado);
+      console.error(`[lead] Meta ${response.status}: ${detalle}`);
+      return `error ${response.status}: ${detalle}`;
     }
+    console.log(`[lead] Meta recibió ${resultado.events_received ?? 0} evento(s)`);
+    return `ok, recibidos ${resultado.events_received ?? 0}, id ${evento.event_id}`;
   } catch (error) {
-    console.error(`[lead] Meta falló: ${error instanceof Error ? error.message : String(error)}`);
+    const detalle = error instanceof Error ? error.message : String(error);
+    console.error(`[lead] Meta falló: ${detalle}`);
+    return `excepción: ${detalle}`;
   }
 }
 
@@ -389,6 +393,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       { ip, interest },
     );
     if (waitUntil) waitUntil(envio);
+    return envio;
   };
 
   const lead: Record<string, unknown> = {
@@ -479,8 +484,10 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       return fail(GENERIC_ERROR, 502);
     }
 
-    notificarMeta();
-    return json({ ok: true });
+    // TEMPORAL — se espera la respuesta de Meta y se devuelve para poder
+    // verificar la integración desde fuera. Quitar en cuanto esté confirmada:
+    // en régimen normal el envío no debe retrasar la respuesta al visitante.
+    return json({ ok: true, meta: await notificarMeta() });
   } catch (error) {
     console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);
     return fail(GENERIC_ERROR, 502);
