@@ -254,18 +254,19 @@ async function enviarEventoMeta(
   env: Env,
   meta: MetaPayload,
   persona: { email: string; phone: string; firstName: string; lastName: string; country: string },
-  contexto: { ip: string | null; interest: string },
+  contexto: { ip: string | null; interest: string; crmId?: string | null },
 ): Promise<string> {
   if (!env.META_CAPI_TOKEN) return 'sin META_CAPI_TOKEN';
 
   try {
     const hash = async (valor: string) => (valor ? await sha256Hex(normalizar(valor)) : null);
-    const [em, ph, fn, ln, country] = await Promise.all([
+    const [em, ph, fn, ln, country, externalId] = await Promise.all([
       hash(persona.email),
       hash(persona.phone.replace(/\D/g, '')),
       hash(persona.firstName),
       hash(persona.lastName),
       hash(PAIS_ISO[persona.country] ?? ''),
+      hash(contexto.crmId ?? ''),
     ]);
 
     const userData: Record<string, unknown> = {};
@@ -274,6 +275,10 @@ async function enviarEventoMeta(
     if (fn) userData.fn = [fn];
     if (ln) userData.ln = [ln];
     if (country) userData.country = [country];
+    // El id del lead en Zoho. Es la misma clave que usa la integración del CRM
+    // para los eventos de ciclo de vida, así que Meta puede reconocer al mismo
+    // registro cuando más adelante pase a QualifiedLead o a venta.
+    if (externalId) userData.external_id = [externalId];
     if (meta.fbp) userData.fbp = meta.fbp;
     if (meta.fbc) userData.fbc = meta.fbc;
     if (contexto.ip) userData.client_ip_address = contexto.ip;
@@ -385,12 +390,12 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
 
   // El evento sale sin bloquear la respuesta: quien envió el formulario no
   // tiene por qué esperar a que Meta conteste.
-  const notificarMeta = () => {
+  const notificarMeta = (crmId?: string | null) => {
     const envio = enviarEventoMeta(
       env,
       (payload.meta ?? {}) as MetaPayload,
       { email, phone, firstName, lastName, country },
-      { ip, interest },
+      { ip, interest, crmId },
     );
     if (waitUntil) waitUntil(envio);
     return envio;
@@ -471,7 +476,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       }
       // Un duplicado sigue siendo una conversión: la persona llenó el formulario
       // y ventas recibe su mensaje en la nota. Para la campaña cuenta igual.
-      notificarMeta();
+      notificarMeta(leadId);
       console.log(`[lead] Duplicado para ${email}`);
       return json({ ok: true });
     }
@@ -484,7 +489,8 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       return fail(GENERIC_ERROR, 502);
     }
 
-    notificarMeta();
+    // `details.id` trae el id del lead recién creado, que viaja como external_id.
+    notificarMeta(duplicateLeadId(entry?.details));
     return json({ ok: true });
   } catch (error) {
     console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);
