@@ -125,12 +125,12 @@ async function verifyTurnstile(token: string, secret: string, ip: string | null)
   //   invalid-input-secret   → el secreto no es el del widget que emitió el token
   //   invalid-input-response → token inválido, malformado o vencido
   //   timeout-or-duplicate   → token ya usado, o de hace más de 5 minutos
+  const codes = result['error-codes'] ?? [];
   if (result.success !== true) {
-    const codes = result['error-codes'] ?? [];
     console.error(`[lead] Turnstile rechazó el token: ${JSON.stringify(codes)} (hostname: ${result.hostname ?? 'n/d'})`);
   }
 
-  return result.success === true;
+  return { ok: result.success === true, codes, hostname: result.hostname };
 }
 
 /**
@@ -237,8 +237,17 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   // IP— y la verificación se activa sola en cuanto la variable exista.
   if (env.TURNSTILE_SECRET_KEY) {
     const turnstileToken = text(payload.turnstileToken, 2048);
-    if (!turnstileToken || !(await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, ip))) {
-      return fail('No se pudo verificar que no eres un robot. Recarga la página e inténtalo de nuevo.', 400);
+    if (!turnstileToken) {
+      return fail('No se pudo verificar que no eres un robot. [diag: el navegador no mandó token]', 400);
+    }
+    const verdict = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, ip);
+    if (!verdict.ok) {
+      // TEMPORAL — diagnóstico en pantalla mientras se depura por qué Turnstile
+      // rechaza tokens que el widget da por buenos. Quitar en cuanto se resuelva
+      // y volver al mensaje genérico: los códigos no son secretos, pero tampoco
+      // le dicen nada útil a quien está llenando el formulario.
+      const diag = `${verdict.codes.join(', ') || 'sin código'} · host: ${verdict.hostname ?? 'n/d'} · ip: ${ip ? 'sí' : 'no'}`;
+      return fail(`No se pudo verificar que no eres un robot. [diag: ${diag}]`, 400);
     }
   } else {
     console.warn('[lead] Sin TURNSTILE_SECRET_KEY: se acepta el envío sin verificar el captcha.');
