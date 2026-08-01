@@ -225,6 +225,21 @@ async function attachNote(host: string, accessToken: string, leadId: string, con
   }
 }
 
+/**
+ * El id con el que Meta reconoce que dos envíos son la misma conversión.
+ *
+ * Se deriva del id del lead en Zoho porque la automatización del CRM
+ * (`automation.sendLeadToMeta`) ya usa exactamente `lead_<id>`. Al compartirlo,
+ * si esa automatización también dispara el evento para un lead que entró por el
+ * formulario, Meta lo deduplica en vez de contar la conversión dos veces.
+ *
+ * Solo se cae al id del navegador cuando Zoho no devolvió el registro.
+ */
+function idDeEvento(crmId: string | null | undefined, idDelNavegador?: string): string {
+  if (crmId) return `lead_${crmId}`;
+  return idDelNavegador || crypto.randomUUID();
+}
+
 /** Meta identifica a la persona por hashes, nunca por el dato en claro. */
 async function sha256Hex(valor: string): Promise<string> {
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(valor));
@@ -254,7 +269,7 @@ async function enviarEventoMeta(
   env: Env,
   meta: MetaPayload,
   persona: { email: string; phone: string; firstName: string; lastName: string; country: string },
-  contexto: { ip: string | null; interest: string; crmId?: string | null },
+  contexto: { ip: string | null; interest: string; crmId?: string | null; eventId: string },
 ): Promise<string> {
   if (!env.META_CAPI_TOKEN) return 'sin META_CAPI_TOKEN';
 
@@ -287,9 +302,7 @@ async function enviarEventoMeta(
     const evento = {
       event_name: 'Lead',
       event_time: Math.floor(Date.now() / 1000),
-      // Si el navegador no mandó id es porque tampoco disparó el píxel, así que
-      // no hay nada con lo que deduplicar y uno propio sirve igual.
-      event_id: meta.event_id || crypto.randomUUID(),
+      event_id: contexto.eventId,
       event_source_url: meta.event_source_url,
       action_source: 'website',
       user_data: userData,
@@ -390,15 +403,18 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
 
   // El evento sale sin bloquear la respuesta: quien envió el formulario no
   // tiene por qué esperar a que Meta conteste.
+  const metaDelNavegador = (payload.meta ?? {}) as MetaPayload;
+
   const notificarMeta = (crmId?: string | null) => {
+    const eventId = idDeEvento(crmId, metaDelNavegador.event_id);
     const envio = enviarEventoMeta(
       env,
-      (payload.meta ?? {}) as MetaPayload,
+      metaDelNavegador,
       { email, phone, firstName, lastName, country },
-      { ip, interest, crmId },
+      { ip, interest, crmId, eventId },
     );
     if (waitUntil) waitUntil(envio);
-    return envio;
+    return eventId;
   };
 
   const lead: Record<string, unknown> = {
@@ -476,9 +492,9 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       }
       // Un duplicado sigue siendo una conversión: la persona llenó el formulario
       // y ventas recibe su mensaje en la nota. Para la campaña cuenta igual.
-      notificarMeta(leadId);
+      const eventIdDuplicado = notificarMeta(leadId);
       console.log(`[lead] Duplicado para ${email}`);
-      return json({ ok: true });
+      return json({ ok: true, eventId: eventIdDuplicado });
     }
 
     if (!response.ok || entry?.status !== 'success') {
@@ -489,9 +505,10 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       return fail(GENERIC_ERROR, 502);
     }
 
-    // `details.id` trae el id del lead recién creado, que viaja como external_id.
-    notificarMeta(duplicateLeadId(entry?.details));
-    return json({ ok: true });
+    // `details.id` trae el id del lead recién creado. Se devuelve el id de evento
+    // para que el píxel del navegador dispare con el mismo y no se duplique.
+    const eventId = notificarMeta(duplicateLeadId(entry?.details));
+    return json({ ok: true, eventId });
   } catch (error) {
     console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);
     return fail(GENERIC_ERROR, 502);
