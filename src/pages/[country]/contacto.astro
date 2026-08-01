@@ -1,7 +1,19 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Icon from '../../components/Icon.astro';
-import { countryPaths, getCountry } from '../../lib/country';
+import { countryPaths, getCountry, COUNTRY_LABELS, withCountry } from '../../lib/country';
+
+// Los valores que acepta el formulario. La función de /api/lead vuelve a
+// validarlos del lado del servidor: lo que llega del navegador no es confiable
+// y Zoho rechaza cualquier valor fuera de lista con INVALID_DATA.
+const COUNTRY_OPTIONS = ['Guatemala', 'El Salvador'];
+
+// El nombre del modelo cambia por país (POS Cute en Guatemala, POS A920 en El
+// Salvador), pero en el formulario la opción es la misma en los dos: al cliente
+// se le pregunta por el producto, no por el aparato.
+const SERVICE_OPTIONS = ['Pagos con tarjeta', 'Tienda en línea', 'Punto de venta', 'Terminal POS'];
+
+const MESSAGE_MAX = 200;
 
 const SUPPORT_LINKS = [
   { href: 'https://api.whatsapp.com/send/?phone=50247856011', icon: 'message-circle', title: 'WhatsApp', subtitle: 'Ayuda más rápida' },
@@ -31,6 +43,15 @@ const OFFICES = [
 export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
 const c = getCountry(country);
+
+// La ruta ya dice en qué país está el visitante, así que el select llega
+// marcado. Se deja editable: el país de la ruta es una suposición, no un dato.
+const countryLabel = COUNTRY_LABELS[country as keyof typeof COUNTRY_LABELS];
+const privacyHref = withCountry(country, '/politicas-de-privacidad');
+
+// Pública por diseño: Turnstile valida el par sitekey/dominio y el secreto que
+// verifica el token vive solo en la Function.
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 ---
 
 <MainLayout
@@ -87,68 +108,80 @@ const c = getCountry(country);
         </div>
         <form data-contact-form class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Nombre *</label>
-            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu nombre" />
+            <label for="cf-first-name" class="block text-[#3a3d47] text-sm font-medium mb-2">Nombre *</label>
+            <input id="cf-first-name" name="first_name" autocomplete="given-name" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu nombre" />
           </div>
           <div>
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Apellido *</label>
-            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu apellido" />
+            <label for="cf-last-name" class="block text-[#3a3d47] text-sm font-medium mb-2">Apellido *</label>
+            <input id="cf-last-name" name="last_name" autocomplete="family-name" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu apellido" />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Empresa *</label>
-            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Nombre de tu empresa" />
+            <label for="cf-company" class="block text-[#3a3d47] text-sm font-medium mb-2">Empresa *</label>
+            <input id="cf-company" name="company" autocomplete="organization" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Nombre de tu empresa" />
           </div>
           <div>
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Email *</label>
-            <input type="email" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="tucorreo@ejemplo.com" />
+            <label for="cf-email" class="block text-[#3a3d47] text-sm font-medium mb-2">Email *</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="tucorreo@ejemplo.com" />
           </div>
           <div>
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">Teléfono *</label>
-            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="+502 0000-0000" />
+            <label for="cf-phone" class="block text-[#3a3d47] text-sm font-medium mb-2">Teléfono *</label>
+            <input id="cf-phone" name="phone" type="tel" autocomplete="tel" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="+502 0000-0000" />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">País *</label>
-            <select required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition">
-              <option value="" disabled selected>Selecciona una opción</option>
-              <option>Guatemala</option>
-              <option>El Salvador</option>
+            <label for="cf-country" class="block text-[#3a3d47] text-sm font-medium mb-2">País *</label>
+            <select id="cf-country" name="country" autocomplete="country-name" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition">
+              <option value="" disabled selected={!countryLabel}>Selecciona una opción</option>
+              {COUNTRY_OPTIONS.map((option) => (
+                <option value={option} selected={option === countryLabel}>{option}</option>
+              ))}
             </select>
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué producto o servicio vendes? *</label>
-            <input required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Describe brevemente tu producto o servicio" />
+            <label for="cf-product" class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué producto o servicio vendes? *</label>
+            <input id="cf-product" name="product" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Describe brevemente tu producto o servicio" />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué servicio te interesa? *</label>
-            <select required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition">
+            <label for="cf-service" class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué servicio te interesa? *</label>
+            <select id="cf-service" name="service" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition">
               <option value="" disabled selected>Selecciona una opción</option>
-              <option>Pagos con tarjeta</option>
-              <option>Tienda en línea</option>
-              <option>Punto de venta</option>
-              {/* El nombre del modelo cambia por país (POS Cute en Guatemala,
-                  POS A920 en El Salvador), pero en el formulario la opción es
-                  la misma en los dos: al cliente se le pregunta por el
-                  producto, no por el aparato. */}
-              <option>Terminal POS</option>
+              {SERVICE_OPTIONS.map((option) => <option value={option}>{option}</option>)}
             </select>
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[#3a3d47] text-sm font-medium mb-2">¿Cómo podemos ayudarte? (Opcional)</label>
-            <textarea rows="4" class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition resize-none" placeholder="Cuéntanos más sobre lo que necesitas"></textarea>
+            <label for="cf-message" class="block text-[#3a3d47] text-sm font-medium mb-2">¿Cómo podemos ayudarte? (Opcional)</label>
+            <textarea id="cf-message" name="message" rows="4" maxlength={MESSAGE_MAX} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition resize-none" placeholder="Cuéntanos más sobre lo que necesitas"></textarea>
+          </div>
+
+          {/* Trampa para bots. Fuera de la vista pero sin display:none, que es
+              lo que muchos bots detectan; oculto también para lectores de
+              pantalla y fuera del orden de tabulación. */}
+          <div aria-hidden="true" class="sr-only">
+            <label for="cf-website">No llenar este campo</label>
+            <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
           <div class="sm:col-span-2 flex justify-center">
-            <label class="flex items-center gap-3 w-full sm:w-fit rounded-xl border border-black/12 bg-[#f9fafb] px-4 py-3.5 cursor-pointer select-none hover:border-black/20 transition-colors">
-              <input type="checkbox" data-recaptcha-checkbox class="w-5 h-5 accent-[#0047ba]" />
-              <span class="text-[#3a3d47] text-sm font-medium flex-1">No soy un robot</span>
-              <span class="text-[10px] text-[#9aa0aa] leading-tight text-right">reCAPTCHA<br />Privacidad · Términos</span>
-            </label>
+            <div data-turnstile data-sitekey={turnstileSiteKey} class="min-h-[65px]"></div>
           </div>
-          <div class="sm:col-span-2 mt-2 flex justify-center">
+
+          {/* El error no reemplaza al formulario: se anuncia arriba del botón y
+              deja intacto lo que la persona ya escribió, para que reintentar no
+              signifique volver a llenarlo todo. */}
+          <div data-contact-error role="alert" class="hidden sm:col-span-2 rounded-xl border border-[#c0392b]/25 bg-[#c0392b]/[0.06] px-4 py-3.5">
+            <p class="text-[#a5281c] text-sm font-medium" data-contact-error-text></p>
+          </div>
+
+          <div class="sm:col-span-2 mt-2 flex flex-col items-center gap-4">
             <button type="submit" disabled data-submit-btn class="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 bg-[#c8cbd2] text-white cursor-not-allowed">
-              Enviar mensaje
-              <Icon name="send" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <span data-submit-label>Enviar mensaje</span>
+              <Icon name="send" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" data-submit-icon />
+              <span data-submit-spinner class="hidden w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
             </button>
+            <p class="text-[#8a8f9a] text-xs text-center max-w-md leading-relaxed">
+              Al enviar aceptas que Qpaypro trate tus datos para contactarte. Consulta nuestra
+              <a href={privacyHref} class="text-[#0047ba] hover:underline">política de privacidad</a>.
+            </p>
           </div>
+          <p data-contact-status role="status" aria-live="polite" class="sr-only"></p>
         </form>
       </div>
     </div>
@@ -224,27 +257,158 @@ const c = getCountry(country);
     </div>
   </section>
 
+  <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+
   <script>
+    interface Turnstile {
+      render(el: HTMLElement, opts: Record<string, unknown>): string;
+      reset(id?: string): void;
+    }
+
+    declare global {
+      interface Window {
+        turnstile?: Turnstile;
+      }
+    }
+
     const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
-    const checkbox = document.querySelector<HTMLInputElement>('[data-recaptcha-checkbox]');
     const submitBtn = document.querySelector<HTMLButtonElement>('[data-submit-btn]');
+    const submitLabel = document.querySelector<HTMLElement>('[data-submit-label]');
+    const submitIcon = document.querySelector<SVGElement>('[data-submit-icon]');
+    const submitSpinner = document.querySelector<HTMLElement>('[data-submit-spinner]');
     const successPanel = document.querySelector<HTMLElement>('[data-contact-success]');
+    const errorPanel = document.querySelector<HTMLElement>('[data-contact-error]');
+    const errorText = document.querySelector<HTMLElement>('[data-contact-error-text]');
+    const statusLine = document.querySelector<HTMLElement>('[data-contact-status]');
+    const turnstileHost = document.querySelector<HTMLElement>('[data-turnstile]');
 
     const ENABLED = ['bg-[#0047ba]', 'text-white', 'hover:bg-[#0f206c]'];
     const DISABLED = ['bg-[#c8cbd2]', 'text-white', 'cursor-not-allowed'];
 
-    checkbox?.addEventListener('change', () => {
-      if (!submitBtn) return;
-      submitBtn.disabled = !checkbox.checked;
-      submitBtn.classList.remove(...ENABLED, ...DISABLED);
-      submitBtn.classList.add(...(checkbox.checked ? ENABLED : DISABLED));
-    });
+    const GENERIC_ERROR = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.';
 
-    form?.addEventListener('submit', (e) => {
+    let captchaToken = '';
+    let widgetId: string | undefined;
+    let sending = false;
+
+    function setEnabled(enabled: boolean) {
+      if (!submitBtn) return;
+      submitBtn.disabled = !enabled;
+      submitBtn.classList.remove(...ENABLED, ...DISABLED);
+      submitBtn.classList.add(...(enabled ? ENABLED : DISABLED));
+    }
+
+    function showError(message: string) {
+      if (errorText) errorText.textContent = message;
+      errorPanel?.classList.remove('hidden');
+      if (statusLine) statusLine.textContent = message;
+    }
+
+    function clearError() {
+      errorPanel?.classList.add('hidden');
+      if (statusLine) statusLine.textContent = '';
+    }
+
+    function setSending(value: boolean) {
+      sending = value;
+      if (submitLabel) submitLabel.textContent = value ? 'Enviando…' : 'Enviar mensaje';
+      submitIcon?.classList.toggle('hidden', value);
+      submitSpinner?.classList.toggle('hidden', !value);
+      // Durante el envío el botón se bloquea aunque haya token, para que un
+      // doble clic no cree dos leads.
+      setEnabled(!value && Boolean(captchaToken));
+      if (value && statusLine) statusLine.textContent = 'Enviando tu mensaje…';
+    }
+
+    // Turnstile carga de forma asíncrona y este módulo puede ejecutarse antes o
+    // después, así que se espera al objeto global en vez de depender del orden.
+    function whenTurnstileReady(callback: (api: Turnstile) => void) {
+      if (window.turnstile) return callback(window.turnstile);
+      let waited = 0;
+      const timer = window.setInterval(() => {
+        if (window.turnstile) {
+          window.clearInterval(timer);
+          callback(window.turnstile);
+        } else if ((waited += 150) > 15000) {
+          window.clearInterval(timer);
+          showError('No se pudo cargar la verificación de seguridad. Recarga la página.');
+        }
+      }, 150);
+    }
+
+    const sitekey = turnstileHost?.dataset.sitekey ?? '';
+
+    if (!turnstileHost || !sitekey) {
+      // Sin sitekey el formulario quedaría sin protección: se prefiere que no
+      // envíe y se note, antes que aceptar spam en silencio.
+      showError('El formulario no está disponible en este momento. Escríbenos por WhatsApp mientras tanto.');
+      console.error('[contacto] Falta PUBLIC_TURNSTILE_SITE_KEY: el formulario queda deshabilitado.');
+    } else {
+      whenTurnstileReady((api) => {
+        widgetId = api.render(turnstileHost, {
+          sitekey,
+          language: 'es',
+          // Sin clearError() aquí: tras un envío fallido se resetea el widget y
+          // este callback vuelve a dispararse, así que limpiar el error borraría
+          // el mensaje justo después de mostrarlo. El error se limpia al
+          // reintentar el envío, no al llegar un token nuevo.
+          callback: (token: string) => {
+            captchaToken = token;
+            setEnabled(!sending);
+          },
+          'expired-callback': () => {
+            captchaToken = '';
+            setEnabled(false);
+          },
+          'error-callback': () => {
+            captchaToken = '';
+            setEnabled(false);
+            showError('No se pudo completar la verificación de seguridad. Inténtalo de nuevo.');
+          },
+        });
+      });
+    }
+
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!checkbox?.checked) return;
-      form.classList.add('hidden');
-      successPanel?.classList.remove('hidden');
+      if (sending || !form.reportValidity()) return;
+      if (!captchaToken) {
+        showError('Completa la verificación de seguridad antes de enviar.');
+        return;
+      }
+
+      clearError();
+      setSending(true);
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Turnstile inyecta su propio input en el formulario; el token se manda
+      // aparte y explícito, así que este sobra en el payload.
+      delete data['cf-turnstile-response'];
+
+      try {
+        const response = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...data, turnstileToken: captchaToken }),
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.ok) {
+          throw new Error(typeof result.error === 'string' ? result.error : GENERIC_ERROR);
+        }
+
+        form.classList.add('hidden');
+        successPanel?.classList.remove('hidden');
+        if (statusLine) statusLine.textContent = 'Mensaje enviado.';
+      } catch (error) {
+        // El token de Turnstile es de un solo uso: si el envío falló hay que
+        // pedir uno nuevo o el reintento se rechaza siempre.
+        captchaToken = '';
+        if (widgetId !== undefined) window.turnstile?.reset(widgetId);
+        setSending(false);
+        setEnabled(false);
+        showError(error instanceof Error ? error.message : GENERIC_ERROR);
+      }
     });
   </script>
 </MainLayout>

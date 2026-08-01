@@ -56,7 +56,11 @@ export async function capturePage(url, outDir, { settleMs = 700, initialWaitMs =
     for (const f of fs.readdirSync(dir)) fs.unlinkSync(path.join(dir, f));
 
     const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
-    await page.goto(url, { waitUntil: 'networkidle' });
+    // `networkidle` es el ideal, pero no se cumple nunca en /contacto: el
+    // widget de Turnstile deja conexiones vivas. Se espera con tiempo límite y,
+    // si no llega, basta con `load` más la pausa de settle de abajo.
+    await page.goto(url, { waitUntil: 'load' });
+    await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
     await page.waitForTimeout(initialWaitMs);
 
     const scroller = await detectScroller(page);

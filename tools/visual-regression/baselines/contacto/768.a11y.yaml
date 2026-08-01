@@ -1,11 +1,11 @@
 - navigation:
   - link "Qpaypro":
-    - /url: index.html
+    - /url: /gt
     - img "Qpaypro"
   - button "Ingresa":
     - text: Ingresa
     - img
-  - button:
+  - button "Abrir menú":
     - img
 - heading "Soporte" [level=1]
 - paragraph: Obtén asistencia en cualquiera de nuestros canales
@@ -32,36 +32,47 @@
 - heading "Hablemos de tu negocio" [level=2]
 - paragraph: Cuéntanos de tu negocio y un asesor te contactará para ayudarte a vender más.
 - text: Nombre *
-- textbox "Tu nombre"
+- textbox "Nombre *":
+  - /placeholder: Tu nombre
 - text: Apellido *
-- textbox "Tu apellido"
+- textbox "Apellido *":
+  - /placeholder: Tu apellido
 - text: Empresa *
-- textbox "Nombre de tu empresa"
+- textbox "Empresa *":
+  - /placeholder: Nombre de tu empresa
 - text: Email *
-- textbox "tucorreo@ejemplo.com"
+- textbox "Email *":
+  - /placeholder: tucorreo@ejemplo.com
 - text: Teléfono *
-- textbox "+502 0000-0000"
+- textbox "Teléfono *":
+  - /placeholder: +502 0000-0000
 - text: País *
-- combobox:
-  - option "Selecciona una opción" [disabled] [selected]
-  - option "Guatemala"
+- combobox "País *":
+  - option "Selecciona una opción" [disabled]
+  - option "Guatemala" [selected]
   - option "El Salvador"
 - text: ¿Qué producto o servicio vendes? *
-- textbox "Describe brevemente tu producto o servicio"
+- textbox "¿Qué producto o servicio vendes? *":
+  - /placeholder: Describe brevemente tu producto o servicio
 - text: ¿Qué servicio te interesa? *
-- combobox:
+- combobox "¿Qué servicio te interesa? *":
   - option "Selecciona una opción" [disabled] [selected]
   - option "Pagos con tarjeta"
   - option "Tienda en línea"
   - option "Punto de venta"
-  - option "POS Cute"
+  - option "Terminal POS"
 - text: ¿Cómo podemos ayudarte? (Opcional)
-- textbox "Cuéntanos más sobre lo que necesitas"
-- checkbox "No soy un robot reCAPTCHA Privacidad · Términos"
-- text: No soy un robot reCAPTCHA Privacidad · Términos
-- button "Enviar mensaje" [disabled]:
+- textbox "¿Cómo podemos ayudarte? (Opcional)":
+  - /placeholder: Cuéntanos más sobre lo que necesitas
+- button "Enviar mensaje":
   - text: Enviar mensaje
   - img
+- paragraph:
+  - text: Al enviar aceptas que Qpaypro trate tus datos para contactarte. Consulta nuestra
+  - link "política de privacidad":
+    - /url: /gt/politicas-de-privacidad
+  - text: .
+- status
 - paragraph: Estamos para ayudarte
 - heading "Nuestras oficinas" [level=2]
 - img
@@ -93,61 +104,77 @@
 - contentinfo:
   - img "Qpaypro"
   - paragraph: La plataforma de pagos moderna para negocios que quieren crecer.
-  - link "X":
-    - /url: "#"
-    - img
   - link "LinkedIn":
-    - /url: "#"
+    - /url: https://www.linkedin.com/company/qpaypro
     - img
   - link "YouTube":
-    - /url: "#"
+    - /url: https://www.youtube.com/@qpaypro
     - img
   - link "Instagram":
-    - /url: "#"
+    - /url: https://www.instagram.com/qpaypro
     - img
   - link "Facebook":
-    - /url: "#"
+    - /url: https://www.facebook.com/qpaypro/?locale=es_LA
     - img
   - heading "Producto" [level=4]
   - list:
     - listitem:
       - link "Pagos":
-        - /url: "#"
+        - /url: /gt/pasarela-de-pagos
     - listitem:
-      - link "Terminal POS":
-        - /url: "#"
+      - link "Punto de Venta":
+        - /url: /gt/sistema-pos
+    - listitem:
+      - link "Terminal de Cobro POS":
+        - /url: /gt/terminal-pos
   - heading "Soluciones" [level=4]
   - list:
     - listitem:
       - link "E-commerce":
-        - /url: "#"
+        - /url: /gt/ecommerce
     - listitem:
       - link "Retail":
-        - /url: "#"
-    - listitem:
-      - link "Marketplace":
-        - /url: "#"
+        - /url: /gt/retail
   - heading "Qpaypro" [level=4]
   - list:
     - listitem:
       - link "Blog":
-        - /url: "#"
+        - /url: /gt/blog
     - listitem:
       - link "Sobre Qpaypro":
-        - /url: "#"
+        - /url: /gt/sobre-qpaypro
     - listitem:
       - link "Seguridad":
-        - /url: "#"
+        - /url: /gt/seguridad
   - heading "Contacto" [level=4]
   - list:
-    - listitem: Guatemala +(502) 2355-6000
-    - listitem: El Salvador +(503) 2208-2300
-    - listitem: WhatsApp +(502) 4785-6011
-    - listitem: soporte@qpaypro.com
+    - listitem:
+      - link "Guatemala +(502) 2355-6000":
+        - /url: tel:+50223556000
+    - listitem:
+      - link "El Salvador +(503) 2208-2300":
+        - /url: tel:+50322082300
+    - listitem:
+      - link "WhatsApp +(502) 4785-6011":
+        - /url: https://api.whatsapp.com/send/?phone=50247856011
+    - listitem:
+      - link "soporte@qpaypro.com":
+        - /url: mailto:soporte@qpaypro.com
   - paragraph: © 2026 Qpaypro. Todos los derechos reservados.
   - link "Política de privacidad":
-    - /url: "#"
+    - /url: /gt/politicas-de-privacidad
   - link "Términos del servicio":
-    - /url: "#"
+    - /url: /gt/terminos-condiciones
   - link "Seguridad":
-    - /url: "#"
+    - /url: /gt/seguridad
+  - button "Preferencias de cookies"
+- dialog "Preferencias de cookies":
+  - heading "Cookies y privacidad" [level=2]
+  - paragraph:
+    - text: Usamos cookies necesarias para que el sitio funcione. Con tu permiso también usamos cookies de analítica, para entender cómo se usa el sitio, y de marketing, para medir nuestras campañas. Puedes cambiar tu elección cuando quieras.
+    - link "Ver políticas de privacidad":
+      - /url: /gt/politicas-de-privacidad
+    - text: .
+  - button "Aceptar todas"
+  - button "Solo necesarias"
+  - button "Personalizar"

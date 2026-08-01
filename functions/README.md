@@ -1,0 +1,80 @@
+# Cloudflare Pages Functions
+
+## `/api/lead`
+
+Recibe el formulario de contacto (`src/pages/[country]/contacto.astro`) y crea un
+Lead en Zoho CRM.
+
+El navegador no puede hablar con Zoho directamente por dos razones: el sitio es
+estático, así que cualquier credencial que se compile en él queda pública, y la
+API de CRM no responde con cabeceras CORS. Esta Function es el único punto donde
+viven los secretos.
+
+### Configuración en Cloudflare Pages
+
+**Settings → Variables and Secrets.** Cargar en *Production* y en *Preview*: si
+solo se cargan en producción, los deploys de preview fallan al enviar.
+Después de agregarlas hay que volver a desplegar; los deploys existentes no las
+recogen.
+
+| Variable | Tipo | Obligatoria |
+|---|---|---|
+| `ZOHO_CLIENT_ID` | Secret | sí |
+| `ZOHO_CLIENT_SECRET` | Secret | sí |
+| `ZOHO_REFRESH_TOKEN` | Secret | sí |
+| `TURNSTILE_SECRET_KEY` | Secret | sí |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Plaintext (build) | sí |
+| `ZOHO_ACCOUNTS_HOST` | Plaintext | no — default `accounts.zoho.com` |
+| `ZOHO_API_HOST` | Plaintext | no — respaldo; Zoho devuelve el correcto |
+| `ZOHO_FIELD_PRODUCT` | Plaintext | no — ver más abajo |
+| `ZOHO_FIELD_SERVICE` | Plaintext | no — ver más abajo |
+| `LEAD_RATE_LIMIT` | KV binding | no — sin él no hay límite por IP |
+
+`PUBLIC_TURNSTILE_SITE_KEY` es la única que se compila dentro del sitio y es
+visible para cualquiera; así está diseñado Turnstile. **A ninguna otra se le
+puede poner el prefijo `PUBLIC_`**: quedaría dentro del JS que descarga el
+navegador.
+
+### Datacenter de Zoho
+
+`accounts.zoho.com` es el de EE.UU. Si el Self Client se creó en
+`api-console.zoho.eu` (o `.in`, `.com.au`, `.jp`), hay que poner el
+`ZOHO_ACCOUNTS_HOST` que corresponda o el refresh falla con `invalid_client`.
+
+El dominio de la API no hace falta configurarlo: Zoho devuelve el `api_domain`
+correcto junto con el `access_token`.
+
+### Campos personalizados
+
+"¿Qué producto o servicio vendes?" y "¿Qué servicio te interesa?" no tienen campo
+estándar en el módulo Leads:
+
+- `Lead_Source` **no** sirve para el servicio de interés: es un picklist de
+  valores fijos y Zoho rechaza el registro completo con `INVALID_DATA` si llega
+  un valor que no está en la lista. Se manda con el valor fijo `Sitio web`.
+- `Comments` **no** es escribible por API en Leads.
+
+Pedirle al administrador de Zoho los API names de los dos campos personalizados
+y ponerlos en `ZOHO_FIELD_PRODUCT` y `ZOHO_FIELD_SERVICE`. Mientras estén
+vacíos, esos dos datos se anexan al final de `Description` en vez de perderse.
+
+### Desarrollo local
+
+```sh
+npm run build
+npx wrangler pages dev dist
+```
+
+Los secretos se leen de un archivo `.dev.vars` en la raíz (ignorado por git):
+
+```
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+ZOHO_CLIENT_ID=…
+ZOHO_CLIENT_SECRET=…
+ZOHO_REFRESH_TOKEN=…
+```
+
+Cloudflare publica llaves de prueba para Turnstile: `1x00000000000000000000AA`
+(sitekey, siempre aprueba) y `1x0000000000000000000000000000000AA` (secret).
+Son las que conviene usar también al capturar la regresión visual, para que el
+widget no dependa de la red.
