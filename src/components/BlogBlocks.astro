@@ -59,6 +59,26 @@ const { body, country } = Astro.props;
               ))}
             </ol>
           );
+        case 'img':
+          return (
+            <figure class:list={['my-10', b.wide && 'lg:-mx-16 xl:-mx-24']}>
+              <img
+                src={b.src}
+                alt={b.alt ?? ''}
+                width={b.w ?? undefined}
+                height={b.h ?? undefined}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-auto rounded-[20px] ring-1 ring-black/[0.06]"
+              />
+              {b.caption && (
+                <figcaption
+                  class="text-[#6b7280] text-[14px] leading-[1.6] font-light mt-3.5 text-center"
+                  set:html={b.caption}
+                />
+              )}
+            </figure>
+          );
         case 'quote':
           return (
             <blockquote class="border-l-2 border-[#0047ba] pl-6 my-9">

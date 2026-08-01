@@ -7,9 +7,20 @@ import categorias from '../data/blog-categorias.json';
  * plantilla.
  */
 export interface Bloque {
-  type: 'p' | 'h2' | 'h3' | 'ul' | 'ol' | 'quote' | 'callout' | 'cta';
+  type: 'p' | 'h2' | 'h3' | 'ul' | 'ol' | 'quote' | 'callout' | 'cta' | 'img';
   text?: string;
   items?: string[];
+  /** Solo para 'img'. `alt` vacío es válido y significa decorativa. */
+  src?: string;
+  alt?: string;
+  w?: number;
+  h?: number;
+  caption?: string;
+  /**
+   * Saca la imagen del ancho de la columna de texto. Para infografías y
+   * gráficos, donde el detalle se pierde a 720px.
+   */
+  wide?: boolean;
 }
 
 export interface Articulo {

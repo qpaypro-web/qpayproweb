@@ -61,12 +61,50 @@ la migración si el artículo nuevo se escribió en el WordPress).
 | `quote` | `text` | Cita destacada, con barra azul a la izquierda. |
 | `callout` | `text` | Caja azul clara con icono, para un dato o una advertencia. |
 | `cta` | `text` | Caja con el texto y dos botones, a precios y a ventas del país de la página. |
+| `img` | `src`, `alt`, `w`, `h`, `caption`, `wide` | Imagen dentro del texto: foto, gráfico o infografía. |
 
 En `text` y en `items` se permite **solo** `<strong>`, `<em>` y `<a href="…">`. Cualquier otra
 etiqueta se ve como texto: el renderizador usa `set:html` sobre esa lista blanca a propósito,
 para que nadie pueda meter estilos del editor viejo.
 
 El índice lateral del artículo aparece desde 1280 px y solo si el artículo tiene 3 o más `h2`.
+
+### Imágenes en el cuerpo
+
+La migración desde WordPress no trajo ninguna imagen del cuerpo: solo la portada. Los artículos
+que la necesiten se completan a mano con bloques `img`.
+
+```json
+{
+  "type": "img",
+  "src": "/images/blog/alianzaelsalvador-presentacion.webp",
+  "alt": "Tres representantes de Qpaypro muestran la aplicación de cobro",
+  "w": 1080,
+  "h": 1080,
+  "caption": "La aplicación de cobro de Qpaypro, durante la presentación."
+}
+```
+
+- `alt` describe lo que se ve, para quien no puede verla. Va vacío **solo** si la imagen es
+  decorativa y no aporta información que no esté en el texto.
+- `w` y `h` son los píxeles reales del archivo. Sin ellos el navegador no reserva el espacio y la
+  página salta mientras carga.
+- `caption` es opcional. Se ve centrado y en gris bajo la imagen.
+- `wide: true` saca la imagen del ancho de la columna de texto en pantallas grandes. Es para
+  infografías y gráficos, donde el detalle se pierde a 720 px; en una foto normal estorba.
+
+Las imágenes van en `public/images/blog/` con el slug del artículo como prefijo
+(`<slug>-<que-es>.<ext>`), para que se sepa a cuál pertenecen. Conviene bajar las fotos grandes a
+1600 px de ancho antes de commitear:
+
+```bash
+sips -Z 1600 original.jpg --out public/images/blog/<slug>-<que-es>.jpg
+```
+
+Un artículo con imágenes del WordPress viejo tiene una trampa: las fotos que el tema ponía como
+**fondo de columna** no aparecen como `<img>` en el HTML ni en el contenido que devuelve la API de
+WordPress, que son shortcodes de WPBakery. Hay que buscarlas en el HTML renderizado por
+`column-image-bg-wrap` o revisar la biblioteca de medios de la fecha del artículo.
 
 ## Agregar un artículo a mano
 
