@@ -1,0 +1,317 @@
+{
+  "_comentario": [
+    "Imágenes del cuerpo de los artículos, recuperadas de la biblioteca de medios del",
+    "WordPress (wp-json/wp/v2/media?parent=<id>). La migración solo trajo portadas.",
+    "",
+    "Se descartaron a propósito las placas de marca -el logo de Qpaypro sobre un fondo-",
+    "que el tema viejo insertaba entre secciones: no aportan nada y en el sitio nuevo el",
+    "encabezado ya identifica la marca.",
+    "",
+    "'tras' ancla la imagen despues del encabezado cuyo texto empieza asi. Sin 'tras',",
+    "las imagenes se reparten entre los parrafos.",
+    "",
+    "Los 'alt' describen lo que se ve; estan escritos mirando cada imagen."
+  ],
+  "8-inteligencias-artificiales-que-te-ayudaran": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/1-1-1.jpg",
+      "archivo": "1-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Pantalla de Decktopus.ai con el campo para escribir el título de una presentación",
+      "tras": "1. Decktopus.ai"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/2-1-1.jpg",
+      "archivo": "2-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Página de Simplified.com: gestión de redes sociales en una sola aplicación",
+      "tras": "2. Simplified.com"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/3-1-1.jpg",
+      "archivo": "3-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Página de Ocoya con el lema «Social Media 10x Faster with AI»",
+      "tras": "3. Ocoya.com"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/4-1-1.jpg",
+      "archivo": "4-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Página de SpiritMe: producción de video instantánea con avatares digitales",
+      "tras": "4. Spiritme.tech"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/5-1-1.jpg",
+      "archivo": "5-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Página de Sheet+ para escribir fórmulas de Google Sheets y Excel con IA",
+      "tras": "5. Sheetplus.ai"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/6-1-1.jpg",
+      "archivo": "6-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Página de Beatoven.ai para crear música libre de regalías",
+      "tras": "6. Beatoven.ai"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/8-1-1.jpg",
+      "archivo": "8-1-1.jpg",
+      "w": 878,
+      "h": 510,
+      "alt": "Página de Murf.ai: generador de voces a partir de texto",
+      "tras": "8. Murf.ai"
+    }
+  ],
+  "qpayfel-facturacion-electronica-guatemala": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsArtboard-1.png",
+      "archivo": "Banners-para-blogsArtboard-1.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Tarjeta con la frase «Esta necesidad nos motivó a desarrollar QPayFel», atribuida a Hugo García, CEO de Qpaypro"
+    }
+  ],
+  "5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-web": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/2004.i518.011_responsive-landing-page-website-mobile-UI-app-templates-Convertido-1-1.png",
+      "archivo": "2004.i518.011_responsive-landing-page-website-mobile-UI-app-templates-Convertido-1-1.png",
+      "w": 529,
+      "h": 700,
+      "alt": "Maqueta de una página de inicio mostrada en tableta y en tres teléfonos"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/hermosa-representacion-concepto-aplicacion-citas-copy-1.webp",
+      "archivo": "hermosa-representacion-concepto-aplicacion-citas-copy-1.webp",
+      "w": 600,
+      "h": 289,
+      "alt": "Ilustración de dos reseñas de clientes con corazones, en burbujas de conversación"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/representacion-3d-mano-agregando-o-eliminando-estrellas-calificacion-copy-1.webp",
+      "archivo": "representacion-3d-mano-agregando-o-eliminando-estrellas-calificacion-copy-1.webp",
+      "w": 600,
+      "h": 266,
+      "alt": "Ilustración de una mano colocando la quinta estrella de una calificación"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/Sellos-1.jpg",
+      "archivo": "Sellos-1.jpg",
+      "w": 538,
+      "h": 755,
+      "alt": "Pantalla de pago con los logotipos de las tarjetas aceptadas y el sello de pago seguro"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/2222-1-1.webp",
+      "archivo": "2222-1-1.webp",
+      "w": 416,
+      "h": 900,
+      "alt": "Catálogo de productos de una tienda en línea visto desde el teléfono"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/1111-1-1.webp",
+      "archivo": "1111-1-1.webp",
+      "w": 416,
+      "h": 900,
+      "alt": "Ficha de producto con foto, descripción y precio en una tienda móvil"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/07/Recurso-2_1-1.webp",
+      "archivo": "Recurso-2_1-1.webp",
+      "w": 416,
+      "h": 901,
+      "alt": "Listado de pantalones en una tienda en línea visto desde el teléfono"
+    }
+  ],
+  "como-generar-confianza-en-linea-sin-tener-una-gran-marca": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-portada-4.png",
+      "archivo": "Banners-para-blogsBanner-de-portada-4.png",
+      "w": 1600,
+      "h": 500,
+      "alt": "Dos manos levantando el pulgar frente a una computadora portátil"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-portada-3.png",
+      "archivo": "Banners-para-blogsBanner-de-portada-3.png",
+      "w": 1600,
+      "h": 500,
+      "alt": "Persona calificando un servicio con una carita sonriente sobre una tableta"
+    }
+  ],
+  "checklist-para-lanzar-tu-tienda-online-sin-fallar-en-el-intento": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-2-4.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-2-4.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Asesora de atención al cliente con diadema, atendiendo una consulta"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-3-3.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-3-3.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Persona pagando con tarjeta desde el teléfono"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-2-3.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-2-3.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Formulario de acceso protegido por un candado, sobre un teclado"
+    }
+  ],
+  "tu-sitio-web-esta-vendiendo-menos-estas-senales-podrian-ser-la-razon": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-2-2.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-2-2.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Persona con una tarjeta en la mano escribiendo en una computadora portátil"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-3-2.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-3-2.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Varias pantallas de un sitio web flotando sobre una computadora portátil"
+    }
+  ],
+  "automatiza-tu-negocio-sin-perder-el-control-guia-para-principiantes": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-3-4.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-3-4.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Persona tocando un panel con conexiones de inteligencia artificial"
+    }
+  ],
+  "mitos-que-estan-frenando-el-crecimiento-de-tu-negocio-digital": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-3-1.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-3-1.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Una mano sostiene una moneda y otra paga con tarjeta junto a un paquete listo para enviar"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-2-1.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-2-1.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Persona con el teléfono en una mano y la tarjeta en la otra, a punto de pagar"
+    }
+  ],
+  "temporadas-altas-sin-perdidas-la-guia-para-cobrar-sin-errores": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/business-woman-start-up-small-business-entrepreneur-sme-success-freelance-woman-working-home-with-online-parcel-delivery-sme-packaging-deliveryconcept-scaled-1.jpg",
+      "archivo": "business-woman-start-up-small-business-entrepreneur-sme-success-freelance-woman-working-home-with-online-parcel-delivery-sme-packaging-deliveryconcept-scaled-1.jpg",
+      "w": 2560,
+      "h": 779,
+      "alt": "Emprendedores preparando pedidos en cajas junto a una computadora portátil"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/online-shopping-sale-concept-3d-illustration-scaled-1.jpg",
+      "archivo": "online-shopping-sale-concept-3d-illustration-scaled-1.jpg",
+      "w": 2560,
+      "h": 1280,
+      "alt": "Carrito de compras en una pantalla rodeado de dados con porcentajes de descuento"
+    }
+  ],
+  "tendencias-que-estan-transformando-el-ecommerce-en-latinoamerica": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-3.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-3.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Persona sosteniendo un paquete rodeado de iconos de compra en línea"
+    }
+  ],
+  "pagos-digitales-el-aliado-silencioso-para-hacer-crecer-tu-negocio": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/09/Banners-para-blogsBanner-de-contenido-2.png",
+      "archivo": "Banners-para-blogsBanner-de-contenido-2.png",
+      "w": 1200,
+      "h": 500,
+      "alt": "Persona haciendo un pago desde el teléfono con un icono de seguridad"
+    }
+  ],
+  "san-valentin-una-fecha-rentable-para-el-comercio": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2024/02/becca-tapert-8qxdUJf346A-unsplash-2-1.jpg",
+      "archivo": "becca-tapert-8qxdUJf346A-unsplash-2-1.jpg",
+      "w": 1920,
+      "h": 1280,
+      "alt": "Tarjeta de regalo junto a rosas y pétalos sobre una mesa"
+    },
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2024/02/jesse-goll-_MCwva4-0uY-unsplash-1.jpg",
+      "archivo": "jesse-goll-_MCwva4-0uY-unsplash-1.jpg",
+      "w": 1920,
+      "h": 1254,
+      "alt": "Letras luminosas que forman la palabra LOVE"
+    }
+  ],
+  "aprende-a-identificar-sitios-falsos-en-internet": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/08/Recurso-3-1.webp",
+      "archivo": "Recurso-3-1.webp",
+      "w": 502,
+      "h": 677,
+      "alt": "Ilustración de una pantalla de pago con un escudo de seguridad y el botón «Pay now»"
+    }
+  ],
+  "uso-del-dinero-por-parte-del-consumidor-latinoamericano-moderno": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/06/nina-rodeada-sus-pedidos-online-entregados-1.webp",
+      "archivo": "nina-rodeada-sus-pedidos-online-entregados-1.webp",
+      "w": 800,
+      "h": 336,
+      "alt": "Persona sentada en el sofá con la computadora portátil, rodeada de los pedidos que recibió en casa"
+    }
+  ],
+  "la-estrategia-de-personalizacion-en-la-experiencia-de-compra-para-impulsar-las-ventas-en-linea": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/04/image-800x336-experiencia-de-compra-1.webp",
+      "archivo": "image-800x336-experiencia-de-compra-1.webp",
+      "w": 800,
+      "h": 336,
+      "alt": "Persona comprando desde la computadora portátil con una taza de café en la mano"
+    }
+  ],
+  "5-consejos-para-aumentar-las-ventas-en-linea": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/03/registro-femenino-traves-tarjetas-credito-telefono-movil-hace-que-pago-digital-sea-wseguro-linea-1.webp",
+      "archivo": "registro-femenino-traves-tarjetas-credito-telefono-movil-hace-que-pago-digital-sea-wseguro-linea-1.webp",
+      "w": 800,
+      "h": 336,
+      "alt": "Persona sosteniendo una tarjeta frente a un icono de pago protegido"
+    }
+  ],
+  "optimizacion-de-la-seguridad-y-privacidad-de-los-usuarios-mediante-la-tecnologia-de-pagos-en-linea": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2023/02/mujer-asistente-digital-su-tableta-1.webp",
+      "archivo": "mujer-asistente-digital-su-tableta-1.webp",
+      "w": 379,
+      "h": 308,
+      "alt": "Persona pagando con tarjeta desde una tableta"
+    }
+  ],
+  "qpaypro-busca-modernizarse-estar-a-la-vanguardia-de-la-tecnologia": [
+    {
+      "origen": "https://www.qpaypro.com/wp-content/uploads/2025/12/Imagen-1-art.png",
+      "archivo": "Imagen-1-art.png",
+      "w": 1000,
+      "h": 317,
+      "alt": "Manos usando una tableta con una cuadrícula de colores en pantalla"
+    }
+  ]
+}

@@ -103,8 +103,44 @@ sips -Z 1600 original.jpg --out public/images/blog/<slug>-<que-es>.jpg
 
 Un artículo con imágenes del WordPress viejo tiene una trampa: las fotos que el tema ponía como
 **fondo de columna** no aparecen como `<img>` en el HTML ni en el contenido que devuelve la API de
-WordPress, que son shortcodes de WPBakery. Hay que buscarlas en el HTML renderizado por
-`column-image-bg-wrap` o revisar la biblioteca de medios de la fecha del artículo.
+WordPress, que son shortcodes de WPBakery. La vía que sí funciona es la biblioteca de medios
+filtrada por el post:
+
+```
+/wp-json/wp/v2/posts?slug=<slugWp>        -> el id
+/wp-json/wp/v2/media?parent=<id>          -> todo lo que se subió a ese artículo
+```
+
+## Reparar artículos migrados
+
+Dos scripts, en este orden. Los dos son idempotentes y aceptan `--dry-run`.
+
+```bash
+python3 scripts/estructurar-blog.py       # jerarquía
+python3 scripts/imagenes-blog.py --descargar   # imágenes del cuerpo
+```
+
+**`estructurar-blog.py`** no escribe contenido: reinterpreta bloques que ya existen a partir de las
+marcas que dejó el texto. Repara cuatro defectos de la migración:
+
+- **Citas partidas en tres bloques.** El WordPress dejaba el párrafo entrecomillado, un encabezado
+  con la atribución («Indicó hugo garcía») y una línea con el cargo. Los une en un `quote`.
+- **Títulos de sección que quedaron como párrafos en negrita**, incluidos los numerados
+  («**1. Mejora tu presencia:** …»), que se parten en encabezado más párrafo.
+- **Encabezados que quedaron solo con el número** («1.», «2.»), que toman el nombre del párrafo
+  siguiente.
+- **Viñetas sueltas** con `•` en párrafos consecutivos, que pasan a ser una lista.
+
+El nivel del encabezado se decide una sola vez por artículo: si el artículo ya tiene secciones, lo
+que se promueve son subsecciones. Sin esa regla, un artículo con diez apartados terminaba con
+veintiún `h2` y un índice lateral inservible.
+
+**`imagenes-blog.py`** ejecuta lo que dice `scripts/blog-imagenes.json`: qué imagen va en qué
+artículo, con qué `alt` y en qué punto. Descarga, encoge a 1600 px, pasa a JPEG las fotografías que
+el WordPress guardó como PNG —ahí había 7 MB de más— e inserta el bloque.
+
+Los `alt` del JSON están escritos mirando cada imagen; no se generan solos. Al agregar imágenes
+nuevas hay que escribirlos igual.
 
 ## Agregar un artículo a mano
 

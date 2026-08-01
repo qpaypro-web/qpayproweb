@@ -112,6 +112,13 @@
         "text": "<strong>¿La consecuencia? Que la forma en la que compramos, vendemos y cobramos seguirá transformándose a un ritmo acelerado y sin pausa.</strong>"
       },
       {
+        "type": "img",
+        "src": "/images/blog/qpaypro-busca-modernizarse-estar-a-la-vanguardia-de-la-tecno-1.jpg",
+        "alt": "Manos usando una tableta con una cuadrícula de colores en pantalla",
+        "w": 1000,
+        "h": 317
+      },
+      {
         "type": "h2",
         "text": "Cómo Qpaypro se prepara para lo que viene"
       },
@@ -180,8 +187,22 @@
         "text": "Hay dudas. Miedos. Decisiones difíciles. Y sí, también pequeños logros que valen oro."
       },
       {
-        "type": "p",
-        "text": "<strong>Esto es lo que nadie te cuenta del cambio, pero que necesitas saber:</strong>"
+        "type": "img",
+        "src": "/images/blog/como-generar-confianza-en-linea-sin-tener-una-gran-marca-2.jpg",
+        "alt": "Persona calificando un servicio con una carita sonriente sobre una tableta",
+        "w": 1600,
+        "h": 500
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/como-generar-confianza-en-linea-sin-tener-una-gran-marca-1.jpg",
+        "alt": "Dos manos levantando el pulgar frente a una computadora portátil",
+        "w": 1600,
+        "h": 500
+      },
+      {
+        "type": "h3",
+        "text": "Esto es lo que nadie te cuenta del cambio, pero que necesitas saber"
       },
       {
         "type": "h2",
@@ -328,28 +349,49 @@
         "text": "Iniciar una tienda online es un paso emocionante, pero también puede sentirse abrumador si no sabes por dónde empezar. Por eso, hoy te compartimos una <strong>guía práctica</strong> con los pasos esenciales para lanzar tu tienda digital con éxito y sin complicarte más de la cuenta."
       },
       {
-        "type": "p",
-        "text": "<strong>Toma nota:</strong>"
+        "type": "h3",
+        "text": "Toma nota"
       },
       {
         "type": "h2",
         "text": "1. Define bien qué vendes y a quién se lo vendes"
       },
       {
-        "type": "p",
-        "text": "<strong>Antes de pensar en la tecnología, responde estas dos preguntas:</strong>"
+        "type": "h3",
+        "text": "Antes de pensar en la tecnología, responde estas dos preguntas"
       },
       {
-        "type": "p",
-        "text": "<strong>¿Qué producto o servicio ofrecerás? </strong>"
+        "type": "h3",
+        "text": "¿Qué producto o servicio ofrecerás?"
       },
       {
-        "type": "p",
-        "text": "<strong>¿Quién es tu cliente ideal y cómo le gusta comprar?</strong>"
+        "type": "h3",
+        "text": "¿Quién es tu cliente ideal y cómo le gusta comprar?"
       },
       {
         "type": "p",
         "text": "Tener claro esto desde el inicio evitará errores comunes, como invertir en un sitio web que no conecta con tu público o cargar productos que nadie busca."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/checklist-para-lanzar-tu-tienda-online-sin-fallar-en-el-inte-3.jpg",
+        "alt": "Formulario de acceso protegido por un candado, sobre un teclado",
+        "w": 1200,
+        "h": 500
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/checklist-para-lanzar-tu-tienda-online-sin-fallar-en-el-inte-2.jpg",
+        "alt": "Persona pagando con tarjeta desde el teléfono",
+        "w": 1200,
+        "h": 500
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/checklist-para-lanzar-tu-tienda-online-sin-fallar-en-el-inte-1.jpg",
+        "alt": "Asesora de atención al cliente con diadema, atendiendo una consulta",
+        "w": 1200,
+        "h": 500
       },
       {
         "type": "h2",
@@ -360,8 +402,8 @@
         "text": "No necesitas ser experto en tecnología para empezar a vender. Hoy existen herramientas accesibles que te permiten tener una tienda profesional sin complicarte."
       },
       {
-        "type": "p",
-        "text": "<strong>Tienes dos caminos claros:</strong>"
+        "type": "h3",
+        "text": "Tienes dos caminos claros"
       },
       {
         "type": "p",
@@ -388,8 +430,8 @@
         "text": "<strong>Más del 70% de las compras en línea se realizan desde el celular.</strong> Tu tienda debe ser rápida, fácil de navegar y clara desde cualquier dispositivo."
       },
       {
-        "type": "p",
-        "text": "<strong>Consejos clave:</strong>"
+        "type": "h3",
+        "text": "Consejos clave"
       },
       {
         "type": "ul",
@@ -416,8 +458,8 @@
         "text": "Si limitas las opciones de pago, limitas tus ventas."
       },
       {
-        "type": "p",
-        "text": "<strong>Asegúrate de ofrecer:</strong>"
+        "type": "h3",
+        "text": "Asegúrate de ofrecer"
       },
       {
         "type": "ul",
@@ -465,8 +507,8 @@
         "text": "Muchos negocios pierden clientes porque no dejan claro cómo y cuándo entregarán."
       },
       {
-        "type": "p",
-        "text": "<strong>Resuelve estas dudas desde el inicio:</strong>"
+        "type": "h3",
+        "text": "Resuelve estas dudas desde el inicio"
       },
       {
         "type": "ul",
@@ -485,8 +527,8 @@
         "text": "7. Facilita el contacto y resuelve dudas"
       },
       {
-        "type": "p",
-        "text": "<strong>Genera confianza desde el primer clic:</strong>"
+        "type": "h3",
+        "text": "Genera confianza desde el primer clic"
       },
       {
         "type": "ul",
@@ -505,8 +547,8 @@
         "text": "8. Revisa y prueba todo antes de lanzar"
       },
       {
-        "type": "p",
-        "text": "<strong>Antes de anunciar tu tienda al mundo:</strong>"
+        "type": "h3",
+        "text": "Antes de anunciar tu tienda al mundo"
       },
       {
         "type": "ul",
@@ -529,8 +571,8 @@
         "text": "Tu tienda digital no es algo que haces una vez y olvidas. Es un proyecto que se construye día a día."
       },
       {
-        "type": "p",
-        "text": "<strong>Una vez lanzada:</strong>"
+        "type": "h3",
+        "text": "Una vez lanzada"
       },
       {
         "type": "ul",
@@ -589,6 +631,20 @@
         "text": "🧩 Si te suena familiar, puede que el problema <strong>no esté en lo que vendes</strong>, sino <strong>en cómo lo estás vendiendo</strong>."
       },
       {
+        "type": "img",
+        "src": "/images/blog/tu-sitio-web-esta-vendiendo-menos-estas-senales-podrian-ser--2.jpg",
+        "alt": "Varias pantallas de un sitio web flotando sobre una computadora portátil",
+        "w": 1200,
+        "h": 500
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/tu-sitio-web-esta-vendiendo-menos-estas-senales-podrian-ser--1.jpg",
+        "alt": "Persona con una tarjeta en la mano escribiendo en una computadora portátil",
+        "w": 1200,
+        "h": 500
+      },
+      {
         "type": "p",
         "text": "Aquí te compartimos algunas señales que podrían estar afectando el rendimiento de tu sitio web (y lo mejor: muchas tienen solución sencilla):"
       },
@@ -605,8 +661,8 @@
         "text": "Y si es desde celular, el margen de paciencia es todavía menor."
       },
       {
-        "type": "p",
-        "text": "<strong>¿Cómo saber si es tu caso?</strong>"
+        "type": "h3",
+        "text": "¿Cómo saber si es tu caso?"
       },
       {
         "type": "ul",
@@ -633,8 +689,8 @@
         "text": "Eso mata las ventas."
       },
       {
-        "type": "p",
-        "text": "<strong>Señales de alerta:</strong>"
+        "type": "h3",
+        "text": "Señales de alerta"
       },
       {
         "type": "ul",
@@ -661,8 +717,8 @@
         "text": "📉 <em>Lo que pasa:</em>No todos tienen tarjeta, o no quieren usarla. Y si no encuentran su método preferido, simplemente no compran."
       },
       {
-        "type": "p",
-        "text": "<strong>¿Qué deberías ofrecer?</strong>"
+        "type": "h3",
+        "text": "¿Qué deberías ofrecer?"
       },
       {
         "type": "ul",
@@ -686,8 +742,8 @@
         "text": "Hoy más del 70% de las compras en línea se hacen desde celulares."
       },
       {
-        "type": "p",
-        "text": "<strong>Problemas comunes:</strong>"
+        "type": "h3",
+        "text": "Problemas comunes"
       },
       {
         "type": "ul",
@@ -711,8 +767,8 @@
         "text": "¿Tu cliente entiende bien lo que vendes, cómo lo vendes y qué debe hacer?"
       },
       {
-        "type": "p",
-        "text": "<strong>Si no respondes rápido a estas preguntas, perderás ventas:</strong>"
+        "type": "h3",
+        "text": "Si no respondes rápido a estas preguntas, perderás ventas"
       },
       {
         "type": "ul",
@@ -775,6 +831,13 @@
         "text": "Confirmaciones de pago manuales, reportes que nunca cuadran y tiempo perdido en tareas repetitivas… <strong>Ahí es donde entra la automatización.</strong>"
       },
       {
+        "type": "img",
+        "src": "/images/blog/automatiza-tu-negocio-sin-perder-el-control-guia-para-princi-1.jpg",
+        "alt": "Persona tocando un panel con conexiones de inteligencia artificial",
+        "w": 1200,
+        "h": 500
+      },
+      {
         "type": "p",
         "text": "<strong>Pero, ¿cómo automatizar tu negocio sin perder el control? Aquí te lo explicamos, paso a paso y sin complicaciones técnicas.</strong>"
       },
@@ -787,8 +850,8 @@
         "text": "Cada vez que alguien te compra, ¿tienes que revisar manualmente si el pago entró?Eso ya no es necesario."
       },
       {
-        "type": "p",
-        "text": "<strong>¿Qué puedes automatizar?</strong>"
+        "type": "h3",
+        "text": "¿Qué puedes automatizar?"
       },
       {
         "type": "ul",
@@ -938,6 +1001,20 @@
         "text": "En la carrera por reducir la fricción, muchos negocios buscan simplificar el proceso de pago al máximo, pensando que menos pasos siempre se traducen en más ventas. Sin embargo, eliminar detalles importantes puede generar <strong>confusión o desconfianza</strong> en el cliente. Por ejemplo, no mostrar información clara sobre la seguridad de la transacción o no ofrecer ayuda en tiempo real puede hacer que el comprador <strong>abandone el carrito</strong> por dudas o temor."
       },
       {
+        "type": "img",
+        "src": "/images/blog/mitos-que-estan-frenando-el-crecimiento-de-tu-negocio-digita-2.jpg",
+        "alt": "Persona con el teléfono en una mano y la tarjeta en la otra, a punto de pagar",
+        "w": 1200,
+        "h": 500
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/mitos-que-estan-frenando-el-crecimiento-de-tu-negocio-digita-1.jpg",
+        "alt": "Una mano sostiene una moneda y otra paga con tarjeta junto a un paquete listo para enviar",
+        "w": 1200,
+        "h": 500
+      },
+      {
         "type": "p",
         "text": "La clave está en encontrar un <strong>equilibrio</strong>: combinar rapidez con información clara y soporte accesible. Un proceso de pago bien diseñado no solo agiliza la compra, sino que también <strong>genera confianza</strong> y aumenta las conversiones. No se trata de sacrificar velocidad, sino de guiar al comprador de manera segura y sencilla en cada paso."
       },
@@ -1030,6 +1107,20 @@
         "text": "Tus clientes tienen distintas preferencias al momento de pagar. Algunos prefieren usar <strong>tarjetas de crédito o débito</strong>, mientras que otros optan por <strong>transferencias bancarias</strong> o métodos alternativos como pagos en efectivo digitalizado. Si limitas las opciones, estás cerrando la puerta a <strong>compradores potenciales</strong>. La flexibilidad en los métodos de pago no solo aumenta tus posibilidades de venta, sino que también mejora la experiencia del cliente, facilitando que complete su compra sin fricción."
       },
       {
+        "type": "img",
+        "src": "/images/blog/temporadas-altas-sin-perdidas-la-guia-para-cobrar-sin-errore-2.jpg",
+        "alt": "Carrito de compras en una pantalla rodeado de dados con porcentajes de descuento",
+        "w": 1600,
+        "h": 800
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/temporadas-altas-sin-perdidas-la-guia-para-cobrar-sin-errore-1.jpg",
+        "alt": "Emprendedores preparando pedidos en cajas junto a una computadora portátil",
+        "w": 1600,
+        "h": 487
+      },
+      {
         "type": "h2",
         "text": "3. Mantén comunicación rápida y clara con tus clientes"
       },
@@ -1097,6 +1188,13 @@
         "text": "<strong>Estos son los tres ejes clave que están marcando el futuro del comercio digital en la región:</strong>"
       },
       {
+        "type": "img",
+        "src": "/images/blog/tendencias-que-estan-transformando-el-ecommerce-en-latinoame-1.jpg",
+        "alt": "Persona sosteniendo un paquete rodeado de iconos de compra en línea",
+        "w": 1200,
+        "h": 500
+      },
+      {
         "type": "h2",
         "text": "1. Métodos de pago más rápidos, flexibles y seguros"
       },
@@ -1105,8 +1203,8 @@
         "text": "El consumidor actual <strong>quiere pagar en segundos, desde donde sea y con lo que tenga a mano</strong>. La adopción de nuevos métodos de pago ha dejado de ser una opción para convertirse en una necesidad."
       },
       {
-        "type": "p",
-        "text": "<strong>Lo que más crece:</strong>"
+        "type": "h3",
+        "text": "Lo que más crece"
       },
       {
         "type": "ul",
@@ -1130,8 +1228,8 @@
         "text": "En un entorno tan competitivo, automatizar no es solo eficiencia: es <strong>escalar sin perder el control</strong>."
       },
       {
-        "type": "p",
-        "text": "<strong>¿Qué procesos se están automatizando hoy?</strong>"
+        "type": "h3",
+        "text": "¿Qué procesos se están automatizando hoy?"
       },
       {
         "type": "ul",
@@ -1233,6 +1331,13 @@
         "text": "Los pagos manuales o en efectivo pueden generar errores: pagos mal ingresados, transferencias no confirmadas o pérdida de comprobantes. Los sistemas digitales automatizan estos procesos, reduciendo errores y brindando una experiencia más segura tanto para vos como para tus clientes."
       },
       {
+        "type": "img",
+        "src": "/images/blog/pagos-digitales-el-aliado-silencioso-para-hacer-crecer-tu-ne-1.jpg",
+        "alt": "Persona haciendo un pago desde el teléfono con un icono de seguridad",
+        "w": 1200,
+        "h": 500
+      },
+      {
         "type": "h2",
         "text": "Menos fricción = más ventas"
       },
@@ -1298,6 +1403,13 @@
       {
         "type": "p",
         "text": "La implementación de Qpayfel no surgió de la casualidad, sino de <strong>una necesidad real identificada en el mercado guatemalteco.</strong> Hugo García, CEO de Qpaypro, explica el origen de esta innovación:"
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/qpayfel-facturacion-electronica-guatemala-1.jpg",
+        "alt": "Tarjeta con la frase «Esta necesidad nos motivó a desarrollar QPayFel», atribuida a Hugo García, CEO de Qpaypro",
+        "w": 1200,
+        "h": 500
       },
       {
         "type": "p",
@@ -2343,12 +2455,20 @@
         "text": "<strong>1. Los Primeros Días: El Nacimiento del eCommerce</strong> El comercio electrónico comenzó con empresas pioneras como Amazon y eBay en la década de 1990. Estas plataformas cambiaron la forma en que los consumidores compraban, permitiéndoles realizar transacciones desde la comodidad de sus hogares. La disponibilidad de internet de banda ancha y la proliferación de computadoras personales impulsaron el crecimiento inicial del eCommerce."
       },
       {
-        "type": "p",
-        "text": "<strong>2. La Era de la Personalización y Movilidad: </strong>A medida que la tecnología avanzaba, el comercio electrónico se volvió más personalizado y móvil. La aparición de los smartphones permitió a los consumidores comprar sobre la marcha, y las empresas comenzaron a utilizar datos y análisis para ofrecer experiencias de compra personalizadas. Plataformas como Vitex, Qpayshop, OpernCart, PrestaShop y WooCommerce facilitaron la creación de tiendas en línea para pequeños y medianos negocios."
+        "type": "h3",
+        "text": "La Era de la Personalización y Movilidad"
       },
       {
         "type": "p",
-        "text": "<strong>3. La Revolución de los Pagos Digitales: </strong>Los métodos de pago evolucionaron junto con el eCommerce. Soluciones como Qpaypro, hicieron que los pagos en línea fueran más seguros y convenientes. La integración de criptomonedas como Bitcoin también comenzó a ganar tracción, ofreciendo nuevas formas de transacción. Aquí es donde Qpaypro se destaca, ofreciendo una tecnología avanzada que se integra con procesadores de pago existentes, permitiendo recibir tarjetas de crédito en línea de manera segura y eficiente."
+        "text": "A medida que la tecnología avanzaba, el comercio electrónico se volvió más personalizado y móvil. La aparición de los smartphones permitió a los consumidores comprar sobre la marcha, y las empresas comenzaron a utilizar datos y análisis para ofrecer experiencias de compra personalizadas. Plataformas como Vitex, Qpayshop, OpernCart, PrestaShop y WooCommerce facilitaron la creación de tiendas en línea para pequeños y medianos negocios."
+      },
+      {
+        "type": "h3",
+        "text": "La Revolución de los Pagos Digitales"
+      },
+      {
+        "type": "p",
+        "text": "Los métodos de pago evolucionaron junto con el eCommerce. Soluciones como Qpaypro, hicieron que los pagos en línea fueran más seguros y convenientes. La integración de criptomonedas como Bitcoin también comenzó a ganar tracción, ofreciendo nuevas formas de transacción. Aquí es donde Qpaypro se destaca, ofreciendo una tecnología avanzada que se integra con procesadores de pago existentes, permitiendo recibir tarjetas de crédito en línea de manera segura y eficiente."
       },
       {
         "type": "h2",
@@ -2667,8 +2787,8 @@
         "text": "<strong>“Qpaypro apoya a todo tipo de empresas por medio de soluciones tecnológicas de pago ágiles y confiables. En esta temporada de celebración del cariño queremos ser tu aliado estratégico para incrementar tus ventas”. Hugo García – Qpaypro.</strong>"
       },
       {
-        "type": "p",
-        "text": "<strong>Acerca de Qpaypro:</strong>"
+        "type": "h3",
+        "text": "Acerca de Qpaypro"
       },
       {
         "type": "p",
@@ -2713,6 +2833,20 @@
         "text": "La celebración del día de San Valentín, conocida localmente como Día del Amor y la Amistad es una fecha para compartir con amigos y celebrar el amor de pareja, el 14 de febrero es también una festividad que dinamiza la economía."
       },
       {
+        "type": "img",
+        "src": "/images/blog/san-valentin-una-fecha-rentable-para-el-comercio-2.jpg",
+        "alt": "Letras luminosas que forman la palabra LOVE",
+        "w": 1600,
+        "h": 1045
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/san-valentin-una-fecha-rentable-para-el-comercio-1.jpg",
+        "alt": "Tarjeta de regalo junto a rosas y pétalos sobre una mesa",
+        "w": 1600,
+        "h": 1067
+      },
+      {
         "type": "p",
         "text": "De acuerdo con información de Qpaypro en Guatemala, 10 días previos al Día del Cariño se tuvo un incremento entre el 20 y 25% en transacciones de los comercios que implementaron estrategias de eCommerce enfocadas a la festividad. Luego, entre el 15, 16 y 17 de febrero de 2024 se logró un incremento del 55% respecto a los primeros días del mes."
       },
@@ -2733,28 +2867,15 @@
         "text": "<strong>La siguiente es una lista de productos tradicionalmente preferidos en esta fecha:</strong>"
       },
       {
-        "type": "p",
-        "text": "• Experiencias (viajes, cenas, conciertos)"
-      },
-      {
-        "type": "p",
-        "text": "• Perfumes"
-      },
-      {
-        "type": "p",
-        "text": "• Joyas"
-      },
-      {
-        "type": "p",
-        "text": "• Bombones, flores y chocolates"
-      },
-      {
-        "type": "p",
-        "text": "• Tecnología y electrónica"
-      },
-      {
-        "type": "p",
-        "text": "• Productos de belleza"
+        "type": "ul",
+        "items": [
+          "Experiencias (viajes, cenas, conciertos)",
+          "Perfumes",
+          "Joyas",
+          "Bombones, flores y chocolates",
+          "Tecnología y electrónica",
+          "Productos de belleza"
+        ]
       },
       {
         "type": "p",
@@ -2777,8 +2898,8 @@
         "text": "Para conocer las opciones de experiencias de pago fáciles e innovadoras que Qpaypro ofrece, visita la página web https://www.qpaypro.com/ o contáctalos al número +(502) 2311-5001 o vía WhatsApp +(502) 5375-9651."
       },
       {
-        "type": "p",
-        "text": "<strong>Acerca de Qpaypro:</strong>"
+        "type": "h2",
+        "text": "Acerca de Qpaypro"
       },
       {
         "type": "p",
@@ -2816,6 +2937,13 @@
         "text": "El incremento acelerado de compras en internet, también ha despertado el interés de quienes desean estafar, sabotear o realizar fraudes con las transacciones realizadas en línea. El auge del eCommerce en nuestra región constituye un valioso fenómeno para empresas y consumidores. Sin embargo, las oportunidades y beneficios que genera, se equiparan con los riesgos y amenazas propios del comercio electrónico."
       },
       {
+        "type": "img",
+        "src": "/images/blog/aprende-a-identificar-sitios-falsos-en-internet-1.webp",
+        "alt": "Ilustración de una pantalla de pago con un escudo de seguridad y el botón «Pay now»",
+        "w": 502,
+        "h": 677
+      },
+      {
         "type": "p",
         "text": "Si bien la confianza en las transacciones se ha incrementado, existen e-compradores que continúan observando la seguridad del proceso de compra como una barrera. De acuerdo con el Cuarto Estudio de Comercio Electrónico de Guatemala, la desconfianza en el sitio del vendedor, la poca seguridad de los pagos y manejo de los datos son desventajas recurrentes expresadas por los consumidores."
       },
@@ -2848,12 +2976,8 @@
         "text": "Por lo expresado en los consejos anteriores, podemos observar que, en el entorno actual, el riesgo de ser víctima de estafa, fraude, robo de datos y otros ciberataques es alto, tanto para los negocios, como para sus clientes. Los comercios afiliados con Qpaypro cuentan con herramientas de mitigación y validación, enfocados en detectar y bloquear los intentos de fraudes."
       },
       {
-        "type": "p",
-        "text": "“En Qpaypro observamos a la seguridad como un prerrequisito para las transacciones deseamos incentivar y facilitar el comercio electrónico en Guatemala, sabemos que la confiabilidad de la compra es fundamental para el éxito de todo negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles sino seguras es una de nuestras características más destacables”"
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
+        "type": "quote",
+        "text": "“En Qpaypro observamos a la seguridad como un prerrequisito para las transacciones deseamos incentivar y facilitar el comercio electrónico en Guatemala, sabemos que la confiabilidad de la compra es fundamental para el éxito de todo negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles sino seguras es una de nuestras características más destacables”, indicó Hugo García."
       },
       {
         "type": "p",
@@ -2889,6 +3013,55 @@
       {
         "type": "p",
         "text": "Para reducir este porcentaje de abandono, existen <strong>cinco estrategias</strong> <strong>clave</strong> que puedes implementar <strong>para aumentar las ventas en tu página web</strong>. Estas estrategias se centran en mejorar la <strong>experiencia del usuario</strong> y <strong>construir confianza</strong>, asegurando que los potenciales compradores se sientan seguros al realizar pagos en línea."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-7.webp",
+        "alt": "Listado de pantalones en una tienda en línea visto desde el teléfono",
+        "w": 416,
+        "h": 901
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-6.webp",
+        "alt": "Ficha de producto con foto, descripción y precio en una tienda móvil",
+        "w": 416,
+        "h": 900
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-5.webp",
+        "alt": "Catálogo de productos de una tienda en línea visto desde el teléfono",
+        "w": 416,
+        "h": 900
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-4.jpg",
+        "alt": "Pantalla de pago con los logotipos de las tarjetas aceptadas y el sello de pago seguro",
+        "w": 538,
+        "h": 755
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-3.webp",
+        "alt": "Ilustración de una mano colocando la quinta estrella de una calificación",
+        "w": 600,
+        "h": 266
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-2.webp",
+        "alt": "Ilustración de dos reseñas de clientes con corazones, en burbujas de conversación",
+        "w": 600,
+        "h": 289
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/5-cosas-que-puedes-hacer-para-cerrar-mas-ventas-en-tu-pagina-1.png",
+        "alt": "Maqueta de una página de inicio mostrada en tableta y en tres teléfonos",
+        "w": 529,
+        "h": 700
       },
       {
         "type": "h2",
@@ -2990,6 +3163,13 @@
         "text": "Las transacciones electrónicas tienen efectos más allá de la compra y venta. No depender del efectivo significa evitar largas filas en los bancos para cambiar cheques o retirar dinero en cajeros automáticos, y también disminuye los riesgos de seguridad. El consumidor latinoamericano actual valora su tiempo y seguridad tanto como su inversión en la compra. Si un negocio ofrece herramientas que agilizan los procesos de pago, es más probable que genere lealtad. La digitalización de los pagos proporciona beneficios tanto para los clientes como para las empresas, ya que agiliza y asegura las transacciones."
       },
       {
+        "type": "img",
+        "src": "/images/blog/uso-del-dinero-por-parte-del-consumidor-latinoamericano-mode-1.webp",
+        "alt": "Persona sentada en el sofá con la computadora portátil, rodeada de los pedidos que recibió en casa",
+        "w": 800,
+        "h": 336
+      },
+      {
         "type": "p",
         "text": "Según un estudio sobre el comercio electrónico en Guatemala, el 61% de los guatemaltecos utiliza internet de manera constante y el 28% ha realizado compras en línea en los últimos tres meses. Las generaciones más jóvenes en América Latina están entrando en el sector financiero. Estos jóvenes valoran la practicidad y son conscientes de los beneficios de los pagos electrónicos, ya que crecieron con padres que ya utilizaban tarjetas de crédito. También están abiertos a la diversificación, incluyendo el uso de criptomonedas. Por lo tanto, en la actualidad, los negocios que ofrecen flexibilidad en los métodos de pago son los que generan más valor."
       },
@@ -2998,16 +3178,8 @@
         "text": "Entender las necesidades y prioridades de los consumidores, segmentándolos por su cultura y generación, ha permitido identificar las soluciones que esperan en diferentes mercados. Los consumidores tienen diferentes preferencias de compra basadas en sus valores culturales y experiencias previas. También está claro que los clientes desean tener la opción de pagar con su método de pago preferido. El camino hacia los pagos digitales es claro y sigue avanzando rápidamente. Una vez que los consumidores prueban la tecnología de pagos digitales para sus compras diarias, no quieren volver atrás. Les encanta la tecnología porque es rápida, segura y conveniente."
       },
       {
-        "type": "p",
-        "text": "Entender las necesidades y prioridades de los consumidores, segmentándolos por su cultura y generación, ha permitido identificar las soluciones que esperan en diferentes mercados. Los consumidores tienen diferentes preferencias de compra basadas en sus valores culturales y experiencias previas. También está claro que los clientes desean tener la opción de pagar con su método de pago preferido. El camino hacia los pagos digitales es claro y sigue avanzando rápidamente. Una vez que los consumidores prueban la tecnología de pagos digitales para sus compras diarias, no quieren volver atrás. Les encanta la tecnología porque es rápida, segura y conveniente.”"
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "Entender las necesidades y prioridades de los consumidores, segmentándolos por su cultura y generación, ha permitido identificar las soluciones que esperan en diferentes mercados. Los consumidores tienen diferentes preferencias de compra basadas en sus valores culturales y experiencias previas. También está claro que los clientes desean tener la opción de pagar con su método de pago preferido. El camino hacia los pagos digitales es claro y sigue avanzando rápidamente. Una vez que los consumidores prueban la tecnología de pagos digitales para sus compras diarias, no quieren volver atrás. Les encanta la tecnología porque es rápida, segura y conveniente.”, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3062,11 +3234,18 @@
       },
       {
         "type": "h3",
-        "text": "1."
+        "text": "1. Decktopus.ai"
       },
       {
         "type": "p",
         "text": "🎨 <a href=\"https://www.decktopus.com/\"><strong>Decktopus.ai</strong></a>: esta herramienta es ideal para generar presentaciones de manera rápida y sencilla. Todo lo que tienes que hacer es introducir el tema de la presentación y la herramienta te hará una serie de preguntas básicas. A continuación, se generará una presentación completa que podrás editar y descargar. El precio es de $4.99 al mes, pero si buscas alternativas gratuitas, puedes echar un vistazo a <a href=\"https://beta.tome.app/\">Tome.app</a> o <a href=\"https://www.beautiful.ai/\">Beautiful.ai</a>"
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-1.jpg",
+        "alt": "Pantalla de Decktopus.ai con el campo para escribir el título de una presentación",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3074,11 +3253,18 @@
       },
       {
         "type": "h3",
-        "text": "2."
+        "text": "2. Simplified.com"
       },
       {
         "type": "p",
         "text": "🛠️ <a href=\"https://simplified.com/\"><strong>Simplified.com</strong></a>: esta herramienta es una verdadera joya. Te permite crear diseños y materiales de marketing utilizando una sola aplicación. Puedes eliminar fondos, cambiar el tamaño de las imágenes, crear kits de branding, editar videos y crear contenido, todo en una sola aplicación. Además, el plan gratuito es muy generoso."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-2.jpg",
+        "alt": "Página de Simplified.com: gestión de redes sociales en una sola aplicación",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3086,11 +3272,18 @@
       },
       {
         "type": "h3",
-        "text": "3."
+        "text": "3. Ocoya.com"
       },
       {
         "type": "p",
         "text": "🌐 <a href=\"https://www.ocoya.com/\"><strong>Ocoya.com</strong></a>: con esta herramienta podrás diseñar imágenes, gifs, música, videos y textos en 26 idiomas. Una vez que hayas creado el contenido, Ocoya lo publicará en tus cuentas sociales cuando le indiques y podrás hacer un seguimiento del rendimiento de tus publicaciones. El precio es de $15 al mes."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-3.jpg",
+        "alt": "Página de Ocoya con el lema «Social Media 10x Faster with AI»",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3098,11 +3291,18 @@
       },
       {
         "type": "h3",
-        "text": "4."
+        "text": "4. Spiritme.tech"
       },
       {
         "type": "p",
         "text": "📹 <a href=\"https://spiritme.tech/\"><strong>Spiritme.tech</strong></a>: con esta herramienta podrás generar un video donde apareces hablando con tu voz, apariencia y gestos. Esta herramienta es perfecta para formaciones, bloggers y videos personalizados. La versión gratuita viene con un avatar estándar de su biblioteca, pero si deseas un avatar personalizado, el precio es de €79 al mes."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-4.jpg",
+        "alt": "Página de SpiritMe: producción de video instantánea con avatares digitales",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3110,11 +3310,18 @@
       },
       {
         "type": "h3",
-        "text": "5."
+        "text": "5. Sheetplus.ai"
       },
       {
         "type": "p",
         "text": "💡 <a href=\"https://sheetplus.ai/\"><strong>Sheetplus.ai</strong></a>: si utilizas Google Sheet o Excel, esta herramienta es imprescindible. Te permitirá escribir fórmulas 10 veces más rápido utilizando IA. Solo tendrás que escribir en lenguaje simple lo que quieres que haga la fórmula, y Sheet+ te dará la fórmula lista para copiar y pegar. La versión gratuita te permitirá utilizar 10 fórmulas al mes."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-5.jpg",
+        "alt": "Página de Sheet+ para escribir fórmulas de Google Sheets y Excel con IA",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3122,11 +3329,18 @@
       },
       {
         "type": "h3",
-        "text": "6."
+        "text": "6. Beatoven.ai"
       },
       {
         "type": "p",
         "text": "🎼 <a href=\"https://www.beatoven.ai/\"><strong>Beatoven.ai</strong></a>: si necesitas música original y gratuita para tu proyecto, Beatoven te ayudará a componer una pieza única y original. La herramienta tiene una gran variedad de géneros, sonidos y efectos. Además, es gratis para un usuario."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-6.jpg",
+        "alt": "Página de Beatoven.ai para crear música libre de regalías",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3134,7 +3348,7 @@
       },
       {
         "type": "h3",
-        "text": "7."
+        "text": "7. Elevenlabs.io"
       },
       {
         "type": "p",
@@ -3146,11 +3360,18 @@
       },
       {
         "type": "h3",
-        "text": "8."
+        "text": "8. Murf.ai"
       },
       {
         "type": "p",
         "text": "🎙️ <a href=\"https://murf.ai/\"><strong>Murf.ai</strong></a>: esta herramienta es similar a ElevenLabs, pero utiliza voces ya predefinidas que suenan muy naturales. Solo tendrás que insertar el texto y obtendrás un audio del mismo con voces adaptadas para diferentes usos (marketing, podcasting, atención al cliente, etc.). La versión gratuita está disponible."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/8-inteligencias-artificiales-que-te-ayudaran-7.jpg",
+        "alt": "Página de Murf.ai: generador de voces a partir de texto",
+        "w": 878,
+        "h": 510
       },
       {
         "type": "p",
@@ -3201,6 +3422,13 @@
         "text": "El eCommerce ofrece a los consumidores libertades que no están disponibles en las tiendas físicas. Pueden comprar a cualquier hora del día, elegir su método de pago preferido sin sentir presión y comparar productos, precios y calidades con facilidad mientras experimentan ambientes y tratos personalizados que pueden generar engagement."
       },
       {
+        "type": "img",
+        "src": "/images/blog/la-estrategia-de-personalizacion-en-la-experiencia-de-compra-1.webp",
+        "alt": "Persona comprando desde la computadora portátil con una taza de café en la mano",
+        "w": 800,
+        "h": 336
+      },
+      {
         "type": "p",
         "text": "Para personalizar la experiencia de compra, el CEO de Qpaypro, Hugo García, brinda tres consejos:"
       },
@@ -3212,16 +3440,8 @@
         ]
       },
       {
-        "type": "p",
-        "text": "“Cada vez más empresas requieren programar pagos recurrentes, QPayBilling es el producto ideal si cobras matriculas educativas, de gimnasio, mensualidades de renta inmobiliaria, consultas médicas, salones de belleza, etc. Incluso hay negocios de ropa, accesorios, comidas y bebida que han sabido generar fidelización por medio de clubes de vino o café, los cuales envían semanalmente un producto a los afiliados cobrando membresías. ¿Quieres comenzar a programar tus cobros? Con esta herramienta no requieres de experiencia técnica, solo necesitas conocer tu negocio”"
-      },
-      {
-        "type": "h2",
-        "text": "Dijo hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Cada vez más empresas requieren programar pagos recurrentes, QPayBilling es el producto ideal si cobras matriculas educativas, de gimnasio, mensualidades de renta inmobiliaria, consultas médicas, salones de belleza, etc. Incluso hay negocios de ropa, accesorios, comidas y bebida que han sabido generar fidelización por medio de clubes de vino o café, los cuales envían semanalmente un producto a los afiliados cobrando membresías. ¿Quieres comenzar a programar tus cobros? Con esta herramienta no requieres de experiencia técnica, solo necesitas conocer tu negocio”, dijo Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3267,24 +3487,51 @@
         "text": "<strong>Tener presencia en línea es esencial</strong> para cualquier negocio que busque crecer y expandirse. Sin embargo, tener un sitio web o perfiles en redes sociales<strong> no es suficiente</strong>. Es necesario <strong>implementar estrategias efectivas</strong> para aumentar las ventas y atraer a nuevos clientes. En este artículo, te brindaremos algunos consejos útiles para aumentar las ventas de tu negocio en internet y redes sociales, y cómo una pasarela de pagos como Qpaypro puede ayudarte a hacer crecer tu negocio."
       },
       {
-        "type": "p",
-        "text": "<strong>1. Mejora tu presencia en línea:</strong> Para aumentar las ventas de tu negocio en internet, es importante que tu sitio web y redes sociales sean atractivos y fáciles de navegar. Asegúrate de que el diseño sea atractivo y que la información esté organizada de manera clara y concisa. También es importante optimizar tu sitio web y redes sociales para los motores de búsqueda, utilizando palabras clave relevantes para tu negocio."
+        "type": "img",
+        "src": "/images/blog/5-consejos-para-aumentar-las-ventas-en-linea-1.webp",
+        "alt": "Persona sosteniendo una tarjeta frente a un icono de pago protegido",
+        "w": 800,
+        "h": 336
+      },
+      {
+        "type": "h2",
+        "text": "Mejora tu presencia en línea"
       },
       {
         "type": "p",
-        "text": "<strong>2. Utiliza las redes sociales a tu favor:</strong> Las redes sociales son una herramienta poderosa para promocionar tu negocio y aumentar las ventas. Crea contenido atractivo y relevante para tu audiencia, utilizando imágenes y videos para llamar la atención. Además, no tengas miedo de interactuar con tus seguidores y responder a sus preguntas y comentarios. Esto puede ayudar a crear una comunidad comprometida y leal a tu marca."
+        "text": "Para aumentar las ventas de tu negocio en internet, es importante que tu sitio web y redes sociales sean atractivos y fáciles de navegar. Asegúrate de que el diseño sea atractivo y que la información esté organizada de manera clara y concisa. También es importante optimizar tu sitio web y redes sociales para los motores de búsqueda, utilizando palabras clave relevantes para tu negocio."
+      },
+      {
+        "type": "h2",
+        "text": "Utiliza las redes sociales a tu favor"
       },
       {
         "type": "p",
-        "text": "<strong>3.</strong> <strong>Ofrece promociones especiales:</strong> Las promociones especiales pueden ser una excelente manera de aumentar las ventas de tu negocio en línea. Por ejemplo, puedes ofrecer descuentos exclusivos para tus seguidores en redes sociales, o crear paquetes de productos que ofrezcan un ahorro significativo. Asegúrate de promocionar estas ofertas en tus redes sociales y sitio web para que tus clientes potenciales estén al tanto."
+        "text": "Las redes sociales son una herramienta poderosa para promocionar tu negocio y aumentar las ventas. Crea contenido atractivo y relevante para tu audiencia, utilizando imágenes y videos para llamar la atención. Además, no tengas miedo de interactuar con tus seguidores y responder a sus preguntas y comentarios. Esto puede ayudar a crear una comunidad comprometida y leal a tu marca."
+      },
+      {
+        "type": "h2",
+        "text": "Ofrece promociones especiales"
       },
       {
         "type": "p",
-        "text": "<strong>4.</strong> <strong>Ofrece un proceso de pago seguro y eficiente:</strong> La seguridad y eficiencia del proceso de pago es fundamental para cualquier negocio en línea. Una pasarela de pagos confiable como Qpaypro puede ayudarte a garantizar que tus transacciones sean seguras y sin problemas. Además, ofrecer varias opciones de pago, como tarjeta de crédito, transferencia bancaria y pagos en línea, puede ayudar a hacer que el proceso de pago sea más fácil y conveniente para tus clientes."
+        "text": "Las promociones especiales pueden ser una excelente manera de aumentar las ventas de tu negocio en línea. Por ejemplo, puedes ofrecer descuentos exclusivos para tus seguidores en redes sociales, o crear paquetes de productos que ofrezcan un ahorro significativo. Asegúrate de promocionar estas ofertas en tus redes sociales y sitio web para que tus clientes potenciales estén al tanto."
+      },
+      {
+        "type": "h2",
+        "text": "Ofrece un proceso de pago seguro y eficiente"
       },
       {
         "type": "p",
-        "text": "<strong>5.</strong> <strong>Ofrece un excelente servicio al cliente:</strong> El servicio al cliente es una parte fundamental de cualquier negocio exitoso. Asegúrate de ofrecer una atención al cliente rápida y amigable, y responde a cualquier problema o pregunta de tus clientes de manera oportuna. Esto puede ayudar a crear una experiencia de compra positiva y fomentar la lealtad del cliente."
+        "text": "La seguridad y eficiencia del proceso de pago es fundamental para cualquier negocio en línea. Una pasarela de pagos confiable como Qpaypro puede ayudarte a garantizar que tus transacciones sean seguras y sin problemas. Además, ofrecer varias opciones de pago, como tarjeta de crédito, transferencia bancaria y pagos en línea, puede ayudar a hacer que el proceso de pago sea más fácil y conveniente para tus clientes."
+      },
+      {
+        "type": "h2",
+        "text": "Ofrece un excelente servicio al cliente"
+      },
+      {
+        "type": "p",
+        "text": "El servicio al cliente es una parte fundamental de cualquier negocio exitoso. Asegúrate de ofrecer una atención al cliente rápida y amigable, y responde a cualquier problema o pregunta de tus clientes de manera oportuna. Esto puede ayudar a crear una experiencia de compra positiva y fomentar la lealtad del cliente."
       },
       {
         "type": "p",
@@ -3326,6 +3573,13 @@
         "text": "En este mes también se celebra el Día de Internet Seguro, un evento a nivel mundial que tiene como objetivo promover buenas prácticas para mantener la privacidad y los datos personales a salvo de terceros no deseados. Además de garantizar una Internet más segura, se busca crear un espacio en el que todos hagamos uso de la tecnología de manera responsable, respetuosa, crítica y creativa, incluyendo las transacciones de pagos electrónicos."
       },
       {
+        "type": "img",
+        "src": "/images/blog/optimizacion-de-la-seguridad-y-privacidad-de-los-usuarios-me-1.webp",
+        "alt": "Persona pagando con tarjeta desde una tableta",
+        "w": 379,
+        "h": 308
+      },
+      {
         "type": "p",
         "text": "En estos tiempos en los que los delincuentes informáticos mejoran constantemente sus tácticas, es importante tomar medidas de seguridad cuando realizamos compras en línea. Los consumidores deben estar informados sobre las amenazas y las herramientas disponibles para mitigarlas, y las empresas deben diversificar sus opciones de pago y hacerlas inequívocas."
       },
@@ -3334,16 +3588,8 @@
         "text": "Por esta razón, Qpaypro es un aliado que ofrece una plataforma sólida y segura para el procesamiento de pagos electrónicos. Al afiliarse, cualquier empresa puede comenzar a recibir pagos electrónicos en un plazo de 24 horas, mediante diferentes opciones de pago, como links de pago, POS virtual, botón de pago, integración de cobro desde redes sociales o tiendas en línea, con el respaldo de un equipo dedicado a su infraestructura y un centro de datos de alto nivel. Qpaypro asegura las transacciones diarias de sus afiliados para garantizar una experiencia confiable y segura."
       },
       {
-        "type": "p",
-        "text": "“En este mes fomentamos y celebramos un espacio virtual donde navegar y comprar se realice sin temor, en Qpaypro estamos comprometidos en lograr que los cobros que efectúen nuestros afiliados sean confiables, para que su atención esté en ofrecer un producto o servicio de calidad, y que la seguridad esté garantizada por nosotros”"
-      },
-      {
-        "type": "h2",
-        "text": "Expresó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“En este mes fomentamos y celebramos un espacio virtual donde navegar y comprar se realice sin temor, en Qpaypro estamos comprometidos en lograr que los cobros que efectúen nuestros afiliados sean confiables, para que su atención esté en ofrecer un producto o servicio de calidad, y que la seguridad esté garantizada por nosotros”, expresó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3476,16 +3722,8 @@
         "text": "Según el Tercer Estudio Nacional de Comercio Electrónico de Guatemala, la confianza en el portal de compra es importante y puede llevar a la repetición de operaciones a través de los mismos canales cuando son percibidos como seguros. Sin embargo, es esencial tener en cuenta que las transacciones realizadas sin el respaldo de redes certificadas son vulnerables. Aunque a menudo se centran en protegerse contra virus y en garantizar la seguridad de sus cuentas y computadoras, también es importante protegerse contra amenazas como la falta de certificados digitales y la falta de respaldo de información y encriptación de datos."
       },
       {
-        "type": "p",
-        "text": "“Contar con el respaldo de una red de pagos como Visanet, que es una de las más grandes, seguras e innovadoras a nivel mundial, es clave para garantizar transacciones confiables”"
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Contar con el respaldo de una red de pagos como Visanet, que es una de las más grandes, seguras e innovadoras a nivel mundial, es clave para garantizar transacciones confiables”, concluyó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3496,12 +3734,8 @@
         "text": "Los servicios de procesamiento de transacciones completos que ofrece VisaNet aumentan el valor y la seguridad de cada transacción procesada en la red. Además, cada transacción Visa está protegida por las tecnologías de detección y análisis de fraude más avanzadas de la industria. VisaNet analiza en tiempo real patrones de riesgo y gasto de los consumidores y convierte esta información en datos útiles para toda la industria."
       },
       {
-        "type": "p",
-        "text": "“En la actualidad, los negocios que demuestran más orientación a la certificación y estandarización son los que generan más valor; esto se hace tangible en tiempos de constantes amenazas y complejidades sin precedetes. Hay procesos en curso, como los mPOS, los cuales requieren de plataformas respaldadas y certificadas para garantizar la seguridad. Para poder avanzar es necesario contar con aliados que les permitan desarrollarse en medio de la implementación de nuevas formas de pago. QPayPro está comprometido en mejorar la experiencia y seguridad de los negocios afiliados. Nuestros sistemas están certificados por Visanet Guatemala y avalados por Visa Internacional para el correcto funcionamiento tanto en ePay como Cybersouce, los cuales internamente utilizamos para el procesamiento de las diferentes transacciones”."
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
+        "type": "quote",
+        "text": "“En la actualidad, los negocios que demuestran más orientación a la certificación y estandarización son los que generan más valor; esto se hace tangible en tiempos de constantes amenazas y complejidades sin precedetes. Hay procesos en curso, como los mPOS, los cuales requieren de plataformas respaldadas y certificadas para garantizar la seguridad. Para poder avanzar es necesario contar con aliados que les permitan desarrollarse en medio de la implementación de nuevas formas de pago. QPayPro está comprometido en mejorar la experiencia y seguridad de los negocios afiliados. Nuestros sistemas están certificados por Visanet Guatemala y avalados por Visa Internacional para el correcto funcionamiento tanto en ePay como Cybersouce, los cuales internamente utilizamos para el procesamiento de las diferentes transacciones”, concluyó Hugo García."
       },
       {
         "type": "p",
@@ -3548,16 +3782,8 @@
         "text": "La transformación digital es clave en la relación de los negocios con los consumidores, está evolucionándolos de forma acelerada y conduciéndolos a nuevas formas de vender y cobrar más allá de las fronteras naturales. Ya sea para interactuar o realizar transacciones, los negocios que se apoyan en las tecnologías modernas para pagos online están buscando las herramientas adecuadas que satisfagan las experiencias de los consumidores."
       },
       {
-        "type": "p",
-        "text": "“Controles cruzados; verificación de la autenticidad de la web de compra; y contar con soportes tecnológicos confiables, son algunas de las recomendaciones para prevenir problemas con el comercio digital”"
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Controles cruzados; verificación de la autenticidad de la web de compra; y contar con soportes tecnológicos confiables, son algunas de las recomendaciones para prevenir problemas con el comercio digital”, concluyó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3585,16 +3811,8 @@
         "text": "Cada vez son más las personas que prefieren hacer los pagos por internet, ya que es un método sencillo, rápido y que aplica a prácticamente cualquier tipo de servicio, desde los pagos regulares del hogar, compras de productos y hasta pagos recurrentes. Se creía que el comercio en línea era un fenómeno propio de países desarrollados y que los que están en vía de desarrollo tendrían que pasar décadas, para que se estableciera dicho mercado. El estudio de Comercio Electrónico en Guatemala nos brinda datos que desmienten ideas preconcebidas que fundaban mitos acerca de las compras en línea."
       },
       {
-        "type": "p",
-        "text": "“Debemos entender que los procesos de protección y garantías de los grandes proveedores de tarjeta de crédito son internacionales, por lo que comprar en Guatemala debe ser tan seguro como hacerlo en cualquier otro lugar del mundo. Qpaypro es el aliado de toda empresa que desean hacer parte de la transformación digital y los mercados del futuro sin importar su giro o dimensión”."
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Debemos entender que los procesos de protección y garantías de los grandes proveedores de tarjeta de crédito son internacionales, por lo que comprar en Guatemala debe ser tan seguro como hacerlo en cualquier otro lugar del mundo. Qpaypro es el aliado de toda empresa que desean hacer parte de la transformación digital y los mercados del futuro sin importar su giro o dimensión”, concluyó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3636,16 +3854,8 @@
         "text": "Para quienes no lo utilizan aún, el código QR (del inglés ‘quick response code’) es, como dice su traducción al castellano, un código de respuesta rápida. Es la evolución del código de barras tradicional, una matriz de puntos o píxeles diagramada en un módulo de forma cuadrada, de dos dimensiones, que actúa como un enlace entre el mundo real y el mundo virtual."
       },
       {
-        "type": "p",
-        "text": "“El código contiene información que no está a simple vista: puede ser un link a un sitio web, un video, un mapa, una ‘app’ u otro elemento. Para poder acceder, es necesario escanear el código QR con la cámara de un teléfono móvil o tablet, y el dispositivo abrirá de forma inmediata el contenido”,"
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“El código contiene información que no está a simple vista: puede ser un link a un sitio web, un video, un mapa, una ‘app’ u otro elemento. Para poder acceder, es necesario escanear el código QR con la cámara de un teléfono móvil o tablet, y el dispositivo abrirá de forma inmediata el contenido”,, concluyó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3733,16 +3943,8 @@
         "text": "QPayPro apoya a todo tipo de empresas por medio de soluciones tecnológicas de pago ágiles y confiables. Sin importar el canal de venta en el que se encuentre y sin necesidad de un sitio web, con la ventaja de empezar a cobrar en 24 horas después de la afiliación."
       },
       {
-        "type": "p",
-        "text": "“QPayShop se convierte en una tienda en línea y cuenta con varios templetes para que puedas subir tus fotografías, crees categorías, coloques precios, entre otras opciones. ¿Vendes desde Instagram, Facebook o Pinterest? esta herramienta vincula tus redes sociales con la tienda que diseñaste. Queremos apoyarte, Qpayshop brindará todo el apoyo que necesites para que inicies tu tienda en línea ya mismo”,"
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“QPayShop se convierte en una tienda en línea y cuenta con varios templetes para que puedas subir tus fotografías, crees categorías, coloques precios, entre otras opciones. ¿Vendes desde Instagram, Facebook o Pinterest? esta herramienta vincula tus redes sociales con la tienda que diseñaste. Queremos apoyarte, Qpayshop brindará todo el apoyo que necesites para que inicies tu tienda en línea ya mismo”,, concluyó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -3815,12 +4017,8 @@
         "text": "Para un negocio, la inclusión de las criptomonedas como forma de pago tiene el potencial para acercar a los comerciantes a nuevos clientes que ya acuden en masa a los activos digitales, así como también ayudar a los vendedores a generar fidelidad entre los clientes existentes que deseaban adaptarse a esta modalidad."
       },
       {
-        "type": "p",
-        "text": "“Es necesario hacerse de aliados con competencias que les permitan desarrollarse en medio del desarrollo e implementación de nuevas formas de pago. Qpaypro está comprometido en mejorar la experiencia de venta de nuestros comercios al aceptar pagos desde cualquier parte, de cualquier forma y de cualquier tipo, para esto una de nuestras próximas incorporaciones será el mundo cripto, el cual anunciaremos en breve”,"
-      },
-      {
-        "type": "h2",
-        "text": "Concluyó hugo garcía"
+        "type": "quote",
+        "text": "“Es necesario hacerse de aliados con competencias que les permitan desarrollarse en medio del desarrollo e implementación de nuevas formas de pago. Qpaypro está comprometido en mejorar la experiencia de venta de nuestros comercios al aceptar pagos desde cualquier parte, de cualquier forma y de cualquier tipo, para esto una de nuestras próximas incorporaciones será el mundo cripto, el cual anunciaremos en breve”,, concluyó Hugo García."
       },
       {
         "type": "p",
@@ -3883,12 +4081,8 @@
         "text": "En toda actividad que realiza el ser humano los riesgos y las amenazas no desaparecen con los esfuerzos de protección, pero si se reducen al aplicar sistemas de seguridad adecuados. Necesitamos de herramientas de trazabilidad de transacciones que apoyen a los procesos de seguridad ya existentes."
       },
       {
-        "type": "p",
-        "text": "“Conociendo las amenazas actuales, en Qpaypro deseamos proteger a tu negocio. Incentivar y facilitar el comercio electrónico en Guatemala es nuestro objetivo, y sabemos que la confiabilidad de las transacciones es fundamental para el éxito de tu negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles sino sumamente seguras es una de nuestras características más destacables. Desde el inicio hemos contado con certificaciones y alianzas que promueven la confianza. Nuestra plataforma cuenta con la confiabilidad de la certificación de Visanet, adicional a Qpayradar que constituye un refuerzo a la armadura prexistente que añade una protección sin precedentes”."
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
+        "type": "quote",
+        "text": "“Conociendo las amenazas actuales, en Qpaypro deseamos proteger a tu negocio. Incentivar y facilitar el comercio electrónico en Guatemala es nuestro objetivo, y sabemos que la confiabilidad de las transacciones es fundamental para el éxito de tu negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles sino sumamente seguras es una de nuestras características más destacables. Desde el inicio hemos contado con certificaciones y alianzas que promueven la confianza. Nuestra plataforma cuenta con la confiabilidad de la certificación de Visanet, adicional a Qpayradar que constituye un refuerzo a la armadura prexistente que añade una protección sin precedentes”, indicó Hugo García."
       },
       {
         "type": "p",
@@ -3930,58 +4124,48 @@
         "text": "A continuación, <a href=\"/gt\">Qpaypro</a> presenta cinco principales beneficios de hacer pagos en línea:"
       },
       {
-        "type": "ol",
-        "items": [
-          "<strong>Comodidad</strong>"
-        ]
+        "type": "h2",
+        "text": "Comodidad"
       },
       {
         "type": "p",
         "text": "Los pagos pueden ser hechos en cualquier lugar y en cualquier momento sin distinción alguna, con solo entrar en tu cuenta y hacer clic en diferentes opciones ya habrás cumplido con este deber de todos los meses. Además, no necesitarías acudir a una entidad bancaria donde debas estar horas de pie para poder ser atendido, gastando tiempo de forma innecesaria."
       },
       {
-        "type": "ol",
-        "items": [
-          "<strong>Seguridad</strong>"
-        ]
+        "type": "h2",
+        "text": "Seguridad"
       },
       {
         "type": "p",
         "text": "El efectivo puede ser necesario en muchas ocasiones, pero todos estamos de acuerdo en lo peligroso que puede resultar estar en la calle con grandes sumas de dinero en nuestra billetera. Por otro lado, en la actualidad existen múltiples herramientas empleadas por plataformas que se encargan de ser fiables y aseguran la privacidad de tus datos personales y bancarios."
       },
       {
-        "type": "ol",
-        "items": [
-          "<strong>Respaldo</strong>"
-        ]
+        "type": "h2",
+        "text": "Respaldo"
       },
       {
         "type": "p",
         "text": "En cualquiera de los casos donde los pagos en línea aplican, desde la facturación de tus servicios básicos o compras online, si existen problemas como Qpaypro que ofrece un respaldo para garantizarte que no perderás tu dinero."
       },
       {
-        "type": "ol",
-        "items": [
-          "<strong>Ahorro de dinero</strong>"
-        ]
+        "type": "h2",
+        "text": "Ahorro de dinero"
       },
       {
         "type": "p",
         "text": "Aunque al principio parezca una locura, el hecho de hacer los pagos por internet te permite economizar, ya que no gastas dinero en cosas adicionales, únicamente realizar el pago pertinente y listo."
       },
       {
-        "type": "ol",
-        "items": [
-          "<strong>Transacciones realizadas al alcance de la mano</strong>"
-        ]
+        "type": "h2",
+        "text": "Transacciones realizadas al alcance de la mano"
       },
       {
         "type": "p",
         "text": "Estas plataformas además cuentan con un registro detallado de los pagos que has realizado en los últimos meses, desde la fecha de cobro, fecha de pago y total pagado."
       },
       {
-        "type": "p",
-        "text": "<strong>Otros beneficios de los pagos en línea:</strong>"
+        "type": "h2",
+        "text": "Otros beneficios de los pagos en línea"
       },
       {
         "type": "ul",
@@ -3995,16 +4179,8 @@
         ]
       },
       {
-        "type": "p",
-        "text": "“Debemos entender que los procesos de protección y garantías de los grandes proveedores de tarjeta de crédito son internacionales, por lo que comprar en Guatemala debe ser tan seguro como hacerlo en cualquier otro lugar del globo. QPayPro es el aliado de toda empresa que desean hacer parte de la transformación digital y los mercados del futuro sin importar su giro o dimensión”"
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Debemos entender que los procesos de protección y garantías de los grandes proveedores de tarjeta de crédito son internacionales, por lo que comprar en Guatemala debe ser tan seguro como hacerlo en cualquier otro lugar del globo. QPayPro es el aliado de toda empresa que desean hacer parte de la transformación digital y los mercados del futuro sin importar su giro o dimensión”, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -4050,48 +4226,48 @@
         "text": "En la actualidad el comercio electrónico está viviendo su mejor momento, ya que la mayoría de personas y clientes potenciales también desean con ansias comprar online. Sin embargo, este crecimiento no es garantía de éxito para las empresas que incursionan en el eCommerce. Debes estar preparado, los diferenciadores que te harán destacar en este mercado no solo tienen que ver con la calidad de lo que ofreces, sino también lo harán las acciones que realizas para facilitar la compra. Por lo que <a href=\"/gt\">Qpaypro</a> brinda a continuación algunos consejos y claves para lograr un exitoso comercio electrónico:"
       },
       {
-        "type": "p",
-        "text": "<strong>1. Experiencia del usuario</strong>"
+        "type": "h2",
+        "text": "1. Experiencia del usuario"
       },
       {
         "type": "p",
         "text": "A la hora de ingresar a la tienda electrónica, el usuario debe obtener una gran experiencia, de manera que el sitio sea fácil y cómodo de navegar. En principio, debe contar con un diseño atractivo que llame la atención de los usuarios, y que los mismos puedan acceder fácilmente al catálogo de productos que se ofrecen a la venta. Para ello, estos últimos tienen que presentarse de manera ordenada, y tienen que ir acompañados con la descripción de sus características y precios. Al mismo tiempo, los productos deben estar bien presentados, de modo que genere mayor interés en los posibles consumidores. Estudios de mercado sugieren que las imágenes y los videos son elementos clave para aumentar la conversión."
       },
       {
-        "type": "p",
-        "text": "<strong>2. Posicionamiento en motores de búsqueda</strong>"
+        "type": "h2",
+        "text": "2. Posicionamiento en motores de búsqueda"
       },
       {
         "type": "p",
         "text": "Es fundamental que la tienda online se posicione en los motores de búsqueda, principalmente en Google. Para esto, el contenido debe cumplir ciertos requerimientos (longitud del contenido, uso de palabras clave, etc.), pero también la programación del sitio. La idea es que la marca se presente frente a la mayor cantidad de clientes potenciales y se sabe que una de las principales fuentes de tráfico proviene de las búsquedas."
       },
       {
-        "type": "p",
-        "text": "<strong>3. </strong><strong>Presencia en redes sociales</strong>"
+        "type": "h2",
+        "text": "Presencia en redes sociales"
       },
       {
         "type": "p",
         "text": "La presencia de la marca en las redes sociales es una práctica clave en el marketing actual. No solamente permite que la marca genere contenido que apoye a los compradores en su viaje, sino que además es un canal de aprendizaje de las expectativas de los clientes y de atención. Igualmente, algunas plataformas sociales, como Facebook e Instagram permiten crear catálogos asociados a la tienda online, aumentando la exposición de los productos."
       },
       {
-        "type": "p",
-        "text": "<strong>4. Atención al cliente</strong>"
+        "type": "h2",
+        "text": "4. Atención al cliente"
       },
       {
         "type": "p",
         "text": "Todas las tiendas electrónicas o iniciativas de eCommerce deben contar con una sección de contacto, para que los usuarios puedan comunicarse con la empresa en caso de realizar consultas o despejar cualquier duda. Esto implica ofrecer números de teléfonos, correos electrónicos o propiciar un chat para que los clientes se comuniquen cuando lo deseen. Sin dudas, esta opción ofrecerá mayor seguridad a los posibles compradores de la tienda, aumentando la confianza en el sitio."
       },
       {
-        "type": "p",
-        "text": "<strong>5. Logística y sistema de pagos</strong>"
+        "type": "h2",
+        "text": "5. Logística y sistema de pagos"
       },
       {
         "type": "p",
         "text": "Para que un eCommerce tenga éxito, el usuario debe obtener una buena experiencia en sus transacciones, para que el mismo considere la posibilidad de volver a comprar en el sitio. Se trata de que los cumplimientos en las entregas sean precisos, y que los envíos de los productos sean operaciones rápidas y cómodas. Para eso, se necesita trabajar con distribuidores eficientes que no tengan fallas en los tiempos y formas de los envíos. Al mismo tiempo, se recomienda ofrecer la mayor cantidad de medios de pago, para que cada usuario pueda pagar de la manera en que desee."
       },
       {
-        "type": "p",
-        "text": "<strong>6. Adaptación a distintos dispositivos</strong>"
+        "type": "h2",
+        "text": "6. Adaptación a distintos dispositivos"
       },
       {
         "type": "p",
@@ -4106,16 +4282,8 @@
         "text": "<a href=\"/gt/tiendas-en-linea\">Qpayshop</a> se convierte en una tienda en línea y cuenta con varias plantillas para subir fotografías, crear categorías, colocar precios, entre otras opciones. ¿Vendes desde Instagram, Facebook o Pinterest? esta herramienta vincula tus redes sociales con la tienda que diseñaste."
       },
       {
-        "type": "p",
-        "text": "“Con la visión de facilitar e incentivar el comercio electrónico en Guatemala, Qpaypro apoya a todo tipo de empresas por medio de soluciones tecnológicas de pago ágiles y confiables. Sin importar el canal de venta en el que se encuentre y sin necesidad de un sitio web, con la ventaja de empezar a cobrar en 24 horas después de la afiliación”."
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Con la visión de facilitar e incentivar el comercio electrónico en Guatemala, Qpaypro apoya a todo tipo de empresas por medio de soluciones tecnológicas de pago ágiles y confiables. Sin importar el canal de venta en el que se encuentre y sin necesidad de un sitio web, con la ventaja de empezar a cobrar en 24 horas después de la afiliación”, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -4161,56 +4329,48 @@
         "text": "A continuación, analizaremos 5 datos relevantes obtenidos del tercer Estudio Nacional de Comercio Electrónico de Guatemala:"
       },
       {
-        "type": "p",
-        "text": "<strong>1. COVID-19</strong>"
+        "type": "h3",
+        "text": "1. COVID-19"
       },
       {
         "type": "p",
         "text": "Ningún otro suceso ha traído mayores cambios para el eCommerce a nivel global. El estudio analizó datos de los años 2020 y 2021, por lo que nos brinda información de lo ocurrido en pandemia en cuanto a comportamiento de los consumidores y las empresas que participan en el comercio electrónico. El estudio concluyó que, el comprador adoptó en su momento las compras online como parte de su vida a raíz del confinamiento. Sin embargo, actualmente este tipo de transacción se basa en el ahorro de tiempo, mayor confianza y diversidad en los métodos de pago."
       },
       {
-        "type": "p",
-        "text": "<strong>2. Regiones y frecuencia de compra</strong>"
+        "type": "h3",
+        "text": "2. Regiones y frecuencia de compra"
       },
       {
         "type": "p",
         "text": "El eCommerce en Guatemala muestra una mayor incidencia en las regiones Centro y Oeste del país, siendo esto muy congruente con la densidad de población en esta zona. Por otro lado, la frecuencia de compra en línea, se mantiene estable desde la medición anterior, con un promedio, en el que seis de cada diez personas, realizándolas al menos una vez por mes. Las compras online se continúan haciendo principalmente de forma mensual, sin reflejar cambios en relación a la medición anterior donde se evidencia el efecto pandemia. Sin embargo, se registra un descenso significativo la compra semanal en tiendas del extranjero, lo cual indica un incremento en oferta y demanda del comercio electrónico local."
       },
       {
-        "type": "p",
-        "text": "<strong>3. </strong><strong>Motivos para comprar en línea</strong>"
+        "type": "h3",
+        "text": "Motivos para comprar en línea"
       },
       {
         "type": "p",
         "text": "El principal motivador de la realización de compras online, se concentra en el ahorro de tiempo a la vez que, a raíz, de la flexibilización de las medidas de confinamiento, elementos como poder comprar en cualquier momento o el envío a domicilio, comienzan a perder importancia. Es interesante observar que el consumidor desea productos que no se encuentran localmente, y eso lo motiva a comprar en línea. Por lo que se evidencia la oportunidad de negocio para ofrecer productos de forma local, vendidos en línea a precios competitivos."
       },
       {
-        "type": "p",
-        "text": "<strong>4. Desventajas</strong>"
+        "type": "h3",
+        "text": "4. Desventajas"
       },
       {
         "type": "p",
         "text": "La desconfianza de no poder ver el producto antes de comprar, y falta de confianza en el sitio o vendedor, se mantienen en cuanto a desventajas de comprar online, aunque, por otro lado, se refleja un mejoramiento logístico en lo referente a tiempos y costos de entrega, cayendo significativamente como aspecto negativo de este tipo de transacción. Tener una tienda en línea que destaque visualmente al producto es una ventaja para quienes ya han comenzado a implementarlo."
       },
       {
-        "type": "p",
-        "text": "<strong>5. Compras locales versus compras en el exterior</strong>"
+        "type": "h3",
+        "text": "5. Compras locales versus compras en el exterior"
       },
       {
         "type": "p",
         "text": "La pandemia impulsó un cambio de hábitos en cuanto a compra de alimentos y bebidas, que a nivel local se mantiene en primer lugar de las categorías más compradas seguidas por el crecimiento de cuidado personal y artículos de telefonía. Sin embargo, se reflejan movimientos en otros productos que tienden a volver a la compra presencial como medicinas y cuidado de la salud, o de igual manera notebooks y computadoras. En cuanto a compras online realizadas en el exterior, las mismas tienden a concentrarse en tecnología, perdiendo terreno otras categorías como indumentaria no deportiva."
       },
       {
-        "type": "p",
-        "text": "“En Qpaypro velamos por el crecimiento de tu negocio, es por eso que al afiliarte con nosotros obtendrás grandes beneficios que potencializarán tus ventas y mejorar tu negocio. Somos más que una plataforma de servicios de pago, incentivamos y facilitamos tus ventas en línea. Gracias al tercer Estudio Nacional de Comercio Electrónico de Guatemala, sabemos que la confiabilidad de las transacciones es fundamental, así como la flexibilidad para el éxito de tu negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles sino sumamente seguras es una de nuestras características más destacables, adicional, capacitamos y brindamos herramientas de forma constante a nuestros afiliados”"
-      },
-      {
-        "type": "h3",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“En Qpaypro velamos por el crecimiento de tu negocio, es por eso que al afiliarte con nosotros obtendrás grandes beneficios que potencializarán tus ventas y mejorar tu negocio. Somos más que una plataforma de servicios de pago, incentivamos y facilitamos tus ventas en línea. Gracias al tercer Estudio Nacional de Comercio Electrónico de Guatemala, sabemos que la confiabilidad de las transacciones es fundamental, así como la flexibilidad para el éxito de tu negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles sino sumamente seguras es una de nuestras características más destacables, adicional, capacitamos y brindamos herramientas de forma constante a nuestros afiliados”, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -4273,16 +4433,8 @@
         "text": "Personalización uno a uno: adaptar la experiencia del comercio electrónico a compradores individuales o lo que los puristas dirían que es la auténtica personalización. Se puede hacer en tiempo real en función de cambios de comportamiento inmediatos o a partir de perfiles de clientes individualizados y creados usando la data histórica."
       },
       {
-        "type": "p",
-        "text": "“En Qpaypro celebramos la individualidad y también festejemos el comportamiento colectivo, deseamos incentivar y facilitar el comercio electrónico en Guatemala, sabemos que la confiabilidad de las transacciones es fundamental, así como la flexibilidad para el éxito de tu negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles, sino sumamente seguras es una de nuestras características más destacables. Desde el inicio hemos contado con certificaciones y alianzas que promueven la confianza. QpayRadar constituye un refuerzo a la armadura preexistente que añade una protección sin precedentes"
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“En Qpaypro celebramos la individualidad y también festejemos el comportamiento colectivo, deseamos incentivar y facilitar el comercio electrónico en Guatemala, sabemos que la confiabilidad de las transacciones es fundamental, así como la flexibilidad para el éxito de tu negocio. Brindar soluciones tecnológicas de pago que no solo son ágiles, sino sumamente seguras es una de nuestras características más destacables. Desde el inicio hemos contado con certificaciones y alianzas que promueven la confianza. QpayRadar constituye un refuerzo a la armadura preexistente que añade una protección sin precedentes, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -4340,28 +4492,12 @@
         "text": "En el mercado actual, la experiencia de compra es determinante para generar clientes nuevos y fidelizar a los existentes. Es crucial que el negocio sea flexible, abierto y confiable en cuanto a métodos de pago. La anuencia a aceptar tarjetas American Express y facilidades de cuotas de BAC Credomatic significa un incremento de un 20% más de transacciones. Para tener acceso este beneficio los negocios afiliados solamente requieren ingresar al panel de control en la plataforma de Qpaypro y activar la opción."
       },
       {
-        "type": "p",
-        "text": "“Nos entusiasma poder ofrecer a nuestros afiliados la ventaja de integrar el procesamiento de BAC Credomatic a nuestro sistema central, para que puedan utilizar las diferentes soluciones como Links de pago, POS Virtual, Pagos QR, API y Plugins, facilitando la compra a sus clientes e incrementando sus ventas”"
+        "type": "quote",
+        "text": "“Nos entusiasma poder ofrecer a nuestros afiliados la ventaja de integrar el procesamiento de BAC Credomatic a nuestro sistema central, para que puedan utilizar las diferentes soluciones como Links de pago, POS Virtual, Pagos QR, API y Plugins, facilitando la compra a sus clientes e incrementando sus ventas”, indicó Hugo García, CEO de Qpaypro."
       },
       {
-        "type": "h3",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
-      },
-      {
-        "type": "p",
-        "text": "“Ahora en Qpaypro somos la única pasarela de pagos en procesar en línea a través de Visanet y BAC Credomatic. En la actualidad contamos con más de 1500 clientes en Guatemala los cuales procesan miles de transacciones mensualmente. Continuamos con nuestro compromiso de facilitar e incentivar el comercio electrónico en Guatemala, ahora por medio de esta alianza con BAC Credomatic. Más que solo una solución de pagos electrónicos, nos vemos realmente como socios estratégicos de nuestros clientes afiliados”"
-      },
-      {
-        "type": "h3",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“Ahora en Qpaypro somos la única pasarela de pagos en procesar en línea a través de Visanet y BAC Credomatic. En la actualidad contamos con más de 1500 clientes en Guatemala los cuales procesan miles de transacciones mensualmente. Continuamos con nuestro compromiso de facilitar e incentivar el comercio electrónico en Guatemala, ahora por medio de esta alianza con BAC Credomatic. Más que solo una solución de pagos electrónicos, nos vemos realmente como socios estratégicos de nuestros clientes afiliados”, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
@@ -4412,16 +4548,8 @@
         "text": "La plataforma es confiable y segura con respaldo 24/7, cuenta con un equipo dedicado a su infraestructura para el procesamiento de transacciones; y se encuentra hospedada en uno de los centros de datos de más alto nivel en el mundo. Qpaypro asegura los miles de transacciones diarias de sus afiliados."
       },
       {
-        "type": "p",
-        "text": "“En este mes fomentamos y celebramos un espacio virtual donde navegar y comprar se realice sin temor, en Qpaypro estamos comprometidos en lograr que los cobros que efectúen nuestros afiliados sean confiables, para que su atención esté en ofrecer un producto o servicio de calidad, y que la seguridad esté garantizada por nosotros”"
-      },
-      {
-        "type": "h2",
-        "text": "Indicó hugo garcía"
-      },
-      {
-        "type": "p",
-        "text": "CEO – Qpaypro"
+        "type": "quote",
+        "text": "“En este mes fomentamos y celebramos un espacio virtual donde navegar y comprar se realice sin temor, en Qpaypro estamos comprometidos en lograr que los cobros que efectúen nuestros afiliados sean confiables, para que su atención esté en ofrecer un producto o servicio de calidad, y que la seguridad esté garantizada por nosotros”, indicó Hugo García, CEO de Qpaypro."
       },
       {
         "type": "p",
