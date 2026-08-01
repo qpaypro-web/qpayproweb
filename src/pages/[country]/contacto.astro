@@ -15,6 +15,11 @@ const SERVICE_OPTIONS = ['Pagos con tarjeta', 'Tienda en línea', 'Punto de vent
 
 const MESSAGE_MAX = 200;
 
+// Longitudes máximas del módulo Leads de Zoho. La Function las vuelve a aplicar
+// —lo que llega del navegador no es confiable—; aquí están para que el campo se
+// corte al escribir en vez de que el CRM rechace el lead entero al enviarlo.
+const MAX = { firstName: 40, lastName: 80, company: 200, email: 100, phone: 30, product: 255 };
+
 const SUPPORT_LINKS = [
   { href: 'https://api.whatsapp.com/send/?phone=50247856011', icon: 'message-circle', title: 'WhatsApp', subtitle: 'Ayuda más rápida' },
   { href: 'mailto:soporte@qpaypro.com', icon: 'mail', title: 'Ticket', subtitle: 'soporte@qpaypro.com' },
@@ -109,23 +114,23 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         <form data-contact-form class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label for="cf-first-name" class="block text-[#3a3d47] text-sm font-medium mb-2">Nombre *</label>
-            <input id="cf-first-name" name="first_name" autocomplete="given-name" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu nombre" />
+            <input id="cf-first-name" name="first_name" autocomplete="given-name" required maxlength={MAX.firstName} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu nombre" />
           </div>
           <div>
             <label for="cf-last-name" class="block text-[#3a3d47] text-sm font-medium mb-2">Apellido *</label>
-            <input id="cf-last-name" name="last_name" autocomplete="family-name" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu apellido" />
+            <input id="cf-last-name" name="last_name" autocomplete="family-name" required maxlength={MAX.lastName} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Tu apellido" />
           </div>
           <div class="sm:col-span-2">
             <label for="cf-company" class="block text-[#3a3d47] text-sm font-medium mb-2">Empresa *</label>
-            <input id="cf-company" name="company" autocomplete="organization" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Nombre de tu empresa" />
+            <input id="cf-company" name="company" autocomplete="organization" required maxlength={MAX.company} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Nombre de tu empresa" />
           </div>
           <div>
             <label for="cf-email" class="block text-[#3a3d47] text-sm font-medium mb-2">Email *</label>
-            <input id="cf-email" name="email" type="email" autocomplete="email" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="tucorreo@ejemplo.com" />
+            <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength={MAX.email} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="tucorreo@ejemplo.com" />
           </div>
           <div>
             <label for="cf-phone" class="block text-[#3a3d47] text-sm font-medium mb-2">Teléfono *</label>
-            <input id="cf-phone" name="phone" type="tel" autocomplete="tel" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="+502 0000-0000" />
+            <input id="cf-phone" name="phone" type="tel" autocomplete="tel" required maxlength={MAX.phone} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="+502 0000-0000" />
           </div>
           <div class="sm:col-span-2">
             <label for="cf-country" class="block text-[#3a3d47] text-sm font-medium mb-2">País *</label>
@@ -138,7 +143,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
           </div>
           <div class="sm:col-span-2">
             <label for="cf-product" class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué producto o servicio vendes? *</label>
-            <input id="cf-product" name="product" required class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Describe brevemente tu producto o servicio" />
+            <input id="cf-product" name="product" required maxlength={MAX.product} class="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-[#1a1d29] placeholder-[#9aa0aa] text-[15px] focus:outline-none focus:border-[#0047ba] focus:ring-2 focus:ring-[#0047ba]/15 transition" placeholder="Describe brevemente tu producto o servicio" />
           </div>
           <div class="sm:col-span-2">
             <label for="cf-service" class="block text-[#3a3d47] text-sm font-medium mb-2">¿Qué servicio te interesa? *</label>

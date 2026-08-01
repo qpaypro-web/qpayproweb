@@ -26,8 +26,6 @@ recogen.
 | `PUBLIC_TURNSTILE_SITE_KEY` | Plaintext (build) | no — ver "Captcha" |
 | `ZOHO_ACCOUNTS_HOST` | Plaintext | no — default `accounts.zoho.com` |
 | `ZOHO_API_HOST` | Plaintext | no — respaldo; Zoho devuelve el correcto |
-| `ZOHO_FIELD_PRODUCT` | Plaintext | no — ver más abajo |
-| `ZOHO_FIELD_SERVICE` | Plaintext | no — ver más abajo |
 | `LEAD_RATE_LIMIT` | KV binding | no — sin él no hay límite por IP |
 
 `PUBLIC_TURNSTILE_SITE_KEY` es la única que se compila dentro del sitio y es
@@ -61,19 +59,71 @@ sin tocar código.
 El dominio de la API no hace falta configurarlo: Zoho devuelve el `api_domain`
 correcto junto con el `access_token`.
 
-### Campos personalizados
+### Campos de Zoho
 
-"¿Qué producto o servicio vendes?" y "¿Qué servicio te interesa?" no tienen campo
-estándar en el módulo Leads:
+Los API names están fijos en el código porque están verificados contra el CRM.
+Los tres primeros son picklists: si el valor no existe **tal cual**, Zoho no
+guarda el campo mal y ya — rechaza el registro completo con `INVALID_DATA`, y el
+visitante solo ve el error genérico.
 
-- `Lead_Source` **no** sirve para el servicio de interés: es un picklist de
-  valores fijos y Zoho rechaza el registro completo con `INVALID_DATA` si llega
-  un valor que no está en la lista. Se manda con el valor fijo `Sitio web`.
-- `Comments` **no** es escribible por API en Leads.
+| Campo | Tipo | Qué se manda |
+|---|---|---|
+| `Lead_Source` | picklist | siempre `Página web` |
+| `Pa_s` | picklist | `Guatemala` o `El Salvador` |
+| `Interesado_en` | picklist **multi-select** | arreglo de un elemento, ver tabla abajo |
+| `Qu_vendes` | texto (255) | "¿Qué producto o servicio vendes?" |
+| `Description` | textarea | el mensaje, si lo escribieron |
 
-Pedirle al administrador de Zoho los API names de los dos campos personalizados
-y ponerlos en `ZOHO_FIELD_PRODUCT` y `ZOHO_FIELD_SERVICE`. Mientras estén
-vacíos, esos dos datos se anexan al final de `Description` en vez de perderse.
+`Pa_s` es el campo de país que usa este CRM. El `Country` estándar viene vacío en
+casi todos los leads, así que no se escribe: cada campo de más es un motivo más
+de rechazo del registro completo.
+
+`Interesado_en` es de selección múltiple: el valor va como arreglo (`["QPayPro"]`)
+aunque solo sea uno. Mandarlo como texto suelto falla.
+
+| Opción del formulario | Valor en `Interesado_en` |
+|---|---|
+| Pagos con tarjeta | `QPayPro` |
+| Tienda en línea | `QPayShop` |
+| Punto de venta | `QPayPOS` |
+| Terminal POS | `mPOS` |
+
+Las longitudes máximas de Leads están en `ZOHO_MAX` y también como `maxlength` en
+el formulario. Pasarse invalida el registro entero, así que el correo y el
+teléfono se rechazan con un 400 en vez de recortarse: uno truncado deja un lead
+con el que nadie puede comunicarse.
+
+### Asignación al asesor (`lar_id`)
+
+Las **assignment rules de Zoho no corren en un insert normal de la API**. Hay que
+pedir una explícitamente con `lar_id`, parejo a `data`, o el lead nace a nombre
+de la cuenta dueña del refresh token y se queda ahí.
+
+`trigger` no sirve para esto: cubre workflows, no assignment rules.
+
+| País | Regla | id |
+|---|---|---|
+| Guatemala | GT ASIGNACION AUTOMATICA QPAYPRO | `2592238000003550078` |
+| El Salvador | SV ASIGNACION AUTOMATICA QPAYPRO | `2592238000208748011` |
+
+Están en `ASSIGNMENT_RULE_BY_COUNTRY`, que es además la lista de países válidos.
+Si en Zoho se renombra o reemplaza una regla, el id cambia y hay que actualizarlo
+aquí: no hay forma de resolverlo por nombre en tiempo de ejecución.
+
+A quién le toca cada lead lo decide la regla dentro de Zoho, no este código.
+
+### Duplicados
+
+Zoho tiene `Email` como único en Leads. Cuando alguien que ya está en el CRM
+vuelve a escribir, la respuesta trae `DUPLICATE_DATA` y la Function **cuelga el
+mensaje como Nota** del lead existente en vez de descartarlo. Si la nota falla se
+registra en el log pero el envío se da por bueno igual.
+
+### Automatizaciones
+
+El insert manda `trigger: ['workflow']`. Con ese parámetro **no** corren
+aprobaciones, blueprints, pathfinder ni orchestration: si se agrega alguno que
+deba dispararse desde el formulario, hay que listarlo ahí.
 
 ### Desarrollo local
 

@@ -13,8 +13,6 @@
  *   TURNSTILE_SECRET_KEY    secreto
  *   ZOHO_ACCOUNTS_HOST      texto, opcional (default accounts.zoho.com)
  *   ZOHO_API_HOST           texto, opcional (normalmente lo dice el propio Zoho)
- *   ZOHO_FIELD_PRODUCT      texto, opcional — API name del campo personalizado
- *   ZOHO_FIELD_SERVICE      texto, opcional — API name del campo personalizado
  *   LEAD_RATE_LIMIT         KV binding, opcional
  */
 
@@ -25,8 +23,6 @@ interface Env {
   TURNSTILE_SECRET_KEY: string;
   ZOHO_ACCOUNTS_HOST?: string;
   ZOHO_API_HOST?: string;
-  ZOHO_FIELD_PRODUCT?: string;
-  ZOHO_FIELD_SERVICE?: string;
   LEAD_RATE_LIMIT?: KVLike;
 }
 
@@ -41,11 +37,45 @@ interface EventContext {
   env: Env;
 }
 
-// Estos valores están duplicados a propósito respecto de
-// src/pages/[country]/contacto.astro: la Function se empaqueta aparte y no debe
-// depender del árbol de Astro. Si cambian allá, cambian aquí.
-const COUNTRIES = ['Guatemala', 'El Salvador'];
-const SERVICES = ['Pagos con tarjeta', 'Tienda en línea', 'Punto de venta', 'Terminal POS'];
+// Las assignment rules de Zoho NO corren en un insert normal de la API: hay que
+// pedir una por id con `lar_id`. Sin esto el lead queda a nombre de la cuenta
+// que firma la petición —no del asesor del país— y nadie lo atiende.
+//
+// Las claves son además la lista de países válidos. Están duplicadas a propósito
+// respecto de src/pages/[country]/contacto.astro: la Function se empaqueta
+// aparte y no debe depender del árbol de Astro. Si cambian allá, cambian aquí.
+const ASSIGNMENT_RULE_BY_COUNTRY: Record<string, string> = {
+  Guatemala: '2592238000003550078', // GT ASIGNACION AUTOMATICA QPAYPRO
+  'El Salvador': '2592238000208748011', // SV ASIGNACION AUTOMATICA QPAYPRO
+};
+
+// Lo que el visitante elige en el formulario, traducido al nombre comercial que
+// espera Zoho. Las claves son las opciones del <select>; los valores, las del
+// picklist Interesado_en. La tabla es además la lista de servicios válidos: lo
+// que no esté aquí se rechaza antes de llegar al CRM.
+const SERVICE_TO_PRODUCT: Record<string, string> = {
+  'Pagos con tarjeta': 'QPayPro',
+  'Tienda en línea': 'QPayShop',
+  'Punto de venta': 'QPayPOS',
+  'Terminal POS': 'mPOS',
+};
+
+// Lead_Source es un picklist y este es el valor exacto que existe en el CRM.
+// Cualquier variante —tilde, mayúscula, sinónimo— hace que Zoho rechace el
+// registro completo con INVALID_DATA.
+const LEAD_SOURCE = 'Página web';
+
+// Longitudes máximas del módulo Leads. Pasarse también invalida el registro
+// entero, así que el recorte se hace aquí y no se delega en Zoho.
+const ZOHO_MAX = {
+  firstName: 40,
+  lastName: 80,
+  company: 200,
+  email: 100,
+  phone: 30,
+  product: 255,
+  description: 32000,
+};
 
 const MESSAGE_MAX = 200;
 const FIELD_MAX = 200;
@@ -122,6 +152,46 @@ async function rateLimited(env: Env, ip: string | null) {
   return false;
 }
 
+/** Zoho devuelve el registro que ya existía dentro de los `details` del error. */
+function duplicateLeadId(details: unknown): string | null {
+  if (!details || typeof details !== 'object') return null;
+  const entry = details as { id?: unknown; duplicate_record?: { id?: unknown } };
+  const id = entry.duplicate_record?.id ?? entry.id;
+  return typeof id === 'string' ? id : null;
+}
+
+/**
+ * Cuelga el mensaje como Nota del lead que ya existía. Nunca lanza: si falla,
+ * el envío igual se da por bueno, porque para quien escribió su mensaje sí
+ * llegó a una persona. La Nota trae su propia fecha, así que no se escribe.
+ */
+async function attachNote(host: string, accessToken: string, leadId: string, content: string) {
+  try {
+    const response = await fetch(`${host}/crm/v8/Notes`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Zoho-oauthtoken ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: [
+          {
+            Parent_Id: { module: { api_name: 'Leads' }, id: leadId },
+            Note_Title: 'Nuevo mensaje desde el formulario web',
+            Note_Content: content,
+          },
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      console.error(`[lead] Nota rechazada para ${leadId}: ${response.status} ${await response.text()}`);
+    }
+  } catch (error) {
+    console.error(`[lead] No se pudo adjuntar la nota a ${leadId}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
 export async function onRequestPost(context: EventContext): Promise<Response> {
   const { request, env } = context;
   const ip = request.headers.get('CF-Connecting-IP');
@@ -159,50 +229,54 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
     console.warn('[lead] Sin TURNSTILE_SECRET_KEY: se acepta el envío sin verificar el captcha.');
   }
 
-  if (await rateLimited(env, ip)) {
-    return fail('Recibimos varios mensajes desde aquí. Espera unos minutos antes de volver a enviar.', 429);
-  }
-
-  const firstName = text(payload.first_name);
-  const lastName = text(payload.last_name);
-  const company = text(payload.company);
-  const email = text(payload.email);
-  const phone = text(payload.phone, 40);
+  const firstName = text(payload.first_name, ZOHO_MAX.firstName);
+  const lastName = text(payload.last_name, ZOHO_MAX.lastName);
+  const company = text(payload.company, ZOHO_MAX.company);
+  // El correo y el teléfono no se recortan: uno truncado deja un lead con el que
+  // nadie puede comunicarse. Se leen con un tope defensivo y se rechazan abajo.
+  const email = text(payload.email, 320);
+  const phone = text(payload.phone, 60);
   const country = text(payload.country);
-  const product = text(payload.product);
+  const product = text(payload.product, ZOHO_MAX.product);
   const service = text(payload.service);
   const message = text(payload.message, MESSAGE_MAX);
 
   // Se revalida en el servidor: lo que llega del navegador no es confiable, y
   // Zoho rechaza el registro completo si un valor de lista no existe.
   if (!firstName || !lastName || !company || !product) return fail('Faltan campos obligatorios.', 400);
+  if (email.length > ZOHO_MAX.email) return fail(`El correo no puede tener más de ${ZOHO_MAX.email} caracteres.`, 400);
   if (!looksLikeEmail(email)) return fail('El correo no parece válido.', 400);
+  if (phone.length > ZOHO_MAX.phone) return fail(`El teléfono no puede tener más de ${ZOHO_MAX.phone} caracteres.`, 400);
   if (phone.length < 6) return fail('El teléfono no parece válido.', 400);
-  if (!COUNTRIES.includes(country)) return fail('País no válido.', 400);
-  if (!SERVICES.includes(service)) return fail('Servicio no válido.', 400);
+  if (!(country in ASSIGNMENT_RULE_BY_COUNTRY)) return fail('País no válido.', 400);
+  if (!(service in SERVICE_TO_PRODUCT)) return fail('Servicio no válido.', 400);
 
-  const lead: Record<string, string> = {
+  // El contador va después de validar: cinco intentos con un correo mal escrito
+  // no deben dejar fuera diez minutos a alguien que sí quiere escribirnos.
+  if (await rateLimited(env, ip)) {
+    return fail('Recibimos varios mensajes desde aquí. Espera unos minutos antes de volver a enviar.', 429);
+  }
+
+  const interest = SERVICE_TO_PRODUCT[service];
+
+  const lead: Record<string, unknown> = {
     First_Name: firstName,
     Last_Name: lastName,
     Company: company,
     Email: email,
     Phone: phone,
-    Country: country,
-    Lead_Source: 'Sitio web',
+    Lead_Source: LEAD_SOURCE,
+    // Pa_s, no el Country estándar: en este CRM el estándar viene vacío y es
+    // este el que usan las assignment rules y los reportes por país.
+    Pa_s: country,
+    // Interesado_en es un picklist de selección múltiple: espera un arreglo
+    // aunque solo se mande un valor.
+    Interesado_en: [interest],
+    Qu_vendes: product,
   };
 
-  // Los campos personalizados se configuran por entorno porque sus API names
-  // los define el administrador de Zoho. Mientras no estén, el dato se anexa a
-  // Description: es preferible un lead con el texto adentro que perderlo.
-  const extras: string[] = [];
-  if (env.ZOHO_FIELD_PRODUCT) lead[env.ZOHO_FIELD_PRODUCT] = product;
-  else extras.push(`Qué vende: ${product}`);
-
-  if (env.ZOHO_FIELD_SERVICE) lead[env.ZOHO_FIELD_SERVICE] = service;
-  else extras.push(`Servicio de interés: ${service}`);
-
-  const description = [message, ...extras].filter(Boolean).join('\n\n');
-  if (description) lead.Description = description;
+  // El mensaje es opcional: si no lo escribieron, no se manda el campo vacío.
+  if (message) lead.Description = message.slice(0, ZOHO_MAX.description);
 
   try {
     const { accessToken, apiDomain } = await getAccessToken(env);
@@ -217,15 +291,40 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
       // Sin duplicate_check_fields: ese parámetro es del endpoint de upsert. En
       // el insert, Zoho ya detecta el repetido por Email y responde
       // DUPLICATE_DATA, que es lo que se maneja abajo.
-      body: JSON.stringify({ data: [lead], trigger: ['workflow'] }),
+      //
+      // `lar_id` es lo que hace correr la assignment rule del país; sin él el
+      // lead nace a nombre de la cuenta que firma la API. Las assignment rules
+      // son independientes de `trigger`, que solo cubre workflows —aprobaciones,
+      // blueprints, pathfinder y orchestration no corren con este parámetro.
+      body: JSON.stringify({
+        data: [lead],
+        trigger: ['workflow'],
+        lar_id: ASSIGNMENT_RULE_BY_COUNTRY[country],
+      }),
     });
 
-    const result = (await response.json()) as { data?: Array<{ code?: string; status?: string; message?: string }> };
+    const result = (await response.json()) as {
+      data?: Array<{ code?: string; status?: string; message?: string; details?: unknown }>;
+    };
     const entry = result.data?.[0];
 
-    // Un lead repetido no es un error para quien escribe: ya está en el CRM y
-    // el workflow de Zoho se encarga. Se registra y se responde con éxito.
+    // Un lead repetido no es un error para quien escribe: ya está en el CRM. Lo
+    // que no puede pasar es que su mensaje nuevo se pierda sin que nadie en
+    // ventas se entere, así que se cuelga como Nota del lead existente.
     if (entry?.code === 'DUPLICATE_DATA') {
+      const leadId = duplicateLeadId(entry.details);
+      if (leadId) {
+        const note = [
+          `Servicio de interés: ${interest}`,
+          `Qué vende: ${product}`,
+          message ? `Mensaje:\n${message}` : '',
+        ]
+          .filter(Boolean)
+          .join('\n\n');
+        await attachNote(host, accessToken, leadId, note);
+      } else {
+        console.error(`[lead] Duplicado sin id en la respuesta: ${JSON.stringify(entry.details)}`);
+      }
       console.log(`[lead] Duplicado para ${email}`);
       return json({ ok: true });
     }
