@@ -229,7 +229,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
     .filter((key) => !env[key]);
   if (missingConfig.length) {
     console.error(`[lead] Faltan variables de entorno: ${missingConfig.join(', ')}`);
-    return fail(GENERIC_ERROR, 500);
+    return fail(`${GENERIC_ERROR} [diag: faltan ${missingConfig.join(', ')}]`, 500);
   }
 
   // El captcha se exige solo si hay secreto configurado. Sin él el endpoint
@@ -356,13 +356,17 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
     if (!response.ok || entry?.status !== 'success') {
       // El detalle se queda en el log: puede nombrar campos internos del CRM.
       console.error(`[lead] Zoho ${response.status}: ${JSON.stringify(result)}`);
-      return fail(GENERIC_ERROR, 502);
+      // TEMPORAL — ver el comentario del diagnóstico de Turnstile más arriba.
+      const diag = `zoho ${response.status} · ${entry?.code ?? 'sin code'} · ${entry?.message ?? 'sin message'}`;
+      return fail(`${GENERIC_ERROR} [diag: ${diag}]`, 502);
     }
 
     return json({ ok: true });
   } catch (error) {
-    console.error(`[lead] ${error instanceof Error ? error.message : String(error)}`);
-    return fail(GENERIC_ERROR, 502);
+    const detail = error instanceof Error ? error.message : String(error);
+    console.error(`[lead] ${detail}`);
+    // TEMPORAL — igual que arriba.
+    return fail(`${GENERIC_ERROR} [diag: ${detail}]`, 502);
   }
 }
 
