@@ -443,6 +443,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
         // La conversión se registra solo cuando el lead entró de verdad, no al
         // pulsar el botón. Van únicamente datos de segmentación: nada que
         // identifique a la persona sale del formulario hacia la analítica.
+        // El servidor devuelve el id derivado del registro en Zoho, que es el
+        // mismo que usa la automatización del CRM. Al disparar el píxel con él,
+        // los tres envíos —navegador, Function y Zoho— cuentan una sola
+        // conversión. Si no llegara, se usa el que generó el navegador.
+        const idFinal = typeof result.eventId === 'string' ? result.eventId : eventId;
+
         window.qpAnalytics?.trackEvent(
           'generate_lead',
           {
@@ -451,7 +457,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
             form_country: String(data.country ?? ''),
             service: String(data.service ?? ''),
           },
-          eventId ? { eventId } : undefined,
+          idFinal ? { eventId: idFinal } : undefined,
         );
 
         form.classList.add('hidden');
