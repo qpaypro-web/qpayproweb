@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
 import AnalyticsEvents from '../components/AnalyticsEvents.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
 import { COUNTRY_CODES, COUNTRY_HREFLANG, DEFAULT_COUNTRY, countryFromPath, swapCountry } from '../lib/country';
 
@@ -60,6 +61,7 @@ const pathname = Astro.url.pathname;
     <Header theme={headerTheme} country={country} />
     <slot />
     <Footer country={country} />
+    <WhatsAppButton />
     <ConsentBanner country={country} />
     <AnalyticsEvents country={country} />
     <script>

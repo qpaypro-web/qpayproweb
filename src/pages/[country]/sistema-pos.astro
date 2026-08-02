@@ -13,21 +13,148 @@ const PIECES = [
   { src: '/images/sistema-pos/dc10e3ff99ab.webp', desktop: { left: '73.125%', top: '37.556%', width: '14.583%' }, mobile: { left: '73.125%', top: '50.622%', width: '14.583%' }, delay: '1.75s' },
 ];
 
+// Sin marcas ni modelos: el equipo puede variar según disponibilidad y lo que
+// se le promete al cliente es la capacidad, no una referencia concreta.
 const HARDWARE_PIECES = [
-  { title: 'Terminal POS', text: 'Pantalla táctil con el software Qpaypro sobre stand G1S de aluminio, con bloqueo antirrobo y carga por contacto.' },
-  { title: 'Escáner inalámbrico', text: 'HS-250 2D WL: lee códigos 1D y 2D al instante, hasta 30-50 m de alcance, con receptor USB incluido.' },
-  { title: 'Impresora de recibos', text: 'Epson TM-m30III: térmica de 3", hasta 300 mm/s y ahorro de hasta 49% de papel.' },
-  { title: 'Cajón de efectivo', text: 'Custom CD30 de acero laminado en frío, con 5 ranuras para billetes y 8 para monedas.' },
+  { title: 'Terminal POS', text: 'Pantalla táctil con el software Qpaypro sobre stand de aluminio, con bloqueo antirrobo y carga por contacto.' },
+  { title: 'Escáner inalámbrico', text: 'Lee códigos 1D y 2D al instante, hasta 30-50 m de alcance, con receptor USB incluido.' },
+  { title: 'Impresora de recibos', text: 'Térmica de alta velocidad y eficiencia.' },
+  { title: 'Cajón de efectivo', text: 'De acero laminado en frío, con 5 ranuras para billetes y 8 para monedas.' },
 ];
 
 const SPECS = [
-  { label: 'Terminal', value: 'Pantalla táctil con software Qpaypro sobre stand G1S universal de aluminio · bloqueo antirrobo · carga por contacto · 149.5 × 133 × 225 mm' },
-  { label: 'Escáner', value: 'HS-250 2D WL · códigos 1D y 2D (QR, Data Matrix, PDF417, Aztec, EAN, UPC, Code 39) · 2.4G y Bluetooth, 30-50 m · batería 2200 mAh, 7 h de uso · receptor USB plug and play · resiste caídas de 3 m' },
-  { label: 'Impresora', value: 'Epson TM-m30III · térmica de recibos de 3" · hasta 300 mm/s · USB-A, USB-B, USB-C y Ethernet integrados, Wi-Fi/Bluetooth opcional · salida de papel frontal o superior · reduce hasta 49% el consumo de papel · carcasa IPX2 resistente al agua y antimicrobiana' },
-  { label: 'Cajón de efectivo', value: 'Custom CD30 · acero laminado en frío · 5 ranuras para billetes y 8 para monedas, más 2 compartimentos inferiores · bloqueo de tres posiciones · apertura impulsada por la impresora · 410 × 420 × 100 mm' },
+  { label: 'Terminal', value: 'Pantalla táctil con software Qpaypro sobre stand universal de aluminio · bloqueo antirrobo · carga por contacto · 149.5 × 133 × 225 mm' },
+  { label: 'Escáner', value: 'Códigos 1D y 2D (QR, Data Matrix, PDF417, Aztec, EAN, UPC, Code 39) · 2.4G y Bluetooth, 30-50 m · batería 2200 mAh, 7 h de uso · receptor USB plug and play · resiste caídas de 3 m' },
+  { label: 'Impresora', value: 'Térmica de recibos de 3" · alta velocidad · USB y Ethernet integrados, Wi-Fi/Bluetooth opcional · salida de papel frontal o superior · bajo consumo de papel · carcasa resistente al agua y antimicrobiana' },
+  { label: 'Cajón de efectivo', value: 'Acero laminado en frío · 5 ranuras para billetes y 8 para monedas, más 2 compartimentos inferiores · bloqueo de tres posiciones · apertura impulsada por la impresora · 410 × 420 × 100 mm' },
   { label: 'Pagos', value: 'Visa y Mastercard · crédito y débito · pago sin contacto (NFC) · 3D Secure' },
   { label: 'Conexión', value: 'WiFi y 4G' },
   { label: 'Canales', value: 'Sincroniza con Shopify, VTEX, WooCommerce, Prestashop y Ecwid' },
+];
+
+// El software es lo que sostiene la venta de este producto: el hardware se
+// compara por precio, el inventario unificado no. Los puntos salen de lo que
+// duele en un comercio que ya vende por varios canales.
+const CAPABILITIES = [
+  {
+    icon: 'boxes',
+    title: 'Un solo inventario',
+    text: 'Tu tienda física, tu tienda en línea y tus ventas por redes descuentan del mismo stock. Se acabó vender algo que ya no tenías o recontar existencias cada noche.',
+  },
+  {
+    icon: 'smartphone',
+    title: 'Punto de venta táctil',
+    text: 'Cobra en pocos toques, sin capacitación larga. Quien entra hoy al mostrador puede estar vendiendo en la misma jornada.',
+  },
+  {
+    icon: 'shopping-bag',
+    title: 'Órdenes',
+    text: 'Consulta, edita y da seguimiento a cada orden desde el mismo lugar, sin importar por qué canal entró.',
+  },
+  {
+    icon: 'refresh-cw',
+    title: 'Devoluciones y cambios',
+    text: 'Procesa una devolución en el mostrador aunque la compra se haya hecho en línea. El stock y el corte se ajustan solos.',
+  },
+  {
+    icon: 'gift',
+    title: 'Tarjetas de regalo',
+    text: 'Vende y canjea tarjetas de regalo en cualquiera de tus canales, con el saldo siempre al día.',
+  },
+  {
+    icon: 'store',
+    title: 'Sucursales',
+    text: 'Suma puntos de venta sin duplicar catálogos. Cada sucursal opera con su propio stock y tú ves el consolidado.',
+  },
+  {
+    icon: 'piggy-bank',
+    title: 'Cajas y cortes',
+    text: 'Apertura, cierre y arqueo por caja y por turno. Sabes con qué cuadró cada quien sin perseguir a nadie.',
+  },
+  {
+    icon: 'users',
+    title: 'Usuarios y permisos',
+    text: 'Cada quien ve lo que le toca. Define qué puede hacer cada cajero, supervisor o administrador.',
+  },
+  {
+    icon: 'chart-line',
+    title: 'Reportes',
+    text: 'Qué se vende, en qué sucursal, a qué hora y quién lo vendió. Con datos para decidir qué reponer y qué dejar de comprar.',
+  },
+];
+
+// Cada punto es una molestia concreta del día a día, no una lista de
+// características. La solución se enuncia sin prometer números.
+const PAIN_POINTS = [
+  {
+    problem: 'Vendes en línea y en el local con inventarios separados',
+    solution: 'Un mismo catálogo y un mismo stock para los dos. Lo que sale del mostrador desaparece de la tienda en línea al instante.',
+  },
+  {
+    problem: 'Cerrar caja te toma media hora y casi nunca cuadra',
+    solution: 'El corte se arma solo con lo que pasó por el sistema: ventas, devoluciones y movimientos de efectivo por turno.',
+  },
+  {
+    problem: 'No sabes qué producto te está dejando dinero',
+    solution: 'Los reportes te muestran qué rota, en qué sucursal y a qué hora, para reponer con criterio y no por intuición.',
+  },
+  {
+    problem: 'Cada canal nuevo significa otro sistema que aprender',
+    solution: 'Tienda física, tienda en línea, links de pago y redes sociales operan desde la misma plataforma.',
+  },
+];
+
+// El sistema es en la nube, así que el kit no es la única puerta de entrada.
+// Decirlo evita perder a quien ya tiene equipo o apenas está arrancando y
+// descarta el producto al ver solo el hardware.
+const MODALIDADES = [
+  {
+    icon: 'shopping-cart',
+    label: 'Con el kit completo',
+    title: 'Todo listo, instalado por nosotros',
+    text: 'Terminal, escáner, impresora y cajón. Un asesor técnico llega, lo instala y lo deja funcionando.',
+    para: 'Para negocios con mostrador fijo y volumen constante.',
+  },
+  {
+    icon: 'smartphone',
+    label: 'Sin hardware',
+    title: 'Solo con tu navegador o el app',
+    text: 'Como el sistema es en la nube, puedes vender, emitir facturas y enviarlas por WhatsApp sin ningún equipo adicional.',
+    para: 'Para quien está arrancando, tiene una operación simple o necesita vender en cualquier lugar.',
+  },
+  {
+    icon: 'plug',
+    label: 'Con tu propio equipo',
+    title: 'Aprovecha lo que ya tienes',
+    text: 'Puedes usar tu hardware si cumple las especificaciones técnicas mínimas, y cobrar con una terminal distinta a la de Qpaypro.',
+    para: 'Consúltalo con tu asesor de ventas antes de comprar equipo.',
+  },
+];
+
+// Giros donde el POS ya se usa. Cada uno enlaza a su página de sector, que es
+// donde está el argumento completo; aquí solo se muestra que aplica.
+const GIROS = [
+  { slug: 'retail', label: 'Tiendas y retail', text: 'Ropa, calzado, librerías, ferreterías.', image: '/images/sectors/dd34e7d09e81.webp', alt: 'Vista de una tienda de ropa con mesas de exhibición y un cliente revisando prendas' },
+  { slug: 'retail', label: 'Abarrotes y conveniencia', text: 'Alto volumen, cobro rápido, control de stock.', image: '/images/sectors/6634fe8542ee.webp', alt: 'Bolsa de compras con frutas, verduras y abarrotes' },
+  { slug: 'belleza', label: 'Salones y barberías', text: 'Cobra por servicio en recepción.', image: '/images/sectors/e5ef95d38da9.webp', alt: 'Punto de venta Qpaypro instalado en la recepción de un salón de belleza' },
+  { slug: 'servicios', label: 'Talleres y servicios', text: 'Órdenes de trabajo y cobros en sitio.', image: '/images/sectors/0f6e080a03e7.webp', alt: 'Técnico trabajando en un taller de reparación junto a una terminal de cobro' },
+];
+
+// Testimonios reales tomados de las páginas de sector: mismas personas, misma
+// cita. No se inventa ninguno ni se les cambia el texto.
+const TESTIMONIOS = [
+  {
+    quote: 'Ha sido la herramienta segura que le da confianza a mis clientes y que hizo crecer mis ventas.',
+    name: 'Ana Lucía',
+    image: '/images/sectors/5d04962f8c9e.webp',
+    alt: 'Ana Lucía, dueña de una tienda, en su negocio',
+  },
+  {
+    quote: 'Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.',
+    name: 'María Belén',
+    image: '/images/sectors/826585492158.webp',
+    alt: 'María Belén, propietaria de un negocio de servicios',
+  },
 ];
 
 const FAQ = [
@@ -36,10 +163,18 @@ const FAQ = [
   { q: '¿El POS acepta pagos con pago sin contacto?', a: 'Sí. Acepta Visa y Mastercard, crédito y débito, con pagos pago sin contacto (NFC) y validación 3D Secure para mayor seguridad.' },
   { q: '¿Puedo controlar mi inventario desde el POS?', a: 'Sí. El POS controla el stock en tiempo real, envía alertas de bajo inventario y organiza tu catálogo por categorías, sincronizado con tus ventas en línea.' },
   {
+    q: '¿Puedo usar QPayPOS si no compro el hardware?',
+    a: 'Sí. El sistema es en la nube, así que puedes vender, emitir facturas y enviarlas por WhatsApp sin ningún equipo adicional: solo necesitas un navegador o la app de Qpaypro en tu dispositivo móvil. Es la opción ideal para negocios que están arrancando, con un inventario y una operación más simples, o para vender en cualquier lugar.',
+  },
+  {
+    q: '¿Puedo usar mi propio hardware o mi propia terminal de tarjeta?',
+    a: 'Sí en los dos casos. Puedes usar tu propio equipo siempre que cumpla las especificaciones técnicas mínimas, así que conviene consultarlo con tu asesor de ventas antes de comprar nada. Y también puedes cobrar con una terminal de tarjeta distinta a la de Qpaypro; las tarifas por cobros con POS externo están en la página de precios.',
+  },
+  {
     q: '¿Cuánto cuesta el Sistema POS completo?',
-    a: getCountry(Astro.params.country!).sistemaPosPrice
-      ? `El sistema completo tiene un precio de referencia de Q${getCountry(Astro.params.country!).sistemaPosPrice!.toLocaleString('es-GT')}. Escríbenos para una cotización a la medida de tu negocio.`
-      : 'Escríbenos para una cotización a la medida de tu negocio.',
+    // Los precios viven en una sola página: repetirlos aquí obliga a
+    // mantenerlos en dos lugares y a que uno de los dos quede desactualizado.
+    a: 'Consulta los planes y precios vigentes en la página de precios, o escríbenos para una cotización a la medida de tu negocio.',
   },
 ];
 
@@ -53,13 +188,8 @@ export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
 const c = getCountry(country);
 
-// El kit tiene precio de referencia en Guatemala; en El Salvador aún no lo
-// entregan, así que en vez de un número se ofrece cotización.
-const UNIT_PRICE: number | null = c.sistemaPosPrice ?? null;
-const CURRENCY = c.currency === 'USD' ? '$' : 'Q';
-const PRICE_LOCALE = c.currency === 'USD' ? 'en-US' : 'es-GT';
-const QUOTE_LABEL = 'A cotizar';
-const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toLocaleString(PRICE_LOCALE);
+const VENTAS_HREF = `/${country}/contacto#ventas`;
+const PRECIOS_HREF = `/${country}/precios`;
 ---
 
 <MainLayout
@@ -70,32 +200,12 @@ const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toL
   <section class="relative w-full bg-[#050506] overflow-hidden">
     <style>
       @keyframes sysPieceIn { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: none; } }
-      @keyframes sysFade { from { opacity: 0; } to { opacity: 1; } }
-      @keyframes sysPop { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
       .sys-piece { position: absolute; height: auto; opacity: 0; animation: sysPieceIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
       @media (prefers-reduced-motion: reduce) { .sys-piece { animation: none; opacity: 1; } }
       .sys-buy-d { position: absolute; right: 4.5%; bottom: 16%; z-index: 5; }
       .sys-buy-m { display: flex; justify-content: center; margin: 22px auto 4px; }
       .sys-buy-trigger { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-family: 'Manrope', sans-serif; background: rgba(17, 24, 39, 0.34); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.26); border-radius: 14px; padding: 13px 24px; color: #fff; font-size: 14px; font-weight: 600; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22); transition: 0.3s; }
       .sys-buy-trigger:hover { background: rgba(17, 24, 39, 0.5); transform: translateY(-2px); }
-      .sys-modal { position: fixed; inset: 0; z-index: 100; background: rgba(5, 5, 6, 0.74); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 24px; animation: sysFade 0.2s ease-out; }
-      .sys-cart { position: relative; width: 300px; max-width: 100%; background: rgba(17, 24, 39, 0.94); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 18px; padding: 20px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5); color: #fff; font-family: 'Manrope', sans-serif; animation: sysPop 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
-      .sys-cart-close { position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: rgba(255, 255, 255, 0.08); color: #fff; cursor: pointer; transition: 0.2s; }
-      .sys-cart-close:hover { background: rgba(255, 255, 255, 0.18); }
-      .sys-cart-head { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.14); margin-bottom: 14px; }
-      .sys-ci-name { display: block; font-size: 15px; font-weight: 600; }
-      .sys-ci-meta { display: block; font-size: 11.5px; font-weight: 300; color: rgba(255, 255, 255, 0.6); margin-top: 3px; }
-      .sys-cart-qty { display: flex; align-items: center; justify-content: space-between; margin: 16px 0; }
-      .sys-q-label { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
-      .sys-q-ctrl { display: flex; align-items: center; gap: 12px; }
-      .sys-q-ctrl button { width: 28px; height: 28px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.08); color: #fff; font-size: 16px; line-height: 1; cursor: pointer; transition: 0.2s; }
-      .sys-q-ctrl button:hover { background: rgba(255, 255, 255, 0.2); }
-      .sys-q-val { min-width: 20px; text-align: center; font-weight: 600; font-size: 15px; }
-      .sys-cart-total { display: flex; align-items: center; justify-content: space-between; padding-top: 13px; border-top: 1px solid rgba(255, 255, 255, 0.14); margin-bottom: 16px; }
-      .sys-t-label { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
-      .sys-t-val { font-size: 19px; font-weight: 700; }
-      .sys-cart-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: linear-gradient(135deg, #0047ba, #0097ce); color: #fff; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; text-decoration: none; transition: 0.25s; }
-      .sys-cart-btn:hover { filter: brightness(1.08); }
     </style>
 
     <div class="relative w-full hidden lg:block">
@@ -104,10 +214,10 @@ const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toL
         <img src={piece.src} alt="" class="sys-piece" style={`left: ${piece.desktop.left}; top: ${piece.desktop.top}; width: ${piece.desktop.width}; animation-delay: ${piece.delay};`} />
       ))}
       <div class="sys-buy-d">
-        <button type="button" class="sys-buy-trigger" data-cart-open>
-          <Icon name="shopping-cart" class="w-4 h-4" />
-          Comprar ahora
-        </button>
+        <a href={VENTAS_HREF} class="sys-buy-trigger">
+          <Icon name="message-circle" class="w-4 h-4" />
+          Hablar con Ventas
+        </a>
       </div>
     </div>
 
@@ -128,44 +238,13 @@ const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toL
            cajón) en vez de al fondo del contenedor: así queda dentro de la
            pantalla tanto si la foto es más alta como más baja que el viewport. -->
       <div class="absolute inset-x-0 top-[76%] flex justify-center">
-        <button type="button" class="sys-buy-trigger" data-cart-open>
-          <Icon name="shopping-cart" class="w-4 h-4" />
-          Comprar ahora
-        </button>
-      </div>
-    </div>
-
-    <div class="sys-modal" data-cart-modal style="display: none;">
-      <div class="sys-cart">
-        <button type="button" class="sys-cart-close" aria-label="Cerrar" data-cart-close>
-          <Icon name="x" class="w-4 h-4" />
-        </button>
-        <div class="sys-cart-head">
-          <Icon name="shopping-cart" class="w-4 h-4" />
-          Tu carrito
-        </div>
-        <div>
-          <span class="sys-ci-name">Sistema POS completo</span>
-          <span class="sys-ci-meta">Terminal · Escáner · Impresora · Cajón</span>
-        </div>
-        <div class="sys-cart-qty">
-          <span class="sys-q-label">Cantidad</span>
-          <span class="sys-q-ctrl">
-            <button type="button" aria-label="Quitar" data-cart-decrement>−</button>
-            <span class="sys-q-val" data-cart-qty>1</span>
-            <button type="button" aria-label="Agregar" data-cart-increment>+</button>
-          </span>
-        </div>
-        <div class="sys-cart-total">
-          <span class="sys-t-label">Total</span>
-          <span class="sys-t-val" data-cart-total>{priceLabel}</span>
-        </div>
-        <a class="sys-cart-btn" href="#">
-          <Icon name="shopping-cart" class="w-4 h-4" />
-          Agregar al carrito
+        <a href={VENTAS_HREF} class="sys-buy-trigger">
+          <Icon name="message-circle" class="w-4 h-4" />
+          Hablar con Ventas
         </a>
       </div>
     </div>
+
   </section>
 
   <section class="w-full bg-white py-24 lg:py-32">
@@ -180,6 +259,245 @@ const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toL
             <h3 class="text-[#0f206c] text-lg font-semibold mb-2.5">{piece.title}</h3>
             <p class="text-[#6b7280] text-[15px] font-light leading-relaxed">{piece.text}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white pb-24 lg:pb-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="order-2 lg:order-1">
+          <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">En tu mostrador</p>
+          <h2 class="text-[#1a1d29] text-3xl md:text-4xl font-semibold tracking-[-0.03em] leading-[1.08] mb-6">
+            Llega armado y listo para vender
+          </h2>
+          <p class="text-[#6b7280] text-lg leading-relaxed font-light mb-8">
+            Llega armado y acompañado de un técnico que te ayuda en todo el proceso de instalación y configuración, y te deja todo
+            listo para vender: cobrando con tarjeta, imprimiendo recibos y descontando del inventario que ya tienes.
+          </p>
+          <ul class="space-y-3.5">
+            {['Nuestros asesores técnicos llegan y lo instalan por ti', 'Tu catálogo actual se carga y queda listo para vender', 'Funciona con WiFi o con datos móviles', 'Soporte local en tu mismo horario'].map((punto) => (
+              <li class="flex items-start gap-3">
+                <Icon name="circle-check" class="w-[18px] h-[18px] text-[#0a9d5a] flex-shrink-0 mt-0.5" strokeWidth={1.9} />
+                <span class="text-[#4a4e58] text-[15px] leading-relaxed font-light">{punto}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="order-1 lg:order-2">
+          <img
+            src="/images/sectors/34d825ba261b.webp"
+            alt="Sistema POS de Qpaypro completo sobre un mostrador: terminal táctil, escáner, impresora y cajón"
+            width="1000"
+            height="1081"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto rounded-[26px] ring-1 ring-black/[0.06]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white pb-24 lg:pb-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-12 lg:mb-14">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Cómo empezar</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl font-semibold tracking-[-0.03em] leading-[1.08] mb-6">
+          No necesitas comprar equipo para empezar
+        </h2>
+        <p class="text-[#6b7280] text-lg leading-relaxed font-light">
+          QPayPOS vive en la nube. Puedes entrar con el kit completo, sin nada de hardware o con el equipo que ya tienes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+        {MODALIDADES.map((m) => (
+          <div class="flex flex-col rounded-[22px] border border-black/[0.07] bg-white p-7 hover:shadow-[0_24px_60px_-32px_rgba(15,32,108,0.35)] transition-shadow duration-300">
+            <div class="flex items-center gap-2.5 mb-5">
+              <span class="w-9 h-9 rounded-lg bg-[#0047ba]/[0.07] flex items-center justify-center flex-shrink-0">
+                <Icon name={m.icon as any} class="w-[18px] h-[18px] text-[#0047ba]" strokeWidth={1.8} />
+              </span>
+              <span class="text-[#0047ba] text-[11px] font-semibold uppercase tracking-[0.14em]">{m.label}</span>
+            </div>
+            <h3 class="text-[#0f206c] text-lg font-semibold mb-2.5 tracking-tight">{m.title}</h3>
+            <p class="text-[#6b7280] text-[15px] font-light leading-relaxed mb-4 flex-1">{m.text}</p>
+            <p class="text-[#8a8f9a] text-[13.5px] font-light leading-snug pt-4 border-t border-black/[0.06]">{m.para}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-[#6b7280] text-[15px] font-light mt-9">
+        Si cobras con una terminal distinta a la de Qpaypro, consulta las tarifas por cobros con POS externo en la{' '}
+        <a href={PRECIOS_HREF} class="text-[#0047ba] font-medium hover:underline">página de precios</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">El software</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] mb-6">
+          El equipo cobra. El sistema es el que hace crecer el negocio.
+        </h2>
+        <p class="text-[#6b7280] text-lg lg:text-xl leading-relaxed font-light">
+          Todo lo que pasa en tu mostrador, tu tienda en línea y tus redes vive en la misma plataforma, con un solo inventario detrás.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {CAPABILITIES.map((cap) => (
+          <div class="rounded-[22px] bg-white border border-black/[0.06] p-7 hover:shadow-[0_24px_60px_-32px_rgba(15,32,108,0.35)] hover:-translate-y-0.5 transition-all duration-300">
+            <div class="w-11 h-11 rounded-xl bg-[#0047ba]/[0.07] flex items-center justify-center mb-5">
+              <Icon name={cap.icon as any} class="w-5 h-5 text-[#0047ba]" strokeWidth={1.8} />
+            </div>
+            <h3 class="text-[#0f206c] text-lg font-semibold mb-2.5 tracking-tight">{cap.title}</h3>
+            <p class="text-[#6b7280] text-[15px] font-light leading-relaxed">{cap.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full overflow-hidden bg-[#050506] py-24 lg:py-32">
+    <div class="absolute -top-40 right-0 w-[620px] h-[620px] rounded-full blur-3xl pointer-events-none" style="background: radial-gradient(circle, rgba(0, 151, 206, 0.3) 0%, transparent 70%);"></div>
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <p class="text-[#4ad2ff] text-xs font-semibold uppercase tracking-[0.22em] mb-5">La pantalla</p>
+          <h2 class="text-white text-3xl md:text-4xl font-semibold tracking-[-0.03em] leading-[1.08] mb-6">
+            Diseñado para vender rápido, no para estudiarlo
+          </h2>
+          <p class="text-white/65 text-lg leading-relaxed font-light mb-8">
+            El catálogo a la izquierda, el ticket a la derecha y el cobro a un toque. Quien atiende encuentra el producto,
+            lo suma y cobra sin salir de la misma pantalla, aunque sea su primer día.
+          </p>
+          <div class="flex flex-wrap gap-2.5">
+            {['Búsqueda por nombre o código', 'Lectura con escáner', 'Descuentos y notas', 'Cobro con tarjeta o efectivo'].map((t) => (
+              <span class="inline-flex items-center rounded-full bg-white/[0.06] border border-white/12 px-4 py-2 text-white/85 text-[13px] font-medium">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-8 rounded-[40px] blur-3xl pointer-events-none" style="background: radial-gradient(circle, rgba(0, 151, 206, 0.28) 0%, transparent 70%);"></div>
+          <img
+            src="/images/sistema-pos/b659d2c7fb02.webp"
+            alt="Pantalla del punto de venta de Qpaypro con el catálogo de productos y el ticket de la venta en curso"
+            width="807"
+            height="757"
+            loading="lazy"
+            decoding="async"
+            class="relative w-full h-auto rounded-[20px] ring-1 ring-white/12 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Por qué importa</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.05]">
+          Lo que hoy te quita tiempo
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+        {PAIN_POINTS.map((item) => (
+          <div class="rounded-[22px] border border-black/[0.07] overflow-hidden">
+            <div class="flex items-start gap-3 bg-[#fafbfc] px-6 py-5 border-b border-black/[0.06]">
+              <Icon name="x" class="w-4 h-4 text-[#c0392b] flex-shrink-0 mt-1" strokeWidth={2.4} />
+              <p class="text-[#1a1d29] text-[15px] font-medium leading-snug">{item.problem}</p>
+            </div>
+            <div class="flex items-start gap-3 px-6 py-5">
+              <Icon name="circle-check" class="w-4 h-4 text-[#0a9d5a] flex-shrink-0 mt-1" strokeWidth={1.9} />
+              <p class="text-[#4a4e58] text-[15px] font-light leading-relaxed">{item.solution}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 lg:mt-14 text-center">
+        <a
+          href={PRECIOS_HREF}
+          class="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[15px] text-[#1a1d29] ring-1 ring-black/10 hover:ring-black/25 transition-all duration-300"
+        >
+          Ver planes y precios
+          <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Dónde funciona</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] mb-6">
+          Hecho para el mostrador de tu giro
+        </h2>
+        <p class="text-[#6b7280] text-lg leading-relaxed font-light">
+          El mismo sistema se acomoda a cómo vende cada negocio.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        {GIROS.map((giro) => (
+          <a
+            href={`/${country}/${giro.slug}`}
+            class="group block rounded-[22px] overflow-hidden bg-white border border-black/[0.06] hover:shadow-[0_24px_60px_-32px_rgba(15,32,108,0.35)] hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <div class="relative aspect-[4/5] overflow-hidden bg-[#eef0f3]">
+              <img
+                src={giro.image}
+                alt={giro.alt}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
+              />
+            </div>
+            <div class="p-5">
+              <h3 class="text-[#0f206c] text-[15px] lg:text-base font-semibold mb-1.5 tracking-tight">{giro.label}</h3>
+              <p class="text-[#6b7280] text-[13.5px] font-light leading-snug">{giro.text}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Quienes ya cobran así</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.05]">
+          Negocios que dejaron de cobrar a mano
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {TESTIMONIOS.map((t) => (
+          <figure class="rounded-[24px] bg-[#f5f6f8] border border-black/[0.05] p-7 lg:p-8 flex flex-col">
+            <Icon name="quote" class="w-7 h-7 text-[#0047ba]/25 mb-5" strokeWidth={1.5} />
+            <blockquote class="text-[#1a1d29] text-[17px] lg:text-lg leading-[1.6] font-light flex-1">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="flex items-center gap-3.5 mt-7 pt-6 border-t border-black/[0.07]">
+              <img
+                src={t.image}
+                alt={t.alt}
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                class="w-12 h-12 rounded-full object-cover object-top ring-1 ring-black/[0.06]"
+              />
+              <span class="text-[#0f206c] text-[15px] font-semibold">{t.name}</span>
+            </figcaption>
+          </figure>
         ))}
       </div>
     </div>
@@ -228,39 +546,17 @@ const priceLabel = UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + UNIT_PRICE.toL
     <div class="relative z-10 max-w-2xl mx-auto px-6 lg:px-8 text-center">
       <h2 class="text-white text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] mb-6">¿Listo para empezar?</h2>
       <p class="text-white/60 text-lg lg:text-xl leading-relaxed mb-11 font-light">Lleva el Sistema POS a tu negocio y empieza a cobrar, controlar tu inventario y vender desde un solo equipo.</p>
-      <a href={`/${country}/contacto`} class="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300">
-        <Icon name="shopping-cart" class="w-4 h-4" />
-        Comprar ahora
-      </a>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href={VENTAS_HREF} class="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-base hover:bg-white/90 transition-colors duration-300">
+          <Icon name="message-circle" class="w-4 h-4" />
+          Hablar con Ventas
+        </a>
+        <a href={PRECIOS_HREF} class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base text-white ring-1 ring-white/25 hover:ring-white/50 transition-all duration-300">
+          Ver planes y precios
+          <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
     </div>
   </section>
 
-  <script define:vars={{ UNIT_PRICE, CURRENCY, PRICE_LOCALE, QUOTE_LABEL }}>
-    const openBtns = document.querySelectorAll('[data-cart-open]');
-    const modal = document.querySelector('[data-cart-modal]');
-    const closeBtn = document.querySelector('[data-cart-close]');
-    const qtyEl = document.querySelector('[data-cart-qty]');
-    const totalEl = document.querySelector('[data-cart-total]');
-    let qty = 1;
-
-    function render() {
-      qtyEl.textContent = String(qty);
-      totalEl.textContent =
-        UNIT_PRICE === null ? QUOTE_LABEL : CURRENCY + (UNIT_PRICE * qty).toLocaleString(PRICE_LOCALE);
-    }
-
-    openBtns.forEach((btn) => btn.addEventListener('click', () => { modal.style.display = 'flex'; }));
-    closeBtn?.addEventListener('click', () => { modal.style.display = 'none'; });
-    modal?.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-    document.querySelector('[data-cart-increment]')?.addEventListener('click', () => {
-      qty += 1;
-      render();
-    });
-    document.querySelector('[data-cart-decrement]')?.addEventListener('click', () => {
-      qty = Math.max(1, qty - 1);
-      render();
-    });
-  </script>
 </MainLayout>
