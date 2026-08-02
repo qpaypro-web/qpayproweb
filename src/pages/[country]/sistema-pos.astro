@@ -104,6 +104,32 @@ const PAIN_POINTS = [
   },
 ];
 
+// Giros donde el POS ya se usa. Cada uno enlaza a su página de sector, que es
+// donde está el argumento completo; aquí solo se muestra que aplica.
+const GIROS = [
+  { slug: 'retail', label: 'Tiendas y retail', text: 'Ropa, calzado, librerías, ferreterías.', image: '/images/sectors/dd34e7d09e81.webp', alt: 'Vista de una tienda de ropa con mesas de exhibición y un cliente revisando prendas' },
+  { slug: 'retail', label: 'Abarrotes y conveniencia', text: 'Alto volumen, cobro rápido, control de stock.', image: '/images/sectors/6634fe8542ee.webp', alt: 'Bolsa de compras con frutas, verduras y abarrotes' },
+  { slug: 'belleza', label: 'Salones y barberías', text: 'Cobra por servicio en recepción.', image: '/images/sectors/e5ef95d38da9.webp', alt: 'Punto de venta Qpaypro instalado en la recepción de un salón de belleza' },
+  { slug: 'servicios', label: 'Talleres y servicios', text: 'Órdenes de trabajo y cobros en sitio.', image: '/images/sectors/0f6e080a03e7.webp', alt: 'Técnico trabajando en un taller de reparación junto a una terminal de cobro' },
+];
+
+// Testimonios reales tomados de las páginas de sector: mismas personas, misma
+// cita. No se inventa ninguno ni se les cambia el texto.
+const TESTIMONIOS = [
+  {
+    quote: 'Ha sido la herramienta segura que le da confianza a mis clientes y que hizo crecer mis ventas.',
+    name: 'Ana Lucía',
+    image: '/images/sectors/5d04962f8c9e.webp',
+    alt: 'Ana Lucía, dueña de una tienda, en su negocio',
+  },
+  {
+    quote: 'Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.',
+    name: 'María Belén',
+    image: '/images/sectors/826585492158.webp',
+    alt: 'María Belén, propietaria de un negocio de servicios',
+  },
+];
+
 const FAQ = [
   { q: '¿Cómo funciona el POS omnicanal de Qpaypro con las tiendas en línea?', a: 'El Sistema POS de Qpaypro sincroniza en tiempo real el inventario, los pagos físicos y la impresión de recibos con las ventas de tu tienda en línea (Shopify, VTEX, WooCommerce), unificando todo en una sola plataforma. Así vendes en el mostrador y en internet con el mismo catálogo y el mismo stock.' },
   { q: '¿Qué incluye el Sistema POS de Qpaypro?', a: 'Incluye terminal POS con pantalla táctil, escáner inalámbrico, impresora de recibos y cajón de efectivo. Todo llega listo para vender y cobrar con tarjeta desde el primer día.' },
@@ -203,6 +229,42 @@ const PRECIOS_HREF = `/${country}/precios`;
     </div>
   </section>
 
+  <section class="w-full bg-white pb-24 lg:pb-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="order-2 lg:order-1">
+          <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">En tu mostrador</p>
+          <h2 class="text-[#1a1d29] text-3xl md:text-4xl font-semibold tracking-[-0.03em] leading-[1.08] mb-6">
+            Llega armado y listo para vender
+          </h2>
+          <p class="text-[#6b7280] text-lg leading-relaxed font-light mb-8">
+            No hay que integrar nada ni contratar a un técnico. Se conecta, se enciende y desde ese momento estás cobrando con tarjeta,
+            imprimiendo recibos y descontando del inventario que ya tenías.
+          </p>
+          <ul class="space-y-3.5">
+            {['Instalación sin técnico ni configuración de servidores', 'Tu catálogo actual se carga y queda listo para vender', 'Funciona con WiFi o con datos móviles', 'Soporte local en tu mismo horario'].map((punto) => (
+              <li class="flex items-start gap-3">
+                <Icon name="circle-check" class="w-[18px] h-[18px] text-[#0a9d5a] flex-shrink-0 mt-0.5" strokeWidth={1.9} />
+                <span class="text-[#4a4e58] text-[15px] leading-relaxed font-light">{punto}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="order-1 lg:order-2">
+          <img
+            src="/images/sectors/34d825ba261b.webp"
+            alt="Sistema POS de Qpaypro completo sobre un mostrador: terminal táctil, escáner, impresora y cajón"
+            width="1000"
+            height="1081"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto rounded-[26px] ring-1 ring-black/[0.06]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
     <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
@@ -225,6 +287,41 @@ const PRECIOS_HREF = `/${country}/precios`;
             <p class="text-[#6b7280] text-[15px] font-light leading-relaxed">{cap.text}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full overflow-hidden bg-[#050506] py-24 lg:py-32">
+    <div class="absolute -top-40 right-0 w-[620px] h-[620px] rounded-full blur-3xl pointer-events-none" style="background: radial-gradient(circle, rgba(0, 151, 206, 0.3) 0%, transparent 70%);"></div>
+    <div class="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <p class="text-[#4ad2ff] text-xs font-semibold uppercase tracking-[0.22em] mb-5">La pantalla</p>
+          <h2 class="text-white text-3xl md:text-4xl font-semibold tracking-[-0.03em] leading-[1.08] mb-6">
+            Diseñado para vender rápido, no para estudiarlo
+          </h2>
+          <p class="text-white/65 text-lg leading-relaxed font-light mb-8">
+            El catálogo a la izquierda, el ticket a la derecha y el cobro a un toque. Quien atiende encuentra el producto,
+            lo suma y cobra sin salir de la misma pantalla, aunque sea su primer día.
+          </p>
+          <div class="flex flex-wrap gap-2.5">
+            {['Búsqueda por nombre o código', 'Lectura con escáner', 'Descuentos y notas', 'Cobro con tarjeta o efectivo'].map((t) => (
+              <span class="inline-flex items-center rounded-full bg-white/[0.06] border border-white/12 px-4 py-2 text-white/85 text-[13px] font-medium">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-8 rounded-[40px] blur-3xl pointer-events-none" style="background: radial-gradient(circle, rgba(0, 151, 206, 0.28) 0%, transparent 70%);"></div>
+          <img
+            src="/images/sistema-pos/b659d2c7fb02.webp"
+            alt="Pantalla del punto de venta de Qpaypro con el catálogo de productos y el ticket de la venta en curso"
+            width="807"
+            height="757"
+            loading="lazy"
+            decoding="async"
+            class="relative w-full h-auto rounded-[20px] ring-1 ring-white/12 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)]"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -261,6 +358,77 @@ const PRECIOS_HREF = `/${country}/precios`;
           Ver planes y precios
           <Icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Dónde funciona</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] mb-6">
+          Hecho para el mostrador de tu giro
+        </h2>
+        <p class="text-[#6b7280] text-lg leading-relaxed font-light">
+          El mismo sistema se acomoda a cómo vende cada negocio.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        {GIROS.map((giro) => (
+          <a
+            href={`/${country}/${giro.slug}`}
+            class="group block rounded-[22px] overflow-hidden bg-white border border-black/[0.06] hover:shadow-[0_24px_60px_-32px_rgba(15,32,108,0.35)] hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <div class="relative aspect-[4/5] overflow-hidden bg-[#eef0f3]">
+              <img
+                src={giro.image}
+                alt={giro.alt}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
+              />
+            </div>
+            <div class="p-5">
+              <h3 class="text-[#0f206c] text-[15px] lg:text-base font-semibold mb-1.5 tracking-tight">{giro.label}</h3>
+              <p class="text-[#6b7280] text-[13.5px] font-light leading-snug">{giro.text}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white py-24 lg:py-32">
+    <div class="max-w-[1000px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-14 lg:mb-16">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Quienes ya cobran así</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.03em] leading-[1.05]">
+          Negocios que dejaron de cobrar a mano
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {TESTIMONIOS.map((t) => (
+          <figure class="rounded-[24px] bg-[#f5f6f8] border border-black/[0.05] p-7 lg:p-8 flex flex-col">
+            <Icon name="quote" class="w-7 h-7 text-[#0047ba]/25 mb-5" strokeWidth={1.5} />
+            <blockquote class="text-[#1a1d29] text-[17px] lg:text-lg leading-[1.6] font-light flex-1">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="flex items-center gap-3.5 mt-7 pt-6 border-t border-black/[0.07]">
+              <img
+                src={t.image}
+                alt={t.alt}
+                width="800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                class="w-12 h-12 rounded-full object-cover object-top ring-1 ring-black/[0.06]"
+              />
+              <span class="text-[#0f206c] text-[15px] font-semibold">{t.name}</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   </section>
