@@ -104,6 +104,33 @@ const PAIN_POINTS = [
   },
 ];
 
+// El sistema es en la nube, así que el kit no es la única puerta de entrada.
+// Decirlo evita perder a quien ya tiene equipo o apenas está arrancando y
+// descarta el producto al ver solo el hardware.
+const MODALIDADES = [
+  {
+    icon: 'shopping-cart',
+    label: 'Con el kit completo',
+    title: 'Todo listo, instalado por nosotros',
+    text: 'Terminal, escáner, impresora y cajón. Un asesor técnico llega, lo instala y lo deja funcionando.',
+    para: 'Para negocios con mostrador fijo y volumen constante.',
+  },
+  {
+    icon: 'smartphone',
+    label: 'Sin hardware',
+    title: 'Solo con tu navegador o el app',
+    text: 'Como el sistema es en la nube, puedes vender, emitir facturas y enviarlas por WhatsApp sin ningún equipo adicional.',
+    para: 'Para quien está arrancando, tiene una operación simple o necesita vender en cualquier lugar.',
+  },
+  {
+    icon: 'plug',
+    label: 'Con tu propio equipo',
+    title: 'Aprovecha lo que ya tienes',
+    text: 'Puedes usar tu hardware si cumple las especificaciones técnicas mínimas, y cobrar con una terminal distinta a la de Qpaypro.',
+    para: 'Consúltalo con tu asesor de ventas antes de comprar equipo.',
+  },
+];
+
 // Giros donde el POS ya se usa. Cada uno enlaza a su página de sector, que es
 // donde está el argumento completo; aquí solo se muestra que aplica.
 const GIROS = [
@@ -135,6 +162,14 @@ const FAQ = [
   { q: '¿Qué incluye el Sistema POS de Qpaypro?', a: 'Incluye terminal POS con pantalla táctil, escáner inalámbrico, impresora de recibos y cajón de efectivo. Todo llega listo para vender y cobrar con tarjeta desde el primer día.' },
   { q: '¿El POS acepta pagos con pago sin contacto?', a: 'Sí. Acepta Visa y Mastercard, crédito y débito, con pagos pago sin contacto (NFC) y validación 3D Secure para mayor seguridad.' },
   { q: '¿Puedo controlar mi inventario desde el POS?', a: 'Sí. El POS controla el stock en tiempo real, envía alertas de bajo inventario y organiza tu catálogo por categorías, sincronizado con tus ventas en línea.' },
+  {
+    q: '¿Puedo usar QPayPOS si no compro el hardware?',
+    a: 'Sí. El sistema es en la nube, así que puedes vender, emitir facturas y enviarlas por WhatsApp sin ningún equipo adicional: solo necesitas un navegador o la app de Qpaypro en tu dispositivo móvil. Es la opción ideal para negocios que están arrancando, con un inventario y una operación más simples, o para vender en cualquier lugar.',
+  },
+  {
+    q: '¿Puedo usar mi propio hardware o mi propia terminal de tarjeta?',
+    a: 'Sí en los dos casos. Puedes usar tu propio equipo siempre que cumpla las especificaciones técnicas mínimas, así que conviene consultarlo con tu asesor de ventas antes de comprar nada. Y también puedes cobrar con una terminal de tarjeta distinta a la de Qpaypro; las tarifas por cobros con POS externo están en la página de precios.',
+  },
   {
     q: '¿Cuánto cuesta el Sistema POS completo?',
     // Los precios viven en una sola página: repetirlos aquí obliga a
@@ -238,11 +273,11 @@ const PRECIOS_HREF = `/${country}/precios`;
             Llega armado y listo para vender
           </h2>
           <p class="text-[#6b7280] text-lg leading-relaxed font-light mb-8">
-            No hay que integrar nada ni contratar a un técnico. Se conecta, se enciende y desde ese momento estás cobrando con tarjeta,
-            imprimiendo recibos y descontando del inventario que ya tenías.
+            Llega armado y acompañado de un técnico que te ayuda en todo el proceso de instalación y configuración, y te deja todo
+            listo para vender: cobrando con tarjeta, imprimiendo recibos y descontando del inventario que ya tienes.
           </p>
           <ul class="space-y-3.5">
-            {['Instalación sin técnico ni configuración de servidores', 'Tu catálogo actual se carga y queda listo para vender', 'Funciona con WiFi o con datos móviles', 'Soporte local en tu mismo horario'].map((punto) => (
+            {['Nuestros asesores técnicos llegan y lo instalan por ti', 'Tu catálogo actual se carga y queda listo para vender', 'Funciona con WiFi o con datos móviles', 'Soporte local en tu mismo horario'].map((punto) => (
               <li class="flex items-start gap-3">
                 <Icon name="circle-check" class="w-[18px] h-[18px] text-[#0a9d5a] flex-shrink-0 mt-0.5" strokeWidth={1.9} />
                 <span class="text-[#4a4e58] text-[15px] leading-relaxed font-light">{punto}</span>
@@ -262,6 +297,41 @@ const PRECIOS_HREF = `/${country}/precios`;
           />
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-white pb-24 lg:pb-32">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center mb-12 lg:mb-14">
+        <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Cómo empezar</p>
+        <h2 class="text-[#1a1d29] text-3xl md:text-4xl font-semibold tracking-[-0.03em] leading-[1.08] mb-6">
+          No necesitas comprar equipo para empezar
+        </h2>
+        <p class="text-[#6b7280] text-lg leading-relaxed font-light">
+          QPayPOS vive en la nube. Puedes entrar con el kit completo, sin nada de hardware o con el equipo que ya tienes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+        {MODALIDADES.map((m) => (
+          <div class="flex flex-col rounded-[22px] border border-black/[0.07] bg-white p-7 hover:shadow-[0_24px_60px_-32px_rgba(15,32,108,0.35)] transition-shadow duration-300">
+            <div class="flex items-center gap-2.5 mb-5">
+              <span class="w-9 h-9 rounded-lg bg-[#0047ba]/[0.07] flex items-center justify-center flex-shrink-0">
+                <Icon name={m.icon as any} class="w-[18px] h-[18px] text-[#0047ba]" strokeWidth={1.8} />
+              </span>
+              <span class="text-[#0047ba] text-[11px] font-semibold uppercase tracking-[0.14em]">{m.label}</span>
+            </div>
+            <h3 class="text-[#0f206c] text-lg font-semibold mb-2.5 tracking-tight">{m.title}</h3>
+            <p class="text-[#6b7280] text-[15px] font-light leading-relaxed mb-4 flex-1">{m.text}</p>
+            <p class="text-[#8a8f9a] text-[13.5px] font-light leading-snug pt-4 border-t border-black/[0.06]">{m.para}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-[#6b7280] text-[15px] font-light mt-9">
+        Si cobras con una terminal distinta a la de Qpaypro, consulta las tarifas por cobros con POS externo en la{' '}
+        <a href={PRECIOS_HREF} class="text-[#0047ba] font-medium hover:underline">página de precios</a>.
+      </p>
     </div>
   </section>
 
