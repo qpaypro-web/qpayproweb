@@ -53,6 +53,15 @@ const jsonLd = [organizacion(), sitioWeb(country), migaDePan(pathname, title)].f
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    {/* El sitio no tenía favicon: /favicon.ico daba 404 y la pestaña salía en
+        blanco. El .ico va sin declarar tipo porque varios navegadores lo piden
+        por convención aunque no aparezca en el HTML; el PNG de 96 es el que
+        usan cuando sí leen el marcado. El de Apple va sobre fondo blanco
+        porque iOS descarta el alfa y compondría el isotipo sobre negro. */}
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="robots" content="index, follow" />
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
