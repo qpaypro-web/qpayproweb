@@ -14,7 +14,7 @@
       "tagline": "Para empezar a cobrar en línea sin costo fijo.",
       "commission": "Desde 3.5% + $0.15",
       "cta": "Comenzar gratis",
-      "url": "https://app.qpaypro.com",
+      "url": "https://app.qpaypro.com/register?country=SV&plan=Free",
       "highlights": [
         "Terminal de cobro POS disponible desde este plan",
         "Links de pago y QR",
@@ -29,7 +29,7 @@
       "tagline": "Para negocios que venden en línea y en tienda.",
       "commission": "Desde 3.5% + $0.15",
       "cta": "Elegir Premium",
-      "url": "https://app.qpaypro.com",
+      "url": "https://app.qpaypro.com/register?country=SV&plan=Premium",
       "highlights": [
         "Todo lo de Free, con menor comisión",
         "Cobros internacionales",
@@ -45,7 +45,7 @@
       "commission": "Desde 3.5% + $0.15",
       "featured": true,
       "cta": "Elegir Elite",
-      "url": "https://app.qpaypro.com",
+      "url": "https://app.qpaypro.com/register?country=SV&plan=Elite",
       "highlights": [
         "Todo lo de Premium, ampliado",
         "Hasta 2,500 productos con variaciones",
@@ -60,7 +60,7 @@
       "tagline": "Para empresas con alto volumen y sucursales.",
       "commission": "Negociada desde 3.5%",
       "cta": "Hablar con Ventas",
-      "url": "/contacto#ventas",
+      "url": "https://app.qpaypro.com/register?country=SV&plan=Enterprise",
       "highlights": [
         "Todo lo de Elite, sin límites",
         "Productos ilimitados, 4 sucursales",
