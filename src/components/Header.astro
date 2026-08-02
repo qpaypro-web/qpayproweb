@@ -201,6 +201,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
                 <a
                   href={swapCountry(currentPath, code)}
                   hreflang={COUNTRY_HREFLANG[code]}
+                  data-country-pick={code}
                   aria-current={code === country ? 'true' : undefined}
                   class:list={[
                     'flex items-center justify-between gap-3 p-3 rounded-xl transition-all text-sm hover:bg-[#f6f7f9]',
@@ -271,6 +272,7 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
               <a
                 href={swapCountry(currentPath, code)}
                 hreflang={COUNTRY_HREFLANG[code]}
+                data-country-pick={code}
                 aria-current={code === country ? 'true' : undefined}
                 class:list={[
                   'flex-1 min-w-0 text-center px-3 py-2.5 rounded-xl text-sm transition-colors',
@@ -488,4 +490,14 @@ const logoFilter = onDark ? THEME_VARIANTS.onDarkBg.logo : THEME_VARIANTS.onLigh
     setupDropdowns(header);
     setupMobileMenu(header);
   }
+
+  // La elección manual de país se guarda para que la Function de la raíz la
+  // respete por encima de la geolocalización: quien ya dijo qué país quiere no
+  // debería tener que repetirlo en cada visita.
+  document.querySelectorAll('[data-country-pick]').forEach((enlace) => {
+    enlace.addEventListener('click', () => {
+      const code = enlace.getAttribute('data-country-pick');
+      if (code) document.cookie = `qp-pais=${code}; path=/; max-age=31536000; SameSite=Lax`;
+    });
+  });
 </script>
