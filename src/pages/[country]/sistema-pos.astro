@@ -2,7 +2,8 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Icon from '../../components/Icon.astro';
 import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.astro';
-import { countryPaths, getCountry } from '../../lib/country';
+import { countryPaths, getCountry, type CountryCode } from '../../lib/country';
+import { ID_ORGANIZACION, preguntasFrecuentes, servicio, urlAbsoluta } from '../../lib/schema';
 
 const PIECES = [
   { src: '/images/sistema-pos/38c08d7b58b2.webp', desktop: { left: '13.667%', top: '58.074%', width: '2.625%' }, mobile: { left: '13.667%', top: '64.974%', width: '2.625%' }, delay: '0.35s' },
@@ -178,18 +179,48 @@ const FAQ = [
   },
 ];
 
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
-};
-
 export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
 const c = getCountry(country);
 
 const VENTAS_HREF = `/${country}/contacto#ventas`;
 const PRECIOS_HREF = `/${country}/precios`;
+
+// Las nueve capacidades entran al catálogo del servicio: son las prestaciones
+// que un asistente compara cuando le preguntan "¿qué punto de venta uso?", y
+// hasta ahora solo existían como tarjetas de texto. El precio del kit se
+// declara aparte y solo donde existe: en El Salvador `sistemaPosPrice` es
+// null, y publicar un precio inventado es peor que no publicar ninguno.
+const jsonLd: Record<string, unknown>[] = [
+  servicio({
+    nombre: `Sistema de punto de venta Qpaypro ${c.name}`,
+    tipo: 'Sistema de punto de venta',
+    descripcion: `Punto de venta para negocios en ${c.name}: cobra con tarjeta, controla inventario y sincroniza tu tienda física con la tienda en línea desde una sola plataforma.`,
+    url: `/${country}/sistema-pos`,
+    country: country as CountryCode,
+    incluye: CAPABILITIES.map((capacidad) => capacidad.title),
+  }),
+  preguntasFrecuentes(FAQ),
+];
+
+if (c.sistemaPosPrice) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `Kit de punto de venta Qpaypro ${c.name}`,
+    description: HARDWARE_PIECES.map((pieza) => pieza.title).join(', ') + '.',
+    brand: { '@id': ID_ORGANIZACION },
+    url: urlAbsoluta(`/${country}/sistema-pos`),
+    offers: {
+      '@type': 'Offer',
+      price: c.sistemaPosPrice,
+      priceCurrency: c.currency.code,
+      availability: 'https://schema.org/InStock',
+      url: urlAbsoluta(`/${country}/precios`),
+      eligibleRegion: { '@type': 'Country', name: c.name },
+    },
+  });
+}
 ---
 
 <MainLayout
@@ -523,7 +554,7 @@ const PRECIOS_HREF = `/${country}/precios`;
   </section>
 
   <section class="w-full bg-white py-24 lg:py-32">
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    {jsonLd.map((nodo) => <script type="application/ld+json" set:html={JSON.stringify(nodo)} />)}
     <div class="max-w-3xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-14 lg:mb-16">
         <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Preguntas frecuentes</p>

@@ -7,6 +7,7 @@ import ConsentBanner from '../components/ConsentBanner.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
 import { COUNTRY_CODES, COUNTRY_HREFLANG, DEFAULT_COUNTRY, countryFromPath, normalizePath, swapCountry } from '../lib/country';
+import { migaDePan, organizacion, sitioWeb } from '../lib/schema';
 
 interface Props {
   title: string;
@@ -33,6 +34,14 @@ const absoluta = (ruta: string) => new URL(ruta, base).href;
 // archivos sueltos, pero Pages sirve la ruta sin extensión. El canonical debe
 // apuntar a la URL que ve el visitante, no al archivo.
 const canonical = absoluta(normalizePath(pathname));
+
+// Datos estructurados comunes a todo el sitio. La empresa y el sitio se
+// declaran una vez por página con un @id fijo, y las entidades propias de cada
+// página (Service, Product, FAQPage) los referencian por ese @id en lugar de
+// volver a describir la empresa. Las migas de pan salen de la ruta, así que no
+// hay que mantenerlas a mano en cada página; el home de cada país no lleva
+// porque ya es el primer nivel.
+const jsonLd = [organizacion(), sitioWeb(country), migaDePan(pathname, title)].filter(Boolean);
 ---
 
 <!doctype html>
@@ -56,6 +65,7 @@ const canonical = absoluta(normalizePath(pathname));
       <link rel="alternate" hreflang={COUNTRY_HREFLANG[code]} href={absoluta(swapCountry(pathname, code))} />
     ))}
     <link rel="alternate" hreflang="x-default" href={absoluta(swapCountry(pathname, DEFAULT_COUNTRY))} />
+    {jsonLd.map((nodo) => <script type="application/ld+json" set:html={JSON.stringify(nodo)} />)}
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');

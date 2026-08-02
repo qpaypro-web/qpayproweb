@@ -3,7 +3,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Icon from '../../components/Icon.astro';
 import GlowSectionDecor from '../../components/GlowSectionDecor.astro';
 import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.astro';
-import { countryPaths, getCountry } from '../../lib/country';
+import { countryPaths, getCountry, type CountryCode } from '../../lib/country';
+import { preguntasFrecuentes, servicio } from '../../lib/schema';
 
 const PAYMENT_METHODS = [
   {
@@ -49,15 +50,26 @@ const FAQ = [
   { q: '¿Es seguro cobrar con Qpaypro?', a: 'Sí. Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y prevención de fraude con Qpayradar y Qpayverify.' },
 ];
 
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
-};
-
 export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
 const c = getCountry(country);
+
+// El FAQPage ya estaba; lo que faltaba era declarar el servicio en sí. Sin
+// esto la página describe cinco formas de cobro en prose y nada dice que sean
+// las prestaciones de un mismo producto ofrecido por Qpaypro en este país.
+// PAYMENT_METHODS es la única fuente: si se agrega una forma de cobro, entra
+// al catálogo sola.
+const jsonLd = [
+  servicio({
+    nombre: `Pasarela de pagos Qpaypro ${c.name}`,
+    tipo: 'Pasarela de pagos',
+    descripcion: `Pasarela de pagos certificada PCI-DSS para negocios en ${c.name}: cobros con tarjeta Visa y Mastercard, links de pago, suscripciones y punto de venta.`,
+    url: `/${country}/pasarela-de-pagos`,
+    country: country as CountryCode,
+    incluye: PAYMENT_METHODS.map((metodo) => metodo.title),
+  }),
+  preguntasFrecuentes(FAQ),
+];
 ---
 
 <MainLayout
@@ -129,7 +141,7 @@ const c = getCountry(country);
   <ConnectedPlatformDiagram />
 
   <section class="w-full bg-white py-24 lg:py-32">
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    {jsonLd.map((nodo) => <script type="application/ld+json" set:html={JSON.stringify(nodo)} />)}
     <div class="max-w-3xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-14 lg:mb-16">
         <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-5">Preguntas frecuentes</p>

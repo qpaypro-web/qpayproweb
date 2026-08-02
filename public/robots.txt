@@ -2,8 +2,38 @@
 User-agent: *
 Allow: /
 
-# La raíz solo redirige al país y no debe aparecer en resultados: el contenido
-# real vive en /gt y /sv, que son los que declara el sitemap.
+# /api/ son las Cloudflare Pages Functions (el endpoint del formulario). No hay
+# nada que indexar ahí y solo responde a POST.
+Disallow: /api/
+
+# Rastreadores de motores de inteligencia artificial. Se permiten a propósito:
+# cuando alguien le pregunta a un asistente qué pasarela de pagos usar en
+# Guatemala o El Salvador, queremos que Qpaypro sea una de las respuestas
+# posibles, y para eso el contenido tiene que ser accesible.
+#
+# Van en su propio bloque porque un agente que encuentra una regla con su
+# nombre ignora por completo el bloque `*`: si solo se listaran aquí sin
+# repetir el Disallow, /api/ les quedaría abierto.
+#
+# OpenAI: GPTBot entrena, OAI-SearchBot alimenta el índice de búsqueda de
+# ChatGPT y ChatGPT-User abre la página cuando un usuario pregunta por ella.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+# Anthropic: ClaudeBot rastrea, Claude-User y Claude-SearchBot resuelven
+# consultas en vivo.
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+# Perplexity, Google (Gemini), Apple, Microsoft, Meta y Common Crawl.
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: Meta-ExternalAgent
+User-agent: CCBot
+Allow: /
 Disallow: /api/
 
 Sitemap: https://www.qpaypro.com/sitemap-index.xml
