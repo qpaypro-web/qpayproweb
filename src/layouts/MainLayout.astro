@@ -6,7 +6,7 @@ import AnalyticsEvents from '../components/AnalyticsEvents.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
-import { COUNTRY_CODES, COUNTRY_HREFLANG, DEFAULT_COUNTRY, countryFromPath, swapCountry } from '../lib/country';
+import { COUNTRY_CODES, COUNTRY_HREFLANG, DEFAULT_COUNTRY, countryFromPath, normalizePath, swapCountry } from '../lib/country';
 
 interface Props {
   title: string;
@@ -23,6 +23,16 @@ const { title, description, headerTheme = 'onLight', ogType = 'website' } = Astr
 const country = countryFromPath(Astro.url.pathname);
 const ogLocale = COUNTRY_HREFLANG[country as keyof typeof COUNTRY_HREFLANG].replace('-', '_');
 const pathname = Astro.url.pathname;
+
+// Google exige URLs absolutas en hreflang y en canonical: las relativas las
+// ignora, así que la segmentación entre Guatemala y El Salvador no se estaba
+// aplicando. `Astro.site` viene de `site` en astro.config.mjs.
+const base = Astro.site?.origin ?? 'https://www.qpaypro.com';
+const absoluta = (ruta: string) => new URL(ruta, base).href;
+// En el build `pathname` llega como /gt/sistema-pos.html porque la salida son
+// archivos sueltos, pero Pages sirve la ruta sin extensión. El canonical debe
+// apuntar a la URL que ve el visitante, no al archivo.
+const canonical = absoluta(normalizePath(pathname));
 ---
 
 <!doctype html>
@@ -40,10 +50,12 @@ const pathname = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={ogLocale} />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
     {COUNTRY_CODES.map((code) => (
-      <link rel="alternate" hreflang={COUNTRY_HREFLANG[code]} href={swapCountry(pathname, code)} />
+      <link rel="alternate" hreflang={COUNTRY_HREFLANG[code]} href={absoluta(swapCountry(pathname, code))} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={swapCountry(pathname, DEFAULT_COUNTRY)} />
+    <link rel="alternate" hreflang="x-default" href={absoluta(swapCountry(pathname, DEFAULT_COUNTRY))} />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
