@@ -27,6 +27,11 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# Capturas de regresión visual: son de usar y tirar (ver tools/visual-regression/README.md).
+# Se dejan aquí por si alguien las escribe dentro del repo en vez de en /tmp.
+tools/visual-regression/baselines/
+tools/visual-regression/capturas/
+
 # Descargas de trabajo de la migración del blog (se regeneran con --descargar)
 scripts/.wp-posts.json
 scripts/.img-estado.txt
