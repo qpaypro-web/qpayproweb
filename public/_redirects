@@ -1,3 +1,8 @@
+/sitemap_index.xml /sitemap-index.xml 301
+/sitemap.xml /sitemap-index.xml 301
+/post-sitemap.xml /sitemap-0.xml 301
+/page-sitemap.xml /sitemap-0.xml 301
+/category-sitemap.xml /sitemap-0.xml 301
 /index.html /gt 301
 /seguridad.html /gt/seguridad 301
 /sobre-qpaypro.html /gt/sobre-qpaypro 301
