@@ -5,6 +5,10 @@ import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.
 import { countryPaths, getCountry, type CountryCode } from '../../lib/country';
 import { ID_ORGANIZACION, preguntasFrecuentes, servicio, urlAbsoluta } from '../../lib/schema';
 
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+
 const PIECES = [
   { src: '/images/sistema-pos/38c08d7b58b2.webp', desktop: { left: '13.667%', top: '58.074%', width: '2.625%' }, mobile: { left: '13.667%', top: '64.974%', width: '2.625%' }, delay: '0.35s' },
   { src: '/images/sistema-pos/e6bddd1eb37e.webp', desktop: { left: '17.958%', top: '31.63%', width: '8.25%' }, mobile: { left: '17.958%', top: '46.477%', width: '8.25%' }, delay: '0.63s' },
@@ -142,7 +146,10 @@ const GIROS = [
 ];
 
 // Testimonios reales tomados de las páginas de sector: mismas personas, misma
-// cita. No se inventa ninguno ni se les cambia el texto.
+// cita. No se inventa ninguno ni se les cambia el texto. El de María Belén
+// menciona el pago en cuotas, que no está habilitado en El Salvador: allá el
+// testimonio no se muestra, porque reescribirle la cita a alguien real no es
+// una opción.
 const TESTIMONIOS = [
   {
     quote: 'Ha sido la herramienta segura que le da confianza a mis clientes y que hizo crecer mis ventas.',
@@ -150,12 +157,17 @@ const TESTIMONIOS = [
     image: '/images/sectors/5d04962f8c9e.webp',
     alt: 'Ana Lucía, dueña de una tienda, en su negocio',
   },
-  {
-    quote: 'Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.',
-    name: 'María Belén',
-    image: '/images/sectors/826585492158.webp',
-    alt: 'María Belén, propietaria de un negocio de servicios',
-  },
+  ...(c.features.installments
+    ? [
+        {
+          quote:
+            'Antes de conocer Qpaypro los cobros eran manuales y engorrosos: me robaban tiempo y generaban estrés. Hoy mis clientas pagan de forma práctica, con tarjeta de crédito y en cuotas, con un solo clic.',
+          name: 'María Belén',
+          image: '/images/sectors/826585492158.webp',
+          alt: 'María Belén, propietaria de un negocio de servicios',
+        },
+      ]
+    : []),
 ];
 
 const FAQ = [
@@ -178,10 +190,6 @@ const FAQ = [
     a: 'Consulta los planes y precios vigentes en la página de precios, o escríbenos para una cotización a la medida de tu negocio.',
   },
 ];
-
-export const getStaticPaths = countryPaths;
-const country = Astro.params.country!;
-const c = getCountry(country);
 
 const VENTAS_HREF = `/${country}/contacto#ventas`;
 const PRECIOS_HREF = `/${country}/precios`;
@@ -534,7 +542,7 @@ if (c.sistemaPosPrice) {
     </div>
   </section>
 
-  <ConnectedPlatformDiagram />
+  <ConnectedPlatformDiagram country={country} />
 
   <section class="w-full bg-[#f5f6f8] py-24 lg:py-32">
     <div class="max-w-3xl mx-auto px-6 lg:px-8">

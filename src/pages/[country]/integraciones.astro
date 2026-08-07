@@ -12,15 +12,16 @@ const PLATFORMS = [
   { href: 'https://qpaypro.zohodesk.com/portal/es/kb/articles/open-cart-3-x', image: '/images/integraciones/51929f45b04f.jpg', name: 'OpenCart', tier: 'Desde Premium' },
 ];
 
-const STEPS = [
-  { num: '01', icon: 'plug', title: 'Instala el plug-in', text: 'Descarga el conector oficial de Qpaypro desde el marketplace de tu plataforma.' },
-  { num: '02', icon: 'settings', title: 'Configura tus llaves', text: 'Pega tus credenciales de Qpaypro y define tu moneda y método de cobro.' },
-  { num: '03', icon: 'credit-card', title: 'Empieza a cobrar', text: 'Tus clientes pagan con tarjeta, cuotas o QR directamente en tu checkout.' },
-];
-
 export const getStaticPaths = countryPaths;
 const country = Astro.params.country!;
 const c = getCountry(country);
+
+const STEPS = [
+  { num: '01', icon: 'plug', title: 'Instala el plug-in', text: 'Descarga el conector oficial de Qpaypro desde el marketplace de tu plataforma.' },
+  { num: '02', icon: 'settings', title: 'Configura tus llaves', text: 'Pega tus credenciales de Qpaypro y define tu moneda y método de cobro.' },
+  // El pago en cuotas no está habilitado en El Salvador.
+  { num: '03', icon: 'credit-card', title: 'Empieza a cobrar', text: `Tus clientes pagan con tarjeta${c.features.installments ? ', cuotas' : ''} o QR directamente en tu checkout.` },
+];
 ---
 
 <MainLayout

@@ -6,53 +6,75 @@ import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.
 import { countryPaths, getCountry, type CountryCode } from '../../lib/country';
 import { preguntasFrecuentes, servicio } from '../../lib/schema';
 
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+
+// El pago en cuotas y las suscripciones están habilitados en Guatemala pero no
+// en El Salvador, y esta página es la misma para los dos. Cada forma de cobro y
+// cada pregunta se declaran una sola vez y se filtran por la bandera del país:
+// anunciar una función que allá no se puede contratar es peor que no anunciarla.
+const { installments: cuotas, subscriptions: suscripciones } = c.features;
+
+// La numeración de las tarjetas se calcula al final, no se escribe a mano: al
+// quitar las suscripciones en El Salvador, las que siguen tienen que correrse.
 const PAYMENT_METHODS = [
   {
-    num: '01',
     icon: 'credit-card',
     title: 'Pagos con tarjeta',
-    text: 'Acepta Visa y Mastercard en tu negocio o a distancia, con pago sin contacto y pagos en cuotas.',
-    points: ['Crédito y débito', 'Pago sin contacto y 3D Secure', 'Pagos en cuotas'],
+    text: cuotas
+      ? 'Acepta Visa y Mastercard en tu negocio o a distancia, con pago sin contacto y pagos en cuotas.'
+      : 'Acepta Visa y Mastercard en tu negocio o a distancia, presencial o sin contacto.',
+    points: ['Crédito y débito', 'Pago sin contacto y 3D Secure', ...(cuotas ? ['Pagos en cuotas'] : [])],
   },
   {
-    num: '02',
     icon: 'link2',
     title: 'Links de pago',
     text: 'Genera un link y cobra por WhatsApp, redes o correo. Tu cliente paga desde su celular al instante.',
     points: ['Cobra por WhatsApp y redes', 'Sin página web', 'Confirmación inmediata'],
   },
+  ...(suscripciones
+    ? [
+        {
+          icon: 'refresh-cw',
+          title: 'Suscripciones',
+          text: 'Automatiza mensualidades, membresías y planes con cobros frecuentes.',
+          points: ['Cobros automáticos', 'Mensualidades y membresías', 'Menos morosidad'],
+        },
+      ]
+    : []),
   {
-    num: '03',
-    icon: 'refresh-cw',
-    title: 'Suscripciones',
-    text: 'Automatiza mensualidades, membresías y planes con cobros frecuentes.',
-    points: ['Cobros automáticos', 'Mensualidades y membresías', 'Menos morosidad'],
-  },
-  {
-    num: '04',
     icon: 'store',
     title: 'Punto de venta',
     text: 'Cobra en tu local con terminal táctil, escáner e impresora, sobre el mismo inventario de tu tienda en línea.',
     points: ['Terminal táctil, escáner e impresora', 'Un solo inventario para todos tus canales', 'Cortes de caja, sucursales y reportes'],
   },
   {
-    num: '05',
     icon: 'shield-check',
     title: 'Seguridad',
     text: 'Cada transacción protegida con certificación de nivel bancario.',
     points: ['Certificación PCI-DSS', 'Protocolo 3D Secure', 'Prevención de fraude Qpayradar + Qpayverify'],
   },
-];
+].map((metodo, i) => ({ ...metodo, num: String(i + 1).padStart(2, '0') }));
 
 const FAQ = [
-  { q: '¿Qué formas de cobro ofrece Qpaypro?', a: 'Cobras con tarjeta (Visa y Mastercard, crédito y débito), con links de pago por WhatsApp, con suscripciones automáticas y en tu tienda en línea o física. Todo desde una sola plataforma.' },
-  { q: '¿Puedo cobrar en cuotas?', a: 'Sí. Puedes ofrecer pagos en cuotas para que tus clientes compren montos más grandes con tarjeta de crédito.' },
+  {
+    q: '¿Qué formas de cobro ofrece Qpaypro?',
+    a: suscripciones
+      ? 'Cobras con tarjeta (Visa y Mastercard, crédito y débito), con links de pago por WhatsApp, con suscripciones automáticas y en tu tienda en línea o física. Todo desde una sola plataforma.'
+      : 'Cobras con tarjeta (Visa y Mastercard, crédito y débito), con links de pago por WhatsApp, con código QR y en tu tienda en línea o física. Todo desde una sola plataforma.',
+  },
+  ...(cuotas
+    ? [{ q: '¿Puedo cobrar en cuotas?', a: 'Sí. Puedes ofrecer pagos en cuotas para que tus clientes compren montos más grandes con tarjeta de crédito.' }]
+    : []),
   { q: '¿Es seguro cobrar con Qpaypro?', a: 'Sí. Cada cobro está protegido con certificación PCI-DSS, protocolo 3D Secure y prevención de fraude con Qpayradar y Qpayverify.' },
 ];
 
-export const getStaticPaths = countryPaths;
-const country = Astro.params.country!;
-const c = getCountry(country);
+// Lo que la página promete en su titular, su meta description y sus dos
+// llamados a la acción. Se arma una vez para que las cuatro digan lo mismo.
+const PROMESA = suscripciones
+  ? 'Acepta tarjetas, cobra con links de pago y suscripciones'
+  : 'Acepta tarjetas, cobra con links de pago y código QR';
 
 // El FAQPage ya estaba; lo que faltaba era declarar el servicio en sí. Sin
 // esto la página describe cinco formas de cobro en prose y nada dice que sean
@@ -63,7 +85,7 @@ const jsonLd = [
   servicio({
     nombre: `Pasarela de pagos Qpaypro ${c.name}`,
     tipo: 'Pasarela de pagos',
-    descripcion: `Pasarela de pagos certificada PCI-DSS para negocios en ${c.name}: cobros con tarjeta Visa y Mastercard, links de pago, suscripciones y punto de venta.`,
+    descripcion: `Pasarela de pagos certificada PCI-DSS para negocios en ${c.name}: cobros con tarjeta Visa y Mastercard, links de pago${suscripciones ? ', suscripciones' : ', código QR'} y punto de venta.`,
     url: `/${country}/pasarela-de-pagos`,
     country: country as CountryCode,
     incluye: PAYMENT_METHODS.map((metodo) => metodo.title),
@@ -73,8 +95,8 @@ const jsonLd = [
 ---
 
 <MainLayout
-  title="Pasarela de pagos: tarjeta, links y suscripciones | Qpaypro"
-  description="Acepta tarjetas, cobra con links de pago y suscripciones — todo con Qpaypro. Pasarela de pagos certificada PCI-DSS para Guatemala y El Salvador."
+  title={`Pasarela de pagos: tarjeta, links y ${suscripciones ? 'suscripciones' : 'código QR'} | Qpaypro`}
+  description={`${PROMESA} — todo con Qpaypro. Pasarela de pagos certificada PCI-DSS para negocios en ${c.name}.`}
   headerTheme="onDark"
 >
   <section class="relative w-full bg-[#050506] overflow-hidden pt-40 pb-24 lg:pt-52 lg:pb-32">
@@ -87,7 +109,7 @@ const jsonLd = [
         <span class="h-px w-8 bg-gradient-to-l from-transparent to-[#4ad2ff]/70"></span>
       </div>
       <h1 class="text-white text-4xl md:text-5xl lg:text-[4rem] font-semibold tracking-[-0.04em] leading-[1.0] mb-7">Soluciones de pago para tu negocio.</h1>
-      <p class="text-white/55 text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto mb-11">Acepta tarjetas, cobra con links de pago y suscripciones — todo con Qpaypro.</p>
+      <p class="text-white/55 text-lg lg:text-xl font-light leading-relaxed max-w-xl mx-auto mb-11">{PROMESA} — todo con Qpaypro.</p>
       <div class="flex items-center justify-center gap-3 flex-wrap">
         <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
           Comenzar ahora
@@ -108,7 +130,7 @@ const jsonLd = [
           </div>
           <h2 class="text-[#0f0f12] text-4xl md:text-5xl font-semibold tracking-[-0.035em] leading-[1.02]">Cobra como tu cliente prefiera</h2>
         </div>
-        <p class="text-[#6b7280] text-lg font-light leading-relaxed lg:pb-2">Con tarjeta, por link, con suscripción o en tu tienda: todo queda conectado en una sola plataforma.</p>
+        <p class="text-[#6b7280] text-lg font-light leading-relaxed lg:pb-2">Con tarjeta, por link, {suscripciones ? 'con suscripción' : 'por QR'} o en tu tienda: todo queda conectado en una sola plataforma.</p>
       </div>
       <div class="grid sm:grid-cols-2 gap-5 lg:gap-6">
         {PAYMENT_METHODS.map((method) => (
@@ -138,7 +160,7 @@ const jsonLd = [
     </div>
   </section>
 
-  <ConnectedPlatformDiagram />
+  <ConnectedPlatformDiagram country={country} />
 
   <section class="w-full bg-white py-24 lg:py-32">
     {jsonLd.map((nodo) => <script type="application/ld+json" set:html={JSON.stringify(nodo)} />)}
@@ -163,7 +185,7 @@ const jsonLd = [
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] blur-[120px] opacity-45 pointer-events-none" style="background: radial-gradient(circle, rgba(0, 71, 186, 0.5), transparent 70%);"></div>
     <div class="relative z-10 max-w-2xl mx-auto px-6 lg:px-8 text-center">
       <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.035em] leading-[1.05] mb-5">Empieza a cobrar con Qpaypro</h2>
-      <p class="text-white/55 text-lg leading-relaxed mb-10 font-light max-w-lg mx-auto">Acepta tarjetas, links de pago y suscripciones hoy mismo.</p>
+      <p class="text-white/55 text-lg leading-relaxed mb-10 font-light max-w-lg mx-auto">Acepta tarjetas, links de pago y {suscripciones ? 'suscripciones' : 'código QR'} hoy mismo.</p>
       <div class="flex items-center justify-center gap-3 flex-wrap">
         <a href={`/${country}/precios`} class="group px-8 py-4 bg-white text-[#050506] rounded-full font-semibold text-[15px] hover:bg-white/90 transition-colors duration-300 inline-flex items-center gap-2">
           Comenzar ahora

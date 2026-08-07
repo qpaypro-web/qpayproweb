@@ -18,7 +18,34 @@ const calc = getCountry(country).calculator;
 const hasInstallments = calc.installments === true;
 
 const INSTALLMENTS = hasInstallments ? calc.installmentRates : [];
-const ADMIN_COST = hasInstallments ? calc.fixedCost : 0;
+
+// Guatemala cobra también en dólares. Las tasas, los regímenes y la fórmula de
+// retención son las mismas en las dos monedas: lo único que cambia es el costo
+// administrativo fijo y el umbral a partir del cual el pequeño contribuyente
+// sufre retención (Q2,500 allá, $300 acá). Por eso las monedas son dos filas de
+// la misma tabla y no dos funciones de cálculo distintas.
+const GT = hasInstallments
+  ? {
+      rates: calc.installmentRates,
+      iva: calc.iva,
+      smallTaxpayerRate: calc.smallTaxpayerRate,
+      generalRetentionRate: calc.generalRetentionRate,
+      currencies: {
+        GTQ: {
+          symbol: 'Q',
+          locale: 'es-GT',
+          fixedCost: calc.fixedCost,
+          threshold: calc.smallTaxpayerThreshold,
+        },
+        USD: {
+          symbol: '$',
+          locale: 'en-US',
+          fixedCost: calc.fixedCostUsd,
+          threshold: calc.smallTaxpayerThresholdUsd,
+        },
+      },
+    }
+  : null;
 
 const SV = hasInstallments
   ? null
@@ -37,9 +64,17 @@ const SV = hasInstallments
       <div class="order-2 w-full max-w-[460px] lg:order-1">
       <div class="rounded-[28px] bg-white shadow-[0_40px_90px_-50px_rgba(15,32,108,0.5)] border border-black/[0.05] overflow-hidden" data-calc>
         <div class="bg-[#f6f7f9] p-7 lg:p-8 border-b border-black/[0.05]">
-          <h2 class="text-center text-[#0f206c] text-xl font-bold tracking-tight mb-6">Ingresa el monto</h2>
+          <h2 class="text-center text-[#0f206c] text-xl font-bold tracking-tight mb-5">Ingresa el monto</h2>
+          {hasInstallments && (
+            <div class="flex justify-center mb-5">
+              <div class="inline-flex items-center rounded-full bg-white border border-black/10 p-1" role="group" aria-label="Moneda del cálculo">
+                <button type="button" data-calc-currency="GTQ" aria-pressed="true" class="px-5 py-2 rounded-full text-sm font-semibold transition-all bg-[#0047ba] text-white">Quetzales</button>
+                <button type="button" data-calc-currency="USD" aria-pressed="false" class="px-5 py-2 rounded-full text-sm font-semibold transition-all text-[#5c606b] hover:text-[#0f206c]">Dólares</button>
+              </div>
+            </div>
+          )}
           <div class="flex items-center gap-2 rounded-full bg-white border border-black/10 px-5 py-3.5 mb-6 focus-within:border-[#0047ba] transition-colors">
-            <span class="text-[#0047ba] font-bold">{hasInstallments ? 'Q' : '$'}</span>
+            <span class="text-[#0047ba] font-bold" data-calc-symbol>{hasInstallments ? 'Q' : '$'}</span>
             <input
               type="text"
               inputmode="decimal"
@@ -135,7 +170,7 @@ const SV = hasInstallments
         </div>
       </div>
       {hasInstallments ? (
-        <p class="text-[#9094a0] text-xs mt-6 leading-relaxed">Cálculo referencial. Incluye comisión (<span data-calc-rate>4,50%</span>) y costo administrativo de Q2.95. La retención aplica según tu régimen y monto.</p>
+        <p class="text-[#9094a0] text-xs mt-6 leading-relaxed">Cálculo referencial. Incluye comisión (<span data-calc-rate>4,50%</span>) y costo administrativo de <span data-calc-admin>Q2.95</span>. La retención aplica según tu régimen y monto.</p>
       ) : (
         <div class="mt-6 space-y-2">
           <p class="text-[#9094a0] text-xs leading-relaxed" data-calc-exempt-note hidden>{SV!.exemptNote}</p>
@@ -164,11 +199,14 @@ const SV = hasInstallments
   </div>
 </section>
 
-<script define:vars={{ INSTALLMENTS, ADMIN_COST, SV, hasInstallments }}>
+<script define:vars={{ GT, SV, hasInstallments }}>
   const root = document.querySelector('[data-calc]');
   const amountInput = root.querySelector('[data-calc-amount]');
   const installmentsSelect = root.querySelector('[data-calc-installments]');
   const regimeButtons = Array.from(root.querySelectorAll('[data-calc-regime]'));
+  const currencyButtons = Array.from(root.querySelectorAll('[data-calc-currency]'));
+  const symbolEl = root.querySelector('[data-calc-symbol]');
+  const adminEl = document.querySelector('[data-calc-admin]');
   const netEl = root.querySelector('[data-calc-net]');
   const commissionEl = root.querySelector('[data-calc-commission]');
   const commissionLabelEl = root.querySelector('[data-calc-commission-label]');
@@ -179,36 +217,45 @@ const SV = hasInstallments
   const exemptNoteEl = document.querySelector('[data-calc-exempt-note]');
 
   let regime = hasInstallments ? 'pequeno' : 'contribuyente';
+  let currency = 'GTQ';
 
-  const formatQ = (n) => 'Q ' + n.toLocaleString('es-GT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const formatUSD = (n) => '$ ' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const decimales = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
 
   // Guatemala: comisión sobre el monto total + costo administrativo fijo, y la
   // retención depende del régimen (pequeño contribuyente por umbral, general
-  // sobre la base sin IVA).
+  // sobre la base sin IVA). En dólares cambian solo el costo fijo y el umbral;
+  // todo lo demás es idéntico.
   function renderGT() {
+    const config = GT.currencies[currency];
+    const money = (n) => config.symbol + ' ' + n.toLocaleString(config.locale, decimales);
+
     const amount = parseFloat(amountInput.value) || 0;
-    const rate = INSTALLMENTS[Number(installmentsSelect.value)].rate;
-    const commissionBeforeAdmin = amount * rate;
+    const rate = GT.rates[Number(installmentsSelect.value)].rate;
 
     let retention = 0;
     let retentionLabel = 'Retención de IVA';
     if (regime === 'pequeno') {
-      retention = amount > 2500 ? 0.05 * amount : 0;
-      retentionLabel = 'Retención de IVA (5%)';
+      // El umbral no se retiene a sí mismo: la retención empieza justo encima
+      // (Q2,500.01 en quetzales, $300.01 en dólares).
+      retention = amount > config.threshold ? GT.smallTaxpayerRate * amount : 0;
+      retentionLabel = `Retención de IVA (${GT.smallTaxpayerRate * 100}%)`;
     } else {
-      retention = (amount / 1.12) * 0.12 * 0.15;
-      retentionLabel = 'Retención de IVA';
+      retention = (amount / (1 + GT.iva)) * GT.iva * GT.generalRetentionRate;
     }
 
-    const commission = commissionBeforeAdmin + ADMIN_COST;
+    const commission = amount * rate + config.fixedCost;
     const net = Math.max(0, amount - commission - retention);
 
-    netEl.textContent = formatQ(net);
-    commissionEl.textContent = formatQ(commission);
-    retentionEl.textContent = formatQ(retention);
+    netEl.textContent = money(net);
+    commissionEl.textContent = money(commission);
+    retentionEl.textContent = money(retention);
     retentionLabelEl.textContent = retentionLabel;
     rateEl.textContent = (rate * 100).toFixed(2).replace('.', ',') + '%';
+    symbolEl.textContent = config.symbol;
+    // Sin espacio, como se escribe un precio: "Q2.95", "$0.36".
+    adminEl.textContent = config.symbol + config.fixedCost.toLocaleString(config.locale, decimales);
   }
 
   // El Salvador: si el comercio es contribuyente de IVA, la comisión se calcula
@@ -267,6 +314,21 @@ const SV = hasInstallments
         const label = b.querySelector('[data-calc-regime-label]');
         label.classList.remove('text-[#0f206c]', 'text-[#5c606b]');
         label.classList.add(active ? 'text-[#0f206c]' : 'text-[#5c606b]');
+      });
+      render();
+    });
+  });
+
+  currencyButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currency = btn.dataset.calcCurrency;
+      currencyButtons.forEach((b) => {
+        const active = b === btn;
+        b.setAttribute('aria-pressed', String(active));
+        b.classList.toggle('bg-[#0047ba]', active);
+        b.classList.toggle('text-white', active);
+        b.classList.toggle('text-[#5c606b]', !active);
+        b.classList.toggle('hover:text-[#0f206c]', !active);
       });
       render();
     });

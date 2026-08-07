@@ -27,18 +27,22 @@ const RISK_LEVELS = [
   { color: 'rgb(239, 68, 68)', label: 'Riesgo alto', title: 'Validación obligatoria', text: 'QPayVerify solicita confirmación antes de procesar.' },
 ];
 
+export const getStaticPaths = countryPaths;
+const country = Astro.params.country!;
+const c = getCountry(country);
+
+// La tokenización no está habilitada en El Salvador, así que esa capa no se
+// enumera allá: la página es la misma para los dos países.
 const PROTECTION_LAYERS = [
-  { icon: 'key-round', title: 'Tokenización', text: 'Los datos de tarjetas se convierten en tokens únicos e inutilizables.' },
+  ...(c.features.tokenization
+    ? [{ icon: 'key-round', title: 'Tokenización', text: 'Los datos de tarjetas se convierten en tokens únicos e inutilizables.' }]
+    : []),
   { icon: 'fingerprint', title: 'Autenticación biométrica', text: 'Validación con huella digital y reconocimiento facial.' },
   { icon: 'file-search', title: 'Auditorías continuas', text: 'Revisiones constantes por terceros certificados.' },
   { icon: 'eye', title: 'Monitoreo 24/7', text: 'Equipo de seguridad vigilando tu cuenta en todo momento.' },
   { icon: 'earth', title: 'Cumplimiento global', text: 'Alineados con regulaciones internacionales de datos.' },
   { icon: 'server', title: 'Infraestructura segura', text: 'Servidores con encriptación de grado militar.' },
 ];
-
-export const getStaticPaths = countryPaths;
-const country = Astro.params.country!;
-const c = getCountry(country);
 ---
 
 <MainLayout

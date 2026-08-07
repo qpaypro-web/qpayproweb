@@ -67,6 +67,72 @@ export function countryFromPath(pathname: string) {
     : DEFAULT_COUNTRY;
 }
 
+/**
+ * Aplica a un contenido compartido las diferencias de un país.
+ *
+ * Los sectores (retail, servicios, clínicas…) son el mismo contenido en los dos
+ * países salvo por las funciones que El Salvador no tiene habilitadas —cuotas,
+ * suscripciones y tokenización—. En vez de duplicar el sector entero, el JSON
+ * guarda la versión general y, bajo la clave del país, solo los pedazos que
+ * cambian.
+ *
+ * Los objetos se fusionan campo por campo y los textos y las listas se
+ * reemplazan enteros. Una lista también se puede retocar por posición
+ * —`{ "blocks": { "0": { "desc": "…" } } }` cambia solo el primer elemento—
+ * para no tener que repetir los demás con tal de corregir uno.
+ */
+function fusionar(base: unknown, cambios: unknown): unknown {
+  const esObjeto = (v: unknown) => !!v && typeof v === 'object' && !Array.isArray(v);
+  if (!esObjeto(cambios)) return cambios;
+  const entradas = Object.entries(cambios as Record<string, unknown>);
+
+  if (Array.isArray(base)) {
+    const copia = [...base];
+    for (const [indice, valor] of entradas) copia[Number(indice)] = fusionar(copia[Number(indice)], valor);
+    return copia;
+  }
+
+  const salida: Record<string, unknown> = esObjeto(base) ? { ...(base as object) } : {};
+  for (const [clave, valor] of entradas) salida[clave] = fusionar(salida[clave], valor);
+  return salida;
+}
+
+/**
+ * Quita de las listas los elementos marcados con `omitirEn`. Es lo que permite
+ * borrar un bloque, una tarjeta o una pregunta completa sin tener que repetir
+ * en la variante toda la lista que la contiene.
+ */
+function podar(nodo: unknown, country: string): unknown {
+  if (Array.isArray(nodo)) {
+    return nodo
+      .filter((item) => {
+        const omitir = (item as { omitirEn?: unknown })?.omitirEn;
+        return !(Array.isArray(omitir) && omitir.includes(country));
+      })
+      .map((item) => podar(item, country));
+  }
+  if (nodo && typeof nodo === 'object') {
+    return Object.fromEntries(
+      Object.entries(nodo as Record<string, unknown>)
+        .filter(([clave]) => clave !== 'omitirEn')
+        .map(([clave, valor]) => [clave, podar(valor, country)]),
+    );
+  }
+  return nodo;
+}
+
+export function conVarianteDePais<T>(contenido: T, country: string): T {
+  if (!contenido || typeof contenido !== 'object') return contenido;
+  const entradas = contenido as Record<string, unknown>;
+  const variante = entradas[country];
+
+  // Las claves de país nunca se renderizan: son la variante, no el contenido.
+  const base = Object.fromEntries(
+    Object.entries(entradas).filter(([clave]) => !(COUNTRY_CODES as string[]).includes(clave)),
+  );
+  return podar(variante ? fusionar(base, variante) : base, country) as T;
+}
+
 /** Misma página en otro país, para el selector del navbar. */
 export function swapCountry(pathname: string, to: CountryCode) {
   const rest = normalizePath(pathname).replace(/^\/(gt|sv)(?=\/|$)/, '') || '/';

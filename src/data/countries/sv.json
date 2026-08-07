@@ -180,9 +180,9 @@
           "label": "Comisión Plug-in Shopify y VTEX",
           "values": [
             "no",
-            "+0.50%",
-            "+0.50%",
-            "+0.50%"
+            "0.50%",
+            "0.50%",
+            "0.50%"
           ]
         },
         {
@@ -256,9 +256,9 @@
         {
           "label": "Comisión POS Físico Externo",
           "values": [
-            "+1.00%",
-            "+0.85%",
-            "+0.75%",
+            "1.00%",
+            "0.85%",
+            "0.75%",
             "Desde 0.65%"
           ],
           "note": "Se cobra con POS distinto a Qpaypro"
@@ -466,7 +466,7 @@
     "model": "POS A920",
     "comingSoon": false,
     "headline": "El POS que lo hace todo.",
-    "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip, sin contacto y QR.",
+    "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip y sin contacto.",
     "heroImage": "/images/terminal-pos-sv/a920-hero.webp",
     "heroAlt": "POS A920 de Qpaypro",
     "seoTitle": "POS A920 El Salvador | Terminal de pago con tarjeta | Qpaypro",
@@ -511,7 +511,7 @@
       },
       {
         "label": "Pagos",
-        "value": "Sin contacto · QR · Chip · Banda"
+        "value": "Sin contacto · Chip · Banda"
       },
       {
         "label": "Batería",
@@ -561,5 +561,10 @@
       "Tener cuenta de Banco Atlántida (de no contar, con gusto apoyamos con la apertura de cuenta)"
     ]
   },
-  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"3.5%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal."
+  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"3.5%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal.",
+  "features": {
+    "installments": false,
+    "subscriptions": false,
+    "tokenization": false
+  }
 }

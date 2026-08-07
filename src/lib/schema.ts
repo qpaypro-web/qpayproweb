@@ -1,4 +1,4 @@
-import { COUNTRY_HREFLANG, COUNTRY_LABELS, COUNTRY_CODES, normalizePath, type CountryCode } from './country';
+import { COUNTRIES, COUNTRY_HREFLANG, COUNTRY_LABELS, COUNTRY_CODES, normalizePath, type CountryCode } from './country';
 
 /**
  * Datos estructurados (schema.org, JSON-LD).
@@ -82,8 +82,12 @@ export function organizacion() {
       url: urlAbsoluta('/logo.svg'),
       contentUrl: urlAbsoluta('/logo.svg'),
     },
+    // Este nodo va en TODAS las páginas de los dos países, así que solo puede
+    // enumerar lo que existe en ambos: las suscripciones no están habilitadas
+    // en El Salvador y quedan declaradas en los nodos por país, que sí saben
+    // dónde están.
     description:
-      'Qpaypro es una plataforma de pagos para Guatemala y El Salvador: pasarela de pagos con tarjeta, links de pago, suscripciones, tienda en línea y punto de venta, con certificación PCI-DSS.',
+      'Qpaypro es una plataforma de pagos para Guatemala y El Salvador: pasarela de pagos con tarjeta, links de pago, código QR, tienda en línea y punto de venta, con certificación PCI-DSS.',
     // areaServed es lo que responde "¿funciona en mi país?", la pregunta que
     // más se le hace a un modelo sobre una pasarela regional.
     areaServed: COUNTRY_CODES.map((code) => ({ '@type': 'Country', name: COUNTRY_LABELS[code] })),
@@ -222,11 +226,14 @@ interface Plan {
  * sitio: "¿cuánto cuesta Qpaypro en Guatemala?" se responde con estos datos.
  */
 export function catalogoDePlanes(country: CountryCode, moneda: string, planes: Plan[]) {
+  // Las suscripciones no están habilitadas en El Salvador, y este nodo describe
+  // la oferta de un país concreto: no puede prometer lo que allá no se contrata.
+  const suscripciones = COUNTRIES[country].features.subscriptions;
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: `Qpaypro ${COUNTRY_LABELS[country]}`,
-    description: `Planes de la plataforma de pagos Qpaypro en ${COUNTRY_LABELS[country]}: pagos con tarjeta, links de pago, suscripciones, tienda en línea y punto de venta.`,
+    description: `Planes de la plataforma de pagos Qpaypro en ${COUNTRY_LABELS[country]}: pagos con tarjeta, links de pago, ${suscripciones ? 'suscripciones' : 'código QR'}, tienda en línea y punto de venta.`,
     brand: { '@id': ID_ORGANIZACION },
     url: urlAbsoluta(`/${country}/precios`),
     offers: planes

@@ -48,7 +48,7 @@ function CellIcon(v: string) {
         <p class="text-[#5c606b] text-xs font-semibold uppercase tracking-[0.24em]" style="font-family: var(--font-brand);">Planes y precios</p>
       </div>
       <h1 class="text-[#1a1d29] text-5xl md:text-6xl lg:text-[4.5rem] font-bold tracking-[-0.03em] leading-[1.03] mb-7">Elige cómo quieres crecer.</h1>
-      <p class="text-[#5c606b] text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto font-light">Cobra con tarjeta, envía links de pago, crea tu tienda en línea, administra tu punto de venta, automatiza suscripciones y ordena tu negocio. Sin costos ocultos.</p>
+      <p class="text-[#5c606b] text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto font-light">Cobra con tarjeta, envía links de pago, crea tu tienda en línea, administra tu punto de venta{c.features.subscriptions ? ', automatiza suscripciones' : ''} y ordena tu negocio. Sin costos ocultos.</p>
     </div>
   </section>
 
@@ -70,7 +70,16 @@ function CellIcon(v: string) {
               <span class="text-[#1a1d29] text-4xl font-bold tracking-tight" data-price-month={plan.priceMonth} data-price-year={plan.priceYear}>{plan.priceMonth}</span>
               <span class="text-[#9094a0] text-base" data-period>/mes</span>
             </div>
-            <p class="text-[#9094a0] text-xs mb-5" style="font-family: var(--font-brand);">{plan.commission} por transacción</p>
+            {/* La comisión cambia con el período de facturación: en Guatemala el
+                plan mensual paga un punto más que el anual. Donde no cambia, el
+                plan no declara `commissionYear` y las dos vistas muestran lo
+                mismo. */}
+            <p
+              class="text-[#9094a0] text-xs mb-5"
+              style="font-family: var(--font-brand);"
+              data-commission-month={plan.commission}
+              data-commission-year={'commissionYear' in plan ? plan.commissionYear : plan.commission}
+            >{plan.commission} por transacción</p>
             <a href={withCountry(country, plan.url)} target={plan.url.startsWith('http') ? '_blank' : undefined} rel={plan.url.startsWith('http') ? 'noreferrer' : undefined} class="w-full py-3 rounded-full font-medium text-sm mb-5 flex items-center justify-center gap-2 transition-all bg-[#0047ba] text-white hover:bg-[#0f206c]">
               {plan.cta}
               <Icon name="arrow-right" class="w-4 h-4" />
@@ -244,6 +253,9 @@ function CellIcon(v: string) {
         });
         document.querySelectorAll<HTMLElement>('[data-period]').forEach((el) => {
           el.textContent = yearly ? '/año' : '/mes';
+        });
+        document.querySelectorAll<HTMLElement>('[data-commission-month]').forEach((el) => {
+          el.textContent = `${yearly ? el.dataset.commissionYear! : el.dataset.commissionMonth!} por transacción`;
         });
       });
     });
