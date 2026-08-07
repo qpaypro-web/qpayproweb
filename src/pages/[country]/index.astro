@@ -70,11 +70,17 @@ const SECURITY_ITEMS = [
   { icon: 'eye', title: 'Monitoreo 24/7', text: 'Detección de riesgo y anomalías en tiempo real, todos los días.', tag: 'Tiempo real' },
   { icon: 'file-check', title: 'Cumplimiento PCI DSS', text: 'Certificación de seguridad internacional para pagos con tarjeta.', tag: 'Nivel 1' },
   { icon: 'lock', title: 'Datos protegidos', text: 'Tu información y la de tus clientes, siempre cifrada y resguardada.', tag: 'Cifrado' },
-  ...(tokenizacion
-    ? [{ icon: 'fingerprint', title: 'Tokenización', text: 'Los datos sensibles se reemplazan por tokens irreversibles.', tag: 'PAN seguro' }]
-    : []),
+  // La tokenización no está habilitada en El Salvador, y ahí va en su lugar el
+  // 3D Secure, que sí existe en los dos países. No es solo por no dejar el hueco:
+  // esta retícula dibuja sus separadores con `gap-px` sobre el fondo claro del
+  // contenedor, así que una celda de menos no desaparece — se ve como una
+  // tarjeta vacía. Cualquier tarjeta que se quite de aquí necesita reemplazo, o
+  // hay que romper las tres columnas.
+  tokenizacion
+    ? { icon: 'fingerprint', title: 'Tokenización', text: 'Los datos sensibles se reemplazan por tokens irreversibles.', tag: 'PAN seguro' }
+    : { icon: 'badge-check', title: 'Autenticación 3D Secure', text: 'Cada pago se confirma con el banco que emitió la tarjeta antes de aprobarse.', tag: '3DS' },
   { icon: 'server-cog', title: 'Infraestructura robusta', text: 'Servidores redundantes con monitoreo y respaldo continuo.', tag: '99.9% uptime' },
-  // La numeración se calcula aquí: sin la tokenización, las que siguen se corren.
+  // La numeración se calcula al final para que no dependa de qué tarjeta entró.
 ].map((item, i) => ({ ...item, num: String(i + 1).padStart(2, '0') }));
 
 const PLATFORM_ITEMS = [
