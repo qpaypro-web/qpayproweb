@@ -12,6 +12,10 @@ const c = getCountry(country);
 // El Salvador es otro dispositivo, así que no puede ir escrito a mano.
 const terminal = c.posTerminal.model;
 
+// Logos del carrusel del hero. Todos vienen recortados al logo y normalizados a
+// 320 px de alto, porque el marquee los pinta con `h-8 w-auto`: es el alto del
+// archivo lo que decide el tamaño en pantalla, así que un logo con margen
+// transparente alrededor se vería más chico que los demás.
 const LOGO_MARQUEE = [
   'b4d76d9ae1e3.webp',
   'af394dadba86.webp',
@@ -21,6 +25,13 @@ const LOGO_MARQUEE = [
   '4a1ec1f15495.webp',
   '456898459a21.webp',
   'd63e92cb3cb0.webp',
+  'uvg.webp',
+  'aristos.webp',
+  'casa-instrumental.webp',
+  'los-tulipanes.webp',
+  'bisel.webp',
+  'milano.webp',
+  'comelasa.webp',
 ];
 
 const SOLUTIONS_CARDS = [
@@ -125,7 +136,11 @@ const TESTIMONIALS = [
     <div class="absolute bottom-0 left-0 right-0 z-20 pb-7 lg:pb-10 overflow-hidden pointer-events-none">
       <style>
         @keyframes logoMarqH { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .logo-marqH { animation: logoMarqH 45s linear infinite; width: max-content; }
+        /* La duración es el tiempo que tarda en pasar la lista completa, así que
+           la velocidad depende de cuántos logos haya: con 8 eran 45s, y al subir
+           a 15 la tira casi se duplicó. 85s mantiene los mismos píxeles por
+           segundo de antes. Si se agregan o quitan logos, hay que reajustarla. */
+        .logo-marqH { animation: logoMarqH 85s linear infinite; width: max-content; }
         @media (prefers-reduced-motion: reduce) { .logo-marqH { animation: none; } }
       </style>
       <div class="relative">
