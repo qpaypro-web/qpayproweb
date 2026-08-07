@@ -12,10 +12,17 @@ const c = getCountry(country);
 // El Salvador es otro dispositivo, así que no puede ir escrito a mano.
 const terminal = c.posTerminal.model;
 
-// Logos del carrusel del hero. Todos vienen recortados al logo y normalizados a
-// 320 px de alto, porque el marquee los pinta con `h-8 w-auto`: es el alto del
-// archivo lo que decide el tamaño en pantalla, así que un logo con margen
-// transparente alrededor se vería más chico que los demás.
+// Logos del carrusel del hero. El marquee los pinta con `h-8 w-auto`, así que
+// es el alto del ARCHIVO —no el del logo— lo que decide el tamaño en pantalla.
+//
+// Los ocho primeros vienen de la migración, recortados al logo, y por eso llenan
+// los 32 px. Los siete siguientes se entregaron dibujados dentro de un lienzo
+// común, cada uno al tamaño que se les quiso dar respecto de los demás: ese
+// margen transparente es intencional y es lo que hace que Comelasa se vea más
+// chico que Los Tulipanes. Recortarlos uno por uno borraría ese ajuste.
+//
+// Todos los archivos miden 320 px de alto, que es el doble de lo que se pinta en
+// pantalla, para que se vean nítidos en pantallas retina.
 const LOGO_MARQUEE = [
   'b4d76d9ae1e3.webp',
   'af394dadba86.webp',
@@ -137,10 +144,11 @@ const TESTIMONIALS = [
       <style>
         @keyframes logoMarqH { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         /* La duración es el tiempo que tarda en pasar la lista completa, así que
-           la velocidad depende de cuántos logos haya: con 8 eran 45s, y al subir
-           a 15 la tira casi se duplicó. 85s mantiene los mismos píxeles por
-           segundo de antes. Si se agregan o quitan logos, hay que reajustarla. */
-        .logo-marqH { animation: logoMarqH 85s linear infinite; width: max-content; }
+           la velocidad depende de cuántos logos haya. Con 8 logos la tira medía
+           1381px y tardaba 45s; con 15 mide 2366px, así que 77s mantiene los
+           mismos píxeles por segundo. Si se agregan o quitan logos hay que
+           reajustarla, o el carrusel cambia de velocidad solo. */
+        .logo-marqH { animation: logoMarqH 77s linear infinite; width: max-content; }
         @media (prefers-reduced-motion: reduce) { .logo-marqH { animation: none; } }
       </style>
       <div class="relative">
