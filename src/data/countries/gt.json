@@ -12,7 +12,8 @@
       "priceMonth": "Q0",
       "priceYear": "Q0",
       "tagline": "Para empezar a cobrar en línea sin costo fijo.",
-      "commission": "5% + Q2.95",
+      "commission": "5.5% + Q2.95",
+      "commissionYear": "5% + Q2.95",
       "cta": "Comenzar gratis",
       "url": "https://app.qpaypro.com/register?country=GT&plan=Free",
       "highlights": [
@@ -27,7 +28,8 @@
       "priceMonth": "Q195",
       "priceYear": "Q1,950",
       "tagline": "Para negocios que venden en línea y en tienda.",
-      "commission": "4.50% + Q2.95",
+      "commission": "4.75% + Q2.95",
+      "commissionYear": "4.50% + Q2.95",
       "cta": "Elegir Premium",
       "url": "https://app.qpaypro.com/register?country=GT&plan=Premium",
       "highlights": [
@@ -43,7 +45,8 @@
       "priceMonth": "Q395",
       "priceYear": "Q3,950",
       "tagline": "Para operaciones que necesitan más control.",
-      "commission": "4.50% + Q2.95",
+      "commission": "4.75% + Q2.95",
+      "commissionYear": "4.50% + Q2.95",
       "cta": "Elegir Elite",
       "url": "https://app.qpaypro.com/register?country=GT&plan=Elite",
       "highlights": [
@@ -60,7 +63,8 @@
       "priceMonth": "Q5,000",
       "priceYear": "Q50,000",
       "tagline": "Para empresas con alto volumen y sucursales.",
-      "commission": "Negociada 4.50%",
+      "commission": "Negociada 4.75%",
+      "commissionYear": "Negociada 4.50%",
       "cta": "Hablar con Ventas",
       "url": "/contacto#ventas",
       "highlights": [
@@ -78,10 +82,10 @@
         {
           "label": "Comisión en línea",
           "values": [
-            "5% + Q2.95",
-            "4.50% + Q2.95",
-            "4.50% + Q2.95",
-            "4.50% + Q2.95"
+            "5.5% + Q2.95",
+            "4.75% + Q2.95",
+            "4.75% + Q2.95",
+            "4.75% + Q2.95"
           ]
         }
       ]
@@ -201,9 +205,9 @@
           "label": "Comisión Plug-in Shopify y VTEX",
           "values": [
             "no",
-            "+0.50%",
-            "+0.50%",
-            "+0.50%"
+            "0.50%",
+            "0.50%",
+            "0.50%"
           ]
         },
         {
@@ -277,9 +281,9 @@
         {
           "label": "Comisión POS Físico Externo",
           "values": [
-            "+1.00%",
-            "+0.85%",
-            "+0.75%",
+            "1.00%",
+            "0.85%",
+            "0.75%",
             "Desde 0.65%"
           ]
         }
@@ -526,8 +530,10 @@
       }
     ],
     "fixedCost": 2.95,
+    "fixedCostUsd": 0.36,
     "iva": 0.12,
     "smallTaxpayerThreshold": 2500,
+    "smallTaxpayerThresholdUsd": 300,
     "smallTaxpayerRate": 0.05,
     "generalRetentionRate": 0.15
   },
@@ -615,5 +621,10 @@
       "Poderoso por dentro."
     ]
   },
-  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta \"4.50%\" depende de la banda MCC de tu giro y se confirma en tu propuesta formal."
+  "plansNote": "Efectivo y transferencias por depósito bancario: 0% de comisión en todos los planes. Tu tarifa exacta depende de la banda MCC de tu giro y se confirma en tu propuesta formal.",
+  "features": {
+    "installments": true,
+    "subscriptions": true,
+    "tokenization": true
+  }
 }

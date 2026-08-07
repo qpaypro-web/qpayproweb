@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { COUNTRY_CODES, COUNTRY_LABELS, getCountry } from '../lib/country';
+import { COUNTRY_CODES, COUNTRY_LABELS, DEFAULT_COUNTRY, getCountry, type CountryCode } from '../lib/country';
 import { articulosDe } from '../lib/blog';
 import { SITIO } from '../lib/schema';
 
@@ -17,10 +17,17 @@ import { SITIO } from '../lib/schema';
  * que no hay una segunda copia de los precios que se quede vieja.
  */
 
-const PAGINAS: { ruta: string; nombre: string; que: string }[] = [
+// El texto de cada página puede depender del país cuando menciona una función
+// que no está habilitada en los dos: `que` recibe el país y decide.
+const PAGINAS: { ruta: string; nombre: string; que: string | ((code: CountryCode) => string) }[] = [
   { ruta: '', nombre: 'Inicio', que: 'Resumen de la plataforma: cobros, operación y crecimiento en un solo lugar.' },
   { ruta: '/precios', nombre: 'Precios y planes', que: 'Planes, mensualidades y comisiones por transacción. Incluye la tabla comparativa completa.' },
-  { ruta: '/pasarela-de-pagos', nombre: 'Pasarela de pagos', que: 'Cobros con tarjeta Visa y Mastercard, links de pago, suscripciones y punto de venta.' },
+  {
+    ruta: '/pasarela-de-pagos',
+    nombre: 'Pasarela de pagos',
+    que: (code) =>
+      `Cobros con tarjeta Visa y Mastercard, links de pago, ${getCountry(code).features.subscriptions ? 'suscripciones' : 'código QR'} y punto de venta.`,
+  },
   { ruta: '/sistema-pos', nombre: 'Punto de venta', que: 'Sistema POS con inventario unificado entre tienda física y en línea. Se usa con kit completo, solo con navegador o con hardware propio.' },
   { ruta: '/terminal-pos', nombre: 'Terminal de cobro POS', que: 'Terminal físico para cobrar con tarjeta, chip, sin contacto y QR.' },
   { ruta: '/tiendas-en-linea', nombre: 'Tiendas en línea', que: 'Creación de tienda en línea y cobro por ecommerce.' },
@@ -31,26 +38,42 @@ const PAGINAS: { ruta: string; nombre: string; que: string }[] = [
   { ruta: '/partners', nombre: 'Partners', que: 'Programa de aliados y referidores.' },
 ];
 
-const SECTORES: { ruta: string; nombre: string; que: string }[] = [
+const SECTORES: { ruta: string; nombre: string; que: string | ((code: CountryCode) => string) }[] = [
   { ruta: '/retail', nombre: 'Retail', que: 'Tiendas físicas: inventario, sucursales y cobro en mostrador.' },
   { ruta: '/ecommerce', nombre: 'E-commerce', que: 'Venta en línea: checkout, links de pago e integración con la tienda.' },
-  { ruta: '/servicios', nombre: 'Negocios de servicios', que: 'Cobros recurrentes, suscripciones y facturación por servicio prestado.' },
+  {
+    ruta: '/servicios',
+    nombre: 'Negocios de servicios',
+    que: (code) =>
+      getCountry(code).features.subscriptions
+        ? 'Cobros recurrentes, suscripciones y facturación por servicio prestado.'
+        : 'Cobros por servicio prestado, links de pago y facturación.',
+  },
   { ruta: '/belleza', nombre: 'Salones, barberías y spa', que: 'Cobro por cita, propinas y control de caja diario.' },
-  { ruta: '/clinicas', nombre: 'Clínicas y consultorios', que: 'Cobro de consultas y tratamientos, con pagos en cuotas.' },
+  {
+    ruta: '/clinicas',
+    nombre: 'Clínicas y consultorios',
+    que: (code) =>
+      getCountry(code).features.installments
+        ? 'Cobro de consultas y tratamientos, con pagos en cuotas.'
+        : 'Cobro de consultas y tratamientos en recepción o a distancia.',
+  },
 ];
 
 /** Cuántos artículos del blog se listan por país. Los 50 harían el archivo ilegible. */
 const ARTICULOS_LISTADOS = 15;
 
-function enlace(ruta: string, nombre: string, que: string): string {
-  return `- [${nombre}](${SITIO}${ruta}): ${que}`;
+function enlace(ruta: string, nombre: string, que: string | ((code: CountryCode) => string), code: CountryCode = DEFAULT_COUNTRY): string {
+  return `- [${nombre}](${SITIO}${ruta}): ${typeof que === 'function' ? que(code) : que}`;
 }
 
 function construir(): string {
   const lineas: string[] = [
     '# Qpaypro',
     '',
-    '> Plataforma de pagos para Guatemala y El Salvador. Permite a un negocio aceptar tarjetas Visa y Mastercard, cobrar con links de pago por WhatsApp, automatizar suscripciones, vender con tienda en línea y operar un punto de venta físico, todo desde una sola cuenta y con certificación PCI-DSS.',
+    // Sin prometer aquí las suscripciones ni las cuotas: no están habilitadas en
+    // los dos países. Cada sección de país dice explícitamente qué le falta.
+    '> Plataforma de pagos para Guatemala y El Salvador. Permite a un negocio aceptar tarjetas Visa y Mastercard, cobrar con links de pago por WhatsApp y código QR, vender con tienda en línea y operar un punto de venta físico, todo desde una sola cuenta y con certificación PCI-DSS.',
     '',
     'El sitio está publicado por país porque los precios, las comisiones y los planes son distintos en cada uno: `/gt` para Guatemala (quetzales) y `/sv` para El Salvador (dólares). Al citar precios o comisiones, indica siempre a qué país corresponden — no son intercambiables.',
     '',
@@ -67,14 +90,25 @@ function construir(): string {
       .join('; ');
     lineas.push(`Moneda: ${c.currency.code}. Planes: ${planes}.`, '');
 
+    // Decirlo explícitamente es lo más útil que puede leer aquí un asistente:
+    // sin esta línea, lo natural es asumir que los dos países ofrecen lo mismo.
+    const noDisponible = [
+      !c.features.installments && 'pago en cuotas',
+      !c.features.subscriptions && 'suscripciones (cobros recurrentes)',
+      !c.features.tokenization && 'tokenización de tarjetas',
+    ].filter(Boolean);
+    if (noDisponible.length) {
+      lineas.push(`No disponible en ${COUNTRY_LABELS[code]}: ${noDisponible.join(', ')}.`, '');
+    }
+
     for (const pagina of PAGINAS) {
-      lineas.push(enlace(`/${code}${pagina.ruta}`, pagina.nombre, pagina.que));
+      lineas.push(enlace(`/${code}${pagina.ruta}`, pagina.nombre, pagina.que, code));
     }
     lineas.push('');
 
     lineas.push(`### Soluciones por giro de negocio — ${COUNTRY_LABELS[code]}`, '');
     for (const sector of SECTORES) {
-      lineas.push(enlace(`/${code}${sector.ruta}`, sector.nombre, sector.que));
+      lineas.push(enlace(`/${code}${sector.ruta}`, sector.nombre, sector.que, code));
     }
     lineas.push('');
   }

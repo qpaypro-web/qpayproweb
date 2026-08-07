@@ -3,13 +3,16 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Icon from '../../components/Icon.astro';
 import ConnectedPlatformDiagram from '../../components/ConnectedPlatformDiagram.astro';
 import sectors from '../../data/sectors.json';
-import { COUNTRY_CODES, getCountry, withCountry } from '../../lib/country';
+import { COUNTRY_CODES, conVarianteDePais, getCountry, withCountry } from '../../lib/country';
 
 export function getStaticPaths() {
   return COUNTRY_CODES.flatMap((country) =>
     Object.keys(sectors).map((sector) => ({
       params: { country, sector },
-      props: { data: sectors[sector] },
+      // El contenido del sector se resuelve aquí, ya con el país aplicado: los
+      // sectores son iguales en los dos salvo por las funciones que El Salvador
+      // no tiene habilitadas, que el JSON declara bajo la clave del país.
+      props: { data: conVarianteDePais(sectors[sector], country) },
     }))
   );
 }
@@ -108,7 +111,7 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <ConnectedPlatformDiagram />
+  <ConnectedPlatformDiagram country={country} />
 
   <section class="relative w-full overflow-hidden py-24 lg:py-32" style="background: linear-gradient(rgb(255, 255, 255) 0%, rgb(238, 242, 248) 100%);">
     <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
@@ -142,27 +145,33 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <section class="w-full bg-white py-24 lg:py-32">
-    <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <div class="rounded-[28px] overflow-hidden bg-[#f5f6f8] aspect-[4/3] lg:aspect-[5/6]">
-          <img src={data.testimonial.image} alt={`Testimonio de ${data.testimonial.name}`} class="w-full h-full object-cover" />
-        </div>
-        <div>
-          <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Testimonios</p>
-          <Icon name="quote" class="w-10 h-10 text-[#0047ba]/25 mb-5" strokeWidth={1.5} />
-          <blockquote class="text-[#1a1d29] text-2xl lg:text-[2rem] font-light leading-[1.35] tracking-[-0.01em] mb-8">{data.testimonial.quote}</blockquote>
-          <div class="flex items-center gap-4">
-            <div class="w-1 h-11 rounded-full bg-gradient-to-b from-[#0047ba] to-[#0097ce] flex-shrink-0"></div>
-            <div>
-              <div class="text-[#1a1d29] font-semibold text-[15px]">{data.testimonial.name}</div>
-              <div class="text-[#8a8f9a] text-sm">{data.testimonial.company}</div>
+  {/* Hay testimonios que nombran el pago en cuotas o las suscripciones, que no
+      están habilitadas en El Salvador. Son citas de personas reales, así que no
+      se les cambia el texto: en ese país el sector declara `testimonial: null`
+      y la sección entera no se dibuja. */}
+  {data.testimonial && (
+    <section class="w-full bg-white py-24 lg:py-32">
+      <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="rounded-[28px] overflow-hidden bg-[#f5f6f8] aspect-[4/3] lg:aspect-[5/6]">
+            <img src={data.testimonial.image} alt={`Testimonio de ${data.testimonial.name}`} class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <p class="text-[#0047ba] text-xs font-semibold uppercase tracking-[0.22em] mb-6">Testimonios</p>
+            <Icon name="quote" class="w-10 h-10 text-[#0047ba]/25 mb-5" strokeWidth={1.5} />
+            <blockquote class="text-[#1a1d29] text-2xl lg:text-[2rem] font-light leading-[1.35] tracking-[-0.01em] mb-8">{data.testimonial.quote}</blockquote>
+            <div class="flex items-center gap-4">
+              <div class="w-1 h-11 rounded-full bg-gradient-to-b from-[#0047ba] to-[#0097ce] flex-shrink-0"></div>
+              <div>
+                <div class="text-[#1a1d29] font-semibold text-[15px]">{data.testimonial.name}</div>
+                <div class="text-[#8a8f9a] text-sm">{data.testimonial.company}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <section class="w-full bg-white py-24 lg:py-32">
     <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />

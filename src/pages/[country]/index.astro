@@ -37,10 +37,15 @@ const SECTOR_PANELS = [
   { key: 'clinicas', title: 'Clínicas', headline: 'Atiende, cobra y da seguimiento con orden', text: 'Gestiona pagos, membresías y cobros frecuentes para que tu clínica opere sin fricción.', href: '/clinicas', image: '03c36a961a82.webp' },
 ];
 
+// El Salvador no tiene habilitadas las suscripciones ni la tokenización, y el
+// home es el mismo para los dos países: se consulta la bandera en vez de dar
+// por hecho que la función existe.
+const { subscriptions: suscripciones, tokenization: tokenizacion } = c.features;
+
 const FEATURES = [
   {
     title: 'Cobros en línea',
-    text: 'Links de pago, QR y suscripciones.',
+    text: suscripciones ? 'Links de pago, QR y suscripciones.' : 'Links de pago y código QR.',
     path: '<path d="M16 6L8 15.5H14L12 22L20 12.5H14L16 6Z" fill="currentColor"></path>',
   },
   {
@@ -61,16 +66,19 @@ const FEATURES = [
 ];
 
 const SECURITY_ITEMS = [
-  { num: '01', icon: 'shield', title: 'Protección avanzada', text: 'Validación y encriptación de extremo a extremo en cada transacción.', tag: 'AES-256' },
-  { num: '02', icon: 'eye', title: 'Monitoreo 24/7', text: 'Detección de riesgo y anomalías en tiempo real, todos los días.', tag: 'Tiempo real' },
-  { num: '03', icon: 'file-check', title: 'Cumplimiento PCI DSS', text: 'Certificación de seguridad internacional para pagos con tarjeta.', tag: 'Nivel 1' },
-  { num: '04', icon: 'lock', title: 'Datos protegidos', text: 'Tu información y la de tus clientes, siempre cifrada y resguardada.', tag: 'Cifrado' },
-  { num: '05', icon: 'fingerprint', title: 'Tokenización', text: 'Los datos sensibles se reemplazan por tokens irreversibles.', tag: 'PAN seguro' },
-  { num: '06', icon: 'server-cog', title: 'Infraestructura robusta', text: 'Servidores redundantes con monitoreo y respaldo continuo.', tag: '99.9% uptime' },
-];
+  { icon: 'shield', title: 'Protección avanzada', text: 'Validación y encriptación de extremo a extremo en cada transacción.', tag: 'AES-256' },
+  { icon: 'eye', title: 'Monitoreo 24/7', text: 'Detección de riesgo y anomalías en tiempo real, todos los días.', tag: 'Tiempo real' },
+  { icon: 'file-check', title: 'Cumplimiento PCI DSS', text: 'Certificación de seguridad internacional para pagos con tarjeta.', tag: 'Nivel 1' },
+  { icon: 'lock', title: 'Datos protegidos', text: 'Tu información y la de tus clientes, siempre cifrada y resguardada.', tag: 'Cifrado' },
+  ...(tokenizacion
+    ? [{ icon: 'fingerprint', title: 'Tokenización', text: 'Los datos sensibles se reemplazan por tokens irreversibles.', tag: 'PAN seguro' }]
+    : []),
+  { icon: 'server-cog', title: 'Infraestructura robusta', text: 'Servidores redundantes con monitoreo y respaldo continuo.', tag: '99.9% uptime' },
+  // La numeración se calcula aquí: sin la tokenización, las que siguen se corren.
+].map((item, i) => ({ ...item, num: String(i + 1).padStart(2, '0') }));
 
 const PLATFORM_ITEMS = [
-  { title: 'Plataforma de pagos', text: 'Cobros automáticos, links de pago, QR y suscripciones. Todo desde una sola pasarela.', image: 'b133d792fa04.webp' },
+  { title: 'Plataforma de pagos', text: suscripciones ? 'Cobros automáticos, links de pago, QR y suscripciones. Todo desde una sola pasarela.' : 'Cobros con tarjeta, links de pago y QR. Todo desde una sola pasarela.', image: 'b133d792fa04.webp' },
   { title: 'Tienda en línea', text: 'Crea y conecta tu tienda en línea con pagos integrados, lista para vender desde el primer día.', image: '0893ae5d2362.webp' },
   { title: 'Integraciones', text: 'Vincula tu tienda de Shopify, WooCommerce, OpenCart, Vtex y más a nuestra pasarela de pagos.', image: '8f12055aabe0.webp' },
   { title: terminal, text: 'Terminal portátil con NFC y chip para cobrar en grande desde la palma de tu mano.', image: '33a00fd88103.webp' },

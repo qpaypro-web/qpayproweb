@@ -279,7 +279,10 @@
             "Menos morosidad"
           ],
           "image": "/images/sectors/f5152b9bb0d7.webp",
-          "order": "normal"
+          "order": "normal",
+          "omitirEn": [
+            "sv"
+          ]
         },
         {
           "eyebrow": "Seguridad",
@@ -335,7 +338,10 @@
         },
         {
           "q": "¿Cómo cobro mensualidades o servicios frecuentes?",
-          "a": "Configuras el cobro automático una sola vez y Qpaypro cobra cada periodo. Así reduces la morosidad y tienes ingresos más predecibles."
+          "a": "Configuras el cobro automático una sola vez y Qpaypro cobra cada periodo. Así reduces la morosidad y tienes ingresos más predecibles.",
+          "omitirEn": [
+            "sv"
+          ]
         },
         {
           "q": "¿Qué comisión cobra Qpaypro?",
@@ -379,6 +385,28 @@
           "label": "Soporte local"
         }
       ]
+    },
+    "sv": {
+      "description": "Cobra con tarjeta y links de pago para tu negocio de servicios. Sin perseguir pagos, con Qpaypro.",
+      "hero": {
+        "subtitle": "Cobros con tarjeta y links de pago para tu negocio de servicios."
+      },
+      "features": {
+        "blocks": {
+          "0": {
+            "desc": "Acepta Visa y Mastercard, crédito y débito, en el lugar del servicio o donde estés. Si tu cliente no trae efectivo, igual cobras.",
+            "bullets": [
+              "Visa y Mastercard, crédito y débito",
+              "Cobra en sitio o a distancia",
+              "Pago sin contacto y 3D Secure"
+            ]
+          }
+        }
+      },
+      "testimonial": null,
+      "final": {
+        "desc": "Empieza a cobrar con tarjeta y por WhatsApp hoy mismo con Qpaypro."
+      }
     }
   },
   "ecommerce": {
@@ -419,7 +447,10 @@
         {
           "image": "/images/sectors/dd2a81749cf7.webp",
           "alt": "Suscripciones",
-          "label": "Suscripciones"
+          "label": "Suscripciones",
+          "omitirEn": [
+            "sv"
+          ]
         },
         {
           "image": "/images/sectors/652f8dbb62a0.webp",
@@ -567,6 +598,19 @@
           "label": "Soporte local"
         }
       ]
+    },
+    "sv": {
+      "features": {
+        "blocks": {
+          "3": {
+            "bullets": [
+              "API de cobros",
+              "Checkout Page",
+              "API de links de pago"
+            ]
+          }
+        }
+      }
     }
   },
   "belleza": {
@@ -890,7 +934,10 @@
       "items": [
         {
           "q": "¿Puedo cobrar tratamientos en cuotas?",
-          "a": "Sí. Aceptas Visa y Mastercard con pagos en cuotas para tratamientos más grandes, directamente en la recepción de tu clínica."
+          "a": "Sí. Aceptas Visa y Mastercard con pagos en cuotas para tratamientos más grandes, directamente en la recepción de tu clínica.",
+          "omitirEn": [
+            "sv"
+          ]
         },
         {
           "q": "¿Cómo cobro la consulta por adelantado?",
@@ -938,6 +985,22 @@
           "label": "Soporte local"
         }
       ]
+    },
+    "sv": {
+      "features": {
+        "blocks": {
+          "0": {
+            "heading": "Cobra consultas y tratamientos con tarjeta",
+            "desc": "Acepta Visa y Mastercard en recepción o a distancia, con pago sin contacto. Sin depender del efectivo.",
+            "bullets": [
+              "Visa y Mastercard, crédito y débito",
+              "Cobra en recepción o a distancia",
+              "Pago sin contacto y 3D Secure"
+            ]
+          }
+        }
+      },
+      "testimonial": null
     }
   }
 }
