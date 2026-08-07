@@ -466,7 +466,7 @@
     "model": "POS A920",
     "comingSoon": false,
     "headline": "El POS que lo hace todo.",
-    "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip, sin contacto y QR.",
+    "subtitle": "El terminal de Qpaypro para El Salvador. Cobra con tarjeta, chip y sin contacto.",
     "heroImage": "/images/terminal-pos-sv/a920-hero.webp",
     "heroAlt": "POS A920 de Qpaypro",
     "seoTitle": "POS A920 El Salvador | Terminal de pago con tarjeta | Qpaypro",
@@ -511,7 +511,7 @@
       },
       {
         "label": "Pagos",
-        "value": "Sin contacto · QR · Chip · Banda"
+        "value": "Sin contacto · Chip · Banda"
       },
       {
         "label": "Batería",

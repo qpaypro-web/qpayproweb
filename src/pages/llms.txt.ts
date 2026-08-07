@@ -29,7 +29,9 @@ const PAGINAS: { ruta: string; nombre: string; que: string | ((code: CountryCode
       `Cobros con tarjeta Visa y Mastercard, links de pago, ${getCountry(code).features.subscriptions ? 'suscripciones' : 'código QR'} y punto de venta.`,
   },
   { ruta: '/sistema-pos', nombre: 'Punto de venta', que: 'Sistema POS con inventario unificado entre tienda física y en línea. Se usa con kit completo, solo con navegador o con hardware propio.' },
-  { ruta: '/terminal-pos', nombre: 'Terminal de cobro POS', que: 'Terminal físico para cobrar con tarjeta, chip, sin contacto y QR.' },
+  // Ni el A920 de El Salvador ni el POS Cute de Guatemala leen QR: el cobro con
+  // código QR existe en la plataforma, pero no en el terminal físico.
+  { ruta: '/terminal-pos', nombre: 'Terminal de cobro POS', que: 'Terminal físico para cobrar con tarjeta, chip y sin contacto.' },
   { ruta: '/tiendas-en-linea', nombre: 'Tiendas en línea', que: 'Creación de tienda en línea y cobro por ecommerce.' },
   { ruta: '/integraciones', nombre: 'Integraciones', que: 'Conexión con Shopify, WooCommerce, VTEX y otras plataformas.' },
   { ruta: '/seguridad', nombre: 'Seguridad', que: 'Certificación PCI-DSS, 3D Secure y prevención de fraude con Qpayradar y Qpayverify.' },
